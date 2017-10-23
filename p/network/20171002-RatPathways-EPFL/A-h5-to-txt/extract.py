@@ -1,17 +1,24 @@
+# RA, 20171023
+
+# Input:
+# Blue Brain Project file to read, h5 format
+filename_input = "./UV/ORIGINAL/pathways_mc0_Column.h5"
+
+# Output:
+output_dir = "./UV/OUTPUT"
+output_filename_mat      = output_dir + "/pathways_mc0_Column.h5.mat"
+output_filename_rat_head = output_dir + "/ratcolumn_head.txt"
+output_filename_rat_data = output_dir + "/ratcolumn_data.txt"
+
 import h5py
 import numpy as np
 
-# Blue Brain Project file to read
-filename = "pathways_mc0_Column.h5"
-
-f = h5py.File(filename, "r")
+f = h5py.File(filename_input, "r")
 fc = f["connectivty"]
 fp = f["populations"]
 
 #for n in fc : print(n)
 #for n in fp : print(n)
-
-print("# Connections from {}".format(filename))
 
 # 1. Construct the graph adjacency matrix
 
@@ -30,7 +37,6 @@ for (k0, v0) in fc.items() :
 # This is the adjacency matrix (i -> j)
 M = np.vstack(M)
 
-print("# Adjacency matrix size: {}".format(M.shape))
 #plt.ion(); plt.imshow(M); plt.show(); input("# Press enter...")
 
 
@@ -38,21 +44,24 @@ print("# Adjacency matrix size: {}".format(M.shape))
 
 from scipy.sparse import csc_matrix
 from scipy.io import savemat
-savemat(filename + ".mat", {'M' : csc_matrix(M)}, do_compression=True)
+savemat(output_filename_mat, {'M' : csc_matrix(M)}, do_compression=True)
 
-# 2b. Output to stdout in txt format
+# 2b. Output in txt format
 
 (I, J) = np.nonzero(M)
 IJ = list(zip(list(I), list(J)))
 
-print("# Number of connections: {}".format(len(IJ)))
-
 base = 0
 
-print("# Array base / first node ID: {}".format(base))
-print("# FromNodeId\tToNodeId")
+with open(output_filename_rat_head, "w") as f :
+    print("# Connections from {}".format(filename_input), file=f)
+    print("# Adjacency matrix size: {}".format(M.shape), file=f)
+    print("# Number of connections: {}".format(len(IJ)), file=f)
+    print("# Array base / first node ID: {}".format(base), file=f)
+    print("# FromNodeId\tToNodeId", file=f)
 
-for (i, j) in IJ :
-	print("{}\t{}".format(base+i, base+j))
+with open(output_filename_rat_data, "w") as f :
+    for (i, j) in IJ :
+            print("{}\t{}".format(base+i, base+j), file=f)
 
 
