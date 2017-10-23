@@ -2,13 +2,13 @@
 
 # Input:
 # Blue Brain Project file to read, h5 format
-filename_input = "./UV/ORIGINAL/pathways_mc0_Column.h5"
+filename_input = "./ORIGINALS/UV/pathways_mc0_Column.h5"
 
 # Output:
-output_dir = "./UV/OUTPUT"
-output_filename_mat      = output_dir + "/pathways_mc0_Column.h5.mat"
-output_filename_rat_head = output_dir + "/ratcolumn_head.txt"
-output_filename_rat_data = output_dir + "/ratcolumn_data.txt"
+output_dir = "./OUTPUT"
+output_filename_mat      = output_dir + "/UV/pathways_mc0_Column.h5.mat"
+output_filename_rat_head = output_dir + "/UV/ratcolumn_head.txt"
+output_filename_rat_data = output_dir + "/UV/ratcolumn_data.txt"
 
 import h5py
 import numpy as np
