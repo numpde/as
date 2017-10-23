@@ -1,12 +1,5 @@
-file=../A-h5-to-txt/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=300
-ind 1, nnodes=100, nedges=299, maxcliquesize=4, bs=( 1 128 0 ), randmaxcliquesize=3, randbs=( 1 175 0 )
-ind 2, nnodes=100, nedges=301, maxcliquesize=4, bs=( 1 116 0 ), randmaxcliquesize=4, randbs=( 1 166 0 )
-file=../A-h5-to-txt/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=350
-ind 1, nnodes=100, nedges=341, maxcliquesize=4, bs=( 1 152 0 ), randmaxcliquesize=3, randbs=( 1 203 0 )
-ind 2, nnodes=100, nedges=350, maxcliquesize=4, bs=( 1 141 0 ), randmaxcliquesize=4, randbs=( 1 196 0 )
-file=../A-h5-to-txt/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=400
-ind 1, nnodes=100, nedges=363, maxcliquesize=4, bs=( 1 139 0 ), randmaxcliquesize=3, randbs=( 1 204 0 )
-ind 2, nnodes=100, nedges=357, maxcliquesize=4, bs=( 1 155 0 ), randmaxcliquesize=3, randbs=( 1 206 0 )
-file=../A-h5-to-txt/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=450
-ind 1, nnodes=100, nedges=367, maxcliquesize=4, bs=( 1 139 0 ), randmaxcliquesize=4, randbs=( 1 195 0 )
-ind 2, nnodes=100, nedges=405, maxcliquesize=4, bs=( 1 164 0 ), randmaxcliquesize=4, randbs=( 1 220 0 )
+file=../A-h5-to-txt/OUTPUT/UV/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=300
+ind 1, nnodes=100, nedges=299, maxcliquesize=3, bs=( 1 124 ), randmaxcliquesize=3, randbs=( 1 169 )
+ind 2, nnodes=100, nedges=298, maxcliquesize=4, bs=( 1 124 1 ), randmaxcliquesize=4, randbs=( 1 148 0 )
+file=../A-h5-to-txt/OUTPUT/UV/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=350
+ind 1, nnodes=100, nedges=318, maxcliquesize=3, bs=( 1 148 ), randmaxcliquesize=3, randbs=( 1 179 )

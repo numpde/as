@@ -3,13 +3,21 @@
 % Control both node and edge sizes of the sampled subnetworks.
 % Swap networks and compute the homology again.
 
-outfilename = './ratcolumn_report.txt';
-fout = fopen(outfilename, 'w');
+% Code by CHY.
+% Minor modifications by RA, 20171023
 
+% Input files:
+filenames{1} = '../A-h5-to-txt/OUTPUT/UV/ratcolumn_data.txt';
+
+% Output files:
+outfilename        = './ratcolumn_report.txt';
+statisticsfilename = './ratcolumn_report_statistics.csv';
+
+% Subgraph parameters
 maxnsubnodes = 100; maxnsubedges = 500; nsubsamples = 2;
-filenames{1} = '../A-h5-to-txt/ratcolumn_data.txt';
-
 densities = [3.0, 3.5, 4.0, 4.5];
+
+fout = fopen(outfilename, 'w');
 
 for densityind = 1:length(densities)
  
@@ -195,7 +203,6 @@ end
 fclose(fp);
 
 % Report the summary statistics.
-statisticsfilename = './ratcolumn_report_statistics.csv';
 fout = fopen(statisticsfilename, 'w');
 fprintf(fout, 'dataset%cnnodes%cnedges%cmaxcliquesize%cb0%cb1%cb2%cb3%cb4%crandmaxcliquesize%crandb0%crandb1%crandb2%crandb3%crandb4\n', 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9);
 for densityind = 1:length(densities)

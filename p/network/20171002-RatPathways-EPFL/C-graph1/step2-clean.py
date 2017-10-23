@@ -1,12 +1,23 @@
+
+# RA, 20171023
+
 import scipy.io
 import pickle
 import networkx as nx
 import numpy    as np
 
+# INPUT
+input_filename_graph   = "./OUTPUT/UV/column-a-graph.pkl"
+input_filename_cliques = "./OUTPUT/UV/column-b-cliques.pkl"
+
+# OUTPUT
+output_filename_cliques = "./OUTPUT/UV/column-c-cliques-clean.pkl"
+
+
 def remove_solitary_nodes(G) :
 	G.remove_nodes_from([n for (n, d) in G.degree() if (d == 0)])
     
-C = pickle.load(open("column-b-cliques.pkl", "rb"))['C']
+C = pickle.load(open(input_filename_cliques, "rb"))['C']
 print("Got C")
 
 (h, _) = np.histogram([len(c) for c in C], bins=range(1, 13))
@@ -30,7 +41,7 @@ for clique_size in [2, 3] :
 del C
 
 
-G = pickle.load(open("column-a-graph.pkl", "rb"))['G']
+G = pickle.load(open(input_filename_graph, "rb"))['G']
 print("Got G")
 
 for c0 in cc : G.remove_edges_from(c0)
@@ -47,5 +58,5 @@ assert(nx.number_connected_components(G) == 1)
 #for g in gg : print(nx.minimum_edge_cut(g))
 
 C = list(nx.find_cliques(G))
-pickle.dump({'C' : C}, open("column-c-cliques-clean.pkl", "wb"))
+pickle.dump({'C' : C}, open(output_filename_cliques, "wb"))
 print("Done.")
