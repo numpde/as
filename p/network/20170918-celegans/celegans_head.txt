@@ -1,0 +1,5 @@
+# Directed *multigraph* of chemical synapses of C. Elegans
+# From: http://www.wormatlas.org/images/NeuronConnect.xls
+# First node: 0
+# number of nodes = 283
+# number of edges = 6394
