@@ -3,3 +3,5 @@ ind 1, nnodes=100, nedges=299, maxcliquesize=3, bs=( 1 124 ), randmaxcliquesize=
 ind 2, nnodes=100, nedges=298, maxcliquesize=4, bs=( 1 124 1 ), randmaxcliquesize=4, randbs=( 1 148 0 )
 file=../A-h5-to-txt/OUTPUT/UV/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=350
 ind 1, nnodes=100, nedges=318, maxcliquesize=3, bs=( 1 148 ), randmaxcliquesize=3, randbs=( 1 179 )
+ind 2, nnodes=100, nedges=342, maxcliquesize=4, bs=( 1 159 0 ), randmaxcliquesize=3, randbs=( 1 204 0 )
+file=../A-h5-to-txt/OUTPUT/UV/ratcolumn_data.txt, maxnsubnodes=100, maxnsubedges=400
