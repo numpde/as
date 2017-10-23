@@ -4,7 +4,6 @@
 import scipy.io
 import pickle
 import networkx as nx
-import numpy    as np
 
 # INPUT
 input_filename_graph   = "./OUTPUT/UV/column-a-graph.pkl"
@@ -14,10 +13,10 @@ input_filename_graph   = "./OUTPUT/UV/column-a-graph.pkl"
 G = pickle.load(open(input_filename_graph, "rb"))['G']
 print("Got G")
 
-print("Minimum edge cut:")
-print(nx.minimum_edge_cut(G))
+
+L = nx.laplacian_matrix(G, weight=None)
+print("Got L")
 
 
-# Result:
-# {(203, 13560), (203, 16645), (203, 52), (203, 7069)}
+print("Laplacian synopsis:", L.shape)
 
