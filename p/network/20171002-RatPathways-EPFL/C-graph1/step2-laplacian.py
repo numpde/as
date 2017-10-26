@@ -21,7 +21,6 @@ output_filename_mat  = "./OUTPUT/UV/column-d-laplacian.mat"
 try :
 	G
 except NameError :
-	pass
 	G = pickle.load(open(input_filename_graph, "rb"))['G']
 
 print("Got G with {} nodes and {} edges".format(G.number_of_nodes(), G.number_of_edges()))
