@@ -8,5 +8,5 @@ step2:
 	python3 step2*.py
 
 step3:
-	python3 step3*.py
-
+	matlab -nosplash < step3-1-eig.m
+	@echo 

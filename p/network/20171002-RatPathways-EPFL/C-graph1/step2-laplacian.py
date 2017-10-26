@@ -1,5 +1,5 @@
 
-# RA, 20171023
+# RA, 2017-10-23
 
 import scipy.io
 import pickle
@@ -24,7 +24,7 @@ except NameError :
 	pass
 	G = pickle.load(open(input_filename_graph, "rb"))['G']
 
-print("Got G with {} nodes and {} edges".format(G.number_of_nodes(), G.number_of_edges))
+print("Got G with {} nodes and {} edges".format(G.number_of_nodes(), G.number_of_edges()))
 
 # 2. Make the Laplacian
 
