@@ -2,11 +2,10 @@ default:
 	@echo Hello!
 
 step1:
-	python3 step1*.py
+	SCRIPT=step1-cliques.py; python3 $$SCRIPT  > $$SCRIPT.out
 
 step2:
-	python3 step2*.py
+	SCRIPT=step2-laplacian.py; python3 $$SCRIPT  > $$SCRIPT.out
 
 step3:
-	matlab -nosplash < step3-1-eig.m
-	@echo 
+	SCRIPT=step3-1-eig.m; /NA/R2012a/bin/matlab -nosplash  < $$SCRIPT  > $$SCRIPT.out
