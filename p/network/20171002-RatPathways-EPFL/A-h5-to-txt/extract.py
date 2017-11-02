@@ -2,6 +2,7 @@
 
 # Input:
 # Blue Brain Project file to read, h5 format
+# Cf. ./ORIGINALS/Connectome_readme_INDIVIDUAL_INSTANCE.txt
 filename_input = "./ORIGINALS/UV/pathways_mc0_Column.h5"
 
 # Output:
