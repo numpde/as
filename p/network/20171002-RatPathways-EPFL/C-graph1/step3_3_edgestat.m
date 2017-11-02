@@ -74,7 +74,7 @@ markers = 'ox*^sv';
 
 H = [];
 for inclusta = INCLUSTA
-    H(end + 1) = loglog(inclusta{1}, [markers(1) 'b-']);
+    H(end + 1) = loglog(inclusta{1}, [markers(1) '-']);
     hold on;
     
     % Remove the used marker
@@ -91,8 +91,7 @@ disp(edgestat_exponent);
 
 websave('renice_tmp.m', 'https://gist.githubusercontent.com/numpde/b81b5a83ad036a0dd9fb1c92bcaeba2b/raw/8824a55228bc435e39082b5a7898e2fa319f5296/renice.m');
 for h = H
-    h = renice_tmp(h);
-    set(h, 'MarkerSize', 4);
+    set(renice_tmp(h), 'MarkerSize', 4);
 end
 delete('renice_tmp.m');
 
