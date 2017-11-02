@@ -1,7 +1,9 @@
 
 % RA, 2017-10-26
 
-% [1] http://www.kyb.mpg.de/fileadmin/user_upload/files/publications/attachments/Luxburg07_tutorial_4488%5b0%5d.pdf
+% References:
+%  - von Luxburg, "A tutorial on spectral clustering", 2007
+%  - Ng, Jordan, Weiss, "On Spectral Clustering: Analysis and an algorithm", 2001
 
 %%
 
@@ -55,7 +57,7 @@ disp(['n x N = ' num2str(n) ' x ' num2str(N)]);
 
 %%
 
-% 2. -- Normalized spectral clustering according to Ng, Jordan, Weiss [1, p.7]
+% 2. -- Normalized spectral clustering according to Ng, Jordan, Weiss
 
 %%
 
@@ -68,7 +70,7 @@ assert(issparse(data_normal.L));
 inv_sqrt_D = sparse(diag(1 ./ sqrt(diag(data_normal.L))));
 L_sym = inv_sqrt_D * data_normal.L * inv_sqrt_D;
 assert(issparse(L_sym));
-assert(norm(L_sym * W - W * E, 'inf') < 1e-10);
+assert(norm(  (L_sym * W) - (W * E)  , 'inf') < 1e-10);
 clear inv_sqrt_D
 
 
@@ -76,12 +78,13 @@ clear inv_sqrt_D
 
 % 2.1 -- Compute clusters
 
-
 % Cluster with k-means, for different k
 
+% Options for the kmeans algorithm
 opt = statset('MaxIter', 1000);
+
 for k = (1 : N)
-    disp(['k = ' num2str(k)]);
+    disp(['Clustering into k = ' num2str(k) ' clusters.']);
     
     % Only use the first k columns for clustering
     w = W(:, 1:k);
@@ -89,10 +92,10 @@ for k = (1 : N)
     % Normalize rows to get the matrix T
     T = diag(1 ./ sqrt(sum(w.^2, 2))) * w;
 
-    % Cluster, get cluster index for each element
+    % Perform clustering, get cluster index for each element
     I = kmeans(T, k, 'Options', opt);
     
-    % Relabel clusters by size
+    % Relabel clusters by decreasing size
     size = histcounts(I, (0 : k) + 0.5);
     assert(length(size) == k);
     [size, rank] = sort(size, 'descend');
@@ -101,7 +104,7 @@ for k = (1 : N)
     
     Clustering{k} = struct('I', I, 'size', size, 'k', k, 'opt', opt, 'n', n, 'N', N);
     
-    % These variables shadow built-in functions
+    % These shadow built-in functions; clear out of harm's way
     clear size rank
 end
 
@@ -120,7 +123,7 @@ load(output_file_clusters);
 % Will hold all "cluster flow" images
 Z = [];
 
-for a = 1 : min(10, N)
+for a = (1 : min(10, N))
     
     % Will hold one row of Z
     z = [];
@@ -135,16 +138,20 @@ for a = 1 : min(10, N)
         % Who goes where?
         S = full(sparse(Ca.I, Cb.I, 1));
         
-        % Normalization
+        % Normalization for maximum contrast
         S = S / max(max(S));
         
-        border = zeros(size(S, 1), 2);
-        z = [z, [border, S, border]];
+        % Normalization for total mass = 1
+        %S = S / sum(sum(S));
+        
+        % Grow the row  z  with padding
+        pad = zeros(size(S, 1), 2);
+        z = [z, [pad, S, pad]];
     end
     
     % Append the row  z  to  Z  with padding
-    border = zeros(2, size(z, 2));
-    Z = [Z; [border; z; border]];
+    pad = zeros(2, size(z, 2));
+    Z = [Z; [pad; z; pad]];
 end
 
 % Color-invert, magnify, and save Z as image
@@ -158,8 +165,8 @@ imwrite(kron(1-Z, ones(pixel_mag)), output_file_clusterflow);
 load(output_file_clusters);
 
 for C = [Clustering{:}]
-    k = C.k;
-    I = C.I;
+    k = C.k; % Number of clusters
+    I = C.I; % Data n belongs to cluster I(n)
     
     % Compute the sizes of the clusters
     H = histcounts(I, (0 : k) + 0.5);
