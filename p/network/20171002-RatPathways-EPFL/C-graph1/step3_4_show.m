@@ -60,8 +60,10 @@ I = C.I;
 
 close all
 
+% There are nedges edges from A(n) to B(n)
 [A, B] = find(M);
 nedges = length(A);
+
 
 AB = [A, B];
 AB = AB(randperm(nedges), :);
