@@ -112,7 +112,7 @@ end
 
 % 2.2 -- Save clusters
 
-save(output_file_clusters, 'Clustering', '-v7.3');
+save(output_file_clusters, 'Clustering', '-v7');
 
 %%
 
