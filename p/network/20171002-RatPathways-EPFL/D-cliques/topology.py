@@ -15,7 +15,7 @@ def betti(C, verbose = False) :
 	import itertools
 	import numpy as np
 	import networkx as nx
-    from scipy.sparse import lil_matrix
+	from scipy.sparse import lil_matrix
 	
 	def DIAGNOSTIC(*params) :
 		if verbose :
@@ -69,7 +69,7 @@ def betti(C, verbose = False) :
 	# D[0] maps to zero by definition
 	D[0] = lil_matrix( (1, len(S[0])) )
 
-    # Construct D[1], D[2], ...
+	# Construct D[1], D[2], ...
 	for k in range(1, len(S)) :
 	D[k] = lil_matrix( (len(S[k-1]), len(S[k])) )
 	SIGN = np.asmatrix([(-1)**i for i in range(0, k+1)]).transpose()
@@ -96,13 +96,13 @@ def betti(C, verbose = False) :
 	rk = [np.linalg.matrix_rank(d.todense()) for d in D]
 	# Compute dimker using rank-nullity theorem
 	ns = [(d.shape[1] - rk[n]) for (n, d) in enumerate(D)]
-    
+
 	# The boundary operators are redundant now
 	del D
 
 	DIAGNOSTIC("rk:", rk)
 	DIAGNOSTIC("ns:", ns)
-    
+
 	#
 	# 5. Infer the Betti numbers
 	#
