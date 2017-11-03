@@ -74,10 +74,10 @@ def betti(C, verbose = False) :
 		D[k] = lil_matrix( (len(S[k-1]), len(S[k])) )
 		SIGN = np.asmatrix([(-1)**i for i in range(0, k+1)]).transpose()
 
-	for (ks, j) in S[k].items() :
-		# Indices of all (k-1)-subsimplices s of the k-simplex ks
-		I = [S[k-1][s] for s in sorted(itertools.combinations(ks, k))]
-		D[k][I, j] = SIGN
+		for (ks, j) in S[k].items() :
+			# Indices of all (k-1)-subsimplices s of the k-simplex ks
+			I = [S[k-1][s] for s in sorted(itertools.combinations(ks, k))]
+			D[k][I, j] = SIGN
 
 	# The simplices are redundant now
 	del S
