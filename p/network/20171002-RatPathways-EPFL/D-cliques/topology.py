@@ -39,12 +39,12 @@ def betti(C, verbose = False) :
 	# S[k][s] is the ID of simplex s
 	S = []
 	for k in range(0, max(len(s) for s in C)) :
-	# Get all (k+1)-cliques, i.e. k-simplices, from max cliques mc
-	Sk = set(c for mc in C for c in itertools.combinations(mc, k+1))
-	# Check that each simplex is in increasing order
-	assert(all((list(s) == sorted(s)) for s in Sk))
-	# Assign an ID to each simplex, in lexicographic order
-	S.append(dict(zip(sorted(Sk), range(0, len(Sk)))))
+		# Get all (k+1)-cliques, i.e. k-simplices, from max cliques mc
+		Sk = set(c for mc in C for c in itertools.combinations(mc, k+1))
+		# Check that each simplex is in increasing order
+		assert(all((list(s) == sorted(s)) for s in Sk))
+		# Assign an ID to each simplex, in lexicographic order
+		S.append(dict(zip(sorted(Sk), range(0, len(Sk)))))
 
 	for (k, Sk) in enumerate(S) :
 		DIAGNOSTIC("Number of {}-simplices: {}".format(k, len(Sk)))
@@ -71,8 +71,8 @@ def betti(C, verbose = False) :
 
 	# Construct D[1], D[2], ...
 	for k in range(1, len(S)) :
-	D[k] = lil_matrix( (len(S[k-1]), len(S[k])) )
-	SIGN = np.asmatrix([(-1)**i for i in range(0, k+1)]).transpose()
+		D[k] = lil_matrix( (len(S[k-1]), len(S[k])) )
+		SIGN = np.asmatrix([(-1)**i for i in range(0, k+1)]).transpose()
 
 	for (ks, j) in S[k].items() :
 		# Indices of all (k-1)-subsimplices s of the k-simplex ks
