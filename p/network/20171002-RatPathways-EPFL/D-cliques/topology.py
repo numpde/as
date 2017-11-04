@@ -93,9 +93,9 @@ def betti(C, verbose = False) :
 	#
 	
 	# Compute rank using matrix SVD
-	rk = [np.linalg.matrix_rank(d.todense()) for d in D]
+	rk = [np.linalg.matrix_rank(d.todense()) for d in D] + [0]
 	# Compute dimker using rank-nullity theorem
-	ns = [(d.shape[1] - rk[n]) for (n, d) in enumerate(D)]
+	ns = [(d.shape[1] - rk[n]) for (n, d) in enumerate(D)] + [0]
 
 	# The boundary operators are redundant now
 	del D
@@ -110,8 +110,14 @@ def betti(C, verbose = False) :
 	# Betti numbers
 	# B[0] is the number of connected components
 	B = [(n - r) for (n, r) in zip(ns[:-1], rk[1:])]
-		
+
+	# Remove trailing zeros
+	while B and (B[-1] == 0) : B.pop()
+
+	DIAGNOSTIC("Betti numbers:", B)
+	
 	# Check: Euler-Poincare formula (see Eqn 16 in [Zomorodian])
-	assert(ec == sum(((-1)**k * B[k]) for k in range(0, len(B))))
+	epc = sum(((-1)**k * B[k]) for k in range(0, len(B)))
+	if (ec != epc) : print("̇Warning: ec = {} and epc = {} should be equal".format(ec, epc))
 
 	return B
