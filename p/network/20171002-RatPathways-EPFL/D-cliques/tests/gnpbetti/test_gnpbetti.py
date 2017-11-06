@@ -3,7 +3,11 @@
 
 # Statistics for Betti numbers of the random G_{n,p} graph
 
-import topology
+import importlib.util as iu
+spec = iu.spec_from_file_location("topology", "../topology.py")
+topology = iu.module_from_spec(spec)
+spec.loader.exec_module(topology)
+
 import networkx as nx
 import numpy as np
 
