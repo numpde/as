@@ -6,11 +6,13 @@
 import networkx as nx
 import numpy    as np
 
-# Load the topology module
-import importlib.util as iu
-spec = iu.spec_from_file_location("topology", "../topology.py")
-topology = iu.module_from_spec(spec)
-spec.loader.exec_module(topology)
+import topology_localcopy as topology
+
+## Load the topology module
+#import importlib.util as iu
+#spec = iu.spec_from_file_location("topology", "../topology.py")
+#topology = iu.module_from_spec(spec)
+#spec.loader.exec_module(topology)
 
 # INPUT
 pass
