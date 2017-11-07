@@ -1,6 +1,7 @@
 
 # RA, 20171023
 
+import gc
 import scipy.io
 import pickle
 import networkx as nx
@@ -10,8 +11,9 @@ import numpy    as np
 input_filename = "../A-h5-to-txt/OUTPUT/UV/pathways_mc0_Column.h5.mat"
 
 # OUTPUT
-output_filename_graph   = "./OUTPUT/UV/column-a-graph.pkl"
-output_filename_cliques = "./OUTPUT/UV/column-b-cliques.pkl"
+output_filename_graph      = "./OUTPUT/UV/column-a-graph.pkl"
+output_filename_maxcliques = "./OUTPUT/UV/column-b-maxcliques.pkl"
+output_filename_allcliques = "./OUTPUT/UV/column-b-allcliques.pkl"
 
 print("1. Loading adjacency matrix.")
 M = scipy.io.loadmat(input_filename)["M"]
@@ -70,13 +72,34 @@ print("--------------------------------")
 print("5. Looking for maximal cliques in the whole graph.")
 
 C = list(nx.find_cliques(G))
-pickle.dump({'C' : C}, open(output_filename_cliques, "wb"))
+pickle.dump({'C' : C}, open(output_filename_maxcliques, "wb"))
 print("Done.")
 
 cc = [len(c) for c in C]
 (h, _) = np.histogram(cc, bins=range(1, 13))
-print("Found: {} cliques.".format(len(cc)))
-print("Histogram of clique size:", h)
+print("Found: {} max cliques.".format(len(cc)))
+print("Histogram of max clique size:", h)
 
 
 
+print("--------------------------------")
+
+
+
+# print("6. Looking for all cliques in the whole graph.")
+#
+# del C
+# gc.collect()
+#
+# S = []
+# for c in nx.enumerate_all_cliques(G) :
+# 	while (len(S) < len(c)) : S.append([])
+# 	S[len(c) - 1].append(tuple(sorted(c)))
+#
+# pickle.dump({'S' : S}, open(output_filename_allcliques, "wb"))
+# print("Done.")
+#
+# cc = [len(c) for c in C]
+# (h, _) = np.histogram(cc, bins=range(1, 13))
+# print("Found: {} cliques.".format(len(cc)))
+# print("Histogram of clique size:", h)
