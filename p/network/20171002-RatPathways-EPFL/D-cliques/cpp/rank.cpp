@@ -111,11 +111,13 @@ int main() {
 	
 	if (!cin.eof()) cin >> input_file_J2I;
 
-	fstream is(input_file_J2I.c_str(), ios_base::in);
+	map J2I, I2J;
+	{
+		fstream is(input_file_J2I.c_str(), ios_base::in);
 
-	map J2I = read(is);
-	map I2J = transpose(J2I);
-	//cout << I2J[12] << endl;
+		J2I = read(is);
+		I2J = transpose(J2I);
+	}
 	
 	//for (auto I : J2I) assert(is_sorted(I.begin(), I.end()));
 	//for (auto J : I2J) assert(is_sorted(J.begin(), J.end()));
