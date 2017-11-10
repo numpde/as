@@ -11,7 +11,7 @@ input_file_stats = "gnpbetti-out_n={}.pkl"
 # OUTPUT
 output_file_plot = "gnpbetti_n={}"
 
-for n in [10, 20, 30] :
+for n in [10, 20, 30, 40] :
 	
 	# Read the statistics
 	data = pickle.load(open(input_file_stats.format(n), "rb"))
