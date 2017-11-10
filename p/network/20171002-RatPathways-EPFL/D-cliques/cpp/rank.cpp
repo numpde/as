@@ -111,7 +111,7 @@ int main() {
 	
 	if (!cin.eof()) cin >> input_file_J2I;
 
-	auto is = fstream(input_file_J2I.c_str(), ios_base::in);
+	fstream is(input_file_J2I.c_str(), ios_base::in);
 
 	map J2I = read(is);
 	map I2J = transpose(J2I);

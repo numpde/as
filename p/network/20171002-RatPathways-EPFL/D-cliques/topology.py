@@ -317,6 +317,8 @@ def betti_bin_cpp(C, verbose=False, worker="./cpp/UV/rank") :
 		with tempfile.NamedTemporaryFile(mode="w") as f :
 		
 			filename = f.name
+
+			DIAGNOSTIC("Writing matrix to", filename)
 			
 			for ks in Sk.keys() :
 				print(' '.join(str(Sl[s]) for s in subcliques(ks, k) if s), file=f)

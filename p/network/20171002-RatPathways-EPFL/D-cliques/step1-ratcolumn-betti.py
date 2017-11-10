@@ -26,9 +26,9 @@ print("Done")
 # Give the garbage collector a hint
 gc.collect()
 
-# Test
-import networkx as nx
-G = nx.gnp_random_graph(20, 0.5, seed=0)
-C = nx.find_cliques(G)
+## Test
+#import networkx as nx
+#G = nx.gnp_random_graph(20, 0.5, seed=0)
+#C = nx.find_cliques(G)
 
 print("Betti numbers:", topology.betti_bin_cpp(C, verbose=True))
