@@ -19,4 +19,4 @@ Compile with
 
 The executable *rank* is in the folder UV.
 
-This routine is called from topology_localcopy.py.
+This routine is called from topology.py or topology_localcopy.py.
