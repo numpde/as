@@ -8,3 +8,7 @@ compile:
 clear:
 	rm -f ./UV/rank
 
+test:
+	@echo Expect rank = 
+	@echo Wait for it...
+	@echo test_J2I_example.txt | ./UV/rank 
