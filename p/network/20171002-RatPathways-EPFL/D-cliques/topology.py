@@ -151,13 +151,14 @@ def betti_bin(C, verbose=False) :
 	def DIAGNOSTIC(*params) :
 		if verbose :
 			print(*params)
-	
-	if all((mc == tuple(sorted(mc))) for mc in C) :
+
+	if ((type(C) is list) and all((mc == tuple(sorted(mc))) for mc in C)) :
 		DIAGNOSTIC("Using the provided maximal cliques list")
+		pass
 	else :
 		DIAGNOSTIC("Converting maximal cliques to sorted tuples")
 		C = [tuple(sorted(mc)) for mc in C]
-		
+	
 	# Each maximal clique is represented in C as a sorted tuple
 	
 	DIAGNOSTIC("Number of maximal cliques: {} ({}M)".format(len(C), round(len(C) / 1e6)))
@@ -251,4 +252,98 @@ def betti_bin(C, verbose=False) :
 	while B and (B[-1] == 0) : B.pop()
 	
 	return B
+
+
+# Like betti_bin but uses an external worker routine 
+# for the CPU-intensive part
+#
+# By default, expect to find the worker at ./cpp/UV/rank
+#
+def betti_bin_cpp(C, verbose=False, worker="./cpp/UV/rank") :
+	from itertools import combinations as subcliques
+	import subprocess as subprocess
+	import tempfile as tempfile
+	import gc as gc
+	import os as os
 	
+	def DIAGNOSTIC(*params) :
+		if verbose :
+			print(*params)
+
+	if ((type(C) is list) and all((mc == tuple(sorted(mc))) for mc in C)) :
+		DIAGNOSTIC("Using the provided maximal cliques list")
+		pass
+	else :
+		DIAGNOSTIC("Converting maximal cliques to sorted tuples")
+		C = [tuple(sorted(mc)) for mc in C]
+	
+	# Each maximal clique is represented in C as a sorted tuple
+	
+	DIAGNOSTIC("Number of maximal cliques: {} ({}M)".format(len(C), round(len(C) / 1e6)))
+	
+	# Betti numbers
+	B = []
+	
+	# (k-1)-chain group
+	Sl = dict()
+	
+	# Iterate over the dimension
+	for k in range(0, max(len(s) for s in C)) :
+		
+		DIAGNOSTIC("Computing the {}-chain group".format(k))
+		
+		# Get all (k+1)-cliques, i.e. k-simplices, from max cliques mc
+		Sk = set(c for mc in C for c in subcliques(mc, k+1))
+		# Check that each simplex is in increasing order
+		assert(all((list(s) == sorted(s)) for s in Sk))
+		# Assign an ID to each simplex, in lexicographic order
+		# (This ordering makes subsequent computations faster)
+		Sk = dict(zip(sorted(Sk), range(0, len(Sk))))
+		
+		# Sk is now a representation of the k-chain group
+		
+		DIAGNOSTIC("{}-chain group rank: {}".format(k, len(Sk)))
+		
+		# "Default" Betti number (if rank is 0)
+		B.append(len(Sk))
+		
+		if (k == 0) :
+			Sl = Sk
+			gc.collect()
+			continue
+		
+		# CALL THE EXTERNAL ROUTINE
+		
+		with tempfile.NamedTemporaryFile(mode="w") as f :
+		
+			filename = f.name
+			
+			for ks in Sk.keys() :
+				print(' '.join(str(Sl[s]) for s in subcliques(ks, k) if s), file=f)
+			
+			del Sl
+			gc.collect()
+			
+			f.seek(0)
+			f.flush()
+			
+			DIAGNOSTIC("External worker: {} {}".format(worker, filename))
+			
+			#with Timer("subprocess") :
+			res = subprocess.run([worker, "", "/dev/null"], input=filename, stdout=subprocess.PIPE, universal_newlines=True)
+			assert(res.returncode == 0)
+			
+			rank = int(res.stdout.splitlines()[0])
+		
+		DIAGNOSTIC("rank = {}".format(rank))
+		
+		B[k]   -= rank
+		B[k-1] -= rank
+		 
+		Sl = Sk
+		gc.collect()
+	
+	# Drop trailing zeros
+	while B and (B[-1] == 0) : B.pop()
+	
+	return B
