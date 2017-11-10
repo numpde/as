@@ -4,11 +4,13 @@ default:
 compile:
 	mkdir -p ./UV/
 	g++ -std=c++11 -O5 ./rank.cpp -o ./UV/rank
+	@echo 
 
 clear:
 	rm -f ./UV/rank
 
 test:
-	@echo Expect rank = 
+	@echo Testing the rank routine.
+	@echo Expect rank = 29876
 	@echo Wait for it...
 	@echo test_J2I_example.txt | ./UV/rank 
