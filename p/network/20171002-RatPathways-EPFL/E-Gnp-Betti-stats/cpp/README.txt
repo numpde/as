@@ -1,4 +1,4 @@
-The c++ routine rank.cpp computes the Z/2Z rank of a binary matrix. 
+The c++ routine rank.cpp computes the Z/2Z rank of a binary matrix, cf. [this](https://gist.github.com/numpde/9584779ad235c6ee19be7a6bb87e8af5) gist.
 
 It reads a filename from stdin.
 
