@@ -9,11 +9,13 @@ mark_unversioned:
 	git status
 
 fill_unversioned:
+	make mark_unversioned
+	
 	for f in $$(find -name 'unversioned' -type f); do \
 		d=$$(dirname $$f); \
 		echo $$d; \
-		ls $$d | grep -v '^unversioned$$' > $$f; \
+		LANG=US.UTF-8 ls -al $$d | grep -v ' [\.]*[ ]*$$' | cut -d ' ' -f 5- | grep -v ' unversioned[ ]*$$' > $$f; \
 		cat $$f; \
 	done
 	
-	git commit -m "(ls unversioned directories)" $$(find -name 'unversioned' -type f)
+	git commit -m "(listing unversioned directories)" $$(find -name 'unversioned' -type f)
