@@ -17,6 +17,6 @@ Compile with
 
 	make compile
 
-The output is in the folder UV.
+The executable *rank* is in the folder UV.
 
 This routine is called from topology_localcopy.py.
