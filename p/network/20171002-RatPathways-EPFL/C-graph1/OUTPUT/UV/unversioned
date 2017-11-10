@@ -1,6 +1,10 @@
-column-a-graph.pkl
-column-b-cliques.pkl
-column-d-laplacian.mat
-column-e-lapeig.mat
-column-e-lapeig-normal.mat
-column-e-lapeig-unnorm.mat
+total 1911040
+drwxr-xr-x 2 ra roman       4096 十一  6 16:47 .
+drwxr-xr-x 5 ra roman       4096 十一  2 16:33 ..
+-rw-r--r-- 1 ra roman  411667275 十一  6 15:51 column-a-graph.pkl
+-rw-r--r-- 1 ra roman 1295571445 十一  6 15:30 column-b-maxcliques.pkl
+-rw-r--r-- 1 ra roman  152206616  十  26 15:05 column-d-laplacian.mat
+-rw-rw-r-- 1 ra roman   28721480  十  26 18:38 column-e-lapeig.mat
+-rw-rw-r-- 1 ra roman   38103774 十一  1 14:31 column-e-lapeig-normal.mat
+-rw-rw-r-- 1 ra roman   30602193 十一  1 14:31 column-e-lapeig-unnorm.mat
+-rw-r--r-- 1 ra roman          0 十一 10 20:48 unversioned
