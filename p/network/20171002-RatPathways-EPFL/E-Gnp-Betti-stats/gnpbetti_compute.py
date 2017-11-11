@@ -32,7 +32,7 @@ num_of_cores = 4
 
 # OUTPUT --- #
 
-output_file_stats = "gnpbetti-out_n={}.pkl"
+output_file_stats = "./OUTPUT/gnpbetti-out_n={}.pkl"
 
 # ---------- #
 

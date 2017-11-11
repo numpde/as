@@ -6,10 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # INPUT
-input_file_stats = "gnpbetti-out_n={}.pkl"
+input_file_stats = "./OUTPUT/gnpbetti-out_n={}.pkl"
 
 # OUTPUT
-output_file_plot = "gnpbetti_n={}"
+output_file_plot = "./OUTPUT/gnpbetti_n={}"
 
 for n in [10, 20, 30, 40] :
 	
