@@ -22,7 +22,7 @@ input_file_graph = "../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 
 ### OUTPUT --- #
 
-output_file_stats = "./OUTPUT/column-stratify-stats-rand.pkl"
+output_file_stats = "./OUTPUT/column-stratify-stats-2b-rand.pkl"
 
 ### PARAMS --- #
 
@@ -37,10 +37,10 @@ max_runs = 100
 
 # Number of computing cores to use
 # Each thread requires about 30-50 GB of RAM
-num_of_cores = 2
+num_of_cores = 4
 
-# Use this for testing purposes
-G = nx.gnp_random_graph(100, 0.1, seed=0)
+## Use this for testing purposes
+#G = nx.gnp_random_graph(100, 0.1, seed=0)
 
 ### MEAT ----- #
 
