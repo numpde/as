@@ -13,7 +13,8 @@ input_file_graph = "../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 P = [i/100 for i in range(0, 101)]
 
 # Number of computing cores to use
-num_of_cores = 4
+# Each thread requires about 30GB of RAM
+num_of_cores = 2
 
 ### OUTPUT --- #
 
@@ -79,7 +80,7 @@ def job(p) :
 	return cliques(p)
 
 progbar = progressbar.ProgressBar()
-CLIQUES = Parallel(n_jobs=num_of_cores)([delayed(job)(p) for p in progbar(P)])
+CLIQUES = Parallel(n_jobs=num_of_cores)(delayed(job)(p) for p in progbar(P))
 
 FE = [fe for (fe, _) in CLIQUES]
 NC = [nc for (_, nc) in CLIQUES]
