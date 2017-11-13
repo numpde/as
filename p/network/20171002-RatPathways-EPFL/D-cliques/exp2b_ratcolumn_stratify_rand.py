@@ -27,7 +27,7 @@ output_file_stats = "./OUTPUT/column-stratify-stats-2b-rand.pkl"
 ### PARAMS --- #
 
 # Fraction of edges included
-FE = [i/100 for i in range(0, 101)]
+FE = np.logspace(-3, 0, 101).tolist()
 
 # Maximal time allowance for each fe (in seconds)
 max_time_per_fe = 1000
