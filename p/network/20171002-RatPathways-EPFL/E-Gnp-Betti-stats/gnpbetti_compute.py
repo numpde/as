@@ -3,6 +3,8 @@
 
 # Statistics for Betti numbers of the random G_{n,p} graph
 
+### IMPORTS -- #
+
 import networkx as nx
 import numpy    as np
 
@@ -12,10 +14,11 @@ from topology_localcopy import betti_bin_cpp as BETTI
 
 # https://blog.dominodatalab.com/simple-parallelization/
 from joblib import Parallel, delayed
-import multiprocessing
 
+### INPUT ---- #
+pass
 
-# INPUT ---- #
+### PARAMS --- #
 
 # The highest Betti number rank that might occur
 max_expected_betti = 10
@@ -30,11 +33,11 @@ P = [p/100 for p in range(1, 77)]
 # Number of computing cores to use
 num_of_cores = 4
 
-# OUTPUT --- #
+### OUTPUT --- #
 
 output_file_stats = "./OUTPUT/gnpbetti-out_n={}.pkl"
 
-# ---------- #
+### MEAT ----- #
 
 # Computes average and std dev of Betti numbers
 # for the G_{n,p} random graph over (runs) runs
