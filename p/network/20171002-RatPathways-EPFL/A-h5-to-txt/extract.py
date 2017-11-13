@@ -1,18 +1,33 @@
-# RA, 20171023
 
-# Input:
+# RA, 2017-10-23
+
+# Convert a Blue Brain Project h5 connectome file
+# to a sparse adjacency matrix (in MATLAB and text format)
+#
+# Also, extract the 3d coordinates of the nodes
+
+### IMPORTS -- #
+
+import h5py
+import numpy as np
+
+from scipy.io     import savemat
+from scipy.sparse import csc_matrix
+
+### INPUT ---- #
+
 # Blue Brain Project file to read, h5 format
 # Cf. ./ORIGINALS/Connectome_readme_INDIVIDUAL_INSTANCE.txt
 filename_input = "./ORIGINALS/UV/pathways_mc0_Column.h5"
 
-# Output:
+### OUTPUT --- #
+
 output_dir = "./OUTPUT/"
 output_filename_mat      = output_dir + "UV/pathways_mc0_Column.h5.mat"
 output_filename_rat_head = output_dir + "UV/ratcolumn_head.txt"
 output_filename_rat_data = output_dir + "UV/ratcolumn_data.txt"
 
-import h5py
-import numpy as np
+### MEAT ----- #
 
 f = h5py.File(filename_input, "r")
 fc = f["connectivty"]
@@ -54,7 +69,6 @@ for (k0, v0) in fc.items() :
 M = np.vstack(M)
 
 # Convert to a sparse matrix
-from scipy.sparse import csc_matrix
 M = csc_matrix(M)
 
 #plt.ion(); plt.imshow(M); plt.show(); input("# Press enter...")
@@ -62,7 +76,6 @@ M = csc_matrix(M)
 
 # 3a. Save the adjacency matrix in Matlab format
 
-from scipy.io import savemat
 savemat(output_filename_mat, {'M' : M, 'XYZ' : XYZ}, do_compression=True)
 
 # 3b. Save the adjacency in txt format
