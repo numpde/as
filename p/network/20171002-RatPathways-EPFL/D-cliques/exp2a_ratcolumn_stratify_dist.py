@@ -4,10 +4,27 @@
 # Track the number of cliques in the ratcolumn graph
 # as edges between distant nodes are dropped
 
+### IMPORTS -- #
+
+import pickle
+import scipy.io
+import progressbar
+import numpy    as np
+import networkx as nx
+
+from joblib      import Parallel, delayed
+from collections import Counter
+
 ### INPUT ---- #
 
 input_file_xyz = "../A-h5-to-txt/OUTPUT/UV/pathways_mc0_Column.h5.mat"
 input_file_graph = "../C-graph1/OUTPUT/UV/column-a-graph.pkl"
+
+### OUTPUT --- #
+
+output_file_stats = "./OUTPUT/column-stratify-stats-2a-dist.pkl"
+
+### PARAMS --- #
 
 # Fraction of maximal edge length
 P = [i/100 for i in range(0, 101)]
@@ -16,26 +33,11 @@ P = [i/100 for i in range(0, 101)]
 # Each thread requires 30-50 GB of RAM
 num_of_cores = 2
 
-### OUTPUT --- #
-
-output_file_stats = "./OUTPUT/column-stratify-stats.pkl"
-
-### ---------- #
-
-import pickle
-import scipy.io
-import numpy as np
-import networkx as nx
-
-import progressbar
-
-from collections import Counter
-
-from joblib import Parallel, delayed
-
 ## Use this for testing purposes
 #G = nx.gnp_random_graph(100, 0.1, seed=0)
 #for (a, b, ed) in G.edges(data=True) : ed['d'] = abs(a - b)
+
+### MEAT ----- #
 
 # See if a graph is already provided
 try :
