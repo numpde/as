@@ -31,7 +31,7 @@ P = np.logspace(-3, 0, 101).tolist()
 
 # Number of computing cores to use
 # Each thread requires 30-50 GB of RAM
-num_of_cores = 2
+num_of_cores = 4
 
 ## Use this for testing purposes
 #G = nx.gnp_random_graph(100, 0.4, seed=0)
