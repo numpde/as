@@ -6,6 +6,7 @@
 
 ### IMPORTS -- #
 
+import gc
 import pickle
 import random
 import scipy.io
@@ -27,16 +28,16 @@ output_file_stats = "./OUTPUT/column-stratify-stats-2b-rand.pkl"
 ### PARAMS --- #
 
 # Fraction of edges included
-FE = np.logspace(-3, 0, 101).tolist()
+FE = np.logspace(-4.2, 0, 201).tolist()
 
-# Maximal time allowance for each fe (in seconds)
-max_time_per_fe = 1000
+# Desired number of runs for the statistic
+max_runs = 20
 
-# Maximal number of runs for the statistic
-max_runs = 100
+# Maximal time allowance for each fe (in minutes)
+max_time_per_fe = 30
 
-# Number of computing cores to use
-# Each thread requires about 30-50 GB of RAM
+# Number of computing threads to use
+# Each thread requires up to 50 GB of RAM
 num_of_cores = 4
 
 ## Use this for testing purposes
@@ -58,16 +59,25 @@ except NameError :
 def cliques(fe) :
 	# Number of edges to include
 	ne = round(G.number_of_edges() * fe)
+	
 	# Stratify graph to short edges
 	g = nx.Graph()
 	g.add_nodes_from(G.nodes())
 	g.add_edges_from(random.sample(G.edges(), ne))
+	
 	# Count k-cliques
 	C = nx.enumerate_all_cliques(g)
 	nc = dict(Counter(len(c) for c in C))
-	# Convert nc to a list 
+	
+	# Convert nc to a list
+	# nc[k] is the number of k-cliques
 	nc = [nc.get(k, 0) for k in range(0, 1 + max(nc.keys()))]
-	# nc[k] is now the number of k-cliques
+	
+	# Clear
+	del g
+	del C
+	gc.collect()
+	
 	return nc
 
 # LL is a list of lists
@@ -81,9 +91,9 @@ def job(fe) :
 	NC = []
 	
 	t0 = time.time()
-	for run in range(0, max_runs) :
+	for run in range(1, max_runs + 1) :
 		NC.append(cliques(fe))
-		if ((time.time() - t0) > max_time_per_fe) : break
+		if ((time.time() - t0) > (max_time_per_fe * 60)) : break
 	
 	NC = np.vstack(padzeros(NC))
 	
