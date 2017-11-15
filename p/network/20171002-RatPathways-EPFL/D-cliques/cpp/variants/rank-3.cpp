@@ -110,9 +110,10 @@ int shortest(const Vec& I, const VEC& I2J) {
 	int k = I[0];
 	int L = I2J[k].size();
 	for (auto i : I) {
-		if (I2J[i].size() >= L) continue;
-		L = I2J[i].size();
-		k = i;
+		if (I2J[i].size() < L) {
+			k = i;
+			L = I2J[i].size();
+		}
 	}
 	return k;
 }
@@ -159,8 +160,10 @@ int main() {
 
 	//*/
 	while (!lenj.empty() && !leni.empty()) {
-		if ((rank % 1000) == 0)
-			cerr << lenj.size() << " / " << rank << endl;
+		if ((rank % 1000) == 0) {
+			cerr << "size: " << I2J.size() << "x" << J2I.size() << " | ";
+			cerr << "lenj: " << lenj.size() << " | " << "rank: " << rank << endl;
+		}
 
 		int p = -1;
 		int q = -1;

@@ -156,8 +156,6 @@ int main() {
 		J2I = read(is);
 		//cerr << "Shuffling..." << endl;
 		//random_shuffle(J2I.begin(), J2I.end());
-		cerr << "Transposing..." << endl;
-		I2J = transpose(J2I);
 	}
 	
 	//for (auto I : J2I) assert(is_sorted(I.begin(), I.end()));
@@ -165,21 +163,43 @@ int main() {
 	
 	int rank = 0;
 
-	for (auto I : J2I) {
-		if ((rank % 1000) == 0) {
-			cerr << "size: " << I2J.size() << "x" << J2I.size() << " | ";
-			cerr << "rank: " << rank << endl;
+	while (!J2I.empty()) {
+		// Remove empty columns
+		cerr << "Cleaning..." << endl;
+		{
+			auto j = J2I.begin();
+			while (j != J2I.end()) {
+				if (j->empty())
+					j = J2I.erase(j);
+				else
+					++j;
+			}
 		}
 		
-		if (I.empty()) continue;
+		if (J2I.empty()) break;
 		
-		// Make a copy
-		Vec J(I2J[*I.begin()]);
+		cerr << "Transposing..." << endl;
+		I2J = transpose(J2I);
 		
-		for (auto i : I) SD(J, I2J[i], I2J[i]);
-		for (auto j : J) SD(I, J2I[j], J2I[j]);
+		for (auto I : J2I) {
+			
+			if (I.empty()) continue;
+			
+			// Make a copy
+			Vec J(I2J[I.front()]);	
+			
+			for (auto i : I) SD(J, I2J[i], I2J[i]);
+			for (auto j : J) SD(I, J2I[j], J2I[j]);
+			
+			rank++;
+			
+			if ((rank % 1000) == 0) {
+				cerr << "size: " << I2J.size() << "x" << J2I.size() << " | ";
+				cerr << "rank: " << rank << endl;
+				break;
+			}
+		}
 		
-		rank++;
 	}
 	
 	cout << rank << endl;
