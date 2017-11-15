@@ -1,0 +1,5 @@
+
+Running on the D3 of the rat column graph (pierrot):
+
+o) rank-2 consumes over 140GB of RAM
+o) rank-3 about 20GB of RAM, returned 6279745 after 370min
