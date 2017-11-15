@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
+#include <utility>
 #include <cassert>
 #include <fstream>
 #include <sstream>
@@ -26,10 +27,10 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& v) {
 using namespace std;
 
 typedef vector<int> Vec;
-typedef vector<Vec> map;
+typedef vector<Vec> VEC;
 
-map read(istream& in) {
-	map J2I;
+VEC read(istream& in) {
+	VEC J2I;
 	
 	string line;
 	while (std::getline(in, line)) {
@@ -49,8 +50,8 @@ map read(istream& in) {
 	return J2I;
 }
 
-map transpose(const map& A) {
-	map B;
+VEC transpose(const VEC& A) {
+	VEC B;
 	
 	for (int j = 0; j != A.size(); ++j) {
 		for (auto i : A[j]) {
@@ -105,17 +106,31 @@ void SD(const Vec& A, const Vec& B, Vec& C) {
 	tmp.swap(C);
 }
 
+int shortest(const Vec& I, const VEC& I2J) {
+	int k = I[0];
+	int L = I2J[k].size();
+	for (auto i : I) {
+		if (I2J[i].size() < L) {
+			k = i;
+			L = I2J[i].size();
+		}
+	}
+	return k;
+}
+
 int main() {
 	string input_file_J2I = "./J2I_tmp.txt";
 	//cout << input_file_J2I << endl;
 	
 	if (!cin.eof()) cin >> input_file_J2I;
 
-	map J2I, I2J;
+	VEC J2I, I2J;
 	{
 		fstream is(input_file_J2I.c_str(), ios_base::in);
 
+		cerr << "Reading file..." << endl;
 		J2I = read(is);
+		cerr << "Transposing..." << endl;
 		I2J = transpose(J2I);
 	}
 	
@@ -124,17 +139,77 @@ int main() {
 	
 	int Q = J2I.size();
 	int rank = 0;
-	
+
+	cerr << "Constructing len-j set..." << endl;
+
+	set < pair<int, int> > lenj;
+	for (int j = 0; j != J2I.size(); ++j) {
+		if (!J2I[j].empty())
+			lenj.insert( make_pair(J2I[j].size(), j) );
+	}
+
+	cerr << "Constructing len-i set..." << endl;
+
+	set < pair<int, int> > leni;
+	for (int i = 0; i != I2J.size(); ++i) {
+		if (!I2J[i].empty())
+			leni.insert( make_pair(I2J[i].size(), i) );
+	}
+
+	cerr << "Computing rank..." << endl;
+
 	//*/
-	for (int q = 0; q != Q; ++q) {
+	while (!lenj.empty() && !leni.empty()) {
+		if ((rank % 1000) == 0) {
+			cerr << "size: " << I2J.size() << "x" << J2I.size() << " | ";
+			cerr << "lenj: " << lenj.size() << " | " << "rank: " << rank << endl;
+		}
+
+		int p = -1;
+		int q = -1;
+		{
+			// Index to the shortest J2I[q]
+			q = lenj.begin()->second;
+			int i = shortest(J2I[q], I2J);
+
+			// Index of the shortest I2J[p]
+			p = leni.begin()->second;
+			int j = shortest(I2J[p], J2I);
+
+			int leniq = I2J[i].size() + J2I[q].size();
+			int lenpj = I2J[p].size() + J2I[j].size();
+
+			if (lenpj < leniq) {
+				p = i;
+			} else {
+				q = j;
+			}
+		}
+
 		Vec I(J2I[q]);
+		Vec J(I2J[p]);
 		
-		if (I.empty()) continue;
-		
-		Vec J(I2J[I[0]]);
-		
-		for (auto i : I) SD2(J, I2J[i], I2J[i]);
-		for (auto j : J) SD2(I, J2I[j], J2I[j]);
+		for (auto i : I) {
+			int sz0 = I2J[i].size();
+			SD2(J, I2J[i], I2J[i]);
+			int sz1 = I2J[i].size();
+
+			if (sz0 == sz1) continue;
+			leni.erase(make_pair(sz0, i));
+			if (!sz1) continue;
+			leni.insert(make_pair(sz1, i));
+		}
+
+		for (auto j : J) {
+			int sz0 = J2I[j].size();
+			SD2(I, J2I[j], J2I[j]);
+			int sz1 = J2I[j].size();
+
+			if (sz0 == sz1) continue;
+			lenj.erase(make_pair(sz0, j));
+			if (!sz1) continue;
+			lenj.insert(make_pair(sz1, j));
+		}
 		
 		rank++;
 	}
@@ -160,73 +235,3 @@ int main() {
 	return 0;
 }
 
-/*/
-int main() {
-	string input_file_J2I = "./J2I_tmp.txt";
-	//cout << input_file_J2I << endl;
-	
-	if (!cin.eof()) cin >> input_file_J2I;
-
-	auto is = fstream(input_file_J2I.c_str(), ios_base::in);
-
-	map J2I = read(is);
-	map I2J = transpose(J2I);
-	//cout << I2J[12] << endl;
-	
-	set<int> nzj;
-	for (int j = 0; j < J2I.size(); ++j)
-		if (!J2I[j].empty())
-			nzj.insert(j);
-	
-	set<int> nzi;
-	for (int i = 0; i < I2J.size(); ++i)
-		if (!I2J[i].empty())
-			nzi.insert(i);
-	
-	int rank = 0;
-	
-	while (!nzj.empty() && !nzi.empty()) {
-		int p = -1;
-		int q = -1;
-		
-		{
-			int qa = *nzj.begin();
-			Vec& IA = J2I[qa];
-			int pa = *IA.begin();
-			Vec& JA = I2J[pa];
-			
-			int pb = *nzi.begin();
-			Vec& JB = I2J[pb];
-			int qb = *JB.begin();
-			Vec& IB = J2I[qb];
-			
-			if ((IA.size() + JA.size()) < (IB.size() + JB.size())) {
-				p = pa;
-				q = qa;
-			} else {
-				p = pb;
-				q = qb;
-			}
-		}
-		
-		Vec J(I2J[p]);
-		Vec I(J2I[q]);
-		
-		for (auto i : I) {
-			SD(J, I2J[i], I2J[i]);
-			if (I2J[i].empty()) nzi.erase(i);
-		}
-		
-		for (auto j : J) {
-			SD(I, J2I[j], J2I[j]);
-			if (J2I[j].empty()) nzj.erase(j);
-		}
-		
-		rank++;
-	}
-	
-	cout << rank << endl;
-	
-	return 0;
-}
-//*/
