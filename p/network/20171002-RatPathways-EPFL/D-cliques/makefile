@@ -8,12 +8,14 @@ outdir:
 compile:
 	cd cpp; make compile
 
-step1: outdir compile
-	python3 step1*.py
+exp1: outdir compile
+	python3 exp1*.py
 
 exp2a: outdir
-	python3 exp2a*.py
+	F=$$(sed -n 's|.*\(OUTPUT.*-2a-.*.pkl\).*|\1|gp' exp2a*.py); \
+	[ ! -e $$F ] && python3 exp2a*.py || python3 plot_exp2a*.py
 
 exp2b: outdir
-	python3 exp2b*.py
+	F=$$(sed -n 's|.*\(OUTPUT.*-2b-.*.pkl\).*|\1|gp' exp2b*.py); \
+	[ ! -e $$F ] && python3 exp2b*.py || python3 plot_exp2b*.py
 
