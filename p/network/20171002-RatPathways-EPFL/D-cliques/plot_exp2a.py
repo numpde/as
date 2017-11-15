@@ -16,7 +16,7 @@ input_file_stats = "./OUTPUT/column-stratify-stats-2a-dist.pkl"
 
 ### OUTPUT --- #
 
-pass
+output_file_plot = input_file_stats + ".eps"
 
 ### MEAT ----- #
 
@@ -38,6 +38,7 @@ FE  = np.asarray(data['FE'])
 
 plt.plot(FE, NC, '.-')
 
+
 plt.yscale('log')
 plt.xscale('log')
 
@@ -50,5 +51,7 @@ plt.xlabel("Fraction of shortest egdes kept")
 plt.ylabel("Number of cliques")
 
 plt.legend(["{}-cliques".format(1+i) for i in range(NC.shape[1])], loc='upper left')
+
+plt.savefig(output_file_plot)
 
 plt.show()

@@ -16,7 +16,7 @@ input_file_stats = "./OUTPUT/column-stratify-stats-2b-rand.pkl"
 
 ### OUTPUT --- #
 
-pass
+output_file_plot = input_file_stats + ".eps"
 
 ### MEAT ----- #
 
@@ -36,7 +36,8 @@ NCS = np.vstack(padzeros(data['NCS']))[:, 1:]
 FE  = np.asarray(data['FE'])
 
 for j in range(0, NCM.shape[1]) :
-	plt.errorbar(FE, NCM[:, j], yerr=0*NCS[:, j], fmt='.-')
+	#plt.errorbar(FE, NCM[:, j], yerr=NCS[:, j], fmt='.-')
+	plt.plot(FE, NCM[:, j], '.-')
 
 plt.yscale('log')
 plt.xscale('log')
@@ -50,5 +51,7 @@ plt.xlabel("Fraction of random egdes kept")
 plt.ylabel("Average number of cliques")
 
 plt.legend(["{}-cliques".format(1+i) for i in range(NCM.shape[1])], loc='upper left')
+
+plt.savefig(output_file_plot)
 
 plt.show()
