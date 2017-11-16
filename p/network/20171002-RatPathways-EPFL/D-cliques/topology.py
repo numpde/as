@@ -332,7 +332,7 @@ def betti_bin_cpp(C, verbose=False, worker="./cpp/UV/rank") :
 			DIAGNOSTIC("External worker: {} {}".format(worker, filename))
 			
 			#with Timer("subprocess") :
-			res = subprocess.run([worker, "", "/dev/null"], input=filename, stdout=subprocess.PIPE, universal_newlines=True)
+			res = subprocess.run([worker, "", "/dev/null"], input=filename, stdout=subprocess.PIPE, stderr=(None if verbose else subprocess.PIPE), universal_newlines=True)
 			assert(res.returncode == 0)
 			
 			rank = int(res.stdout.splitlines()[0])
