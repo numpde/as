@@ -30,8 +30,13 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& v) {
 using namespace std;
 
 typedef vector<int> Vec;
-typedef vector<Vec> VEC;
+typedef vector<Vec> VEC; // Mapped matrix 
 
+// Read a stream of the form
+//   4 5 7
+//   7 8
+//   1 3 9
+//   ...
 VEC read(istream& in) {
 	VEC J2I;
 	
@@ -53,6 +58,7 @@ VEC read(istream& in) {
 	return J2I;
 }
 
+// Transpose the mapped matrix
 VEC transpose(const VEC& A) {
 	VEC B;
 	
@@ -110,6 +116,7 @@ void SD(const Vec& A, const Vec& B, Vec& C) {
 	tmp.swap(C);
 }
 
+// Find k in I such that I2J[k] is shortest
 int shortest(const Vec& I, const VEC& I2J) {
 	int k = I[0];
 	int L = I2J[k].size();
@@ -121,10 +128,6 @@ int shortest(const Vec& I, const VEC& I2J) {
 	return k;
 }
 
-template <class T>
-void clear_each(vector<T>& V) {
-	for (auto& v : V) v.clear();
-}
 
 int main() {
 	string input_file_J2I = "./J2I_tmp.txt";
@@ -156,13 +159,22 @@ int main() {
 	cerr << "OpenMP threads min/max/adaptive: " << min_omp_threads << "/" << max_omp_threads << "/" << adaptive_threading << " threads." << endl;
 	
 	
-	cerr << "Constructing len-j / len-i sets..." << endl;
+	// The sets lenj/leni point to the shortest column/row:
+	//
+	// The k-th element p = (len, j) in lenj is such that
+	// len is the length of the column j
+	// and it is the k-th shortest column
+	//
+	// Similarly for leni
 	//
 	typedef set < pair<int, int> > LEN;
 	LEN lenj, leni;
 	//
 	#pragma omp parallel
 	{
+		#pragma omp single nowait
+		cerr << "Constructing len-j / len-i sets..." << endl;
+		
 		int thread = omp_get_thread_num();
 		
 		if (thread == (0 % omp_threads)) {
@@ -184,6 +196,7 @@ int main() {
 		}
 	}
 	
+	// Essential barrier: wait for lenj/i sets
 	#pragma omp barrier
 
 	cerr << "Computing rank..." << endl;
@@ -219,7 +232,7 @@ int main() {
 	// OUTER LOOP
 	while (!lenj.empty() && !leni.empty()) {
 		
-		// SECTION 1 (Thread management)
+		// SECTION 1: Thread management
 		
 		// Adjust the number of openmp threads
 		if (adaptive_threading) {
@@ -246,7 +259,7 @@ int main() {
 			t0 = Time::now();
 		}
 		
-		// SECTION 2 (Parallel computation)
+		// SECTION 2: Parallel computation
 		
 		#pragma omp parallel 
 		{
@@ -292,14 +305,17 @@ int main() {
 				// Cannot set "nowait": synchronize I and J
 				#pragma omp single 
 				{
+					// Find the best pivot
 					C bestc = pqlen[0];
 					for (auto& c : pqlen) if (c.L < bestc.L) bestc = c;
 
+					// Nonzeros in the pivot column/row
 					I = J2I[bestc.q];
 					J = I2J[bestc.p];
 				}
 
-				// Compute erasei, inserti
+				// Manipulate the matrix
+				// Compute erasei/inserti for leni update
 				{
 					erasei[thread].clear(); inserti[thread].clear();
 					
@@ -319,7 +335,8 @@ int main() {
 					}
 				}
 
-				// Compute erasej, insertj
+				// Manipulate the matrix-tranpose
+				// Compute erasej/insertj for lenj update
 				{
 					erasej[thread].clear(); insertj[thread].clear();
 					
@@ -374,6 +391,7 @@ int main() {
 		} // omp parallel
 	} // while
 	
+	// Communicate the result
 	cout << rank << endl;
 	
 	return 0;
