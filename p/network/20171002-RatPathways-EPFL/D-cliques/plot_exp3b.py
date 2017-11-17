@@ -1,7 +1,7 @@
 
-# RA, 2017-11-14
+# RA, 2017-11-17
 
-# Plot the results of exp2b
+# Plot the results of exp3b
 
 ### IMPORTS -- #
 
@@ -30,10 +30,11 @@ def padzeros(LL) :
 data = pickle.load(open(input_file_stats, "rb"))
 print("Data keys:", list(data.keys()))
 
-# We omit 0-cliques
+# Betti number stats (mean and stddev)
 BEM = np.vstack(padzeros(data['BEM']))
 BES = np.vstack(padzeros(data['BES']))
 
+# Fraction of edges kept in the graph
 FE  = np.asarray(data['FE'])
 
 for j in range(0, BEM.shape[1]) :
