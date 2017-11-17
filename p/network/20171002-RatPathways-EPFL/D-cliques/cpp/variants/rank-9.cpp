@@ -145,7 +145,7 @@ int main() {
 		I2J = transpose(J2I);
 	}
 	
-	// Use the environment variable MAX_OMP_THREADS
+	// Use the environment variable OMP_NUM_THREADS
 	int max_omp_threads = omp_get_max_threads();
 	int min_omp_threads = min(2, max_omp_threads);
 	// ...but use initially:
