@@ -1,5 +1,5 @@
 
-// RA, 2017-11-09
+// RA, 2017-11-17
 
 #include <algorithm>
 #include <iostream>
@@ -204,19 +204,14 @@ int main() {
 	int rank = 0;
 	
 	//
-	vector< vector< LEN::iterator > > erasei, erasej;
+	vector< vector< LEN::iterator > > erasei(omp_threads), erasej(omp_threads);
 	//
 	typedef vector< pair< LEN::iterator, pair<int, int> > > VOP;
-	vector< VOP > inserti, insertj;
-	//
-	for (int t = 0; t < max_omp_threads; ++t) {
-		erasei.push_back(vector<LEN::iterator>()); inserti.push_back(VOP());
-		erasej.push_back(vector<LEN::iterator>()); insertj.push_back(VOP());
-	}
+	vector< VOP > inserti(omp_threads), insertj(omp_threads);
 	
 	//
 	struct C { int p = -1, q = -1, L = -1; };
-	vector<C> pqlen(2);
+	vector<C> pqlen(2); // Do not change the initial size here
 	
 	//
 	typedef std::chrono::high_resolution_clock Time;
@@ -250,7 +245,7 @@ int main() {
 			}
 			
 			// How many pivot candidates to compute?
-			// At least 2, to check leni and lenj
+			// At least 2 in order to check leni and lenj
 			pqlen.resize(max(2, omp_threads/2));
 			
 			erasei.resize(omp_threads); inserti.resize(omp_threads);
@@ -335,7 +330,7 @@ int main() {
 					}
 				}
 
-				// Manipulate the matrix-tranpose
+				// Manipulate the matrix-transpose
 				// Compute erasej/insertj for lenj update
 				{
 					erasej[thread].clear(); insertj[thread].clear();
