@@ -1,0 +1,44 @@
+Number of maximal cliques: 40855865
+Converting C to sorted tuples
+Done
+Using the provided maximal cliques list
+Number of maximal cliques: 40855865 (41M)
+Computing the 0-chain group
+0-chain group rank: 28909
+Computing the 1-chain group
+1-chain group rank: 6322661
+Writing matrix to /tmp/tmpxtqpc1hv
+External worker: ./cpp/UV/rank /tmp/tmpxtqpc1hv
+rank = 28908
+Computing the 2-chain group
+2-chain group rank: 57670760
+Writing matrix to /tmp/tmp5tcrmc2b
+External worker: ./cpp/UV/rank /tmp/tmp5tcrmc2b
+rank = 6279745
+Computing the 3-chain group
+3-chain group rank: 50638959
+Writing matrix to /tmp/tmp0ppx7an_
+External worker: ./cpp/UV/rank /tmp/tmp0ppx7an_
+rank = 40868436
+Computing the 4-chain group
+4-chain group rank: 7049975
+Writing matrix to /tmp/tmprw08i4zi
+External worker: ./cpp/UV/rank /tmp/tmprw08i4zi
+rank = 6824388
+Computing the 5-chain group
+5-chain group rank: 227853
+Writing matrix to /tmp/tmp0ksgbopf
+External worker: ./cpp/UV/rank /tmp/tmp0ksgbopf
+rank = 225587
+Computing the 6-chain group
+6-chain group rank: 2273
+Writing matrix to /tmp/tmpbrnz7ikd
+External worker: ./cpp/UV/rank /tmp/tmpbrnz7ikd
+rank = 2266
+Computing the 7-chain group
+7-chain group rank: 7
+Writing matrix to /tmp/tmp4e686dhd
+External worker: ./cpp/UV/rank /tmp/tmp4e686dhd
+rank = 7
+Betti numbers: [1, 14008, 10522579, 2946135]
+
