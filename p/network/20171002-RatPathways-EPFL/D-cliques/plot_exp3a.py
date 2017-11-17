@@ -26,8 +26,9 @@ def padzeros(LL) :
 	maxL = max(len(L) for L in LL)
 	return [(L + ([0] * (maxL - len(L)))) for L in LL]
 
-# data has keys ['maxd', 'P', 'FE', 'BE']
+# 
 data = pickle.load(open(input_file_stats, "rb"))
+print("Data keys:", list(data.keys()))
 
 # Betti numbers
 BE = np.vstack(padzeros(data['BE']))
