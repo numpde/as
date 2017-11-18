@@ -116,18 +116,58 @@ void SD(const Vec& A, const Vec& B, Vec& C) {
 	tmp.swap(C);
 }
 
-// Find k in I such that I2J[k] is shortest
-int shortest(const Vec& I, const VEC& I2J) {
-	int k = I[0];
-	int L = I2J[k].size();
-	for (auto i : I) {
-		if (I2J[i].size() >= L) continue;
-		L = I2J[i].size();
-		k = i;
+//
+struct Pivot { 
+	int p = -1;  // row number
+	int q = -1;  // col number
+	
+	int nI = -1; // nnz in pivot row
+	int nJ = -1; // nnz in pivot col
+	
+	Pivot t() const {
+		Pivot Q;
+		
+		Q.p = q; Q.nI = nJ;
+		Q.q = p; Q.nJ = nI;
+		
+		return Q;
 	}
-	return k;
+	
+	// What is a better (smaller) pivot?
+	bool operator<(const Pivot& Q) { 
+		return (nI * nJ) < (Q.nI * Q.nJ); 
+	}
+	
+};
+//
+std::ostream& operator<<(std::ostream& out, const Pivot& P) {
+	out << "Pivot[(" << P.p << ", " << P.q << "), " << P.nJ << "x" << P.nI << "]";
+	return out;
+}
+	
+// Find i in J2I[j] such that I2J[i] is shortest
+// Make a Pivot with (p, q) = (i, j)
+Pivot shortest(int j, const VEC& J2I, const VEC& I2J) {
+	Pivot P;
+	VEC::value_type I(J2I[j]);
+
+	P.q = j;
+	P.nI = I.size();
+	
+	P.p = I[0];
+	P.nJ = I2J[P.p].size();
+	
+	for (auto i : I) {
+		if (I2J[i].size() < P.nJ) {
+			P.p = i;
+			P.nJ = I2J[i].size();
+		}
+	}
+	
+	return P;
 }
 
+//
 
 int main() {
 	string input_file_J2I = "./J2I_tmp.txt";
@@ -145,9 +185,9 @@ int main() {
 		I2J = transpose(J2I);
 	}
 	
-	// Use the environment variable OMP_NUM_THREADS, cap to 12
-	int max_omp_threads = min(omp_get_max_threads(), 12);
-	// Use at least two threads, unless only 1 allowed
+	// Use the environment variable OMP_NUM_THREADS, cap to 24
+	int max_omp_threads = min(omp_get_max_threads(), 24);
+	// Use at least two threads, unless only 1 is allowed
 	int min_omp_threads = min(2, max_omp_threads);
 	// ...but use initially:
 	int omp_threads = min_omp_threads;
@@ -171,34 +211,37 @@ int main() {
 	typedef set < pair<int, int> > LEN;
 	LEN lenj, leni;
 	//
-	#pragma omp parallel
+	#pragma omp parallel sections
 	{
-		#pragma omp single nowait
+		#pragma omp section
 		cerr << "Constructing len-j / len-i sets..." << endl;
 		
-		int thread = omp_get_thread_num();
-		
-		if (thread == (0 % omp_threads)) {
+		#pragma omp section
+		{
 			for (auto I : J2I) assert(is_sorted(I.begin(), I.end()));
-			
+		}
+		
+		#pragma omp section
+		{
+			for (auto J : I2J) assert(is_sorted(J.begin(), J.end()));
+		}
+		
+		#pragma omp section
+		{
 			for (int j = 0; j != J2I.size(); ++j) {
 				if (!J2I[j].empty())
 					lenj.insert( make_pair(J2I[j].size(), j) );
 			}
 		}
 
-		if (thread == (1 % omp_threads)) {
-			for (auto J : I2J) assert(is_sorted(J.begin(), J.end()));
-			
+		#pragma omp section
+		{
 			for (int i = 0; i != I2J.size(); ++i) {
 				if (!I2J[i].empty())
 					leni.insert( make_pair(I2J[i].size(), i) );
 			}
 		}
 	}
-	
-	// Essential barrier: wait for lenj/i sets
-	#pragma omp barrier
 
 	cerr << "Computing rank..." << endl;
 	
@@ -210,10 +253,8 @@ int main() {
 	typedef vector< pair< LEN::iterator, pair<int, int> > > VOP;
 	vector< VOP > inserti(omp_threads), insertj(omp_threads);
 	
-	//
-	struct C { int p = -1, q = -1, L = -1; };
 	// Do not change the default initial size here:
-	vector<C> pqlen(2);
+	vector<Pivot> pivots(2);
 	
 	//
 	typedef std::chrono::high_resolution_clock Time;
@@ -221,7 +262,12 @@ int main() {
 	//
 	vector<double> timings(1 + max_omp_threads, 0.0);
 	//
+	// Used for selecting the number of threads:
 	auto t0 = Time::now();
+	
+	double time_a_pivoting = 0;
+	double time_b_flipping = 0;
+	double time_c_ordering = 0;
 	
 	//
 	Vec I, J;
@@ -246,14 +292,26 @@ int main() {
 				}
 			}
 			
+			{
+				cerr << "Timings. ";
+				cerr << "A: " << time_a_pivoting << "s" << ", "; 
+				cerr << "B: " << time_b_flipping << "s" << ", "; 
+				cerr << "C: " << time_c_ordering << "s" << endl; 
+			}
+			
 			// How many pivot candidates to compute?
 			// At least 2 in order to check leni and lenj
 			// (Comment out to use the default defined above)
-			//pqlen.resize(max(2, omp_threads/2));
+			//pivots.resize(max(2, omp_threads/2));
+			
+			assert(pivots.size());
 			
 			erasei.resize(omp_threads); inserti.resize(omp_threads);
 			erasej.resize(omp_threads); insertj.resize(omp_threads);
 			
+			cerr << endl;
+			
+			// Used for selecting the number of threads:
 			t0 = Time::now();
 		}
 		
@@ -261,61 +319,69 @@ int main() {
 		
 		#pragma omp parallel 
 		{
-			int thread = omp_get_thread_num();
+			int thread_id = omp_get_thread_num();
 			
 			// INNER LOOP
 			while (!lenj.empty() && !leni.empty()) {
 				
-				#pragma omp parallel for
-				for (int k = 0; k < pqlen.size(); ++k) {
-					pqlen[k].L = J2I.size() + I2J.size();
-					
+				//
+				// Step 1: Find a pivot
+				//
+				
+				auto ta = Time::now();
+	
+				// Need to find at least one pivot candidate
+				assert(pivots.size());
+				
+				// Essential implicit barrier: wait for 'pivots'
+				#pragma omp for 
+				for (int k = 0; k < pivots.size(); ++k) {
 					// At even k
 					if (((k % 2) == 0) && (k < lenj.size())) {
-						// Index to the k-th shortest J2I[q]
+						// Find index to the k-th shortest J2I[q]
 						auto j = lenj.begin();
 						advance(j, k);
-						C c;
-						c.q = j->second;
-						c.p = shortest(J2I[c.q], I2J);
-						c.L = I2J[c.p].size() + J2I[c.q].size();
-						//
-						if (c.L < pqlen[k].L) pqlen[k] = c;
+						// Best pivot in this column
+						pivots[k] = shortest(j->second, J2I, I2J);
 					}
 					
 					// At odd k
 					if (((k % 2) == 1) && (k < leni.size())) {
-						// Index of the k-th shortest I2J[p]
+						// Find index of the k-th shortest I2J[p]
 						auto i = leni.begin();
 						advance(i, k);
-						C c;
-						c.p = i->second;
-						c.q = shortest(I2J[c.p], J2I);
-						c.L = I2J[c.p].size() + J2I[c.q].size();
-						//
-						if (c.L < pqlen[k].L) pqlen[k] = c;
+						// Best pivot in this row
+						pivots[k] = shortest(i->second, I2J, J2I).t(/* (!) */);
 					}
 				}
 				
-				// Essential barrier: wait for pqlen
-				#pragma omp barrier
-			
-				// Cannot set "nowait": synchronize I and J
-				#pragma omp single 
+				// Essential implicit barrier: wait for 'I' and 'J'
+				#pragma omp single
 				{
 					// Find the best pivot
-					C bestc = pqlen[0];
-					for (auto& c : pqlen) if (c.L < bestc.L) bestc = c;
+					Pivot best = pivots[0];
+					for (auto& P : pivots) if (P < best) best = P;
+					
+					//cout << best << endl;
 
-					// Nonzeros in the pivot column/row
-					I = J2I[bestc.q];
-					J = I2J[bestc.p];
+					// Nonzeros in the pivot ...
+					I = J2I[best.q]; //  ... column
+					J = I2J[best.p]; //  ... row
 				}
+				
+				#pragma omp single
+				time_a_pivoting += Duration(Time::now() - ta).count();
+				
+				//
+				// Step 2: Flipping matrix
+				//
 
+				auto tb = Time::now();
+				
 				// Manipulate the matrix
 				// Compute erasei/inserti for leni update
 				{
-					erasei[thread].clear(); inserti[thread].clear();
+					erasei[thread_id].clear(); inserti[thread_id].clear();
 					
 					#pragma omp for nowait
 					for (int ii = 0; ii < I.size(); ++ii) {
@@ -326,17 +392,17 @@ int main() {
 						int sz1 = I2J[i].size();
 
 						if (sz0 == sz1) continue;
-						erasei[thread].push_back(leni.find(make_pair(sz0, i)));
+						erasei[thread_id].push_back(leni.find(make_pair(sz0, i)));
 						if (!sz1) continue;
 						auto p = make_pair(sz1, i);
-						inserti[thread].push_back(make_pair(leni.upper_bound(p), p));
+						inserti[thread_id].push_back(make_pair(leni.upper_bound(p), p));
 					}
 				}
 
 				// Manipulate the matrix-transpose
 				// Compute erasej/insertj for lenj update
 				{
-					erasej[thread].clear(); insertj[thread].clear();
+					erasej[thread_id].clear(); insertj[thread_id].clear();
 					
 					#pragma omp for nowait
 					for (int jj = 0; jj < J.size(); ++jj) {
@@ -347,34 +413,53 @@ int main() {
 						int sz1 = J2I[j].size();
 
 						if (sz0 == sz1) continue;
-						erasej[thread].push_back(lenj.find(make_pair(sz0, j)));
+						erasej[thread_id].push_back(lenj.find(make_pair(sz0, j)));
 						if (!sz1) continue;
 						auto p = make_pair(sz1, j);
-						insertj[thread].push_back(make_pair(lenj.upper_bound(p), p));
+						insertj[thread_id].push_back(make_pair(lenj.upper_bound(p), p));
 					}
 				}
-			
-				// Essential barrier: wait for inserti/j, erasei/j
+				
+				// Essential barrier: wait for 'inserti/j' and 'erasei/j'
 				#pragma omp barrier
+				
+				#pragma omp single
+				time_b_flipping += Duration(Time::now() - tb).count();
+				
+				//
+				// Step 3: Ordering lenghts
+				//
+				
+				auto tc = Time::now();
 				
 				#pragma omp single nowait
 				{
-					// Cannot reverse the order of insertion and erasure
+					// Note: Cannot reorder insertion and erasure!
+					// (iterator invalidation possible after 'erase')
 					for (auto& v : inserti) for (auto& p : v) leni.insert(p.first, p.second);
 					for (auto& v : erasei)  for (auto& i : v) leni.erase(i);
 				}
-					
+						
 				#pragma omp single nowait
 				{
-					// Cannot reverse the order of insertion and erasure
+					// Note: Cannot reorder insertion and erasure!
+					// (iterator invalidation possible after 'erase')
 					for (auto& v : insertj) for (auto& p : v) lenj.insert(p.first, p.second);
 					for (auto& v : erasej)  for (auto& j : v) lenj.erase(j);
 				}
 				
-				// Cannot set "nowait": essential (implicit) barrier
-				#pragma omp single
+				#pragma omp single nowait
 				rank++;
 				
+				// Essential barrier: wait for 'leni/j' and 'rank'
+				#pragma omp barrier
+				
+				#pragma omp single
+				time_c_ordering += Duration(Time::now() - tc).count();
+				
+				
+				// Note: no thread can reach here before 'rank'
+				//       is updated by virtue of the omp barrier
 				if ((rank % 1000) == 0) {
 					#pragma omp single
 					{
@@ -382,9 +467,10 @@ int main() {
 						cerr << "#lenj: " << lenj.size() << " | " << "rank: " << rank << endl;
 					}
 					
-					// leave inner loop
+					// leave inner loop and the parallel section
 					break; 
 				}
+				
 			} // while
 		} // omp parallel
 	} // while
