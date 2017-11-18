@@ -292,12 +292,14 @@ int main() {
 				}
 			}
 			
+			#ifdef SHOW_TIMINGS
 			{
 				cerr << "Timings. ";
 				cerr << "A: " << time_a_pivoting << "s" << ", "; 
 				cerr << "B: " << time_b_flipping << "s" << ", "; 
 				cerr << "C: " << time_c_ordering << "s" << endl; 
 			}
+			#endif
 			
 			// How many pivot candidates to compute?
 			// At least 2 in order to check leni and lenj
