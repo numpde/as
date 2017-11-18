@@ -315,7 +315,7 @@ int main() {
 				{
 					erasei[thread].clear(); inserti[thread].clear();
 					
-					#pragma omp for
+					#pragma omp for nowait
 					for (int ii = 0; ii < I.size(); ++ii) {
 						int i = I[ii];
 						
@@ -336,7 +336,7 @@ int main() {
 				{
 					erasej[thread].clear(); insertj[thread].clear();
 					
-					#pragma omp for
+					#pragma omp for nowait
 					for (int jj = 0; jj < J.size(); ++jj) {
 						int j = J[jj];
 						
