@@ -1,7 +1,7 @@
 
 # RA, 2017-11-06
 
-# Compute the Betti numbers for thee ratcolumn graph
+# Compute the Betti numbers for the ratcolumn graph
 
 # INPUT ---- #
 input_file_cliques = "../C-graph1/OUTPUT/UV/column-b-maxcliques.pkl"
