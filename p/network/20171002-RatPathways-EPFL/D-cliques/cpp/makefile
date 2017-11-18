@@ -3,7 +3,7 @@ default:
 
 compile:
 	mkdir -p ./UV/
-	g++ -std=c++11 -O4 -fopenmp ./rank.cpp -o ./UV/rank
+	g++ -std=c++11 -O4 -fopenmp ./variants/rank-9.cpp -o ./UV/rank
 	@echo 
 
 clear:
