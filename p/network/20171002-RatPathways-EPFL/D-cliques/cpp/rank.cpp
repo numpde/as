@@ -212,7 +212,8 @@ int main() {
 	
 	//
 	struct C { int p = -1, q = -1, L = -1; };
-	vector<C> pqlen(2); // Do not change the initial size here
+	// Do not change the default initial size here:
+	vector<C> pqlen(2);
 	
 	//
 	typedef std::chrono::high_resolution_clock Time;
@@ -247,7 +248,8 @@ int main() {
 			
 			// How many pivot candidates to compute?
 			// At least 2 in order to check leni and lenj
-			pqlen.resize(max(2, omp_threads/2));
+			// (Comment out to use the default defined above)
+			//pqlen.resize(max(2, omp_threads/2));
 			
 			erasei.resize(omp_threads); inserti.resize(omp_threads);
 			erasej.resize(omp_threads); insertj.resize(omp_threads);
