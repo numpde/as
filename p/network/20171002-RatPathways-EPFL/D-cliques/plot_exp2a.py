@@ -16,7 +16,7 @@ input_file_stats = "./OUTPUT/column-stratify-stats-2a-dist.pkl"
 
 ### OUTPUT --- #
 
-output_file_plot = input_file_stats + ".eps"
+output_file_plot = input_file_stats + "." # + eps/png
 
 ### MEAT ----- #
 
@@ -52,6 +52,7 @@ plt.ylabel("Number of cliques")
 
 plt.legend(["{}-cliques".format(1+i) for i in range(NC.shape[1])], loc='upper left')
 
-plt.savefig(output_file_plot)
+plt.savefig(output_file_plot + "eps")
+plt.savefig(output_file_plot + "png")
 
 plt.show()
