@@ -16,12 +16,20 @@
 # Test-read from disk
 
 
+### INPUT --- #
+
+filename_in = "./NeuronConnect.xls"
+backup_url = "http://www.wormatlas.org/images/NeuronConnect.xls"
+
+### OUTPUT -- #
+
+filename_pkl = "./celegans.pkl"
+filename_txt = "./celegans_{}.txt" # {} = head, data
+
+
 ###########################
 print('\n', "Part I", '\n')
 ###########################
-
-filename_in = "./NeuronConnect.xls"
-url = "http://www.wormatlas.org/images/NeuronConnect.xls"
 
 
 import os.path
@@ -29,7 +37,7 @@ if not os.path.isfile(filename_in) :
 	# Download the file
 	print("File", filename_in, "not found. Downloading.")
 	import urllib.request
-	urllib.request.urlretrieve(url, filename_in)
+	urllib.request.urlretrieve(backup_url, filename_in)
 	print("Done.")
 	print(" ")
 
@@ -159,8 +167,6 @@ for (k, v) in S_NMJ.items() :
 
 import pickle
 
-filename_pkl = "./celegans.pkl"
-
 with open(filename_pkl, "wb") as f :
 	pickle.dump(G, f, protocol=pickle.HIGHEST_PROTOCOL)
 	pickle.dump(E, f, protocol=pickle.HIGHEST_PROTOCOL)
@@ -170,8 +176,6 @@ print("Saved to file:", filename_pkl)
 
 
 # SAVE THE G GRAPH IN TXT FORMAT
-
-filename_txt = "./celegans_{}.txt"
 
 first_label = 0
 G0 = nx.convert_node_labels_to_integers(G, first_label=first_label)
