@@ -23,13 +23,13 @@ pass
 # The highest Betti number rank that might occur
 max_expected_betti = 10
 # Number of nodes in the random graph
-nn = [10, 20, 30, 40, 50, 60]
+nn = [10, 20, 30, 40, 50, 60, 70, 80]
 # Maximal number of runs for the statistic
 max_runs = 100
 # Maximal time allowance for each p (in seconds)
 max_time_per_p = 1000
 # Range of edge proba in G_{n,p}
-P = [p/100 for p in range(1, 77)]
+P = [p/100 for p in range(1, 80)]
 # Number of computing cores to use
 num_of_cores = 4
 
