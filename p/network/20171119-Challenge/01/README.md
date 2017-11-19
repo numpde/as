@@ -1,6 +1,6 @@
 The purpose of this challenge is to improve the rank computation routine for graph-topological boundary operators.
 
-A reference implementation is provided in the subfolder **reference**. It reads a file name from standard input and prints the result to standard output. The file is expect to contain a binary matrix in the format
+A reference implementation is provided in the subfolder **reference**. It reads a file name from standard input and prints the result to standard output. The file is expected to contain a binary matrix in the format
 
 	137 148 406
 	140 149 450
