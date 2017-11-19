@@ -46,13 +46,13 @@ plt.xscale('log')
 
 plt.gca().set_xlim([2e-5, 2])
 #plt.xticks()
-plt.gca().set_ylim([2e-1, 2e8])
-plt.yticks([10**e for e in range(0, 9)])
+plt.gca().set_ylim([2e-1, 5e7])
+plt.yticks([10**e for e in range(0, 8)])
 
 plt.xlabel("Fraction of random egdes kept")
 plt.ylabel("Average Betti numbers")
 
-plt.legend(["b{}".format(1+i) for i in range(BEM.shape[1])], loc='upper left')
+plt.legend(["b{}".format(i) for i in range(BEM.shape[1])], loc='upper left')
 
 plt.savefig(output_file_plot + "eps")
 plt.savefig(output_file_plot + "png")
