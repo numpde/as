@@ -1,0 +1,9 @@
+./task/UV/0.txt 0
+./task/UV/1.txt 40
+./task/UV/2.txt 550
+./task/UV/3.txt 3438
+./task/UV/4.txt 10842
+./task/UV/5.txt 18037
+./task/UV/6.txt 15845
+./task/UV/7.txt 6670
+./task/UV/8.txt 1078
