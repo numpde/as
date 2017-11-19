@@ -14,12 +14,13 @@ clear:
 	cd cpp; make clear
 
 step1:
-	cd cpp; make compile
+	@f=../D-cliques/cpp/variants/rank-9.cpp; [ -e $$f ] && cp -v $$f ./cpp/rank_localcopy.cpp
+	@cd cpp; make compile
 
 step2:
-	mkdir -p OUTPUT
-	python3 gnpbetti_compute.py
+	@mkdir -p OUTPUT
+	@python3 gnpbetti_compute.py
 
 step3:
-	mkdir -p OUTPUT
-	python3 gnpbetti_plot.py
+	@mkdir -p OUTPUT
+	@python3 gnpbetti_plot.py

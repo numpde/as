@@ -254,7 +254,12 @@ def betti_bin(C, verbose=False) :
 	return B
 
 
-def betti_bin_cpp(C, verbose=False) :
+# Like betti_bin but uses an external worker routine 
+# for the CPU-intensive part
+#
+# By default, expect to find the worker at ./cpp/UV/rank
+#
+def betti_bin_cpp(C, verbose=False, worker="./cpp/UV/rank") :
 	from itertools import combinations as subcliques
 	import subprocess as subprocess
 	import tempfile as tempfile
@@ -285,6 +290,8 @@ def betti_bin_cpp(C, verbose=False) :
 	# Iterate over the dimension
 	for k in range(0, max(len(s) for s in C)) :
 		
+		DIAGNOSTIC("Computing the {}-chain group".format(k))
+		
 		# Get all (k+1)-cliques, i.e. k-simplices, from max cliques mc
 		Sk = set(c for mc in C for c in subcliques(mc, k+1))
 		# Check that each simplex is in increasing order
@@ -310,90 +317,35 @@ def betti_bin_cpp(C, verbose=False) :
 		with tempfile.NamedTemporaryFile(mode="w") as f :
 		
 			filename = f.name
+
+			DIAGNOSTIC("Writing matrix to", filename)
 			
 			for ks in Sk.keys() :
 				print(' '.join(str(Sl[s]) for s in subcliques(ks, k) if s), file=f)
 			
+			del Sl
+			gc.collect()
+			
 			f.seek(0)
 			f.flush()
 			
+			DIAGNOSTIC("External worker: {} {}".format(worker, filename))
+			
 			#with Timer("subprocess") :
-			res = subprocess.run(["./cpp/UV/rank", "", "/dev/null"], input=filename, stdout=subprocess.PIPE, universal_newlines=True)
+			res = subprocess.run([worker, "", "/dev/null"], input=filename, stdout=subprocess.PIPE, stderr=(None if verbose else subprocess.PIPE), universal_newlines=True)
 			assert(res.returncode == 0)
+			
 			rank = int(res.stdout.splitlines()[0])
 		
-		DIAGNOSTIC("rank = ", rank)
+		DIAGNOSTIC("rank = {}".format(rank))
 		
 		B[k]   -= rank
 		B[k-1] -= rank
-		
-		if (not verbose) : 
-			S = None
-			Sl = Sk
-			gc.collect()
-			continue
-		
-		# CROSS-CHECK
-		
-		# J2I is a mapped representation of the boundary operator
-		# (Understood to have boolean entries instead of +1 / -1)
-		
-		J2I = {
-			j : set(Sl[s] for s in subcliques(ks, k) if s)
-			for (ks, j) in Sk.items()
-		}
-		
+		 
 		Sl = Sk
-		
-		DIAGNOSTIC("Assembled J2I of size {}".format(len(J2I)))
-		
-		# Transpose J2I
-		
-		I2J = {
-			i : set()
-			for I in J2I.values() for i in I
-		}
-		
-		for (j, I) in J2I.items() :
-			for i in I :
-				I2J[i].add(j)
-		
-		DIAGNOSTIC("Assembled I2J of size {}".format(len(I2J)))
-		
-		rank_ref = 0
-		
-		# Compute the rank of the boundary operator
-		# The rank = The # of completed while loops
-		# It's usually the most time-consuming part
-		while J2I and I2J :
-			# Default pivot option
-			I = next(iter(J2I.values()))
-			J = I2J[next(iter(I))]
-			
-			# An alternative option
-			JA = next(iter(I2J.values()))
-			IA = J2I[next(iter(JA))]
-			
-			# Choose the option with fewer indices
-			# (reducing the number of loops below)
-			if ((len(IA) + len(JA)) < (len(I) + len(J))) : (I, J) = (IA, JA)
-
-			for i in I : 
-				I2J[i] = J.symmetric_difference(I2J[i])
-				if not I2J[i] : del I2J[i]
-
-			for j in J : 
-				J2I[j] = I.symmetric_difference(J2I[j])
-				if not J2I[j] : del J2I[j]
-			
-			rank_ref += 1
-		
-		DIAGNOSTIC("rank_ref = ", rank_ref)
-		
-		assert(rank == rank_ref)
-		
 		gc.collect()
 	
+	# Drop trailing zeros
 	while B and (B[-1] == 0) : B.pop()
 	
 	return B
