@@ -49,7 +49,7 @@ The routine **xls2graph.py** extracts the three graphs **G**, **E** and **M**, t
 	celegans.pkl
 
 The graphs are weighted directed graphs, where the weight is the multiplicity of the synapse.
-Note that the xls file contains all synapses twice, expect those of type **NMJ**.
+Note that the xls file contains all synapses twice, except those of type **NMJ**.
 The graph **E** of electric junctions is a directed graph where the edge **(a, b)** is present whenever **(b, a)** is.
 
 The graph of the chemical synapses is also written to the two files
