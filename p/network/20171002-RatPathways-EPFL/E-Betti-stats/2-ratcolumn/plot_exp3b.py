@@ -1,7 +1,7 @@
 
-# RA, 2017-11-16
+# RA, 2017-11-17
 
-# Plot the results of exp3a
+# Plot the results of exp3b
 
 ### IMPORTS -- #
 
@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 ### INPUT ---- #
 
-input_file_stats = "./OUTPUT/column-stratify-betti-3a-dist.pkl"
+input_file_stats = "./OUTPUT/exp3b.pkl"
 
 ### OUTPUT --- #
 
@@ -30,15 +30,16 @@ def padzeros(LL) :
 data = pickle.load(open(input_file_stats, "rb"))
 print("Data keys:", list(data.keys()))
 
-# Betti numbers
-BE = np.vstack(padzeros(data['BE']))
+# Betti number stats (mean and stddev)
+BEM = np.vstack(padzeros(data['BEM']))
+BES = np.vstack(padzeros(data['BES']))
 
-
+# Fraction of edges kept in the graph
 FE  = np.asarray(data['FE'])
 
-
-plt.plot(FE, BE, '.-')
-
+for j in range(0, BEM.shape[1]) :
+	#plt.errorbar(FE, BEM[:, j], yerr=BES[:, j], fmt='.-')
+	plt.plot(FE, BEM[:, j], '.-')
 
 plt.yscale('log')
 plt.xscale('log')
@@ -48,10 +49,10 @@ plt.gca().set_xlim([2e-5, 2])
 plt.gca().set_ylim([2e-1, 5e7])
 plt.yticks([10**e for e in range(0, 8)])
 
-plt.xlabel("Fraction of shortest egdes kept")
-plt.ylabel("Betti numbers")
+plt.xlabel("Fraction of random egdes kept")
+plt.ylabel("Average Betti numbers")
 
-plt.legend(["b{}".format(i) for i in range(BE.shape[1])], loc='upper left')
+plt.legend(["b{}".format(i) for i in range(BEM.shape[1])], loc='upper left')
 
 plt.savefig(output_file_plot + "eps")
 plt.savefig(output_file_plot + "png")
