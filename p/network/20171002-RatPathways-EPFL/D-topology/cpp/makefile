@@ -13,4 +13,4 @@ test:
 	@echo Testing the rank routine.
 	@echo Expect rank = 29876
 	@echo Wait for it...
-	@echo test_J2I_example.txt | time ./UV/rank 
+	@echo J2I_example.txt | time ./UV/rank 

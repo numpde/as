@@ -14,7 +14,7 @@ clear:
 	cd cpp; make clear
 
 step1:
-	@f=../D-cliques/cpp/variants/rank-9.cpp; [ -e $$f ] && cp -v $$f ./cpp/rank_localcopy.cpp
+	@f=../../D-topology/cpp/variants/rank-9.cpp; [ -e $$f ] && cp -v $$f ./cpp/rank_localcopy.cpp
 	@cd cpp; make compile
 
 step2:

@@ -3,17 +3,20 @@
 
 # Compute the Betti numbers for the ratcolumn graph
 
-# INPUT ---- #
-input_file_cliques = "../C-graph1/OUTPUT/UV/column-b-maxcliques.pkl"
+### IMPORTS -- #
 
-# OUTPUT --- #
-pass
+from topology_localcopy import betti_bin_cpp
 
-# ---------- #
-
-import topology
 import pickle
 import gc
+
+### INPUT ---- #
+input_file_cliques = "../../C-graph1/OUTPUT/UV/column-b-maxcliques.pkl"
+
+### OUTPUT --- #
+pass
+
+### MEAT ----- #
 
 C = pickle.load(open(input_file_cliques, "rb"))['C']
 
@@ -31,4 +34,4 @@ gc.collect()
 #G = nx.gnp_random_graph(20, 0.5, seed=0)
 #C = nx.find_cliques(G)
 
-print("Betti numbers:", topology.betti_bin_cpp(C, verbose=True))
+print("Betti numbers:", betti_bin_cpp(C, verbose=True))

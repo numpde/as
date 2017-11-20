@@ -14,12 +14,12 @@ import numpy     as np
 import networkx  as nx
 import progressbar, time
 
-from joblib   import Parallel, delayed
-from topology import betti_bin_cpp as betti
+from joblib import Parallel, delayed
+from topology_localcopy import betti_bin_cpp as betti
 
 ### INPUT ---- #
 
-input_file_graph = "../C-graph1/OUTPUT/UV/column-a-graph.pkl"
+input_file_graph = "../../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 
 ### OUTPUT --- #
 

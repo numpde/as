@@ -19,7 +19,7 @@ from joblib      import Parallel, delayed
 
 ### INPUT ---- #
 
-input_file_graph = "../C-graph1/OUTPUT/UV/column-a-graph.pkl"
+input_file_graph = "../../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 
 ### OUTPUT --- #
 
