@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 ### INPUT ---- #
 
-input_file_stats = "./OUTPUT/column-stratify-stats-2a-dist.pkl"
+input_file_stats = "./OUTPUT/exp2a.pkl"
 
 ### OUTPUT --- #
 

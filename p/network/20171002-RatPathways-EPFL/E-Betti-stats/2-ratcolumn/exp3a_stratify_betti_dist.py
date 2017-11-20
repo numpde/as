@@ -22,7 +22,7 @@ input_file_graph = "../../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 
 ### OUTPUT --- #
 
-output_file_stats = "./OUTPUT/column-stratify-betti-3a-dist.pkl"
+output_file_stats = "./OUTPUT/exp3a.pkl"
 
 ### PARAMS --- #
 

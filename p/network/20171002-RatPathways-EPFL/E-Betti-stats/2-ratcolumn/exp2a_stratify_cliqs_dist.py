@@ -22,7 +22,7 @@ input_file_graph = "../../C-graph1/OUTPUT/UV/column-a-graph.pkl"
 
 ### OUTPUT --- #
 
-output_file_stats = "./OUTPUT/column-stratify-stats-2a-dist.pkl"
+output_file_stats = "./OUTPUT/exp2a.pkl"
 
 ### PARAMS --- #
 

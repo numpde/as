@@ -6,16 +6,14 @@ outdir:
 	mkdir -p OUTPUT
 
 compile:
-	cd cpp; make compile
+	cd cpp && make compile
 
 exp1: outdir compile
-	python3 exp1*.py
+	F=$$(ls exp1*.py); \
+		( python3 $$F 1> OUTPUT/$$F.out.tmp 2> OUTPUT/$$F.err.tmp )
+		&&
+		( cd OUTPUT; mv $$F.out.tmp $$F.out.log; mv $$F.err.tmp $$F.err.log )
 
-exp2a: outdir
-	F=$$(sed -n 's|.*\(OUTPUT.*-2a-.*.pkl\).*|\1|gp' exp2a*.py); \
-	[ ! -e $$F ] && python3 exp2a*.py || python3 plot_exp2a*.py
-
-exp2b: outdir
-	F=$$(sed -n 's|.*\(OUTPUT.*-2b-.*.pkl\).*|\1|gp' exp2b*.py); \
-	[ ! -e $$F ] && python3 exp2b*.py || python3 plot_exp2b*.py
-
+exp%: outdir
+	F=$$(sed -n 's|.*\(OUTPUT.*$@.*.pkl\).*|\1|gp' $@*.py); \
+		[ ! -e $$F ] && python3 $@*.py || python3 plot_$@*.py

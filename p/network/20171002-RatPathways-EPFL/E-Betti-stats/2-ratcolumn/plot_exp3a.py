@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 ### INPUT ---- #
 
-input_file_stats = "./OUTPUT/column-stratify-betti-3a-dist.pkl"
+input_file_stats = "./OUTPUT/exp3a.pkl"
 
 ### OUTPUT --- #
 
