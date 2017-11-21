@@ -50,6 +50,7 @@ try :
 	G
 # Otherwise load the ratcolumn graph from disk
 except NameError :
+	#G = pickle.load(open(input_file_graph, "rb"))['G']
 	C = pickle.load(open(input_file_cliqs, "rb"))['C']
 
 # Get max-cliques
