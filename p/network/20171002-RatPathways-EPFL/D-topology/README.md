@@ -1,7 +1,7 @@
 The module **topology.py** implements variants of a routine to compute the Betti numbers of graphs,
 see [A. Zomorodian, Computational topology (Notes), 2009](http://www.ams.org/meetings/short-courses/zomorodian-notes.pdf). The variants differ in how the rank of the matrix of the boundary operator is computed. 
 
-The variant **betti** uses the SVD.
+The variant **betti** uses the SVD. In the subfolder **correctness**, this it is verified against an independent implementation.
 
 In the variant **betti_bin**, the matrix is considered as a binary matrix and the rank is computed over Z/2Z.
 The result is, however, the same for simplicial complexes that arise from graphs.
