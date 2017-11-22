@@ -1,6 +1,6 @@
 The script **extract.py** reads 
 the neural connectome from
-the Blue Brain Project file **pathways_mc0_Column.h5** (under **ORIGINALS**),
+the Blue Brain Project file **pathways_mc0_Column.h5** (located under **ORIGINALS**),
 and
 writes the graph as an adjacency matrix and 
 the 3d locations of neurons in 3d into 
@@ -10,6 +10,6 @@ In addition it writes the incidence list to **ratcolumn_data.txt** with some met
 
 Run
 
-	make connect
+	make x
 
 to launch the script.
