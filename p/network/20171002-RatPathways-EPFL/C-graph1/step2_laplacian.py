@@ -1,17 +1,22 @@
 
 # RA, 2017-10-23
 
+### IMPORTS -- #
+
 import scipy.io
 import pickle
 import networkx as nx
 import numpy as np
 
-# INPUT
+### INPUT ---- #
+
 input_filename_graph = "./OUTPUT/UV/column-a-graph.pkl"
 
-# OUTPUT
+### OUTPUT --- #
+
 output_filename_mat  = "./OUTPUT/UV/column-d-laplacian.mat"
 
+### MEAT ----- #
 
 # 1. Load the graph
 
