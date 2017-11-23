@@ -1,0 +1,595 @@
+\documentclass[onepage]{beamer}
+\mode<presentation>{
+	\setbeamercovered{transparent}
+	%\beamertemplatenavigationsymbolsempty
+	\setbeamertemplate{footline}[frame number]
+% 	\usefonttheme{professionalfonts}
+}
+
+% https://tex.stackexchange.com/questions/34166/understanding-minipages-aligning-at-top
+\usepackage{adjustbox}
+
+% https://tex.stackexchange.com/questions/49048/how-to-cite-one-bibentry-in-full-length-in-the-body-text
+\usepackage{bibentry}
+\bibliographystyle{plain}
+\nobibliography*
+%
+% https://tex.stackexchange.com/questions/163827/wrong-vertical-spaces-using-bibentry-within-beamer/163842
+\def\mybeamernewblock{%
+  \usebeamercolor[fg]{bibliography entry author}%
+  \usebeamerfont{bibliography entry author}%
+  \usebeamertemplate{bibliography entry author}%
+  \def\newblock{%
+    \usebeamercolor[fg]{bibliography entry title}%
+    \usebeamerfont{bibliography entry title}%
+    \usebeamertemplate{bibliography entry title}%
+    \def\newblock{%
+      \usebeamercolor[fg]{bibliography entry location}%
+      \usebeamerfont{bibliography entry location}%
+      \usebeamertemplate{bibliography entry location}%
+      \def\newblock{%
+        \usebeamercolor[fg]{bibliography entry note}%
+        \usebeamerfont{bibliography entry note}%
+        \usebeamertemplate{bibliography entry note}}}}%
+  \leavevmode
+}
+\newenvironment{references}{\begin{itemize}\let\newblock\mybeamernewblock}{\end{itemize}}
+
+
+\setbeamersize{text margin left=10pt, text margin right=10pt}
+\setbeamertemplate{itemize items}[circle]
+
+\beamertemplatenavigationsymbolsempty
+
+% http://tex.stackexchange.com/questions/8680/how-can-i-insert-a-newline-in-a-framebox
+%\usepackage{minibox}
+%\usepackage{framed}
+%\usepackage[usestackEOL]{stackengine}
+
+% % http://tex.stackexchange.com/questions/167000/annotating-tables-with-tikz-adding-arrows
+% \usepackage{color, colortbl}
+\usepackage{tikz}
+\tikzstyle{every picture}+=[remember picture]
+%\usetikzlibrary{tikzmark, positioning, fit, shapes.misc}
+
+%% http://tex.stackexchange.com/questions/91124/itemize-removing-natural-indent
+%\usepackage{enumitem}
+
+%% http://tex.stackexchange.com/questions/41408/a-five-level-deep-list
+%\usepackage{enumitem}
+%\setlistdepth{9}
+
+% https://tex.stackexchange.com/questions/20792/how-to-superimpose-latex-on-a-picture
+\usepackage{overpic}
+
+% % http://tex.stackexchange.com/questions/32661/how-to-locate-figures-with-x-y-specified-location-in-a-presentation
+% \usepackage[absolute,overlay]{textpos} % absolute positioning of stuff
+% \setlength{\TPHorizModule}{1mm}
+% \setlength{\TPVertModule}{1mm}
+
+\usepackage{graphicx}
+\graphicspath{{../img/}}
+\AtBeginDocument{\DeclareGraphicsExtensions{.eps, .png, .gif, .pdf}}
+
+\usepackage[makeroom]{cancel}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+% \usepackage{amssymb}
+% \usepackage{nicefrac}
+% \usepackage{bbm}
+% \usepackage{esint}
+% \usepackage{sidecap}
+
+\usepackage{hyperref}
+% \hypersetup{pdfpagemode=FullScreen}
+
+\newcommand{\HIDE}[1]{}
+
+\newcommand{\skipline}{{\ }\\}
+
+\newcommand{\EMAIL}{{\color{blue}randreev{\tiny\color{white}.\hspace{-1.5pt}}@{\tiny\color{white}.\hspace{-1.5pt}}stat.sinica.edu.tw}}
+
+\author{\small RA}
+\subject{Talks}
+
+\newcommand{\CITE}[1]{{\footnotesize[#1]}}
+
+% \input{definitions}
+
+\providecommand{\DIV}{\mathop{\text{div}}}
+\providecommand{\GRAD}{\mathop{\text{grad}}}
+
+\providecommand{\IE}{\mathbb{E}}
+\providecommand{\IP}{\mathbb{P}}
+\providecommand{\IR}{\mathbb{R}}
+\providecommand{\IZ}{\mathbb{Z}}
+
+\providecommand{\duality}[2]{\langle #1 \rangle_{#2}}
+\providecommand{\norm}[2]{\| #1 \|_{#2}}
+\providecommand{\seminorm}[2]{| #1 |_{#2}}
+\providecommand{\VERT}{\ensuremath{| \! | \! |}}
+\newcommand{\tnorm}[2]{\VERT{#1}\VERT_{{#2}}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+
+\providecommand{\Abf}{\mathbf{A}}
+\providecommand{\Bbf}{\mathbf{B}}
+\providecommand{\Dbf}{\mathbf{D}}
+\providecommand{\Ibf}{\mathbf{I}}
+\providecommand{\Jbf}{\mathbf{J}}
+\providecommand{\Fbf}{\mathbf{F}}
+\providecommand{\Hbf}{\mathbf{H}}
+\providecommand{\Mbf}{\mathbf{M}}
+\providecommand{\Tbf}{\mathbf{T}}
+\providecommand{\Pbf}{\mathbf{P}}
+\providecommand{\Vbf}{\mathbf{V}}
+\providecommand{\pbf}{\mathbf{p}}
+\providecommand{\ubf}{\mathbf{u}}
+\providecommand{\vbf}{\mathbf{v}}
+\providecommand{\wbf}{\mathbf{w}}
+\providecommand{\ybf}{\mathbf{y}}
+\providecommand{\zbf}{\mathbf{z}}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\providecommand{\T}{\mathsf{T}}
+
+\renewcommand{\hat}[1]{\widehat{#1}}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+
+\newcommand{\rd}{\,\mathrm{d}}
+
+\newcommand{\TEXT}[1]{\quad\text{#1}\quad}
+
+% http://tex.stackexchange.com/questions/211518/beamer-vfill-and-itemize
+\def\Bottom#1{\vskip 0pt plus 1filll #1}
+\def\BottomRight#1{\Bottom{\hfill #1}}
+
+% MATLAB CODE LISTING
+\usepackage{color}
+\definecolor{DarkBlue}{rgb}{0,0,0.4}
+% \definecolor{DarkRed}{rgb}{0.3,0,0}
+\definecolor{DarkGreen}{rgb}{0,0.3,0}
+\usepackage{listings}
+\lstset{%
+	language=MATLAB,
+	basicstyle=\bf\ttfamily\tiny,%\footnotesize,
+	keywordstyle=\color{DarkBlue},
+	numbers=left, numberstyle=\footnotesize, numbersep=4pt,
+	commentstyle={\color{DarkGreen}},
+% 	backgroundcolor=\color{white},
+	showspaces=false, showstringspaces=false, showtabs=false,
+	frame=none,
+	tabsize=4,
+	breaklines=true, breakatwhitespace=false,
+	emph={[1]femT_,femT_assemE,femT_assemF,femT_assemFE,femTX_assemLoad,spacetime},
+	emphstyle={[1]\color{blue}},
+	emph={[2]femX_,femX_MA,femX_b,femX_init,femX_show},
+	emphstyle={[2]\color{DarkGreen}},
+	morekeywords={parfor,true,false},
+	xleftmargin=8pt,
+	numbers=none
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifthen}
+
+\newcommand{\REDBOX}[1]{
+	\setlength{\fboxrule}{1pt}
+	\fcolorbox{red}{SeeMeBarely}{$\displaystyle
+		#1
+	$}
+}
+
+\definecolor{SeeMeBarely}{RGB}{230,230,230}
+\definecolor{Purple}{RGB}{128,0,128}
+\definecolor{DeepPurple}{RGB}{32,0,96}
+\newcommand{\ra}[1]{{\color{blue}{#1}}}
+\newcommand{\cred}[1]{{\color{red}{#1}}}
+\newcommand{\cblu}[1]{{\color{blue}{#1}}}
+\newcommand{\cpur}[1]{{\color{Purple}{#1}}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand{\ItemComment}[1]{\hfill{\scriptsize(#1)\normalsize}}
+
+%\setbeamercolor{math text}{fg=DeepPurple}
+%\setbeamercolor{inlined}{fg=DeepPurple}
+
+% \setlength\abovedisplayskip{0pt}
+% \setlength\belowdisplayskip{0pt}
+
+% % http://tex.stackexchange.com/questions/269844/tikz-full-page-with-absolute-node-positioning
+% \newcommand{\halfblack}[1]{%
+% 	\begin{tikzpicture}[remember picture, overlay]%
+% 		\node (back names) [shape=rectangle, fill=black, minimum height=#1\paperheight, minimum width=1.1\paperwidth, anchor=south] at (current page.south) {};%
+% 	\end{tikzpicture}%
+% }
+% \newcommand{\halfwhite}[1]{%
+% 	\begin{tikzpicture}[remember picture, overlay]%
+% 		\node (back names) [shape=rectangle, fill=white, minimum height=#1\paperheight, minimum width=1.1\paperwidth, anchor=north] at (current page.north) {};%
+% 	\end{tikzpicture}%
+% }
+
+
+
+
+
+% http://www.webnots.com/vibgyor-rainbow-color-codes/
+\definecolor{a}{RGB}{148, 0, 211}
+\definecolor{b}{RGB}{75, 0, 130}
+\definecolor{c}{RGB}{0, 0, 255}
+\definecolor{d}{RGB}{0, 160, 0}
+\definecolor{e}{RGB}{200, 200, 0}
+\definecolor{f}{RGB}{255, 127, 0}
+\definecolor{g}{RGB}{255, 0, 0}
+%
+\definecolor{z}{RGB}{0, 0, 0}
+\definecolor{w}{RGB}{255, 255, 255}
+
+% http://tex.stackexchange.com/questions/17611/how-does-one-type-chinese-in-latex
+\usepackage{CJKutf8}
+\AtBeginDvi{\input{zhwinfonts}}
+%
+\newcommand{\REN}{\begin{CJK*}{UTF8}{gbsn}人\end{CJK*}}
+\newcommand{\ren}[1]{{\color{#1}\REN}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[plain,t]
+	\begin{center}
+		%\small
+		%
+		Clustering in single-cell analyses
+		%
+		\\[1\baselineskip]
+		\small
+		RA
+% 		\\[1\baselineskip]
+% 		\footnotesize
+% 		ISS, AS \\ \EMAIL
+
+		\vspace{1cm}
+
+		%
+
+	\end{center}
+
+	\Bottom{
+		\scriptsize
+		%Support: 
+		\hfill
+		Nov, 2017
+		\\ {\ }
+	}
+\end{frame}
+
+%%%
+
+\def\TITLE{``Wanderlust'' for development trajectory detection \cite{BendallETAL2014}}
+\def\REF{
+	\tiny
+	\begin{references}
+	\item[\cite{BendallETAL2014}]
+		\bibentry{BendallETAL2014}
+	\end{references}
+}
+\begin{frame}[t]{\TITLE}{}
+	Single-cell mass cytometry data, such as
+	\begin{itemize}
+	\item
+		phenotypic proteins,
+	\item
+		transcription factors,
+	\item
+		regulatory enzymes,
+	\item
+		cell-state indicators,
+	\item
+		activation of regulatory signaling molecules.
+	\end{itemize}
+	%
+	Data
+	gathered at once or over time
+	---
+	only need
+	representatives of different developmental stages.
+	%
+	\underline{No temporal component}.
+	
+	{\ }
+	
+	Goal: A typical trajectory
+	of cell development
+	in the ``phenotypic space''.
+	
+	\Bottom\REF
+\end{frame}
+%
+%
+\begin{frame}[t]{\TITLE}{}
+	Input:
+	\begin{itemize}
+	\item
+		cell profiles $X = \{ x_1, \ldots, x_n \} \subset \IR^D$,
+	\item
+		one {\bf young} cell highlighted as ``initiator cell'',
+	\item
+		distance function on $X$,
+	\item
+		ensemble parameters
+		\begin{itemize}
+		\item
+			size of ensemble $n_g$,
+		\item
+			number of nearest neighbors $k$,
+		\item
+			subset size $\ell < k$.
+		\end{itemize}
+	\end{itemize}
+	
+	Output:
+	\begin{itemize}
+	\item
+		A trajectory ``score'' (measure of maturity) $0 \leq s_i \leq 1$ for each cell $i$.
+	\end{itemize}
+	
+	{\ }
+	
+	The ``initiator cell'' cell has a score of zero.
+	
+	\Bottom\REF
+\end{frame}
+%
+%
+\begin{frame}[t]{\TITLE}{}
+	\adjustbox{valign=c}{%
+		\begin{minipage}{0.6\textwidth}
+			Global distances are established based on local distances,
+			i.e.~from nearest neighbors.
+			%
+			This is similar to t-SNE.
+			
+			{\ }
+			
+			The proposed algorithm includes
+			averaging the trajectory score
+			over an ensemble 
+			of $\ell$-out-of-$k$
+			nearest neighbors graphs
+			to water down degeneracies.
+		\end{minipage}
+	}%
+	\hfill
+	\adjustbox{valign=c}{%
+		\begin{minipage}[t]{0.3\textwidth}
+			\begin{overpic}[width=\textwidth]{../img/wanderlust-graphxy}
+		% 	\begin{overpic}[width=0.3\textwidth,grid,tics=10]{../img/wanderlust-graphxy}
+				\put (0, 0) {\tiny img: \cite{BendallETAL2014}}
+				\put (58, 90) {\tiny short circuit}
+				\put (59, 80) {\tiny graph path}
+			\end{overpic}
+		\end{minipage}
+	}%
+	
+	\Bottom\REF
+\end{frame}
+%
+%
+\begin{frame}[t]{\TITLE}{}
+	\adjustbox{valign=t}{%
+		\begin{minipage}{0.6\textwidth}
+			\begin{overpic}[width=\textwidth]{../img/wanderlust-expression}
+		% 	\begin{overpic}[width=0.3\textwidth,grid,tics=10]{../img/wanderlust-graphxy}
+				%\put (0, 0) {\tiny img: \cite{BendallETAL2014}}
+			\end{overpic}
+			
+			\tiny
+			\centering
+			$\rightarrow$ ``wanderlust'' score $\rightarrow$
+		\end{minipage}
+	}%
+	\hfill
+	\adjustbox{valign=t}{%
+		\begin{minipage}[t]{0.3\textwidth}
+			Insights, e.g.:
+			
+			{\ }
+			
+			Identify
+			new markers 
+			of early human B cell precursors.
+			
+			{\ }
+			
+			Establish a reference
+			\textbf{healthy}
+			developmental trajectory
+			to
+			better understand
+			disease.
+		\end{minipage}
+	}%
+	
+	\Bottom\REF
+\end{frame}
+
+%%%
+
+\def\TITLE{``Wishbone'' for bifurcating development trajectories \cite{SettyETAL2016}}
+%
+%
+\begin{frame}[t]{\TITLE}{}
+	Modification of ``wanderlust''
+	for trajectories
+	with one branching point.
+	
+	{\ }
+	
+	\adjustbox{valign=t}{%
+		\begin{minipage}{0.4\textwidth}
+			{\only<1-3>{%
+				\begin{overpic}[width=\textwidth]{../img/wishbone-graphsjt}
+				\end{overpic}
+				
+				\tiny
+				All images: \cite{SettyETAL2016}
+			}}%
+			{\only<4>{%
+				\centering
+				\begin{overpic}[width=0.7\textwidth]{../img/wishbone-secondev}
+				\end{overpic}
+				
+				The components of the 2nd EV of $Q$ indicate the branch.
+			}}%
+		\end{minipage}
+	}%
+	\hfill
+	\adjustbox{valign=t}{%
+		\begin{minipage}[t]{0.45\textwidth}
+			{\only<1>{%
+				Preprocessing: projection
+				onto the first few \textbf{diffusion maps}
+				(coordinates 2--4 constructed from EVs
+				of a Markov matrix/process on the original data \cite{CoifmanLafon2006}).
+				
+			}}%
+			{\only<2>{%
+				Encode in the matrix $Q_{j t}$
+				the excess distance of going
+				
+				\begin{quote}
+					$s \to j \to t$
+				\end{quote}
+				
+				rather than directly
+				
+				\begin{quote}
+					$s \to t$.
+				\end{quote}
+				
+				{\ }
+				
+				The excess distance is large
+				
+				{\ } \hfill $\Leftrightarrow$ \hfill {\ }
+				
+				$j$ and $t$
+				are on different branches.
+			}}%
+			{\only<3-4>{%
+				\begin{overpic}[width=0.9\textwidth]{../img/wishbone-distancematrix}
+				\end{overpic}
+				
+				{\ }\vspace{-4\baselineskip}
+			}}%
+		\end{minipage}
+	}%
+	
+	\Bottom
+	{
+		\tiny
+		\begin{references}
+		{\only<1>{
+			\item[\cite{CoifmanLafon2006}]
+				\bibentry{CoifmanLafon2006}
+		}}%%
+		\item[\cite{SettyETAL2016}]
+			\bibentry{SettyETAL2016}
+		\end{references}
+	}
+\end{frame}
+
+%%
+
+
+\def\TITLE{``SCUBA'' \cite{MarcoETAL2014}}
+\def\REF{
+	\tiny
+	\begin{references}
+	\item[\cite{MarcoETAL2014}]
+		\bibentry{MarcoETAL2014}
+	\end{references}
+}
+\begin{frame}[t]{\TITLE}{{S}ingle-cell {c}lustering {u}sing {b}ifurcation {a}nalysis}
+	
+	{\ }
+	
+	``for extracting lineage relationships 
+	from single-cell gene expression data
+	and modeling [..] cell differentiation.''
+	
+	
+	\Bottom\REF
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Extra}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+% Backup frames follow
+%
+%
+%\begin{frame}
+%	Appendix
+%\end{frame}
+%
+%%
+%
+%\begin{frame}
+%	%
+%\end{frame}
+%
+%
+% FINAL SLIDE
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[plain,b]
+	\hfill
+	\tiny
+	\color{gray}
+	this slide is intentionally left blank
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\scriptsize
+\bibliography{../../../../r/refs}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{framenumber}{\value{finalframe}}
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
