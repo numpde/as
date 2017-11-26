@@ -323,39 +323,106 @@
 				hierarchical clustering, PCA, factor analysis, ZIFA
 			\item
 				t-SNE
+				\hfill
 				(clusters from a notion of neighbors)
 			\item
 				SNN-Cliq
+				\hfill
 				(rankings of similarities)
 			\item
 				RaceID
+				\hfill
 				($k$-means on inter-cell-Pearson's-correlation)
 			\item
+				Destiny
+				\hfill
+				(extends diffusion maps to handle zeros, ...)
+			\item
 				SCUBA
-				(extract lineage relationships)
+				\hfill
+				($k$-means along a temporal tree)
+			\item
+				BackSPIN
+				\hfill
+				(split expression matrix sorted by genes and cells)
+			\item
+				PAGODA
+				\hfill
+				(weighted PCA for gene sets)
 			\end{itemize}
 		}}%
 	\item<2->
-		characterizing genes that have differential distributions across conditions;
+		find genes with differential distributions across conditions;
+		
+		{\only<2>{%
+			\begin{itemize}
+			\item
+				MAST
+				\hfill
+				(logistic regression on DE between groups, ...)
+			\item
+				SCDE
+				\hfill
+				(gene-specific expression as Poisson--Binomial mixture)
+			\item
+				scDD
+				\hfill
+				(Dirichlet process mixture of normals, ...)
+			\end{itemize}
+		}}%
 	\item<3->
 		pseudo-temporal ordering and inference;
 		
 		{\only<3>{%
 			\begin{itemize}
 			\item
-				``Monocle''
-				{\tiny
-					\bibentry{TrapnellETAL2014}
-				}
+				Monocle
+				\cite{TrapnellETAL2014}
+				\hfill
+				(independent component analysis and MST)
+			\item
+				Waterfall
+				\hfill
+				(spectral $k$-means + MST on centroids)
+			\item
+				Sincell
+				\hfill
+				(R workflow for building cell hierarchies)
+			\item
+				Oscope
+				\hfill
+				($k$-medoids clustering to identify oscillatory genes)
+			\item
+				Wanderlust
+				\hfill
+				(ensemble of $k$-nearest neighbor graphs, ...)
 			\end{itemize}
 		}}%
 	\end{itemize}
 	
+	{\only<4>{%
+		{\ }
+		
+		Note:
+		47+ algorithms
+		on single-cell pseudotime estimation \cite{Gitter2017-github}
+	}}%
+	
 	\Bottom{
 		\tiny
 		\begin{references}
-		\item[\cite{BacherKendziorski2016}]
-			\bibentry{BacherKendziorski2016}
+		{\only<3>{%
+			\item[\cite{TrapnellETAL2014}]
+				\bibentry{TrapnellETAL2014}
+		}}
+		{\only<4>{%
+			\item[\cite{Gitter2017-github}]
+				\bibentry{Gitter2017-github}
+		}}
+		{{%
+			\item[\cite{BacherKendziorski2016}]
+				\bibentry{BacherKendziorski2016}
+		}}
 		\end{references}
 	}
 \end{frame}
@@ -600,25 +667,25 @@
 %%
 
 
-\def\TITLE{``SCUBA'' \cite{MarcoETAL2014}}
-\def\REF{
-	\tiny
-	\begin{references}
-	\item[\cite{MarcoETAL2014}]
-		\bibentry{MarcoETAL2014}
-	\end{references}
-}
-\begin{frame}[t]{\TITLE}{{S}ingle-cell {c}lustering {u}sing {b}ifurcation {a}nalysis}
-	
-	{\ }
-	
-	``for extracting lineage relationships 
-	from single-cell gene expression data
-	and modeling [..] cell differentiation.''
-	
-	
-	\Bottom\REF
-\end{frame}
+% \def\TITLE{``SCUBA'' \cite{MarcoETAL2014}}
+% \def\REF{
+% 	\tiny
+% 	\begin{references}
+% 	\item[\cite{MarcoETAL2014}]
+% 		\bibentry{MarcoETAL2014}
+% 	\end{references}
+% }
+% \begin{frame}[t]{\TITLE}{{S}ingle-cell {c}lustering {u}sing {b}ifurcation {a}nalysis}
+% 	
+% 	{\ }
+% 	
+% 	``for extracting lineage relationships 
+% 	from single-cell gene expression data
+% 	and modeling [..] cell differentiation.''
+% 	
+% 	
+% 	\Bottom\REF
+% \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Extra}
