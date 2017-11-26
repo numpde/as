@@ -290,6 +290,78 @@
 
 %%%
 
+\begin{frame}[t]{Single-cell RNA-seq}{Progression of measurement volume}
+	
+	{\ }
+
+	\centering
+	\begin{overpic}[width=\textwidth]{singlecell-scaling}
+		\put (0, 0) {\tiny \color{red} img: \cite{SvenssonVentotormoTechmann2017}}
+	\end{overpic}
+	
+	\Bottom{
+		\tiny
+		\begin{references}
+		\item[\cite{SvenssonVentotormoTechmann2017}]
+			\bibentry{SvenssonVentotormoTechmann2017}
+		\end{references}
+	}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Single-cell RNA-seq}{}
+
+	Common goals \cite{BacherKendziorski2016}
+	\begin{itemize}
+	\item<1->
+		identifying cell sub-populations within a biological condition;
+		
+		{\only<1>{%
+			\begin{itemize}
+			\item
+				hierarchical clustering, PCA, factor analysis, ZIFA
+			\item
+				t-SNE
+				(clusters from a notion of neighbors)
+			\item
+				SNN-Cliq
+				(rankings of similarities)
+			\item
+				RaceID
+				($k$-means on inter-cell-Pearson's-correlation)
+			\item
+				SCUBA
+				(extract lineage relationships)
+			\end{itemize}
+		}}%
+	\item<2->
+		characterizing genes that have differential distributions across conditions;
+	\item<3->
+		pseudo-temporal ordering and inference;
+		
+		{\only<3>{%
+			\begin{itemize}
+			\item
+				``Monocle''
+				{\tiny
+					\bibentry{TrapnellETAL2014}
+				}
+			\end{itemize}
+		}}%
+	\end{itemize}
+	
+	\Bottom{
+		\tiny
+		\begin{references}
+		\item[\cite{BacherKendziorski2016}]
+			\bibentry{BacherKendziorski2016}
+		\end{references}
+	}
+\end{frame}
+
+%%%
+
 \def\TITLE{``Wanderlust'' for development trajectory detection \cite{BendallETAL2014}}
 \def\REF{
 	\tiny
@@ -517,6 +589,7 @@
 		{\only<1>{
 			\item[\cite{CoifmanLafon2006}]
 				\bibentry{CoifmanLafon2006}
+				\ 
 		}}%%
 		\item[\cite{SettyETAL2016}]
 			\bibentry{SettyETAL2016}
@@ -584,7 +657,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \scriptsize
-\bibliography{../../../../r/refs}
+\bibliography{../../../r/refs}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
