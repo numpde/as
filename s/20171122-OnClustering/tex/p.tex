@@ -314,10 +314,42 @@
 
 	Common goals \cite{BacherKendziorski2016}
 	\begin{itemize}
-	\item<1->
-		identifying cell sub-populations within a biological condition;
+	\item<1->[A.]
+		pseudo-temporal ordering and inference;
 		
 		{\only<1>{%
+			\begin{itemize}
+			\item
+				Monocle
+				\cite{TrapnellETAL2014}
+				\hfill
+				(independent component analysis and MST)
+			\item
+				Waterfall
+				\hfill
+				(spectral $k$-means + MST on centroids)
+			\item
+				Sincell
+				\hfill
+				(R workflow for building cell hierarchies)
+			\item
+				Oscope
+				\hfill
+				($k$-medoids clustering to identify oscillatory genes)
+			\item
+				Wanderlust
+				\hfill
+				(ensemble of $k$-nearest neighbor graphs, ...)
+			\end{itemize}
+			
+			Note:
+			47+ algorithms
+			on single-cell pseudotime estimation \cite{Gitter2017-github}
+		}}%
+	\item<2->[B.]
+		identifying cell sub-populations within a biological condition;
+		
+		{\only<2>{%
 			\begin{itemize}
 			\item
 				hierarchical clustering, PCA, factor analysis, ZIFA
@@ -344,17 +376,17 @@
 			\item
 				BackSPIN
 				\hfill
-				(split expression matrix sorted by genes and cells)
+				(biclustering simultaneously clustering genes and cells)
 			\item
 				PAGODA
 				\hfill
 				(weighted PCA for gene sets)
 			\end{itemize}
 		}}%
-	\item<2->
+	\item<3->[C.]
 		find genes with differential distributions across conditions;
 		
-		{\only<2>{%
+		{\only<3>{%
 			\begin{itemize}
 			\item
 				MAST
@@ -370,58 +402,24 @@
 				(Dirichlet process mixture of normals, ...)
 			\end{itemize}
 		}}%
-	\item<3->
-		pseudo-temporal ordering and inference;
-		
-		{\only<3>{%
-			\begin{itemize}
-			\item
-				Monocle
-				\cite{TrapnellETAL2014}
-				\hfill
-				(independent component analysis and MST)
-			\item
-				Waterfall
-				\hfill
-				(spectral $k$-means + MST on centroids)
-			\item
-				Sincell
-				\hfill
-				(R workflow for building cell hierarchies)
-			\item
-				Oscope
-				\hfill
-				($k$-medoids clustering to identify oscillatory genes)
-			\item
-				Wanderlust
-				\hfill
-				(ensemble of $k$-nearest neighbor graphs, ...)
-			\end{itemize}
-		}}%
 	\end{itemize}
 	
-	{\only<4>{%
-		{\ }
-		
-		Note:
-		47+ algorithms
-		on single-cell pseudotime estimation \cite{Gitter2017-github}
-	}}%
 	
 	\Bottom{
 		\tiny
 		\begin{references}
-		{\only<3>{%
+		{\only<1>{%
 			\item[\cite{TrapnellETAL2014}]
 				\bibentry{TrapnellETAL2014}
-		}}
-		{\only<4>{%
+				\ 
 			\item[\cite{Gitter2017-github}]
 				\bibentry{Gitter2017-github}
+				\ 
 		}}
 		{{%
 			\item[\cite{BacherKendziorski2016}]
 				\bibentry{BacherKendziorski2016}
+				\ 
 		}}
 		\end{references}
 	}
@@ -429,7 +427,7 @@
 
 %%%
 
-\def\TITLE{``Wanderlust'' for development trajectory detection \cite{BendallETAL2014}}
+\def\TITLE{A. Pseudo-temporal ordering and inference}
 \def\REF{
 	\tiny
 	\begin{references}
@@ -437,7 +435,7 @@
 		\bibentry{BendallETAL2014}
 	\end{references}
 }
-\begin{frame}[t]{\TITLE}{}
+\begin{frame}[t]{\TITLE}{``Wanderlust'' \cite{BendallETAL2014}}
 	Single-cell mass cytometry data, such as
 	\begin{itemize}
 	\item
@@ -470,7 +468,7 @@
 \end{frame}
 %
 %
-\begin{frame}[t]{\TITLE}{}
+\begin{frame}[t]{\TITLE}{``Wanderlust'' \cite{BendallETAL2014}}
 	Input:
 	\begin{itemize}
 	\item
@@ -495,17 +493,16 @@
 	\begin{itemize}
 	\item
 		A trajectory ``score'' (measure of maturity) $0 \leq s_i \leq 1$ for each cell $i$.
+		
+		The ``initiator cell'' cell has a score of zero.
 	\end{itemize}
 	
-	{\ }
-	
-	The ``initiator cell'' cell has a score of zero.
 	
 	\Bottom\REF
 \end{frame}
 %
 %
-\begin{frame}[t]{\TITLE}{}
+\begin{frame}[t]{\TITLE}{``Wanderlust'' \cite{BendallETAL2014}}
 	\adjustbox{valign=c}{%
 		\begin{minipage}{0.6\textwidth}
 			Global distances are established based on local distances,
@@ -539,7 +536,7 @@
 \end{frame}
 %
 %
-\begin{frame}[t]{\TITLE}{}
+\begin{frame}[t]{\TITLE}{``Wanderlust'' \cite{BendallETAL2014}}
 	\adjustbox{valign=t}{%
 		\begin{minipage}{0.6\textwidth}
 			\begin{overpic}[width=\textwidth]{../img/wanderlust-expression}
@@ -579,10 +576,9 @@
 
 %%%
 
-\def\TITLE{``Wishbone'' for bifurcating development trajectories \cite{SettyETAL2016}}
 %
 %
-\begin{frame}[t]{\TITLE}{}
+\begin{frame}[t]{\TITLE}{``Wishbone'' \cite{SettyETAL2016}}
 	Modification of ``wanderlust''
 	for trajectories
 	with one branching point.
@@ -664,28 +660,113 @@
 	}
 \end{frame}
 
+
 %%
 
 
-% \def\TITLE{``SCUBA'' \cite{MarcoETAL2014}}
-% \def\REF{
-% 	\tiny
-% 	\begin{references}
-% 	\item[\cite{MarcoETAL2014}]
-% 		\bibentry{MarcoETAL2014}
-% 	\end{references}
-% }
-% \begin{frame}[t]{\TITLE}{{S}ingle-cell {c}lustering {u}sing {b}ifurcation {a}nalysis}
-% 	
-% 	{\ }
-% 	
-% 	``for extracting lineage relationships 
-% 	from single-cell gene expression data
-% 	and modeling [..] cell differentiation.''
-% 	
-% 	
-% 	\Bottom\REF
-% \end{frame}
+\def\TITLE{B. Identifying cell sub-populations}
+%
+%
+\begin{frame}[t]{\TITLE}{``BackSPIN'' \cite{ZeiselETAL2015}}
+	
+	First, the ``SPIN'' algorithm for distance matrix reordering \cite{TsafrirTsafrirEindorZukNottermanDomany2005}.
+
+	{\only<1>{%
+		Input:
+		\begin{itemize}
+		\item
+			A distance matrix $D \in \IR^{n \times n}$.
+		\item
+			A matrix of weights $W$ (e.g.~concentrated on the diagonal).
+		\end{itemize}
+		
+		Output: permutation $\sigma$ (near-)minimizing
+		\[
+			\sum_{i j} W_{i j} D_{\sigma(i) \sigma(j)}
+			.
+		\]
+		
+		``The emphasis of SPIN is on providing an informative image of
+		the data, one that facilitates extraction of meaningful characteristics.''
+	}}%
+	{\only<2>{%
+		\begin{center}
+			\begin{overpic}[width=0.8\textwidth]{spin-bar}
+				\put (0, 0) {\tiny img: \cite{TsafrirTsafrirEindorZukNottermanDomany2005}}
+			\end{overpic}
+		\end{center}
+	}}%
+	
+	\Bottom{
+		\tiny
+		\begin{references}
+		\item[\cite{TsafrirTsafrirEindorZukNottermanDomany2005}]
+			\bibentry{TsafrirTsafrirEindorZukNottermanDomany2005}
+			\ 
+		\item[\cite{ZeiselETAL2015}]
+			\bibentry{ZeiselETAL2015}
+			\ 
+		\end{references}
+	}
+\end{frame}
+%
+%
+\begin{frame}[t]{\TITLE}{``BackSPIN'' \cite{ZeiselETAL2015}}
+	
+	{\only<1>{%
+		``BackSPIN'' algorithm
+		\begin{itemize}
+		\item
+			Sort the expression matrix by both cells and genes.
+		\item
+			Splitting over the cell dimension balancing sum-of-correlations
+			
+			--- if the sums differ significantly.
+		\item
+			Assign genes to each group by higher average expression.
+		\item
+			Repeat on submatrices.
+		\end{itemize}
+		
+		Main point:
+		``genes enriched outside of
+		the cells under consideration are excluded. So, for example, Rasgrf2 would be
+		excluded when clustering oligodendrocytes because it is enriched in neurons, and
+		conversely, Mog would be excluded when clustering neurons.''
+	}}%
+	{\only<2>{%
+		\vspace{-0.5cm}
+		\adjustbox{valign=c}{%
+			\begin{minipage}[t]{0.4\textwidth}
+				\scriptsize
+				``Molecular census of [mouse] somatosensory S1 cortex and hippocampus CA1 by unbiased sampling and single-cell RNA-seq''
+				\cite{ZeiselETAL2015}
+			\end{minipage}
+		}%
+		\adjustbox{valign=c}{%
+			\begin{minipage}[t]{0.55\textwidth}
+				\begin{overpic}[width=\textwidth]{backspin-gene-cell}
+					%\put (0, 90) {\color{red} \tiny img: \cite{ZeiselETAL2015}}
+				\end{overpic}
+			\end{minipage}
+		}%
+		
+		\vspace{-1cm}
+	}}%
+
+	
+	\Bottom{
+		\tiny
+		\begin{references}
+		\item[\cite{ZeiselETAL2015}]
+			\bibentry{ZeiselETAL2015}
+			\ 
+		\end{references}
+	}
+\end{frame}
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Extra}

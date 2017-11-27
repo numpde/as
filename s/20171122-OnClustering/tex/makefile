@@ -4,11 +4,17 @@ OPEN=xdg-open
 
 MAIN=p
 
-none: l
-	@echo ciao
+default:
+	make l
+	make b
+	make l
+	make l
 
 e:
 	$(OPEN) $(MAIN).tex 1> /dev/null 2> /dev/null &
+
+b:
+	bibtex $(MAIN)
 
 l:
 	pdflatex -shell-escape -halt-on-error -interaction nonstopmode $(MAIN).tex
