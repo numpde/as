@@ -318,7 +318,7 @@
 	Common goals \cite{BacherKendziorski2016}
 	\begin{itemize}
 	\item<1->[A.]
-		pseudo-temporal ordering and inference;
+		pseudo-temporal ordering
 		
 		{\only<1>{%
 			\begin{itemize}
@@ -350,7 +350,7 @@
 			on single-cell pseudotime estimation \cite{Gitter2017-github}
 		}}%
 	\item<2->[B.]
-		identifying cell sub-populations within a biological condition;
+		identifying cell sub-populations
 		
 		{\only<2>{%
 			\begin{itemize}
@@ -387,9 +387,31 @@
 			\end{itemize}
 		}}%
 	\item<3->[C.]
-		find genes with differential distributions across conditions;
+		differential gene expression detection
 		
 		{\only<3>{%
+			{\ }
+			
+			\adjustbox{valign=c}{%
+				\begin{minipage}{0.45\textwidth}
+					\begin{overpic}[width=\textwidth]{rnaseq-de}
+						%\put (0, 45) {\color{red} \tiny img: \cite{2015-Finotello-DiCamillo}}
+					\end{overpic}
+				\end{minipage}
+			}%
+			\adjustbox{valign=c}{%
+				{\ }
+				\begin{minipage}{0.43\textwidth}
+					\scriptsize
+					``Identify genes with statistically different 
+					expression levels in the compared conditions (e.g.~A and B).''
+					\cite{2015-Finotello-DiCamillo}
+				\end{minipage}
+			}%
+				
+		}}
+		
+		{\only<4>{%
 			\begin{itemize}
 			\item
 				MAST
@@ -404,6 +426,8 @@
 				\hfill
 				(Dirichlet process mixture of normals, ...)
 			\end{itemize}
+			
+			Reviews are e.g.~\cite{2013-Rapaport, 2015-Finotello-DiCamillo}
 		}}%
 	\end{itemize}
 	
@@ -417,6 +441,16 @@
 				\ 
 			\item[\cite{Gitter2017-github}]
 				\bibentry{Gitter2017-github}
+				\ 
+		}}
+		{\only<4>{%
+			\item[\cite{2013-Rapaport}]
+				\bibentry{2013-Rapaport}
+				\ 
+		}}%
+		{\only<3-4>{%
+			\item[\cite{2015-Finotello-DiCamillo}]
+				\bibentry{2015-Finotello-DiCamillo}
 				\ 
 		}}
 		{{%
@@ -526,8 +560,8 @@
 	\hfill
 	\adjustbox{valign=c}{%
 		\begin{minipage}[t]{0.3\textwidth}
-			\begin{overpic}[width=\textwidth]{../img/wanderlust-graphxy}
-		% 	\begin{overpic}[width=0.3\textwidth,grid,tics=10]{../img/wanderlust-graphxy}
+			\begin{overpic}[width=\textwidth]{wanderlust-graphxy}
+		% 	\begin{overpic}[width=0.3\textwidth,grid,tics=10]{wanderlust-graphxy}
 				\put (0, 0) {\tiny img: \cite{BendallETAL2014}}
 				\put (58, 90) {\tiny short circuit}
 				\put (59, 80) {\tiny graph path}
@@ -542,9 +576,7 @@
 \begin{frame}[t]{\TITLE}{``Wanderlust'' \cite{BendallETAL2014}}
 	\adjustbox{valign=t}{%
 		\begin{minipage}{0.6\textwidth}
-			\begin{overpic}[width=\textwidth]{../img/wanderlust-expression}
-		% 	\begin{overpic}[width=0.3\textwidth,grid,tics=10]{../img/wanderlust-graphxy}
-				%\put (0, 0) {\tiny img: \cite{BendallETAL2014}}
+			\begin{overpic}[width=\textwidth]{wanderlust-expression}
 			\end{overpic}
 			
 			\tiny
@@ -591,15 +623,16 @@
 	\adjustbox{valign=t}{%
 		\begin{minipage}{0.4\textwidth}
 			{\only<1-3>{%
-				\begin{overpic}[width=\textwidth]{../img/wishbone-graphsjt}
+				\begin{overpic}[width=\textwidth]{wishbone-graphsjt}
 				\end{overpic}
 				
 				\tiny
-				All images: \cite{SettyETAL2016}
+				\vspace{-5pt}
+				images: \cite{SettyETAL2016}
 			}}%
 			{\only<4>{%
 				\centering
-				\begin{overpic}[width=0.7\textwidth]{../img/wishbone-secondev}
+				\begin{overpic}[width=0.7\textwidth]{wishbone-secondev}
 				\end{overpic}
 				
 				The components of the 2nd EV of $Q$ indicate the branch.
@@ -640,7 +673,7 @@
 				are on different branches.
 			}}%
 			{\only<3-4>{%
-				\begin{overpic}[width=0.9\textwidth]{../img/wishbone-distancematrix}
+				\begin{overpic}[width=0.9\textwidth]{wishbone-distancematrix}
 				\end{overpic}
 				
 				{\ }\vspace{-4\baselineskip}
@@ -680,7 +713,7 @@
 		\item
 			A distance matrix $D \in \IR^{n \times n}$.
 		\item
-			A matrix of weights $W$ (e.g.~concentrated on the diagonal).
+			A matrix of weights $W$ (e.g.~concentrated toward the diagonal).
 		\end{itemize}
 		
 		Output: permutation $\sigma$ (near-)minimizing
@@ -698,6 +731,13 @@
 				\put (0, 0) {\tiny img: \cite{TsafrirTsafrirEindorZukNottermanDomany2005}}
 			\end{overpic}
 		\end{center}
+		\scriptsize
+		\hspace{0.13\textwidth}
+		Data
+		\hspace{0.14\textwidth}
+		Distance matrix
+		\hspace{0.12\textwidth}
+		Distance matrix reordered
 	}}%
 	
 	\Bottom{
@@ -720,7 +760,7 @@
 		``BackSPIN'' algorithm
 		\begin{itemize}
 		\item
-			Sort the expression matrix by both cells and genes.
+			Sort the cell-gene \textbf{expression} matrix by both cells and genes.
 		\item
 			Splitting over the cell dimension balancing sum-of-correlations
 			
@@ -807,8 +847,10 @@
 %\section{Bibliography}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\scriptsize
+{
+\tiny
 \bibliography{../../../r/refs}
+}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
