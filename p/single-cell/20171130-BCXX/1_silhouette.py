@@ -144,7 +144,7 @@ def plot_silhouette(X, C) :
 		y_lower = y_upper + 10  # 10 for the 0 samples
 
 
-# With and without gene-wise the z-score transform
+# With and without gene-wise z-score transform
 for zscore in [True, False] :
 	
 	# Get the z-score-transformed or the original data
