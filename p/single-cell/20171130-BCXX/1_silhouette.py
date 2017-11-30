@@ -55,7 +55,7 @@ sample2cluster = [n[0:4] for n in header]
 if False :
 	# Omit the BC01 cluster
 	I = [i for (i, c) in enumerate(sample2cluster) if (c == "BC01")]
-	X = np.delete(X, I, 0)
+	X = np.delete(X, I, axis_sample)
 	sample2cluster = [c for (i, c) in enumerate(sample2cluster) if (i not in I)]
 	del header # invalidate inconsitent variable
 
