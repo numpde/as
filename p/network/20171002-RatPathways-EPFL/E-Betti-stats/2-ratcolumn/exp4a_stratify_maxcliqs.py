@@ -7,12 +7,14 @@
 ### IMPORTS -- #
 
 import gc
+import sys
 import pickle
 import random
 import numpy     as np
 import networkx  as nx
 
 from time import time
+from datetime import datetime
 from joblib import Parallel, delayed
 from progressbar import ProgressBar as Progress
 from topology_localcopy import betti_bin_cpp as betti
@@ -23,7 +25,7 @@ input_file_cliqs = "../../C-graph1/OUTPUT/UV/column-b-maxcliques.pkl"
 
 ### OUTPUT --- #
 
-output_file_stats = "./OUTPUT/exp4a.pkl"
+output_file_stats = "./OUTPUT/exp4a_{launched}.pkl"
 
 ### PARAMS --- #
 
@@ -31,29 +33,36 @@ output_file_stats = "./OUTPUT/exp4a.pkl"
 FC = np.logspace(-3, 0, 31).tolist()
 
 # Desired number of runs for the statistic
-max_runs = 100
+n_samples = 100
 
-# Maximal time allowance for each fc (in minutes, after first sample)
+# Maximal time allowance for each fc (in minutes, after the first sample)
 max_time_per_fc = 60
 
 # Number of computing threads to use
-num_of_cores = 8
-
-## Use this for testing purposes
-#G = nx.gnp_random_graph(40, 0.8, seed=0)
-#C = nx.find_cliques(G)
+max_n_jobs = 8
 
 ### MEAT ----- #
 
-# See if a graph is already provided
-try :
-	G
-# Otherwise load the ratcolumn graph from disk
-except NameError :
+# Computation launch time as run identifier
+output_file_stats = \
+output_file_stats.format(launched = datetime.now().strftime("%Y%m%d-%H%M%S"))
+
+if ("TEST" in sys.argv) :
+	# Provide "TEST" on command line for testing purposes
+	
+	print("# Warning: We are in test mode")
+	G = nx.gnp_random_graph(40, 0.8, seed=0)
+	C = nx.find_cliques(G)
+	n_samples = 4
+	max_n_jobs = 2
+
+else :
+	# Otherwise load the ratcolumn graph from disk
+
 	#G = pickle.load(open(input_file_graph, "rb"))['G']
 	C = pickle.load(open(input_file_cliqs, "rb"))['C']
 
-# Get max-cliques
+# Format the max-cliques, commit to RAM
 C = [tuple(sorted(mc)) for mc in C]
 
 # Compute Betti numbers for a graph on a subset of cliques
@@ -69,7 +78,7 @@ def betti_fc(fc) :
 	
 	# Compute the Betti numbers
 	# be[k] is the k-th Betti number
-	be = betti(c, verbose=(num_of_cores==1))
+	be = betti(c, verbose=("VERBOSE_BETTI" in sys.argv))
 
 	# Clear
 	del c
@@ -77,40 +86,45 @@ def betti_fc(fc) :
 	
 	return be
 
-# LL is a list of lists
-# Append zeros to each list for uniform length
-def padzeros(LL) :
-	maxL = max(len(L) for L in LL)
-	return [(L + ([0] * (maxL - len(L)))) for L in LL]
-
-def job(fc, t0) :
-	if ((time() - t0) > (max_time_per_fc * 60)) : return None
-	
+def job(fc) :
 	return betti_fc(fc)
 
 # Compute statistics over several runs
 def stats(fc) :
-	BE = Parallel(n_jobs=num_of_cores)(delayed(job)(fc, time()) for _ in range(max_runs))
 	
-	BE = [be for be in BE if (be is not None)]
-	
-	run = len(BE) # Number of samples
-	assert(run), "Failed to get any samples."
-	
-	BE = np.vstack(padzeros(BE))
-	
-	(bem, bes) = (np.mean(BE, 0), np.std(BE, 0))
-	
-	return (bem.tolist(), bes.tolist(), run)
+	# Starting time for this round
+	t0 = time()
 
-BETTI = [stats(fc) for fc in Progress()(FC)]
+	# Initial number of parallel jobs
+	n_jobs = 1
+	
+	# Result accumulator
+	BE = []
+	
+	while (len(BE) < n_samples) and ((time() - t0) <= (max_time_per_fc * 60)) :
+		
+		batchsize = min(n_samples - len(BE), n_jobs)
+		#print("Doing a batch of {} on {} cores".format(batchsize, n_jobs))
+		
+		BE.extend(
+			Parallel(n_jobs=n_jobs)(
+				delayed(job)(fc) for _ in range(batchsize)
+			)
+		)
+		
+		# Progressively increase the number of parallel jobs
+		n_jobs = min(n_jobs + 1, max_n_jobs)
+	
+	return BE
 
-BEM = [bem for (bem, _, _) in BETTI] # Mean
-BES = [bes for (_, bes, _) in BETTI] # Std dev
-RUN = [run for (_, _, run) in BETTI] # Number of samples
 
-# Collect the results
-results = { "FC" : FC, "BEM" : BEM, "BES" : BES, "RUN" : RUN }
+BETTI = dict()
 
-# Save to file
-pickle.dump(results, open(output_file_stats, "wb"))
+for fc in Progress()(FC) :
+	BETTI[fc] = stats(fc)
+
+	# Collect the results
+	results = { "FC" : FC, "BETTI" : BETTI }
+
+	# Save the (intermediate) results to file
+	pickle.dump(results, open(output_file_stats, "wb"))
