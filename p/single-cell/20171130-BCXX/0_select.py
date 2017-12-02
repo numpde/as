@@ -44,14 +44,11 @@ gene_id = [t.decode("utf-8")[0:15] for t in X['gene_id']]
 #print("Gene types:", set(gene_type_freq))
 ## {('misc_RNA', 2034), ('TR_V_gene', 97), ('rRNA', 527), ('IG_V_pseudogene', 187), ('Mt_tRNA', 22), ('sense_overlapping', 202), ('IG_J_pseudogene', 3), ('pseudogene', 13931), ('SPIKE_IN', 3), ('sense_intronic', 742), ('TR_C_gene', 5), ('IG_D_gene', 37), ('TR_V_pseudogene', 27), ('miRNA', 3055), ('TR_J_pseudogene', 4), ('TR_D_gene', 3), ('snRNA', 1916), ('polymorphic_pseudogene', 45), ('IG_V_gene', 138), ('TR_J_gene', 74), ('lincRNA', 7114), ('antisense', 5276), ('IG_C_pseudogene', 9), ('snoRNA', 1457), ('3prime_overlapping_ncrna', 21), ('IG_J_gene', 18), ('protein_coding', 20345), ('IG_C_gene', 14), ('processed_transcript', 515), ('ERCC', 92), ('Mt_rRNA', 2)}
 
-# Make a numpy matrix: (metadata + smpls) x genes
+# Make a numpy matrix: (metadata + samples) x genes
 X = np.asarray(list(X[n] for n in header))
 
-# Along which axis/dimension of the data are the smpls / the genes
+# Along which axis/dimension of the data are the samples / the genes
 (axis_smpl, axis_gene) = (0, 1)
-
-# Cluster membership of each smpl (BCXX)
-smpl2cluster = [n[0:4] for n in header]
 
 #
 def delbyid(L, J) :
@@ -59,9 +56,13 @@ def delbyid(L, J) :
 
 if False :
 	# Omit the BC01 cluster
-	I = [i for (i, c) in enumerate(smpl2cluster) if (c == "BC01")]
+	
+	# Cluster membership of each sample (BCXX)
+	sample2cluster = [n[0:4] for n in header]
+	
+	I = [i for (i, c) in enumerate(sample2cluster) if (c == "BC01")]
 	X = np.delete(X, I, axis_smpl)
-	smpl2cluster = [c for (i, c) in enumerate(smpl2cluster) if (i not in I)]
+	sample2cluster = [c for (i, c) in enumerate(sample2cluster) if (i not in I)]
 	del header # invalidate inconsitent variable
 
 # Omit uninteresting gene records
@@ -118,7 +119,6 @@ pickle.dump(
 	{
 		'X' : X,                       # filtered data
 		'header' : header,             # BCXX(LN)_XX
-		'smpl2cluster' : smpl2cluster, # BCXX
 		'gene_id' : gene_id,           # ENSGXXXXXXXXXXX
 		'gene_type' : gene_type,       # protein_coding, lincRNA, ...
 		'n_smpls' : n_smpls,           # number of samples
