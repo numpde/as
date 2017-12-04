@@ -105,7 +105,7 @@ for normalize in [True, False] :
 		plt.xlim(( mint, maxt ))
 		plt.ylim((    0, maxf ))
 			
-		plt.title("Sample subset: {}_XX ({} samples)".format(g, Y.shape[axis_smpl]))
+		plt.title("Sample subset: {}_XX ({} samples)".format(g, len(tfd)))
 		plt.xlabel(xlabel)
 		plt.ylabel("Frequency")
 
