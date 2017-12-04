@@ -77,8 +77,7 @@ for normalize in [True, False] :
 			x = x[x != 0]
 			
 			# Additional data for this sample
-			d = dict()
-			d['median'] = np.median(x)
+			d = { 'median' : np.median(x) }
 			
 			if normalize : x = x / np.sum(x)
 			
