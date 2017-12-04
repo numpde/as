@@ -54,35 +54,50 @@ print("Groups:", ', '.join(groups))
 
 GROUP = dict()
 for g in groups :
-	# Find samples of the form "g"_XX
-	S = [s for (s, h) in enumerate(header) if re.match(g + "_[0-9]+", h)]
+	# Find samples of the form [g]_XX
+	S = [(s, h) for (s, h) in enumerate(header) if re.match(g + "_[0-9]+", h)]
 
 	# Extract the those samples from the data matrix
-	GROUP[g] = np.take(X, S, axis = axis_smpl)
+	GROUP[g] = {
+		'data' : np.take(X, [s for (s, h) in S], axis = axis_smpl),
+		'head' : [h for (s, h) in S],
+		'clas' : [g] * len(S)
+	}
 
 #
 
 print("Computing...")
 
-ZM = dict()
-for (g, Y) in Progress()(GROUP.items()) :
-	ZM[g] = { 'nnz' : [], 'med' : [] }
+ZMH = dict()
+for (g, DH) in Progress()(GROUP.items()) :
+	Y = DH['data']
+	
+	ZMH[g] = { 'nnz' : [], 'med' : [], 'hed' : DH['head'] }
 	for s in range(Y.shape[axis_smpl]) :
-		x = np.take(Y, s, axis = axis_smpl)
+		x = np.take(Y, s, axis=axis_smpl)
 		
-		ZM[g]['nnz'].append(np.count_nonzero(x))
-		ZM[g]['med'].append(np.median(np.log10(x[x != 0])))
+		ZMH[g]['nnz'].append(np.log10(np.count_nonzero(x)))
+		ZMH[g]['med'].append(np.median(np.log10(x[x != 0])))
 
 print("Plotting...")
 
-colors = plt.get_cmap('hsv')(np.linspace(0, 1.0, len(ZM))).tolist()
+# Each group has its own color
+colors = plt.get_cmap('hsv')(np.linspace(0, 1.0, len(ZMH))).tolist()
+#
+for g in sorted(ZMH.keys()) :
+	zmh = ZMH[g]
+	
+	(x, y) = (zmh['nnz'], zmh['med'])
+	plt.plot(x, y, '.', color=colors.pop())
+	
+	# Annotate outliers
+	zmh = zip(zmh['nnz'], zmh['med'], zmh['hed'])
+	zmh = [(x, y, h) for (x, y, h) in zmh if (y < 0) or (y > 1.5)]
+	for (x, y, h) in zmh : plt.text(x, y, h, fontsize=5)
 
-for g in Progress()(sorted(ZM.keys())) :
-	plt.plot(ZM[g]['nnz'], ZM[g]['med'], '.', color=colors.pop())
-
-plt.xlabel("Number of expressed genes")
+plt.xlabel("log10(# of expressed genes)")
 plt.ylabel("Median log10(expression)")
-plt.legend(sorted(ZM.keys()), loc='lower right', prop={'size': 6})
+plt.legend(sorted(ZMH.keys()), loc='upper left', prop={'size': 6})
 
 print("Saving figure...")
 
