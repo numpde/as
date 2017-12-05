@@ -1,7 +1,5 @@
 
-# RA, 2017-12-02
-
-# (In progress)
+# RA, 2017-12-05
 
 ### IMPORTS -- #
 
@@ -46,8 +44,8 @@ def map_uniprot_ensg(filename) :
 # Sanity check
 assert(E2U[U2E["Q9H2K8"]] == "Q9H2K8")
 
-# 
-
+# Load the Differential Expression data (DE)
+# For a gene e, E2KS[e] is a measure of DE
 E2KS = pickle.load(open(input_file_e2ks, "rb"))['E2KS']
 
 # Cycle through the cell mechanisms
@@ -65,22 +63,23 @@ for (mech, filename) in input_file_func.items() :
 	ks = list(reversed(sorted(E2KS[e] for e in E if (e in E2KS))))
 	M2KS[mech] = ks
 
-
+# Mechanisms
 M = list(sorted((np.mean(ks), k) for (k, ks) in M2KS.items()))
-print(M)
 M = [k for (_, k) in M]
 
 for m in M :
 	plt.plot(range(1, 1 + len(M2KS[m])), M2KS[m], '--.')
 
-plt.xlabel("Involved gene")
+plt.xlabel("Involved gene number")
 plt.ylabel("Differential expression")
 plt.xscale("log")
 
-plt.savefig(output_file_deplot.format(extension="png") + "-noleg.png")
+plt.savefig(output_file_deplot.format(extension="noleg.png"))
+plt.savefig(output_file_deplot.format(extension="noleg.eps"))
 
 plt.legend(M)
 
 plt.savefig(output_file_deplot.format(extension="png"))
+plt.savefig(output_file_deplot.format(extension="eps"))
 
 plt.show()
