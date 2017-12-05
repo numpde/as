@@ -39,6 +39,10 @@ Downloaded (2017-12-05)
 	byfunction/apoptosis.txt
 	byfunction/differentiation.txt
 	byfunction/brca.txt
+	byfunction/migration.txt
+	byfunction/angiogenesis.txt
+	byfunction/cellcycle.txt
+	byfunction/immuneresponse.txt
 
 from
 
@@ -49,4 +53,12 @@ from
 	http://amigo.geneontology.org/amigo/search/bioentity?q=differentiation*&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&fq=annotation_class_list_label:%22cell%20differentiation%22&sfq=document_category:%22bioentity%22
 
 	http://amigo.geneontology.org/amigo/search/bioentity?q=brca*&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&sfq=document_category:%22bioentity%22
+
+	http://amigo2.berkeleybop.org/amigo/search/bioentity?q=GO:0016477&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&fq=annotation_class_list_label:%22cell%20migration%22&sfq=document_category:%22bioentity%22
+
+	http://amigo2.berkeleybop.org/amigo/search/bioentity?q=angiogenesis*&fq=annotation_class_list_label:%22angiogenesis%22&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&sfq=document_category:%22bioentity%22
+
+	http://amigo2.berkeleybop.org/amigo/search/bioentity?q=cycle*&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&fq=annotation_class_list_label:%22cell%20cycle%22&sfq=document_category:%22bioentity%22
+
+	http://amigo2.berkeleybop.org/amigo/search/bioentity?q=immune*&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&fq=annotation_class_list_label:%22immune%20response%22&sfq=document_category:%22bioentity%22
 

@@ -9,9 +9,9 @@ import pickle
 import inspect
 import numpy as np
 import matplotlib.pyplot as plt
-from progressbar import ProgressBar as Progress
 
-from scipy import stats
+from progressbar import ProgressBar as Progress
+from joblib      import Parallel, delayed
 
 ### INPUT ---- #
 
@@ -21,7 +21,14 @@ input_file_selected = "OUTPUT/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_ma
 
 output_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 
+### PARAM ---- #
+
+pass
+
 ### MEAT ----- #
+
+# Distance between two empirical proba
+def dist(p, q) : return scipy.stats.ks_2samp(p, q)[0]
 
 # Load the BC data
 data = pickle.load(open(input_file_selected, "rb"))
@@ -33,67 +40,54 @@ X = data['X']
 # Labels for axis/dimension of data
 (axis_smpl, axis_gene) = (data['axis_smpl'], data['axis_gene'])
 
-# BCXX(LN)(_Re)_XX
+# Labels of samples of the form BCXX[LN][_Re]_XX 
 header = data['header']
 #print(header)
 
 # Remove strange samples
-strange = { "BC07LN_20" }
-for h in strange :
-	s = header.index(h)
-	header.pop(s)
-	X = np.delete(X, s, axis=axis_smpl)
+for h in { "BC07LN_20" } :
+	X = np.delete(X, header.index(h), axis=axis_smpl)
+	header.remove(h)
 
-
-#
+# Number of samples / genes in the expression matrix
 (n_samples, n_genes) = (X.shape[axis_smpl], X.shape[axis_gene])
 
 # Get the sample groups
 #
 # Option 1: BCXX
-#groups = [n[0:4] for n in header]
+groups = [n[0:4] for n in header]
 #
 # Option 2: BCXX[LN][_Re]
-groups = [re.findall("(.*)_[0-9]+", n)[0] for n in header]
+#groups = [re.findall("(.*)_[0-9]+", n)[0] for n in header]
 
 # Make groups unique and sort
 groups = sorted(list(set(groups)))
 print("Groups:", ', '.join(groups))
 
-GROUP = dict()
-for g in groups :
-	# Find samples of the form [g]_XX
-	S = [s for (s, h) in enumerate(header) if re.match(g + "_[0-9]+", h)]
+# Collect numbers of samples of the form "g"_XX by group
+G2S = {
+	g : [s for (s, h) in enumerate(header) if re.match(g + "_[0-9]+", h)]
+	for g in groups 
+}
 
-	# Extract the those samples from the data matrix
-	GROUP[g] = np.take(X, S, axis = axis_smpl)
+# Split the expression matrix by groups
+G2X = {
+	g : np.take(X, G2S[g], axis=axis_smpl) 
+	for g in groups 
+}
 
-
-E2KS = dict()
-
-for n in Progress()(range(n_genes)) :
+# Compute differential expression for gene #n
+def job(n) :
+	P = [np.take(G2X[g], n, axis=axis_gene) for g in groups]
+	ks = np.mean([dist(p, q) for p in P for q in P])
 	
-	ks = np.zeros( (len(groups), len(groups)) )
-	def f(Y) : return np.take(Y, n, axis = axis_gene)
-	for (i, a) in enumerate(groups) :
-		for (j, b) in enumerate(groups) :
-			A = f(GROUP[a]); A = A[A.nonzero()]
-			B = f(GROUP[b]); B = B[B.nonzero()]
-			if len(A) and len(B) :
-				(d, p) = scipy.stats.ks_2samp(A, B)
-			else :
-				d = 0
-			ks[i, j] += d
-	
-	E2KS[data['gene_id'][n]] = np.sum(ks)
-	
-	#if (n > 100) :
-		#print("Warning: early abort.")
-		#break
+	return (data['gene_id'][n], ks)
 
+# [Gene Ensembl ID] --> [Gene differential expression]
+E2KS = dict(Parallel(n_jobs=2)(delayed(job)(n) for n in Progress()(range(n_genes))))
 
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 script = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
 # Save results
-pickle.dump({ 'E2KS' : E2KS, 'script' : script }, open(output_file_e2ks, "wb"))
+pickle.dump({ 'E2DE' : E2KS, 'script' : script }, open(output_file_e2ks, "wb"))
