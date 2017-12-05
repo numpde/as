@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 ### INPUT ---- #
 
-input_file_stats = "./OUTPUT/exp4a.pkl"
+input_file_stats = "./OUTPUT/exp4a_20171201-114027.pkl"
 
 ### OUTPUT --- #
 
@@ -28,16 +28,30 @@ def padzeros(LL) :
 
 # 
 data = pickle.load(open(input_file_stats, "rb"))
-print("Data keys:", list(data.keys()))
+#print("Data keys:", list(data.keys()))
 
-# Betti number stats (mean and stddev)
-BEM = np.vstack(padzeros(data['BEM']))
-BES = np.vstack(padzeros(data['BES']))
+BETTI = data['BETTI']
 
-# Fraction of edges kept in the graph
-FC  = np.asarray(data['FC'])
+for (fc, betti) in BETTI.items() :
+	BETTI[fc] = np.vstack(padzeros(betti))
 
-for j in range(0, BEM.shape[1]) :
+FC = []   # Fraction of max-cliques
+RUN = []  # Number of runs in the statistic
+BEM = []  # Mean and ...
+BES = []  #      ... stddev of Betti numbers
+#
+for fc in sorted(BETTI.keys()) :
+	FC .append(fc)
+	RUN.append(len(BETTI[fc]))
+	BEM.append(np.mean(BETTI[fc], 0).tolist())
+	BES.append(np.std (BETTI[fc], 0).tolist())
+
+# Betti number stats as numpy array
+BEM = np.vstack(padzeros(BEM))
+BES = np.vstack(padzeros(BES))
+
+# 
+for j in range(BEM.shape[1]) :
 	plt.errorbar(FC, BEM[:, j], yerr=BES[:, j], fmt='.-')
 	#plt.plot(FC, BEM[:, j], '.-')
 
