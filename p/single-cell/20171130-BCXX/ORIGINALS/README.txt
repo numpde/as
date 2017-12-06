@@ -35,14 +35,14 @@ that contains the selection of relevant genes in the BC dataset is from TXP (201
 
 Downloaded (2017-12-05)
 
-	byfunction/dna-repair.txt
-	byfunction/apoptosis.txt
-	byfunction/differentiation.txt
-	byfunction/brca.txt
-	byfunction/migration.txt
-	byfunction/angiogenesis.txt
-	byfunction/cellcycle.txt
-	byfunction/immuneresponse.txt
+	byfunction/GO/dna-repair.txt
+	byfunction/GO/apoptosis.txt
+	byfunction/GO/differentiation.txt
+	byfunction/GO/brca.txt
+	byfunction/GO/migration.txt
+	byfunction/GO/angiogenesis.txt
+	byfunction/GO/cellcycle.txt
+	byfunction/GO/immuneresponse.txt
 
 from
 
@@ -62,3 +62,9 @@ from
 
 	http://amigo2.berkeleybop.org/amigo/search/bioentity?q=immune*&fq=taxon_subset_closure_label:%22Homo%20sapiens%22&fq=annotation_class_list_label:%22immune%20response%22&sfq=document_category:%22bioentity%22
 
+
+The files
+
+	byfunction/KL/*.txt
+
+are from KL (2017-12-05).
