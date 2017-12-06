@@ -4,14 +4,16 @@
 ### IMPORTS -- #
 
 import re
-import scipy
+import math
 import pickle
 import inspect
 import numpy as np
 import matplotlib.pyplot as plt
 
-from progressbar import ProgressBar as Progress
-from joblib      import Parallel, delayed
+from scipy           import stats
+from multiprocessing import cpu_count
+from joblib          import Parallel, delayed
+from progressbar     import ProgressBar as Progress
 
 ### INPUT ---- #
 
@@ -23,14 +25,22 @@ output_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 
 ### PARAM ---- #
 
-pass
+# Number of parallel computing processes
+num_procs = math.ceil(cpu_count() / 2)
+
+### (!!!) ---- #
+
+
+# Differential expression between two collections of empirical proba
+def DE(P, Q) :
+	# Distance between two empirical proba
+	def dist(p, q) : return stats.ks_2samp(p, q)[0]
+
+	return np.max([dist(p, q) for p in P for q in Q])
 
 ### MEAT ----- #
 
-# Distance between two empirical proba
-def dist(p, q) : return scipy.stats.ks_2samp(p, q)[0]
-
-# Load the BC data
+# Load the BC datas
 data = pickle.load(open(input_file_selected, "rb"))
 #print(data.keys())
 
@@ -79,12 +89,12 @@ G2X = {
 # Compute differential expression for gene #n
 def job(n) :
 	P = [np.take(G2X[g], n, axis=axis_gene) for g in groups]
-	ks = np.mean([dist(p, q) for p in P for q in P])
+	ks = DE(P, P)
 	
 	return (data['gene_id'][n], ks)
 
 # [Gene Ensembl ID] --> [Gene differential expression]
-E2KS = dict(Parallel(n_jobs=2)(delayed(job)(n) for n in Progress()(range(n_genes))))
+E2KS = dict(Parallel(n_jobs=num_procs)(delayed(job)(n) for n in Progress()(range(n_genes))))
 
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 script = inspect.getsource(inspect.getmodule(inspect.currentframe()))

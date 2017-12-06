@@ -7,26 +7,28 @@ import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 
+from itertools import chain
+
 ### INPUT ---- #
 
 input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 
 input_file_hgnc = "ORIGINALS/UV/HGNC-Approved-20171205.txt"
 
-input_file_func = { 
-	"Apoptosis"       : "ORIGINALS/byfunction/apoptosis.txt",
-	"DNA repair"      : "ORIGINALS/byfunction/dna-repair.txt",
-	"Differentiation" : "ORIGINALS/byfunction/differentiation.txt",
-	"BRCA"            : "ORIGINALS/byfunction/brca.txt",
-	"Cell migration"  : "ORIGINALS/byfunction/migration.txt",
-	"Angiogenesis"    : "ORIGINALS/byfunction/angiogenesis.txt",
-	"Cell cycle"      : "ORIGINALS/byfunction/cellcycle.txt",
-	"Immune response" : "ORIGINALS/byfunction/immuneresponse.txt"
+input_file_mech = { 
+	"Apoptosis"       : "ORIGINALS/byfunction/GO/apoptosis.txt",
+	"DNA repair"      : "ORIGINALS/byfunction/GO/dna-repair.txt",
+	"Differentiation" : "ORIGINALS/byfunction/GO/differentiation.txt",
+	"BRCA"            : "ORIGINALS/byfunction/GO/brca.txt",
+	"Cell migration"  : "ORIGINALS/byfunction/GO/migration.txt",
+	"Angiogenesis"    : "ORIGINALS/byfunction/GO/angiogenesis.txt",
+	"Cell cycle"      : "ORIGINALS/byfunction/GO/cellcycle.txt",
+	"Immune response" : "ORIGINALS/byfunction/GO/immuneresponse.txt"
 }
 
 ### OUTPUT --- #
 
-output_file_deplot = "OUTPUT/3_proba_a/de_{zoom}.{extension}"
+output_file_deplot = "OUTPUT/3_proba_a/m2de_{zoom}.{extension}"
 
 ### MEAT ----- #
 
@@ -54,18 +56,28 @@ E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2DE']
 
 # Cycle through the cell mechanisms
 
+otherE = set(E2DE.keys())
+
 M2DE = dict()
-for (mech, filename) in input_file_func.items() :
+for (mech, filename) in input_file_mech.items() :
 	print("Mechanism:", mech)
 	
-	X = np.genfromtxt(filename, delimiter='\t', dtype=None, comments='\r')
+	Y = np.genfromtxt(filename, delimiter='\t', dtype=None, comments='\r')
 
-	U = [u[len("UniProtKB:"):] for u in utf(X[:, 0])]
+	U = [u[len("UniProtKB:"):] for u in utf(Y[:, 0])]
 	E = [U2E[u] for u in U if (u in U2E)]
 	print("Mapped: {} genes. Not mapped: {}".format(len(E), [u for u in U if (u not in U2E)]))
+	
+	print(len(otherE), len(E))
+	otherE = otherE - set(E)
 
-	de = list(sorted(E2DE[e] for e in E if (e in E2DE)))
-	M2DE[mech] = de
+	M2DE[mech] = [E2DE[e] for e in E if (e in E2DE)]
+
+M2DE["Other"] = [de for (e, de) in E2DE.items() if (e in otherE)]
+M2DE["All"] = E2DE.values()
+
+# Sort
+M2DE = { m : list(sorted(de)) for (m, de) in M2DE.items() }
 
 # Mechanisms
 M = list(sorted((np.mean(de), m) for (m, de) in M2DE.items()))
@@ -74,7 +86,7 @@ M = [m for (_, m) in M]
 for m in M :
 	plt.plot(M2DE[m], np.linspace(0.0, 1.0, len(M2DE[m]) + 1)[1:], '-')
 
-plt.xlabel("Differential expression (average interbatch KS distance)")
+plt.xlabel("Differential expression")
 plt.ylabel("Gene relative rank in mechanism")
 #plt.xscale("log")
 #plt.yscale("log")
