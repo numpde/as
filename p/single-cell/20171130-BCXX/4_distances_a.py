@@ -36,20 +36,24 @@ dots = 1000
 DIMS = [10, 100, 1000, 10000, 20000]
 
 metrics = [
-	{'func' : func, 'data' : data, 'info' : info}
+	{ 'func' : func, 'data' : data, 'info' : info }
 	for data in ['X', 'Z']
 	for func in ['eucl', 'corr']
 	for info in ['sc', 'fr']
 ]
 
+metrics.append(
+	{ 'func' : 'ks', 'data' : 'X', 'info' : '--' }
+)
+
 ## ==================== (!!!) :
 
-## Differential expression within a collection of empirical proba
-#def DE(P) :
-	## Distance between two empirical proba
-	#def dist(p, q) : return stats.ks_2samp(p, q)[0]
+# Differential expression within a collection of empirical proba
+def DE(P) :
+	# Distance between two empirical proba
+	def dist(p, q) : return stats.ks_2samp(p, q)[0]
 
-	#return np.max([dist(p, q) for p in P for q in P])
+	return np.mean([dist(p, q) for p in P for q in P])
 
 # https://en.wikipedia.org/wiki/Silhouette_(clustering)
 # D = distance matrix
@@ -142,11 +146,22 @@ def eucl(K, data=None, info=None) :
 
 	return si[info]
 
+def ks(K) :
+	return np.mean([
+		DE([np.take(G2X[g], k, axis=axis_gene) for g in groups])
+		for k in K
+	])
+
 def measure(K, m) :
-	func = (corr if (m['func'] == 'corr') else eucl)
-	data = (Z if (m['data'] == 'Z') else X)
-	info = m['info']
-	return func(K, data=data, info=info)
+	if (m['func'] == 'ks') :
+		assert(m['data'] == 'X')
+		assert(m['info'] == '--')
+		return ks(K)
+	else :
+		func = (corr if (m['func'] == 'corr') else eucl)
+		data = (Z if (m['data'] == 'Z') else X)
+		info = m['info']
+		return func(K, data=data, info=info)
 
 #ks = np.mean([DE([np.take(G2X[g], k, axis=axis_gene) for g in groups]) for k in K])
 
@@ -178,7 +193,13 @@ def main() :
 			
 			# Save results
 			pickle.dump(
-				{ 'measurements' : measurements, 'DIMS' : DIMS, 'metrics' : metrics }, 
+				{ 
+					'measurements' : measurements, 
+					'DIMS'         : DIMS, 
+					'KK'           : KK,
+					'metrics'      : metrics,
+					'script'       : script
+				}, 
 				open(output_file_measurements, "wb")
 			)
 
