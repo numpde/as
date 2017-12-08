@@ -27,7 +27,7 @@ output_file_measurements = "OUTPUT/4_distances_a/measurements.pkl"
 ## =================== PARAMS :
 
 # Number of parallel computing processes
-num_procs = min(math.ceil(cpu_count() / 2), 10)
+num_procs = min(math.ceil(cpu_count() / 2), 12)
 
 # Number of dots per graph
 dots = 1000
@@ -196,7 +196,6 @@ def main() :
 				{ 
 					'measurements' : measurements, 
 					'DIMS'         : DIMS, 
-					'KK'           : KK,
 					'metrics'      : metrics,
 					'script'       : script
 				}, 
