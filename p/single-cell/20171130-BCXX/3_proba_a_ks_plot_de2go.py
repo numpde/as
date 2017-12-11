@@ -1,7 +1,7 @@
 
 # RA, 2017-12-06
 
-## ------------------ IMPORTS :
+## ================== IMPORTS :
 
 import pickle
 import os.path
@@ -16,7 +16,7 @@ from joblib      import Parallel, delayed
 #https://pypi.python.org/pypi/biomart/0.8.0
 from biomart     import BiomartServer
 
-## -------------------- INPUT :
+## ==================== INPUT :
 
 input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 
@@ -25,19 +25,20 @@ input_file_e2go = "OUTPUT/3_proba_a/e2go.txt"
 # does not exist, it will be created via biomart
 biomart_url = "http://grch37.ensembl.org/biomart"
 
-## ------------------- OUTPUT :
+## =================== OUTPUT :
 
 output_file_deplot = "OUTPUT/3_proba_a/de2go_{zoom}.{extension}"
+output_file_gorank = "OUTPUT/3_proba_a/gorank.{extension}"
 
 # Will be created if necessary:
 output_file_e2go = input_file_e2go
 
-## ------------------- PARAMS :
+## =================== PARAMS :
 
 num_biomart_parallel_queries = 10
 num_biomart_ids_per_query = 100
 
-## --------------------- WORK :
+## ===================== WORK :
 
 # Load the Differential Expression data (DE)
 # For a gene e, E2DE[e] is a measure of DE
@@ -56,6 +57,16 @@ if os.path.isfile(input_file_e2go) :
 
 else :
 	# Download ENSG-GO associations
+	
+	# Get biomart record by ENSG ID
+	# Q&A: https://www.biostars.org/p/3570/
+	
+	# See also
+	# https://www.ncbi.nlm.nih.gov/guide/howto/find-func-gene/
+	
+	# "The Ensembl genome database project"
+	# Nucleic Acids Res. 2002 Jan 1; 30(1): 38–41.
+	# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC99161/
 	
 	print("Downloading ENSG-GO associations from biomart...")
 	
@@ -119,6 +130,8 @@ DE = [de for (de, _) in DE2E]
 
 # All known GO IDs
 GO = list(set(chain.from_iterable(E2GO.values())))
+#
+print("GO count:", len(GO))
 # 
 # Map GO ID --> Count
 GO2C = { go : np.zeros(len(DE2E)) for go in GO }
@@ -126,28 +139,52 @@ GO2C = { go : np.zeros(len(DE2E)) for go in GO }
 for (n, (de, e)) in enumerate(DE2E) :
 	for go in E2GO.get(e, []) :
 		GO2C[go][n] += 1
+
+GO_C = [ (go, np.cumsum(C)) for (go, C) in GO2C.items() ]
+del GO2C
+
+# Sort by decreasing number of occurrence
+GO_C = sorted(GO_C, key=(lambda go_C : -max(go_C[1])))
+
 #
-GO2C = { go : np.cumsum(C) for (go, C) in GO2C.items() }
+
+plt.clf()
+plt.plot([max(C) for (go, C) in GO_C])
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel("GO ID rank")
+plt.ylabel("Number of occurrences in BC data")
+plt.savefig(output_file_gorank.format(extension="png"))
+plt.savefig(output_file_gorank.format(extension="eps"))
+
+#
 
 #print([(go, x[0:10]) for (go, x) in list(GO2C.items())[0:2]])
 
-GO = reversed(sorted((max(C), go) for (go, C) in GO2C.items()))
-GO = [go for (_, go) in GO]
-GO = GO[0:20]
+# Pick the GO IDs with the most frequent occurrence
+GO_C = GO_C[:400]
 
-for go in GO:
-	plt.plot(DE, GO2C[go], '-')
+# Normalize
+GO_C = [ (go, C / max(C)) for (go, C) in GO_C ]
 
-#plt.ylabel("Proportion of genes involved")
-#plt.xlabel("Differential expression cut-off")
+GO_C = sorted(GO_C, key=(lambda go_C : -np.mean(go_C[1])))
+GO_C = GO_C[:30]
+
+#
+
+plt.clf()
+
+for (_, C) in GO_C :
+	plt.plot(DE, C, '-')
+
+plt.xlabel("Differential expression cut-off")
+plt.ylabel("Fraction of genes involved")
 #plt.xscale("log")
 #plt.yscale("log")
 
 # Mechanism + number of associated genes
 #L = [(m + " ({})".format(len(M2E[m]))) for m in M]
-plt.legend(GO, prop={'size': 6})
+plt.legend([go for (go, C) in GO_C], prop={'size': 6})
 
-#plt.savefig(output_file_deplot.format(zoom="full", extension="png"))
-#plt.savefig(output_file_deplot.format(zoom="full", extension="eps"))
-
-plt.show()
+plt.savefig(output_file_deplot.format(zoom="full", extension="png"))
+plt.savefig(output_file_deplot.format(zoom="full", extension="eps"))

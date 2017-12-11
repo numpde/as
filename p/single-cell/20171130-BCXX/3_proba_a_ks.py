@@ -17,7 +17,7 @@ from progressbar     import ProgressBar as Progress
 
 ### INPUT ---- #
 
-input_file_selected = "OUTPUT/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+input_file_BC = "OUTPUT/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
 
 ### OUTPUT --- #
 
@@ -40,8 +40,8 @@ def DE(P, Q) :
 
 ### MEAT ----- #
 
-# Load the BC datas
-data = pickle.load(open(input_file_selected, "rb"))
+# Load the BC data
+data = pickle.load(open(input_file_BC, "rb"))
 #print(data.keys())
 
 # Expression matrix
@@ -51,24 +51,23 @@ X = data['X']
 (axis_smpl, axis_gene) = (data['axis_smpl'], data['axis_gene'])
 
 # Labels of samples of the form BCXX[LN][_Re]_XX 
-header = data['header']
-#print(header)
+sample_labels = data['header']
 
 # Remove strange samples
 for h in { "BC07LN_20" } :
-	X = np.delete(X, header.index(h), axis=axis_smpl)
-	header.remove(h)
+	X = np.delete(X, sample_labels.index(h), axis=axis_smpl)
+	sample_labels.remove(h)
 
 # Number of samples / genes in the expression matrix
 (n_samples, n_genes) = (X.shape[axis_smpl], X.shape[axis_gene])
 
 # Get the sample groups
 #
-# Option 1: BCXX
-groups = [n[0:4] for n in header]
+# Option 1: BCXX -- by patient
+groups = [n[0:4] for n in sample_labels]
 #
-# Option 2: BCXX[LN][_Re]
-#groups = [re.findall("(.*)_[0-9]+", n)[0] for n in header]
+# Option 2: BCXX[LN][_Re] -- by batch
+#groups = [re.findall("(.*)_[0-9]+", n)[0] for n in sample_labels]
 
 # Make groups unique and sort
 groups = sorted(list(set(groups)))
@@ -76,7 +75,7 @@ print("Groups:", ', '.join(groups))
 
 # Collect numbers of samples of the form "g"_XX by group
 G2S = {
-	g : [s for (s, h) in enumerate(header) if re.match(g + "_[0-9]+", h)]
+	g : [s for (s, h) in enumerate(sample_labels) if re.match(g + "_[0-9]+", h)]
 	for g in groups 
 }
 
