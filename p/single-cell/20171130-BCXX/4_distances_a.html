@@ -1,29 +1,63 @@
 <html>
 <head>
-<script type="text/javascript">
-	function large(f) {
-		document.getElementById('ONE').innerHTML = '<img src="' + f + '" width="480px"/>';
+<style>
+	td {
+		vertical-align: top;
 	}
 	
-	function writepics() {
-		var dims = 10;
-		
-		var r = document.getElementsByName('dims');
-		for (var i = 0; i < r.length; ++i) {
-			if (r[i].checked) {
-				dims = r[i].value;
-			}
+	table { 
+		border-spacing: 0px;
+		border-collapse: separate;
+	}
+</style>
+<script type="text/javascript">
+	var width = 480; // px
+	
+	function byN(n) { return document.getElementsByName(n); }
+	function byI(n) { return document.getElementById(n);    }
+	
+	function large(f) {
+		byI('ONE').innerHTML = f ? '<img src="' + f + '" width="' + width + 'px"/>' : '';
+	}
+	
+	function writepics(caller) {
+		if (caller) {
+			
+		}
+	
+		let dims = 10;
+		for (let d of byN('dims')) {
+			if (d.checked) dims = d.value;
 		}
 		
-		document.getElementById('ONE').innerHTML = "";
+		large();
+		
+		let M = new Array();
+		
+		let m = 0;
+		//
+		for (let da of byN("data")) {
+			for (let di of byN("distance")) {
+				for (let si of byN("silhouette")) {
+					if (da.checked & di.checked & si.checked) M.push(m);
+					m++;
+				}
+			}
+		}
+		//
+		for (let ks of byN("ks")) {
+			if (ks.checked) M.push(m);
+			m++;
+		}
 	
-		var e = document.getElementById('ALL');
+		let e = byI('ALL');
 		e.innerHTML = "";
-		for (var m2 = 8; m2 >= 0; --m2) {
-			for (var m1 = 0; m1 < 9; ++m1) { 
-				var f = 'OUTPUT/4_distances_a/dims=' + dims + '_m1=' + m1 + '_m2=' + m2 + '.png';
-				var o = "large('" + f + "');";
-				var i = '<img src="' + f + '" width="48px" height="36px" onclick="' + o + '" ondragstart="return false;"/>';
+		let w = Math.round(width / M.length);
+		for (let m2 of M.slice().reverse()) {
+			for (let m1 of M) { 
+				let f = 'OUTPUT/4_distances_a/dims=' + dims + '_m1=' + m1 + '_m2=' + m2 + '.png';
+				let o = "large('" + f + "');";
+				let i = '<img src="' + f + '" width="' + w + 'px" onclick="' + o + '" ondragstart="return false;"/>';
 				e.innerHTML += i;
 			}
 			e.innerHTML += "<br>";
@@ -32,9 +66,22 @@
 	}
 
 	function onload() {
-		var r = document.getElementsByName('dims');
-		for (var i = 0; i < r.length; ++i) {
-			r[i].onclick = writepics;
+		for (let el of ["dims", "data", "distance", "silhouette", "ks"]) {
+			let E = byN(el);
+			for (let i = 0; i < E.length; ++i) {
+				let e = E[i];
+				if (E.length == 2) e.setAttribute("otherid", E[1-i].id);
+				e.onchange = function() { 
+					if (e.hasAttribute("otherid")) {
+						let f = byI(e.getAttribute("otherid"));
+						if (!e.checked & !f.checked) {
+							f.checked = true;
+						}
+					}
+					writepics(e); 
+					return true;
+				};
+			}
 		}
 	
 		writepics();
@@ -43,46 +90,111 @@
 </head>
 
 <body onload="onload();">
-	This uses the GSE75688 BC data (a subset of ~24k genes).
-	
-	<br>
-	
-	The following compare clustering indices
-	(cluster = tumor).
-	
-	<br>
-	
-	A number of genes,
-	
-	<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" name="dims" id="r1" value="10" checked><label for="r1"> 10 </label>
-	<input type="radio" name="dims" id="r2" value="100"       ><label for="r2"> 100 </label>
-	<input type="radio" name="dims" id="r3" value="1000"      ><label for="r3"> 1000 </label>
-	<input type="radio" name="dims" id="r4" value="10000"     ><label for="r4"> 10000 </label>
-	<input type="radio" name="dims" id="r5" value="20000"     ><label for="r5"> 20000 </label>
-	<br>
-	
-	is randomly selected 1000x (giving 1000 dots per plot).
-	
-	<br>
-	
-	Variants:
-	<br>
-	Original data (X) vs. Z transformed data (Z)
-	<br>
-	Euclidian distance (eucl) vs. "1 - correlation" (corr)
-	<br>
-	Mean silhouette value vs. the fraction of positive scores
-	<br>
-	Average KS distance
-	
-	<br>
+	<div style="width:1000px;">
+		<table>
+		<tr>
+		<td style="width:480px;">
+			Here we compare different
+			clustering indices against each other.
+			
+			<br><br>
+			
+			Choose the number of dimensions for data points:
+			
+			<ul><li>
+				<input type="radio" name="dims" id="r1" value="10" checked><label for="r1"> 10 </label>
+				<input type="radio" name="dims" id="r2" value="100"       ><label for="r2"> 100 </label>
+				<input type="radio" name="dims" id="r3" value="1000"      ><label for="r3"> 1000 </label>
+				<input type="radio" name="dims" id="r4" value="10000"     ><label for="r4"> 10000 </label>
+				<input type="radio" name="dims" id="r5" value="20000"     ><label for="r5"> 20000 </label>
+			</li></ul>
+			
+			<!--is randomly selected 1000x (giving 1000 dots per plot).-->
+			
+			Silhoutte variants:
+			
+			<ul>
+			<li>
+			<input type="checkbox" name="data" value="x" id="da1" checked>
+			<label for="da1">Original data (X)</label>
+			/
+			<input type="checkbox" name="data" value="z" id="da2" checked>
+			<label for="da2">Z transformed data (Z)</label>
+			</li>
+			</ul>
+			
+			<ul>
+			<li>
+			<input type="checkbox" name="distance" value="e" id="di1" checked>
+			<label for="di1">Euclidian</label>
+			/
+			<input type="checkbox" name="distance" value="c" id="di2" checked>
+			<label for="di2">1 - correlation</label>
+			</li>
+			</ul>
+			
+			<ul>
+			<li>
+			<input type="checkbox" name="silhouette" value="m" id="si1" checked>
+			<label for="si1">Mean silhouette value</label>
+			/
+			<input type="checkbox" name="silhouette" value="f" id="si2" checked>
+			<label for="si2">Fraction of positive scores</label>
+			</li>
+			</ul>
+			
+			KS variants:
+			
+			<ul>
+			<li>
+			<input type="checkbox" name="ks" value="a" id="ks1" checked>
+			<label for="ks1">Average KS distance</label>
+			</li>
+			</ul>
+			
+			<br>
+			
+			<div style="width: 100%; height: 360px; overflow-y: scroll;">
+				How the data are generated:
+				
+				<br><br>
+				
+				We start with the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE75688">GSE75688</a> dataset
+				that contains the gene expression levels
+				of single cells
+				from 14 tumors of 11 patients.
 
-	<div id="ALL">
-	</div>
-	
-	<div id="ONE">
+				The cells are grouped by tumor
+				(BC01_XX to BC11_XX, as well as BC03LN_XX, BC07LN_XX, BC09_Re_XX),
+				defining the clusters of samples.
+				
+				First, a subset of ~24k genes is extracted
+				removing in particular all non-expressed genes.
+				The sample BC07LN_20 is omitted due to strangely high expression levels.
+				
+				<br>
+				
+				We randomly select N genes and compute the clustering indices,
+				where N is the chosen number of dimensions.
+				We repeat this 1000 times giving 1000 dots per plot.
+			</div>
+			
+			<br><br>
+			
+			<span style="font-size:6px; color:#BBBBBB">RA, 2017-12-09</span>
+		</td>
+		<td style="width:10px;">
+		</td>
+		<td style="width:480px;">
+
+			<div id="ALL">
+			</div>
+			
+			<div id="ONE">
+			</div>
+		</td>
+		</tr>
+		</table>
 	</div>
 </body>
 </html>
