@@ -94,8 +94,6 @@ for m in M :
 
 plt.ylabel("Proportion of genes involved")
 plt.xlabel("Differential expression cut-off")
-#plt.xscale("log")
-#plt.yscale("log")
 
 # Mechanism + number of associated genes
 L = [(m + " ({})".format(len(M2E[m]))) for m in M]
@@ -103,9 +101,3 @@ plt.legend(L)
 
 plt.savefig(output_file_deplot.format(zoom="full", extension="png"))
 plt.savefig(output_file_deplot.format(zoom="full", extension="eps"))
-
-#plt.xlim((plt.xlim()[0], np.mean(plt.xlim())))
-#plt.ylim((plt.ylim()[0], np.mean(plt.ylim())))
-
-#plt.savefig(output_file_deplot.format(zoom="zoom", extension="png"))
-#plt.savefig(output_file_deplot.format(zoom="zoom", extension="eps"))

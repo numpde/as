@@ -17,7 +17,7 @@ from progressbar     import ProgressBar as Progress
 
 ### INPUT ---- #
 
-input_file_BC = "OUTPUT/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+input_file_BC = "OUTPUT/0_selected/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
 
 ### OUTPUT --- #
 
@@ -99,4 +99,5 @@ E2KS = dict(Parallel(n_jobs=num_procs)(delayed(job)(n) for n in Progress()(range
 script = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
 # Save results
-pickle.dump({ 'E2DE' : E2KS, 'script' : script }, open(output_file_e2ks, "wb"))
+if ("TEST" not in sys.argv) :
+	pickle.dump({ 'E2DE' : E2KS, 'script' : script }, open(output_file_e2ks, "wb"))

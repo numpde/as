@@ -14,11 +14,11 @@ import numpy as np
 ### INPUT ---- #
 
 input_file_raw_BC = "ORIGINALS/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt"
-input_file_select = "ORIGINALS/gene-selection-txp.txt"
+input_file_select = "ORIGINALS/txp/gene-selection.txt"
 
 ### OUTPUT --- #
 
-output_file_select = "OUTPUT/UV/" + os.path.split(input_file_raw_BC)[1] + "-selected.pkl"
+output_file_select = "OUTPUT/0_select/UV/" + os.path.split(input_file_raw_BC)[1] + "-selected.pkl"
 
 ### MEAT ----- #
 
@@ -106,10 +106,29 @@ print("Got data with {} samples and {} nontrivial genes".format(n_smpls, n_genes
 assert(n_smpls), "Didn't get any samples"
 assert(n_genes), "Didn't get any genes"
 
+# Group samples by patient BCXX
+#
+patients = [h[0:4] for h in header]
+#
+P2SH = {
+	p : [(s, h) for (s, h) in enumerate(header) if re.match(p + "_[0-9]+", h)]
+	for p in patients 
+}
+
+# Groups samples by batch BCXX[LN][_Re]
+#
+batches = [re.findall("(.*)_[0-9]+", h)[0] for h in header]
+#
+B2SH = {
+	b : [(s, h) for (s, h) in enumerate(header) if re.match(b + "_[0-9]+", h)]
+	for b in batches 
+}
+
+
 # To get the gene-wise z-score transform do
 #
 #	from scipy import stats
-# 	Z = stats.mstats.zscore(X, axis=axis_smpl)
+#	Z = stats.mstats.zscore(X, axis=axis_smpl)
 
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 script = inspect.getsource(inspect.getmodule(inspect.currentframe()))
@@ -117,15 +136,17 @@ script = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 # Save the filtered data
 pickle.dump(
 	{
-		'X' : X,                       # filtered data
-		'header' : header,             # BCXX(LN)_XX
-		'gene_id' : gene_id,           # ENSGXXXXXXXXXXX
-		'gene_type' : gene_type,       # protein_coding, lincRNA, ...
-		'n_smpls' : n_smpls,           # number of samples
-		'n_genes' : n_genes,           # number of genes
-		'axis_smpl' : axis_smpl,       # axis/dimension of samples
-		'axis_gene' : axis_gene,       # axis/dimension of genes
-		'script' : script              # this script
+		'X'         : X,            # filtered data
+		'header'    : header,       # BCXX[LN]_[Re]_XX
+		'gene_id'   : gene_id,      # ENSGXXXXXXXXXXX
+		'gene_type' : gene_type,    # protein_coding, lincRNA, ...
+		'n_smpls'   : n_smpls,      # number of samples
+		'n_genes'   : n_genes,      # number of genes
+		'axis_smpl' : axis_smpl,    # axis/dimension of samples
+		'axis_gene' : axis_gene,    # axis/dimension of genes
+		'P2SH'      : P2SH,         # group by patient
+		'B2SH'      : B2SH,         # group by batch
+		'script'    : script        # this script
 	},
 	open(output_file_select, "wb")
 )

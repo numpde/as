@@ -88,8 +88,6 @@ for m in M :
 
 plt.xlabel("Differential expression")
 plt.ylabel("Gene relative rank in mechanism")
-#plt.xscale("log")
-#plt.yscale("log")
 
 # Mechanism + number of associated genes
 L = [(m + " ({})".format(len(M2DE[m]))) for m in M]

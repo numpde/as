@@ -9,6 +9,15 @@
 		border-spacing: 0px;
 		border-collapse: separate;
 	}
+	
+	/* https://stackoverflow.com/a/22098624/3609568 */
+	.scroll {
+		unicode-bidi:bidi-override;
+		direction: rtl;
+		overflow: scroll;
+		overflow-x: hidden!important;
+	}
+
 </style>
 <script type="text/javascript">
 	var width = 480; // px
@@ -17,7 +26,7 @@
 	function byI(n) { return document.getElementById(n);    }
 	
 	function large(f) {
-		byI('ONE').innerHTML = f ? '<img src="' + f + '" width="' + width + 'px"/>' : '';
+		byI('ONE').innerHTML = f ? ('<img src="' + f + '" width="' + width + 'px"/>') : '<br>Click on a plot to enlarge.';
 	}
 	
 	function writepics(caller) {
@@ -26,42 +35,48 @@
 		}
 	
 		let dims = 10;
-		for (let d of byN('dims')) {
-			if (d.checked) dims = d.value;
-		}
+		for (let d of byN('dims')) if (d.checked) dims = d.value;
 		
+		// Remove the large image 
 		large();
 		
+		// Measurements to display
 		let M = new Array();
-		
-		let m = 0;
-		//
-		for (let da of byN("data")) {
-			for (let di of byN("distance")) {
-				for (let si of byN("silhouette")) {
-					if (da.checked & di.checked & si.checked) M.push(m);
-					m++;
+		{
+			let m = 0;
+			
+			// The order of for-loops is essential here
+			for (let da of byN("data")) {
+				for (let di of byN("distance")) {
+					for (let si of byN("silhouette")) {
+						if (da.checked & di.checked & si.checked) M.push(m);
+						m++;
+					}
 				}
 			}
-		}
-		//
-		for (let ks of byN("ks")) {
-			if (ks.checked) M.push(m);
-			m++;
+			
+			for (let ks of byN("ks")) {
+				if (ks.checked) M.push(m);
+				m++;
+			}
 		}
 	
-		let e = byI('ALL');
-		e.innerHTML = "";
-		let w = Math.round(width / M.length);
-		for (let m2 of M.slice().reverse()) {
-			for (let m1 of M) { 
-				let f = 'OUTPUT/4_distances_a/dims=' + dims + '_m1=' + m1 + '_m2=' + m2 + '.png';
-				let o = "large('" + f + "');";
-				let i = '<img src="' + f + '" width="' + w + 'px" onclick="' + o + '" ondragstart="return false;"/>';
-				e.innerHTML += i;
+		// Write img tags
+		{
+			let e = byI('ALL');
+			e.innerHTML = "";
+			let w = Math.round(width / M.length);
+			for (let m2 of M.slice().reverse()) {
+				for (let m1 of M) { 
+					let f = 'OUTPUT/4_distances_a/images/UV/dims=' + dims + '_m1=' + m1 + '_m2=' + m2 + '.png';
+					let o = "large('" + f + "');";
+					let i = '<img src="' + f + '" width="' + w + 'px" onclick="' + o + '" ondragstart="return false;"/>';
+					e.innerHTML += i;
+				}
+				e.innerHTML += "<br>";
 			}
-			e.innerHTML += "<br>";
 		}
+		
 		return true;
 	}
 
@@ -71,16 +86,16 @@
 			for (let i = 0; i < E.length; ++i) {
 				let e = E[i];
 				if (E.length == 2) e.setAttribute("otherid", E[1-i].id);
-				e.onchange = function() { 
-					if (e.hasAttribute("otherid")) {
-						let f = byI(e.getAttribute("otherid"));
-						if (!e.checked & !f.checked) {
-							f.checked = true;
+				
+				e.onchange = 
+					function() { 
+						if (e.hasAttribute("otherid")) {
+							let f = byI(e.getAttribute("otherid"));
+							if (!e.checked & !f.checked) f.checked = true;
 						}
-					}
-					writepics(e); 
-					return true;
-				};
+						writepics(e); 
+						return true;
+					};
 			}
 		}
 	
@@ -93,7 +108,7 @@
 	<div style="width:1000px;">
 		<table>
 		<tr>
-		<td style="width:480px;">
+		<td style="width:0%;">
 			Here we compare different
 			clustering indices against each other.
 			
@@ -102,20 +117,18 @@
 			Choose the number of dimensions for data points:
 			
 			<ul><li>
-				<input type="radio" name="dims" id="r1" value="10" checked><label for="r1"> 10 </label>
-				<input type="radio" name="dims" id="r2" value="100"       ><label for="r2"> 100 </label>
-				<input type="radio" name="dims" id="r3" value="1000"      ><label for="r3"> 1000 </label>
-				<input type="radio" name="dims" id="r4" value="10000"     ><label for="r4"> 10000 </label>
-				<input type="radio" name="dims" id="r5" value="20000"     ><label for="r5"> 20000 </label>
+				<input type="radio" name="dims" id="r1" value="10"         ><label for="r1"> 10    </label>
+				<input type="radio" name="dims" id="r2" value="100" checked><label for="r2"> 100   </label>
+				<input type="radio" name="dims" id="r3" value="1000"       ><label for="r3"> 1000  </label>
+				<input type="radio" name="dims" id="r4" value="10000"      ><label for="r4"> 10000 </label>
+				<input type="radio" name="dims" id="r5" value="20000"      ><label for="r5"> 20000 </label>
 			</li></ul>
-			
-			<!--is randomly selected 1000x (giving 1000 dots per plot).-->
 			
 			Silhoutte variants:
 			
 			<ul>
 			<li>
-			<input type="checkbox" name="data" value="x" id="da1" checked>
+			<input type="checkbox" name="data" value="x" id="da1">
 			<label for="da1">Original data (X)</label>
 			/
 			<input type="checkbox" name="data" value="z" id="da2" checked>
@@ -125,7 +138,7 @@
 			
 			<ul>
 			<li>
-			<input type="checkbox" name="distance" value="e" id="di1" checked>
+			<input type="checkbox" name="distance" value="e" id="di1">
 			<label for="di1">Euclidian</label>
 			/
 			<input type="checkbox" name="distance" value="c" id="di2" checked>
@@ -138,7 +151,7 @@
 			<input type="checkbox" name="silhouette" value="m" id="si1" checked>
 			<label for="si1">Mean silhouette value</label>
 			/
-			<input type="checkbox" name="silhouette" value="f" id="si2" checked>
+			<input type="checkbox" name="silhouette" value="f" id="si2">
 			<label for="si2">Fraction of positive scores</label>
 			</li>
 			</ul>
@@ -154,12 +167,15 @@
 			
 			<br>
 			
-			<div style="width: 100%; height: 360px; overflow-y: scroll;">
+			<div class="scroll" style="width: 480px; height: 360px; padding-left: 10px; ">
+			<div style="direction: ltr;">
 				How the data are generated:
 				
 				<br><br>
 				
-				We start with the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE75688">GSE75688</a> dataset
+				We start with the 
+				<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE75688" target="_blank">GSE75688</a>
+				dataset
 				that contains the gene expression levels
 				of single cells
 				from 14 tumors of 11 patients.
@@ -177,6 +193,7 @@
 				We randomly select N genes and compute the clustering indices,
 				where N is the chosen number of dimensions.
 				We repeat this 1000 times giving 1000 dots per plot.
+			</div>
 			</div>
 			
 			<br><br>
