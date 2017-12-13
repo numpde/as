@@ -139,18 +139,15 @@ def main() :
 	for dims in PARAM['#dims'] :
 		
 		print("Computing with gene subsets of size {}".format(dims))
-	
-		# Random subsets
-		KK = [
-			random.sample(range(n_genes), dims) 
-			for _ in range(PARAM['#dots'])
-		]
 		
 		# GO to index
 		GO2I = { go : [] for go in GO }
 		
 		# Iterate over random subsets K
-		for K in Progress()(KK) :
+		for _ in Progress()(range(PARAM['#dots'])) :
+			
+			# Random subset of genes of size dims
+			K = random.sample(range(n_genes), dims)
 			
 			# Clustering index
 			i = silhouette(cos_dist(np.take(Z, K, axis=axis_gene), axis_gene), S)
