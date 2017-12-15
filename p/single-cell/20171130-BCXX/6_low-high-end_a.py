@@ -14,7 +14,7 @@ import pickle
 import random
 import inspect
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 # https://stackoverflow.com/questions/4150171/how-to-create-a-density-plot-in-matplotlib
 from scipy.stats     import gaussian_kde
@@ -38,14 +38,15 @@ IFILE = {
 ## =================== OUTPUT :
 
 OFILE = {
-	"Frequency" : "OUTPUT/6_low-high-end_a/go-freq_dims={dims}.{ext}"
+	"Results" : "OUTPUT/6_low-high-end_a/UV/results.pkl",
+	#"Frequency" : "OUTPUT/6_low-high-end_a/go-freq_dims={dims}.{ext}"
 }
 
 ## =================== PARAMS :
 
 PARAM = {
 	# Number of random subsets
-	'#dots' : (100000 if not ("TEST" in sys.argv) else 100),
+	'#dots' : (100000 if not ("TEST" in sys.argv) else 22),
 	
 	# Number of dimensions per random subset
 	'#dims' : [10, 100, 1000]
@@ -136,12 +137,13 @@ def main() :
 	
 	# [ RANDOM SUBSETS ]
 	
+	GO2I = {}
 	for dims in PARAM['#dims'] :
 		
 		print("Computing with gene subsets of size {}".format(dims))
 		
 		# GO to index
-		GO2I = { go : [] for go in GO }
+		GO2I[dims] = { go : [] for go in GO }
 		
 		# Iterate over random subsets K
 		for _ in Progress()(range(PARAM['#dots'])) :
@@ -162,26 +164,28 @@ def main() :
 				# Expected number of occurrences of this GO ID in the sample
 				x = len(GO2E[go]) / n_genes * dims
 				
-				if (c >= x) : GO2I[go].extend([i] * c)
+				if (c >= x) : GO2I[dims][go].extend([i] * c)
 		
 		# Absolute frequency of the most frequent GO ID
-		maxI = max(len(I) for I in GO2I.values())
+		maxI = max(len(I) for I in GO2I[dims].values())
 		
-		for (go, I) in GO2I.items() :
-			if (len(I) == 0) : continue
-			if (len(I) < 0.1 * maxI) : continue
-			if (min(I) == max(I)) : continue
+		pickle.dump({'GO2I' : GO2I}, open(OFILE["Results"], "wb"))
+		
+		#for (go, I) in GO2I[dims].items() :
+			#if (len(I) == 0) : continue
+			#if (len(I) < 0.1 * maxI) : continue
+			#if (min(I) == max(I)) : continue
 
-			t = np.linspace(min(I), max(I), 100)
-			f = gaussian_kde(I)(t)
+			#t = np.linspace(min(I), max(I), 100)
+			#f = gaussian_kde(I)(t)
 			
-			plt.plot(t, f)
+			#plt.plot(t, f)
 			
-			#plt.hist(I, histtype='step', density=True, stacked=True)
+			##plt.hist(I, histtype='step', density=True, stacked=True)
 		
-		plt.xlabel("Clustering index")
-		plt.ylabel("Relative empirical frequency")
-		plt.savefig(OFILE["Frequency"].format(dims=dims, ext="png"))
+		#plt.xlabel("Clustering index")
+		#plt.ylabel("Relative empirical frequency")
+		#plt.savefig(OFILE["Frequency"].format(dims=dims, ext="png"))
 
 if (__name__ == "__main__") :
 	main()
