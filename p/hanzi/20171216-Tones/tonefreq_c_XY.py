@@ -7,7 +7,7 @@ IFILE = {
 }
 
 OFILE = {
-	'XY' : "OUTPUT/c/XY.pkl"
+	'XY' : "OUTPUT/c/UV/XY.pkl"
 }
 
 PARAM = {

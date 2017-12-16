@@ -2,7 +2,7 @@
 # RA, 2017-12-16
 
 IFILE = {
-	'XY' : "OUTPUT/c/XY.pkl"
+	'XY' : "OUTPUT/c/UV/XY.pkl"
 }
 
 OFILE = {
