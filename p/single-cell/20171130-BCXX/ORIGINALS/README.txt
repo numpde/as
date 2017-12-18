@@ -68,3 +68,19 @@ The files
 	byfunction/KL/*.txt
 
 are from KL (2017-12-05).
+
+
+Downloaded (2017-12-18)
+
+	go/go-summary.csv
+
+from 
+
+	https://yeastmine.yeastgenome.org/yeastmine
+
+following the instructions at
+
+	http://www.geneontology.org/faq/how-do-i-get-term-names-my-list-go-ids
+
+using the list of GO IDs from the results of **0_e2go.py**.
+

@@ -17,7 +17,7 @@ from progressbar     import ProgressBar as Progress
 
 ### INPUT ---- #
 
-input_file_BC = "OUTPUT/0_selected/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+input_file_BC = "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
 
 ### OUTPUT --- #
 

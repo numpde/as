@@ -18,7 +18,7 @@ from joblib          import Parallel, delayed
 
 ## ==================== INPUT :
 
-input_file_BC = "OUTPUT/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+input_file_BC = "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
 
 ## =================== OUTPUT :
 
@@ -165,7 +165,7 @@ def measure(K, m) :
 
 #ks = np.mean([DE([np.take(G2X[g], k, axis=axis_gene) for g in groups]) for k in K])
 
-if (np.inf in DIMS) : DIMS[DIMS.index(np.inf)] = (n_genes - 1)
+while (np.inf in DIMS) : DIMS[DIMS.index(np.inf)] = (n_genes - 1)
 
 
 def main() :
