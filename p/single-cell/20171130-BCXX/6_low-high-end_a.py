@@ -44,12 +44,18 @@ OFILE = {
 
 ## =================== PARAMS :
 
+# Test mode
+TESTMODE = ("TEST" in sys.argv)
+
 PARAM = {
 	# Number of random subsets
-	'#dots' : (100000 if not ("TEST" in sys.argv) else 22),
+	'#dots' : (100000 if not TESTMODE else 22),
 	
 	# Number of dimensions per random subset
-	'#dims' : [10, 100, 1000]
+	'#dims' : [10, 100, 1000],
+	
+	# GO ID should appear in that many genes to be considered
+	'e/go cut-off' : 1
 }
 
 ## ==================== PREPA :
@@ -62,6 +68,9 @@ for f in IFILE.values() :
 for f in OFILE.values() :
 	os.makedirs(os.path.dirname(f), exist_ok=True)
 	
+# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
+THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
+
 ## ===================== WORK :
 
 # https://en.wikipedia.org/wiki/Silhouette_(clustering)
@@ -97,15 +106,24 @@ def main() :
 		E2GO = { e_go[0] : e_go[1:] for e_go in E_GO }
 		del E_GO
 	
-	# All known GO IDs
-	GO = list(set(chain.from_iterable(E2GO.values())))
-	
 	# GO2E : GO ID --> [ENSG IDs]
-	GO2E = { go : [] for go in GO }
-	for (e, gos) in E2GO.items() : 
-		for go in gos :
+	GO2E = { go : [] for go in set(chain.from_iterable(E2GO.values())) }
+	for (e, GO) in E2GO.items() : 
+		for go in GO :
 			GO2E[go].append(e)
-
+	
+	# [ FILTER MOST "POPULAR" GO IDs ]
+	
+	GO2E = { go : E for (go, E) in GO2E.items() if (len(E) >= PARAM['e/go cut-off']) }
+	
+	# Recompute E2GO
+	E2GO = { e : [] for e in E2GO.keys() }
+	for (go, E) in GO2E.items() : 
+		for e in E :
+			E2GO[e].append(go)
+	
+	print("Profiling {} GO IDs".format(len(GO2E)))
+	
 	# [ LOAD BC DATASET ]
 	
 	# Load the BC data
@@ -143,7 +161,7 @@ def main() :
 		print("Computing with gene subsets of size {}".format(dims))
 		
 		# GO to index
-		GO2I[dims] = { go : [] for go in GO }
+		GO2I[dims] = { go : [] for go in GO2E.keys() }
 		
 		# Iterate over random subsets K
 		for _ in Progress()(range(PARAM['#dots'])) :
@@ -164,29 +182,19 @@ def main() :
 				# Expected number of occurrences of this GO ID in the sample
 				x = len(GO2E[go]) / n_genes * dims
 				
-				if (c >= x) : GO2I[dims][go].extend([i] * c)
+				if (c >= x) : 
+					GO2I[dims][go].extend([i] * c)
 		
 		# Absolute frequency of the most frequent GO ID
 		maxI = max(len(I) for I in GO2I[dims].values())
 		
-		pickle.dump({'GO2I' : GO2I}, open(OFILE["Results"], "wb"))
-		
-		#for (go, I) in GO2I[dims].items() :
-			#if (len(I) == 0) : continue
-			#if (len(I) < 0.1 * maxI) : continue
-			#if (min(I) == max(I)) : continue
-
-			#t = np.linspace(min(I), max(I), 100)
-			#f = gaussian_kde(I)(t)
-			
-			#plt.plot(t, f)
-			
-			##plt.hist(I, histtype='step', density=True, stacked=True)
-		
-		#plt.xlabel("Clustering index")
-		#plt.ylabel("Relative empirical frequency")
-		#plt.savefig(OFILE["Frequency"].format(dims=dims, ext="png"))
+		# Do not save results if in test mode
+		if TESTMODE : continue
+	
+		pickle.dump(
+			{'GO2I' : GO2I, 'script' : THIS}, 
+			open(OFILE["Results"], "wb")
+		)
 
 if (__name__ == "__main__") :
 	main()
-
