@@ -25,9 +25,11 @@ IFILE = {
 OFILE = {
 	# ENSG ID ---> GO ID associations
 	'E2GO' : "OUTPUT/0_e2go/e2go.txt",
+	# GO ID ---> ENSG ID associations
+	'GO2E' : "OUTPUT/0_e2go/go2e.txt",
+	# The list of GO IDs
 	'All GO' : "OUTPUT/0_e2go/go.txt",
 }
-
 
 ## =================== PARAMS :
 
@@ -39,11 +41,12 @@ num_biomart_ids_per_query = 100
 
 ## ===================== WORK :
 
+
 # [ PART 1 ]
 
 if os.path.isfile(OFILE['E2GO']) :
 	
-	print(OFILE['E2GO'], "already exists.")
+	print("Note:", OFILE['E2GO'], "already exists.")
 	
 	# Read the ENSG-GO associations from file
 	with open(OFILE['E2GO'], 'r') as f :
@@ -53,7 +56,7 @@ if os.path.isfile(OFILE['E2GO']) :
 		
 	# E2GO[e] is now a list of GO IDs associated to ENSG ID e
 	
-	print("E2GO:", list(E2GO.items())[0:10])
+	#print("E2GO:", list(E2GO.items())[0:10])
 
 else :
 	# Download ENSG-GO associations
@@ -119,8 +122,22 @@ else :
 		for (e, GO) in E2GO.items() :
 			print('\t'.join([e] + GO), file=f)
 
+
 # [ PART 2 ]
 
 with open(OFILE['All GO'], 'w') as f :
 	for go in sorted(set(chain.from_iterable(E2GO.values()))) :
 		print(go, file=f)
+
+
+# [ PART 3 ]
+
+# GO2E : GO ID --> [ENSG IDs]
+GO2E = { go : [] for go in set(chain.from_iterable(E2GO.values())) }
+for (e, GO) in E2GO.items() : 
+	for go in GO :
+		GO2E[go].append(e)
+
+with open(OFILE['GO2E'], 'w') as f :
+	for (go, E) in GO2E.items() :
+		print('\t'.join([go] + E), file=f)
