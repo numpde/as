@@ -78,7 +78,7 @@ def silhouette(D, S) :
 	def md(i, c) : return np.mean([D[i, j] for j in c])
 	A = { c : [md(i, c) for i in c] for c in S }
 	B = { c : [min(md(i, d) for d in S if (d != c)) for i in c] for c in S }
-	s = { c : [(b - a) / max(b, a) for (a, b) in zip(A[c], B[c])] for c in S }
+	s = { c : [(b - a) / max(b, a) for (a, b) in zip(A[c], B[c]) if max(b, a)] for c in S }
 	#for s in s.values() : print(sorted(s))
 	return s
 
@@ -97,9 +97,10 @@ def job(X, axis, dims, S) :
 	# Clustering index
 	i = silhouette(cos_dist(np.take(X, K, axis=axis), axis), S)
 	i = list(chain.from_iterable(i.values()))
-	i = np.mean(i) # OR: i = np.mean((x > 0) for x in i)
-	
-	return i
+	if i :
+		return np.mean(i) # OR: np.mean((x > 0) for x in i)
+	else :
+		return None
 
 def main() :
 
