@@ -1,7 +1,7 @@
 
 # RA, 2017-12-20
 
-# 
+# Sample gene subsets of GO categories
 
 ## ================== IMPORTS :
 
@@ -131,28 +131,30 @@ def main() :
 	S = list(tuple(s for (s, _) in SH) for SH in BC_data['B2SH'].values())
 
 	# ENSG terms
-	ENSG = BC_data['gene_id']
+	BC_E = BC_data['gene_id']
 	
 	# [ LOAD GO TERMS ]
 
 	print("Loading GO terms")
 
-	# GO2E : GO ID --> [gene numbers in data]
+	# Read  GO2E : GO ID --> [ENSG IDs]  from file
 	GO2E = dict(
-		(go, E)
-		for (go, E) in [
-			(go_E[0], [ENSG.index(e) for e in go_E[1:] if (e in ENSG)])
-			for go_E in [
-				L.rstrip().split('\t') 
-				for L in open(IFILE["GO -> ENSG"], 'r')
-			]
+		(go_E[0], go_E[1:])
+		for go_E in [
+			L.rstrip().split('\t') 
+			for L in open(IFILE["GO -> ENSG"], 'r')
 		]
-		if (len(E) >= PARAM['e/go cut-off'])
 	)
+
+	# GO2K is a list of pairs (GO ID, [gene numbers in data])
+	GO2K = [ (go, [BC_E.index(e) for e in E if (e in BC_E)]) for (go, E) in GO2E.items() ]
 	
-	if TESTMODE : GO2E = dict(list(GO2E.items())[0:7])
+	# Filter out slim GO terms and make it a dict
+	GO2K = dict( (go, E) for (go, E) in GO2K if (len(E) >= PARAM['e/go cut-off']) )
 	
-	print("Profiling {} GO IDs".format(len(GO2E)))
+	if TESTMODE : GO2K = dict(list(GO2K.items())[0:7])
+	
+	print("Profiling {} GO IDs".format(len(GO2K)))
 	
 	# [ RANDOM SUBSETS ]
 	
@@ -160,14 +162,14 @@ def main() :
 	for dims in PARAM['#dims'] :
 		
 		# GO -> [clustering indices]
-		GO2I[dims] = dict( (go, []) for go in GO2E.keys() )
+		GO2I[dims] = dict( (go, []) for go in GO2K.keys() )
 		
-		for (n, (go, E)) in enumerate(GO2E.items()) :
+		for (n, (go, E)) in enumerate(GO2K.items()) :
 			
 			# Extract the gene expression for the current GO ID
 			Y = np.take(Z, E, axis_gene)
 			
-			print("Profiling GO ID {} of {} by subsets of size {}".format(n+1, len(GO2E), dims))
+			print("Profiling GO ID {} of {} by subsets of size {}".format(n+1, len(GO2K), dims))
 			
 			# Iterate over random subsets
 			GO2I[dims][go] = Parallel(n_jobs=PARAM['#proc'])(
@@ -179,7 +181,7 @@ def main() :
 			if TESTMODE : continue
 		
 			pickle.dump(
-				{'GO2I' : GO2I, 'script' : THIS}, 
+				{'GO2I' : GO2I, 'GO2E' : GO2E, 'GO2K' : GO2K, 'script' : THIS}, 
 				open(OFILE["Results"], "wb")
 			)
 

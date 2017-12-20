@@ -78,7 +78,7 @@ DE = [de for (de, _) in DE2E]
 
 # Mechanism-to-count
 M2C = {
-	m : np.cumsum([0] + [(e in E) for (_, e) in DE2E])
+	m : np.cumsum([(e in E) for (_, e) in DE2E])
 	for (m, E) in M2E.items()
 }
 
@@ -92,8 +92,8 @@ M = [m for (_, m) in M]
 for m in M :
 	plt.plot(DE, M2C[m], '-')
 
-plt.ylabel("Proportion of genes involved")
 plt.xlabel("Differential expression cut-off")
+plt.ylabel("Fraction of genes involved")
 
 # Mechanism + number of associated genes
 L = [(m + " ({})".format(len(M2E[m]))) for m in M]

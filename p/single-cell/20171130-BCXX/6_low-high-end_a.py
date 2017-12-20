@@ -32,7 +32,7 @@ from progressbar     import ProgressBar as Progress
 
 IFILE = {
 	"BC data" : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
-	"ENSG to GO" : "OUTPUT/0_e2go/e2go.txt"
+	"ENSG to GO" : "OUTPUT/0_e2go/e2go.txt",
 }
 
 ## =================== OUTPUT :

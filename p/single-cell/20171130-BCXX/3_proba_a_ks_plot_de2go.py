@@ -23,6 +23,9 @@ input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 # ENSG ---> GO IDs map
 input_file_e2go = "OUTPUT/0_e2go/e2go.txt"
 
+# GO terms in words
+input_file_go2t = "ORIGINALS/go/go-summary.csv"
+
 ## =================== OUTPUT :
 
 output_file_deplot = "OUTPUT/3_proba_a/de2go_{zoom}.{extension}"
@@ -39,6 +42,13 @@ num_biomart_ids_per_query = 100
 # For a gene e, E2DE[e] is a measure of DE
 E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2DE']
 
+# Load GO terms in words
+
+GO2T = dict(
+	tuple(L.rstrip().split('\t')[:2])
+	for L in open(input_file_go2t, 'r').readlines()[1:]
+)
+	
 # Get ENSG --> GOs associations
 
 if os.path.isfile(input_file_e2go) :
@@ -49,6 +59,12 @@ if os.path.isfile(input_file_e2go) :
 		E_GO = [L.rstrip().split('\t') for L in f]
 		E2GO = { e_go[0] : e_go[1:] for e_go in E_GO }
 		del E_GO
+
+	# GO2E : GO ID --> [ENSG IDs]
+	GO2E = { go : [] for go in set(chain.from_iterable(E2GO.values())) }
+	for (e, GO) in E2GO.items() : 
+		for go in GO :
+			GO2E[go].append(e)
 
 else :
 	print(input_file_e2go, "not found. Try running 0_e2go.py.")
@@ -115,7 +131,7 @@ plt.ylabel("Fraction of genes involved")
 
 # Mechanism + number of associated genes
 #L = [(m + " ({})".format(len(M2E[m]))) for m in M]
-plt.legend([go for (go, C) in GO_C], prop={'size': 6})
+plt.legend([(GO2T.get(go, go)[0:40] + " ({})".format(len(GO2E[go]))) for (go, C) in GO_C], prop={'size': 5})
 
 plt.savefig(output_file_deplot.format(zoom="full", extension="png"))
 plt.savefig(output_file_deplot.format(zoom="full", extension="eps"))

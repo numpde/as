@@ -93,10 +93,13 @@ def main() :
 				
 				plt.plot(t, f)
 			
-			plt.legend([GO2T.get(go, go) for (go, I) in GO_I], loc='upper left', prop={'size': 6})
+			size = (4 if (min_len_rank > 16) else 6 if (min_len_rank > 8) else 8)
+			
+			plt.legend([GO2T.get(go, go) for (go, I) in GO_I], loc='upper left', prop={'size': size})
 			plt.xlabel("Clustering index")
 			plt.ylabel("Relative empirical frequency")
 			plt.savefig(OFILE["Frequency"].format(dims=dims, filt=min_len_rank, ext="png"))
+			plt.savefig(OFILE["Frequency"].format(dims=dims, filt=min_len_rank, ext="eps"))
 
 if (__name__ == "__main__") :
 	main()
