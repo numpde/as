@@ -3,7 +3,7 @@
 
 IFILE = {
 	'char tone' : "OUTPUT/a/char-tones.csv",
-	'font'      : "ORIGINALS/NotoSansCJK-Regular.ttc"
+	'font'      : "ORIGINALS/UV/NotoSansCJK-Regular.ttc"
 }
 
 OFILE = {
