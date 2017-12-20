@@ -51,7 +51,7 @@ PARAM = {
 	'e/go cut-off' : 20,
 	
 	# Number of parallel computing processes
-	'#proc' : min(24, math.ceil(cpu_count() / 2)),
+	'#proc' : min(12, math.ceil(cpu_count() / 2)),
 }
 
 ## ==================== PREPA :
@@ -103,25 +103,6 @@ def job(X, axis, dims, S) :
 		return None
 
 def main() :
-
-	# [ LOAD GO TERMS ]
-
-	# GO2E : GO ID --> [ENSG IDs]
-	GO2E = dict(
-		(go, E)
-		for (go, E) in [
-			(go_E[0], go_E[1:])
-			for go_E in [
-				L.rstrip().split('\t') 
-				for L in open(IFILE["GO -> ENSG"], 'r')
-			]
-		]
-		if (len(E) >= PARAM['e/go cut-off'])
-	)
-	
-	if TESTMODE : GO2E = dict(list(GO2E.items())[0:7])
-	
-	print("Profiling {} GO IDs".format(len(GO2E)))
 	
 	# [ LOAD BC DATASET ]
 	
@@ -130,9 +111,6 @@ def main() :
 
 	# Expression matrix
 	X = BC_data['X']
-	
-	# ENSG IDs
-	E = BC_data['gene_id']
 
 	# Labels for axis/dimension of BC data
 	(axis_smpl, axis_gene) = (BC_data['axis_smpl'], BC_data['axis_gene'])
@@ -151,6 +129,30 @@ def main() :
 	
 	# S = [(indices of items in c) for each cluster c]
 	S = list(tuple(s for (s, _) in SH) for SH in BC_data['B2SH'].values())
+
+	# ENSG terms
+	ENSG = BC_data['gene_id']
+	
+	# [ LOAD GO TERMS ]
+
+	print("Loading GO terms")
+
+	# GO2E : GO ID --> [gene numbers in data]
+	GO2E = dict(
+		(go, E)
+		for (go, E) in [
+			(go_E[0], [ENSG.index(e) for e in go_E[1:] if (e in ENSG)])
+			for go_E in [
+				L.rstrip().split('\t') 
+				for L in open(IFILE["GO -> ENSG"], 'r')
+			]
+		]
+		if (len(E) >= PARAM['e/go cut-off'])
+	)
+	
+	if TESTMODE : GO2E = dict(list(GO2E.items())[0:7])
+	
+	print("Profiling {} GO IDs".format(len(GO2E)))
 	
 	# [ RANDOM SUBSETS ]
 	
@@ -160,14 +162,16 @@ def main() :
 		# GO -> [clustering indices]
 		GO2I[dims] = dict( (go, []) for go in GO2E.keys() )
 		
-		for (go, E) in GO2E.items() :
+		for (n, (go, E)) in enumerate(GO2E.items()) :
 			
-			print("Profiling '{}' by subsets of size {}".format(go, dims))
+			# Extract the gene expression for the current GO ID
+			Y = np.take(Z, E, axis_gene)
 			
-			# Iterate over random subsets K
+			print("Profiling GO ID {} of {} by subsets of size {}".format(n+1, len(GO2E), dims))
 			
+			# Iterate over random subsets
 			GO2I[dims][go] = Parallel(n_jobs=PARAM['#proc'])(
-				delayed(job)(Z, axis_gene, dims, S)
+				delayed(job)(Y, axis_gene, dims, S)
 				for _ in Progress()(range(PARAM['#dots']))
 			)
 			
