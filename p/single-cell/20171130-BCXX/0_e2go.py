@@ -15,18 +15,26 @@ from biomart     import BiomartServer
 
 ## ==================== INPUT :
 
-# Extract the list of relevant genes from here
-input_file_BC = "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
-
-# 
-biomart_url = "http://grch37.ensembl.org/biomart"
+IFILE = {
+	# Extract the list of relevant genes from here
+	'BC selected' : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
+}
 
 ## =================== OUTPUT :
 
-# ENSG ID ---> GO ID associations
-output_file_e2go = "OUTPUT/0_e2go/e2go.txt"
+OFILE = {
+	# ENSG ID ---> GO ID associations
+	'E2GO' : "OUTPUT/0_e2go/e2go.txt",
+	# GO ID ---> ENSG ID associations
+	'GO2E' : "OUTPUT/0_e2go/go2e.txt",
+	# The list of GO IDs
+	'All GO' : "OUTPUT/0_e2go/go.txt",
+}
 
 ## =================== PARAMS :
+
+# 
+biomart_url = "http://grch37.ensembl.org/biomart"
 
 num_biomart_parallel_queries = 10
 num_biomart_ids_per_query = 100
@@ -34,19 +42,21 @@ num_biomart_ids_per_query = 100
 ## ===================== WORK :
 
 
-if os.path.isfile(output_file_e2go) :
+# [ PART 1 ]
+
+if os.path.isfile(OFILE['E2GO']) :
 	
-	print(output_file_e2go, "already exists.")
+	print("Note:", OFILE['E2GO'], "already exists.")
 	
 	# Read the ENSG-GO associations from file
-	with open(output_file_e2go, 'r') as f :
+	with open(OFILE['E2GO'], 'r') as f :
 		E_GO = [L.rstrip().split('\t') for L in f]
 		E2GO = { e_go[0] : e_go[1:] for e_go in E_GO }
 		del E_GO
 		
 	# E2GO[e] is now a list of GO IDs associated to ENSG ID e
 	
-	print("E2GO:", list(E2GO.items())[0:10])
+	#print("E2GO:", list(E2GO.items())[0:10])
 
 else :
 	# Download ENSG-GO associations
@@ -62,7 +72,7 @@ else :
 	# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC99161/
 	
 	# List of relevant ENSG IDs
-	E = pickle.load(open(input_file_BC, "rb"))['gene_id']
+	E = pickle.load(open(IFILE['BC selected'], "rb"))['gene_id']
 	
 	print("Downloading ENSG-GO associations from biomart...")
 	
@@ -108,7 +118,26 @@ else :
 	E2GO = dict()
 	for (e, go) in E_GO : E2GO.setdefault(e, []).append(go)
 	
-	with open(output_file_e2go, 'w') as f :
+	with open(OFILE['E2GO'], 'w') as f :
 		for (e, GO) in E2GO.items() :
 			print('\t'.join([e] + GO), file=f)
 
+
+# [ PART 2 ]
+
+with open(OFILE['All GO'], 'w') as f :
+	for go in sorted(set(chain.from_iterable(E2GO.values()))) :
+		print(go, file=f)
+
+
+# [ PART 3 ]
+
+# GO2E : GO ID --> [ENSG IDs]
+GO2E = { go : [] for go in set(chain.from_iterable(E2GO.values())) }
+for (e, GO) in E2GO.items() : 
+	for go in GO :
+		GO2E[go].append(e)
+
+with open(OFILE['GO2E'], 'w') as f :
+	for (go, E) in GO2E.items() :
+		print('\t'.join([go] + E), file=f)

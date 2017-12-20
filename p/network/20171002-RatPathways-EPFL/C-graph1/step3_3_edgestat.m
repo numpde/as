@@ -88,6 +88,8 @@ edgestat_exponent.std  = std(EXPONENT);
 disp('Slope:');
 disp(edgestat_exponent);
 
+xlabel('Number of clusters');
+ylabel('In-cluster/out-cluster edge proportion');
 
 websave('renice_tmp.m', 'https://gist.githubusercontent.com/numpde/b81b5a83ad036a0dd9fb1c92bcaeba2b/raw/8824a55228bc435e39082b5a7898e2fa319f5296/renice.m');
 for h = H

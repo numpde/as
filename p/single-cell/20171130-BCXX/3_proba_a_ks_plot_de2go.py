@@ -20,18 +20,13 @@ from biomart     import BiomartServer
 
 input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
 
-# If the file
-input_file_e2go = "OUTPUT/3_proba_a/e2go.txt"
-# does not exist, it will be created via biomart
-biomart_url = "http://grch37.ensembl.org/biomart"
+# ENSG ---> GO IDs map
+input_file_e2go = "OUTPUT/0_e2go/e2go.txt"
 
 ## =================== OUTPUT :
 
 output_file_deplot = "OUTPUT/3_proba_a/de2go_{zoom}.{extension}"
 output_file_gorank = "OUTPUT/3_proba_a/gorank.{extension}"
-
-# Will be created if necessary:
-output_file_e2go = input_file_e2go
 
 ## =================== PARAMS :
 
@@ -56,72 +51,8 @@ if os.path.isfile(input_file_e2go) :
 		del E_GO
 
 else :
-	# Download ENSG-GO associations
-	
-	# Get biomart record by ENSG ID
-	# Q&A: https://www.biostars.org/p/3570/
-	
-	# See also
-	# https://www.ncbi.nlm.nih.gov/guide/howto/find-func-gene/
-	
-	# "The Ensembl genome database project"
-	# Nucleic Acids Res. 2002 Jan 1; 30(1): 38–41.
-	# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC99161/
-	
-	print("Downloading ENSG-GO associations from biomart...")
-	
-	# Connect to biomart
-	biomart = BiomartServer(biomart_url)
-	sapiens = biomart.datasets['hsapiens_gene_ensembl']
-
-	#sapiens.show_filters()
-	#sapiens.show_attributes()
-		
-	def biomart_e2go(E) :
-		
-		response = sapiens.search(
-			{
-				'filters' : { 'ensembl_gene_id' : E },
-				'attributes': [ 'ensembl_gene_id', 'go_id' ]
-			}, 
-			header=0
-		).content.decode("utf-8")
-		
-		return [r.split() for r in response.splitlines()]
-
-	# Partition the list L into chunks of size sz
-	# https://stackoverflow.com/a/312466/3609568
-	def partition(L, sz):
-		L = list(L)
-		return [L[x:(x+sz)] for x in range(0, len(L), sz)]
-
-	# Download ENSG-GO associations from biomart chunkwise
-	# (biomart is queried via an URL that can't be too long)
-	E_GO = list(itertools.chain.from_iterable(
-		Parallel(n_jobs = num_biomart_parallel_queries)(
-			delayed(biomart_e2go)(E_part) 
-			for E_part in Progress()(partition(E2DE.keys(), num_biomart_ids_per_query))
-		)
-	))
-	
-	assert(len(E_GO)), "E_GO is empty"
-	
-	# Filter the ENSG that have any associated GO
-	E_GO = [e_go for e_go in E_GO if (len(e_go) == 2)]
-	
-	E2GO = dict()
-	for (e, go) in E_GO : E2GO.setdefault(e, []).append(go)
-	
-	with open(output_file_e2go, 'w') as f :
-		for (e, GO) in E2GO.items() :
-			print('\t'.join([e] + GO), file=f)
-	
-	del E_GO
-	del sapiens
-	del biomart
-
-# Now E2GO[e] is a list of GO IDs associated to ENSG ID e
-
+	print(input_file_e2go, "not found. Try running 0_e2go.py.")
+	exit()
 
 # Sorted (differential-expression, gene ID) pairs 
 DE2E = sorted((de, e) for (e, de) in E2DE.items())
