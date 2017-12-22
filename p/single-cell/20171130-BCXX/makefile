@@ -4,7 +4,7 @@ default:
 
 0:
 	mkdir -p OUTPUT/0_select/UV/
-	python3 0_*.py 1> OUTPUT/0_select/info.log
+	python3 0_select.py 1> OUTPUT/0_select/info.log
 
 p4:
 	@echo Copying to public_html

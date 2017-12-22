@@ -67,7 +67,7 @@ for f in IFILE.values() :
 # Create output directories
 for f in OFILE.values() :
 	os.makedirs(os.path.dirname(f), exist_ok=True)
-	
+
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
@@ -131,12 +131,13 @@ def main() :
 
 	# Expression matrix
 	X = BC_data['X']
-	
-	# ENSG IDs
-	E = BC_data['gene_id']
 
 	# Labels for axis/dimension of BC data
 	(axis_smpl, axis_gene) = (BC_data['axis_smpl'], BC_data['axis_gene'])
+	
+	# ENSG IDs
+	E = BC_data['gene_id']
+	assert(len(E) == X.shape[axis_gene]), "Inconsistent gene info"
 
 	# Z transform
 	Z = stats.mstats.zscore(X, axis=axis_smpl)

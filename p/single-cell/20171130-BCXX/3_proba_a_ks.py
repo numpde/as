@@ -1,12 +1,11 @@
 
-# RA, 2017-12-05
+# RA, 2017-12-05 (Initial)
+# RA, 2017-12-21 (Revision)
 
-### IMPORTS -- #
+## ================== IMPORTS :
 
-import re
-import math
-import pickle
-import inspect
+import os, re, sys, math, pickle, inspect
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -15,34 +14,69 @@ from multiprocessing import cpu_count
 from joblib          import Parallel, delayed
 from progressbar     import ProgressBar as Progress
 
-### INPUT ---- #
+## ==================== INPUT :
 
-input_file_BC = "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+IFILE = {
+	'BC data' : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
+}
 
-### OUTPUT --- #
+# Check existence of input files
+for f in IFILE.values() :
+	assert(os.path.isfile(f)), ("File not found: " + f)
 
-output_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
+## =================== OUTPUT :
 
-### PARAM ---- #
+OFILE = {
+	'gene-ks' : "OUTPUT/3_proba_a/UV/gene-ks.pkl",
+}
 
-# Number of parallel computing processes
-num_procs = math.ceil(cpu_count() / 2)
+# Create output directories
+for f in OFILE.values() :
+	os.makedirs(os.path.dirname(f), exist_ok=True)
 
-### (!!!) ---- #
+## =================== PARAMS :
 
+PARAM = {
+	# Number of parallel computing processes
+	'#jobs' : min(10, math.ceil(3/4 * cpu_count())),
+	
+	# Clusters/groups by 'p'atient or by 'b'atch?
+	'groups' : 'b',
+}
 
-# Differential expression between two collections of empirical proba
-def DE(P, Q) :
-	# Distance between two empirical proba
-	def dist(p, q) : return stats.ks_2samp(p, q)[0]
+# Suspicious samples to be omitted
+STRANGE_SAMPLES = {
+	#"BC07LN_20", 
+}
 
-	return np.max([dist(p, q) for p in P for q in Q])
+# Test mode
+TESTMODE = ("TEST" in sys.argv)
 
-### MEAT ----- #
+## ==================== PREPA :
+
+# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
+THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
+
+## ====================== (!) :
+
+# (alphabetical order)
+KS_meta = ['max', 'mean', 'median', 'min', 'std']
+
+# Differential expression within a collection of empirical proba
+def KS(P) :
+	ks = [
+		stats.ks_2samp(p, q)[0] 
+		for (m, p) in enumerate(P) 
+		for (n, q) in enumerate(P) if (m < n)
+	]
+	# (alphabetical order)
+	return (np.max(ks), np.mean(ks), np.median(ks), np.min(ks), np.std(ks))
+
+## ===================== WORK :
 
 # Load the BC data
-data = pickle.load(open(input_file_BC, "rb"))
-#print(data.keys())
+data = pickle.load(open(IFILE['BC data'], "rb"))
+print("Data keys:", list(data.keys()))
 
 # Expression matrix
 X = data['X']
@@ -54,7 +88,7 @@ X = data['X']
 sample_labels = data['header']
 
 # Remove strange samples
-for h in { "BC07LN_20" } :
+for h in STRANGE_SAMPLES :
 	X = np.delete(X, sample_labels.index(h), axis=axis_smpl)
 	sample_labels.remove(h)
 
@@ -63,41 +97,54 @@ for h in { "BC07LN_20" } :
 
 # Get the sample groups
 #
-# Option 1: BCXX -- by patient
-groups = [n[0:4] for n in sample_labels]
+if (PARAM['groups'] == 'p') : 
+	# Option 1: BCXX -- by patient
+	groups = [n[0:4] for n in sample_labels]
 #
-# Option 2: BCXX[LN][_Re] -- by batch
-#groups = [re.findall("(.*)_[0-9]+", n)[0] for n in sample_labels]
-
-# Make groups unique and sort
+if (PARAM['groups'] == 'b') : 
+	# Option 2: BCXX[LN][_Re] -- by batch
+	groups = [re.findall("(.*)_[0-9]+", n)[0] for n in sample_labels]
+#
+assert(groups), "Grouping failed"
+#
+# Make group labels unique and sort
 groups = sorted(list(set(groups)))
 print("Groups:", ', '.join(groups))
 
 # Collect numbers of samples of the form "g"_XX by group
 G2S = {
-	g : [s for (s, h) in enumerate(sample_labels) if re.match(g + "_[0-9]+", h)]
+	g : tuple(s for (s, h) in enumerate(sample_labels) if re.match(g + "_[0-9]+", h))
 	for g in groups 
 }
 
-# Split the expression matrix by groups
+# Split the expression matrix by groups, arrange by genes
 G2X = {
-	g : np.take(X, G2S[g], axis=axis_smpl) 
+	g : np.moveaxis(np.take(X, G2S[g], axis=axis_smpl), axis_gene, 0)
 	for g in groups 
 }
 
 # Compute differential expression for gene #n
 def job(n) :
-	P = [np.take(G2X[g], n, axis=axis_gene) for g in groups]
-	ks = DE(P, P)
-	
-	return (data['gene_id'][n], ks)
+	return (data['gene_id'][n], KS([G2X[g][n] for g in groups]))
 
-# [Gene Ensembl ID] --> [Gene differential expression]
-E2KS = dict(Parallel(n_jobs=num_procs)(delayed(job)(n) for n in Progress()(range(n_genes))))
+# E2KS : ENSG --> (Gene differential expression)
+E2KS = dict(
+	Parallel(n_jobs=PARAM['#jobs'])(
+		delayed(job)(n) 
+		for n in Progress()(range(n_genes))
+	)
+)
 
-# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
-script = inspect.getsource(inspect.getmodule(inspect.currentframe()))
+if TESTMODE : exit()
 
 # Save results
-if ("TEST" not in sys.argv) :
-	pickle.dump({ 'E2DE' : E2KS, 'script' : script }, open(output_file_e2ks, "wb"))
+pickle.dump(
+	{ 
+		'E2KS' : E2KS, 
+		'KS_meta' : KS_meta,
+		'groups' : groups,
+		'G2S' : G2S,
+		'script' : THIS,
+	}, 
+	open(OFILE['gene-ks'], "wb")
+)

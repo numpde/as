@@ -18,7 +18,7 @@ from biomart     import BiomartServer
 
 ## ==================== INPUT :
 
-input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
+input_file_e2ks = "OUTPUT/3_proba_a/UV/gene-ks.pkl"
 
 # ENSG ---> GO IDs map
 input_file_e2go = "OUTPUT/0_e2go/e2go.txt"
@@ -33,14 +33,12 @@ output_file_gorank = "OUTPUT/3_proba_a/gorank.{extension}"
 
 ## =================== PARAMS :
 
-num_biomart_parallel_queries = 10
-num_biomart_ids_per_query = 100
 
 ## ===================== WORK :
 
 # Load the Differential Expression data (DE)
 # For a gene e, E2DE[e] is a measure of DE
-E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2DE']
+E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2KS']
 
 # Load GO terms in words
 
@@ -71,7 +69,7 @@ else :
 	exit()
 
 # Sorted (differential-expression, gene ID) pairs 
-DE2E = sorted((de, e) for (e, de) in E2DE.items())
+DE2E = sorted((de[1], e) for (e, de) in E2DE.items())
 # Just the DE in the same order
 DE = [de for (de, _) in DE2E]
 

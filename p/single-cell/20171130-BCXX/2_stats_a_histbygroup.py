@@ -14,7 +14,7 @@ from scipy import stats
 
 ### INPUT ---- #
 
-input_file_selected = "OUTPUT/0_selected/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
+input_file_selected = "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl"
 
 ### OUTPUT --- #
 

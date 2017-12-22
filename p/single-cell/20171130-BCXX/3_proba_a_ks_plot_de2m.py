@@ -11,7 +11,7 @@ from itertools import chain
 
 ### INPUT ---- #
 
-input_file_e2ks = "OUTPUT/3_proba_a/e2ks.pkl"
+input_file_e2ks = "OUTPUT/3_proba_a/UV/gene-ks.pkl"
 
 input_file_hgnc = "ORIGINALS/UV/HGNC-Approved-20171205.txt"
 
@@ -52,7 +52,7 @@ assert(E2U[U2E["Q9H2K8"]] == "Q9H2K8")
 
 # Load the Differential Expression data (DE)
 # For a gene e, E2DE[e] is a measure of DE
-E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2DE']
+E2DE = pickle.load(open(input_file_e2ks, "rb"))['E2KS']
 
 # Load the mechanism-to-genes maps
 M2E = dict()
@@ -72,7 +72,7 @@ M2E["Other"] = list(set(E2DE.keys()) - set(chain.from_iterable(M2E.values())))
 M2E["All"] = E2DE.keys()
 
 # Sorted (differential-expression, gene ID) pairs 
-DE2E = sorted((de, e) for (e, de) in E2DE.items())
+DE2E = sorted((de[1], e) for (e, de) in E2DE.items())
 # Just the DE in the same order
 DE = [de for (de, _) in DE2E]
 

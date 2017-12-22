@@ -50,9 +50,13 @@ X = np.asarray(list(X[n] for n in header))
 # Along which axis/dimension of the data are the samples / the genes
 (axis_smpl, axis_gene) = (0, 1)
 
+# Consistency check
+assert(X.shape[axis_gene] == len(gene_id)), "Gene IDs not in sync"
+assert(X.shape[axis_gene] == len(gene_type)), "Gene types not in sync"
+
 #
 def delbyid(L, J) :
-	return [v for (j, v) in enumerate(L) if (j not in J)]
+	return [v for (j, v) in enumerate(L) if (j not in set(J))]
 
 if False :
 	# Omit the BC01 cluster
@@ -92,10 +96,10 @@ if True :
 
 if True :
 	# Omit genes that are not expressed
-	J = (np.std(X, axis=axis_smpl) == 0)
-	X = X[:, np.invert(J)]
+	J = np.nonzero(np.std(X, axis=axis_smpl) == 0)[0].tolist()
+	X = np.delete(X, J, axis_gene)
 	(gene_id, gene_type) = (delbyid(gene_id, J), delbyid(gene_type, J))
-	print("Omitted {} non-expressed genes".format(sum(J)))
+	print("Omitted {} non-expressed genes".format(len(J)))
 
 # Size of the remaining dataset
 (n_smpls, n_genes) = (X.shape[axis_smpl], X.shape[axis_gene])
@@ -105,6 +109,8 @@ print("Got data with {} samples and {} nontrivial genes".format(n_smpls, n_genes
 # Sanity check
 assert(n_smpls), "Didn't get any samples"
 assert(n_genes), "Didn't get any genes"
+assert(X.shape[axis_gene] == len(gene_id)), "Gene IDs not in sync"
+assert(X.shape[axis_gene] == len(gene_type)), "Gene types not in sync"
 
 # Group samples by patient BCXX
 #

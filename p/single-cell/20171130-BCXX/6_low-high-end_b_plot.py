@@ -88,18 +88,20 @@ def main() :
 		GO_I = sorted(((go, I) for (go, I) in GO_I), key=(lambda go_I : np.median(go_I[1])))
 		
 		# Take the most interesting ones
-		GO_I = GO_I[0:20]
+		GO_I = GO_I[0:200]
 		
 		# Plot
 		
 		plt.clf()
 		
-		for (go, I) in GO_I :
+		colors = plt.get_cmap('hsv')(np.linspace(0.1, 1.0, len(GO_I))).tolist()
+		
+		for (n, (go, I)) in enumerate(GO_I) :
 			
 			t = np.linspace(min(I), max(I), 100)
-			f = gaussian_kde(I)(t)
+			f = gaussian_kde(I)
 			
-			plt.plot(t, f)
+			plt.plot(t, f(t), '-', color=colors.pop(), zorder=(-5*n))
 		
 		
 		# Legend labels
@@ -107,7 +109,7 @@ def main() :
 		# and font size
 		legend_font_size = 4
 		
-		plt.legend(L, loc='upper left', prop={'size': legend_font_size})
+		plt.legend(L[0:40], loc='upper left', prop={'size': legend_font_size})
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative empirical frequency")
 		
