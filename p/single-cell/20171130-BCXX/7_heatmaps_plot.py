@@ -14,29 +14,56 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from scipy import stats
-from joblib import Parallel, delayed
+from scipy.constants import golden as phi
 from itertools import chain
 from progressbar import ProgressBar as Progress
 
 ## ==================== INPUT :
 
 IFILE = {
-	'BC data' : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
+	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
 	'GO=>ENSG' : "OUTPUT/0_e2go/go2e.txt",
-	'gene-ks' : "OUTPUT/3_proba_a/UV/gene-ks.pkl",
+	'GO=>Info' : "ORIGINALS/go/go-summary.csv",
+	'gene-ks'  : "OUTPUT/3_proba_a/UV/gene-ks.pkl",
 }
 
 ## =================== OUTPUT :
 
 OFILE = {
-	'heatmap' : "OUTPUT/7_heatmaps/heatmap_{go}.{ext}"
+	'de-vs-ex' : "OUTPUT/7_heatmaps/de-vs-ex_{go}.{ext}",
+	'heatmap'  : "OUTPUT/7_heatmaps/heatmap_{go}.{ext}",
+	'go-info'  : "OUTPUT/7_heatmaps/info_{go}.txt",
 }
 
+## ==================== PARAM :
+
+PARAM = {
+	# GO terms of interest
+	'GO filter' : {
+		None, 
+		"GO:0001525", # angiogenesis
+		"GO:0006281", # DNA-repair
+		"GO:0006955", # immune response
+		"GO:0007049", # cell cycle
+		"GO:0016477", # cell migration
+		"GO:0004984", # olfactory receptor activity
+		"GO:0004930", # G-protein coupled receptor activity
+		"GO:0070531", # BRCA1-A complex
+		"GO:0070532", # BRCA1-B complex
+		"GO:0070533", # BRCA1-C complex
+		"GO:0006915", # apoptotic process
+		"GO:0043065", # positive regulation of apoptotic process
+		"GO:0043066", # negative regulation of apoptotic process
+	},
+	
+	# Figure formats
+	'ext' : ['png'],
+}
 
 ## ====================== (!) :
 
 
-# [ LOAD BC DATASET ]
+#[ LOAD BC DATASET ]#
 
 # Load the BC data
 BC_data = pickle.load(open(IFILE['BC data'], 'rb'))
@@ -54,32 +81,30 @@ X = BC_data['X']
 BC_E = BC_data['gene_id']
 assert(len(BC_E) == X.shape[axis_gene]), "Inconsistent gene info"
 
-# Batch to indices/header
+# Batch to (sample index, header)
 B2SH = BC_data['B2SH']
 
-# Clusters
+# Clusters/groups by batch
 G = sorted(list(B2SH.keys()))
 S = [ np.array([s for (s, h) in B2SH[g]]) for g in G ]
 
 
-# [ LOAD KS DATA ]
+#[ LOAD KS DIFFERENTIAL EXPRESSION DATA ]#
 
 KS_data = pickle.load(open(IFILE['gene-ks'], 'rb'))
 #print(KS.keys())
 
-E2KS = KS_data['E2KS']
-KS_meta = KS_data['KS_meta']
+KS_OP = 1
+KS_meta = KS_data['KS_meta'][KS_OP]
+assert(KS_meta in ['max', 'mean', 'median', 'min', 'std'])
 
-## [ TRANSFORM DATA ]
-
-## Z transform
-#from scipy import stats
-#Z = stats.mstats.zscore(X, axis=axis_smpl)
+E2DE = { e : ks[KS_OP] for (e, ks) in KS_data['E2KS'].items() }
 
 
-# [ LOAD GO TERMS ]
+#[ LOAD GO TERMS & ANNOTATION ]#
 
-# Read  GO2E : GO ID --> [ENSG IDs]  from file
+# GO2E : GO ID --> [ENSG IDs]
+# Read it from file
 GO2E = {
 	go_E[0] : go_E[1:]
 	for go_E in [
@@ -88,178 +113,141 @@ GO2E = {
 	]
 }
 
+# GO2T : GO ID --> GO category name
+GO2T = dict(
+	tuple(L.rstrip().split('\t')[:2])
+	for L in open(IFILE['GO=>Info'], 'r').readlines()[1:]
+)
 
-## [ PLOT EXPRESSION VS DE ]
+for go in list(PARAM['GO filter']) :
+	if (go is not None) and (go not in GO2E) :
+		print("NOTE: {} has no gene list".format(go))
+		PARAM['GO filter'].remove(go)
 
-#E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
+#[ FOR EACH GO TERM OF INTEREST ]#
 
-##print(len(E2KS), len(E2X), len(set(E2KS.keys()) & set(E2X.keys())), len(BC_E))
-
-#ks_op = 1
-
-#ks = [ E2KS[e][ks_op]  for e in BC_E ]
-#ex = [ np.mean(E2X[e]) for e in BC_E ]
-
-#plt.clf()
-#plt.loglog(ex, ks, 'b.', markersize=0.5)
-#plt.xlabel('Average expression')
-#plt.ylabel('Differential expression (KS {})'.format(KS_meta[ks_op]))
-#plt.show()
-
-
-# [ PLOT EXPRESSION VS DE / GO ]
-
-E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
-
-ks_op = 1
-
-plt.clf()
-
-E = BC_E
-ks = [ E2KS[e][ks_op]  for e in E ]
-ex = [ np.std(E2X[e]) for e in E ]
-plt.loglog(ex, ks, 'g.', markersize=1)
-
-go = 'GO:0006281' # DNA-repair
-E = set(GO2E[go]) & set(BC_E)
-ks = [ E2KS[e][ks_op]  for e in E ]
-ex = [ np.std(E2X[e]) for e in E ]
-plt.loglog(ex, ks, 'rd', markersize=3)
-
-go = 'GO:0001525' # angiogenesis
-E = set(GO2E[go]) & set(BC_E)
-ks = [ E2KS[e][ks_op]  for e in E ]
-ex = [ np.std(E2X[e]) for e in E ]
-plt.loglog(ex, ks, 'bo', markersize=3)
-
-go = 'GO:0004984' # olfactory receptor activity
-E = set(GO2E[go]) & set(BC_E)
-ks = [ E2KS[e][ks_op]  for e in E ]
-ex = [ np.std(E2X[e]) for e in E ]
-plt.loglog(ex, ks, 'kx', markersize=3)
-
-plt.xlabel('Expression std dev')
-plt.ylabel('Differential expression (KS {})'.format(KS_meta[ks_op]))
-plt.show()
-
-
-# [ SELECT GO CATEGORY ]
-
-go = 'GO:0001525' # angiogenesis
-go = 'GO:0006281' # DNA-repair
-go = 'GO:0016477' # cell migration
-
-GO2E = { go : GO2E[go] }
-
-# GO2K : GO ID --> [gene numbers in data]
-GO2K = {
-	go : [BC_E.index(e) for e in (set(E) & set(BC_E))]
-	for (go, E) in GO2E.items() 
-}
-
-
-# [ SUBSET ]
-
-K = GO2K[go]
-X = np.take(X, K, axis=axis_gene)
-#print(X.shape)
-
-
-# [ DIFFERENTIAL EXPRESSION ]
-
-Y = X
-
-# Reorder X by differentially expressed genes first
-DE = [
-	KS([y[s] for s in S])
-	for y in np.moveaxis(Y, axis_gene, 0)
-]
-
-I = [n for (n, ks) in sorted(enumerate(DE), key=(lambda x : -x[1]))]
-
-X = X[:, I]
-
-
-# [ IN-CLUSTER REORDER ]
-
-for s in S :
-	Y = X[s, :]
-	Y = Y[sorted(range(Y.shape[0]), key=(lambda i : -np.sum(Y[i, :])))]
-	X[s, :] = Y
-
-# The in-cluster reshuffling invalidates the sample labels
-if 'header' in locals() : del header
-
-
-# [ HEATMAP ]
-
-#X = np.take(X, list(range(0, 20)), axis=axis_gene)
-#X = np.take(X, list(range(0, 10)), axis=axis_smpl)
-
-Y = np.zeros(X.shape)
-#
-Y[X != 0] = np.log(X[X != 0])
-Y[Y <= 0] = 0
-Y = Y / np.max(Y)
-#
-Y[X == 0] = -1
-
-#heatmap(X)
-
-
-R = [len(s) for s in S]
-R = list(chain.from_iterable([[2, b] for b in R]))
-R = np.cumsum(R)
-R = R / max(R)
-R = R * 0.98 + 0.01
-
-phi = (1 + math.sqrt(5)) / 2
-fig = plt.figure(figsize=(8*phi, 8))
-
-AX = [
-	fig.add_axes([a, 0.01, b-a, 0.98])
-	for (a, b) in zip(R[0::2], R[1::2])
-]
-
-for (n, ax) in enumerate(AX) :
-	y = np.take(Y, S[n], axis=axis_smpl)
-	ax.matshow(np.transpose(y), aspect='auto', origin='upper', cmap="YlGnBu", vmin=-0.1, vmax=1)
+for go in PARAM['GO filter'] :
 	
-	ax.set_xticks([])
-	ax.set_yticks([])
+	# GO ID for file names
+	go_safe = str(go).replace(':', '-')
+
+
+	#[ SELECT GENES OF INTEREST ]#
+
+	# Default choice: all genes
+	E = set(BC_E)
 	
-	ax.text(0.95, 0.005, G[n], rotation=90, transform=ax.transAxes, horizontalalignment='right', verticalalignment='bottom')
-
-plt.savefig(OFILE['heatmap'].format(go=go.replace(':', '-'), ext='eps'))
-plt.show()
-
-
-plt.clf()
+	# Filter by GO
+	if (go is not None) : E &= set(GO2E[go])
 	
+	
+	#[ PLOT EXPRESSION VS DE ]#
+	
+	plt.clf()
+
+	# E2X : BC ENSG --> BC X data
+	E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
+
+	# Background
+	de = [ E2DE[e]  for e in BC_E ]
+	ex = [ np.mean(E2X[e]) for e in BC_E ]
+	plt.loglog(ex, de, 'r.', markersize=0.4)
+
+	if go : 
+		de = [ E2DE[e]  for e in E ]
+		ex = [ np.mean(E2X[e]) for e in E ]
+		h2 = plt.loglog(ex, de, 'bo', markersize=2)[0]
+		plt.legend([h2], ["{} ({})".format(GO2T[go], len(E))])
+	
+	
+	plt.xlabel('Expression mean')
+	plt.ylabel('Differential expression (KS {})'.format(KS_meta))
+	
+	for ext in PARAM['ext'] :
+		plt.savefig(OFILE['de-vs-ex'].format(go=go_safe, ext=ext))
+	
+	
+	#[ SELECT GENES FOR HEATMAP ]#
+	
+	# Order by differential expression
+	E = list(sorted(E, key=(lambda e : -E2DE[e])))
+	
+	print("GO filter: {}, # genes: {}".format(go, len(E)))
+	
+	Y = np.take(X, [BC_E.index(e) for e in E], axis=axis_gene)
+	
+	
+	#[ IN-CLUSTER REORDER FOR IMPROVED VISUALS ]#
+
+	assert(axis_smpl == 0), "General case not implemented"
+	for s in S :
+		Z = Y[s, :]
+		Z = Z[sorted(range(Z.shape[0]), key=(lambda i : -np.sum(Z[i, :]))), :]
+		Y[s, :] = Z
 
 
-## [ PLOT EXPRESSION PDF ]
+	#[ PREPARE HEATMAP MATRIX ]#
 
-#plt.clf()
-#for i in range(X.shape[axis_gene]) :
-	#plt.clf()
-	#x = np.take(X, i, axis=axis_gene)
-	#for (n, s) in enumerate(reversed([tuple(range(n_samples))] + S)) :
-		#I = np.log(np.take(x, s, axis=axis_smpl))
-		#I = [i for i in I if np.isfinite(i)]
+	Z = np.zeros(Y.shape)
+	#
+	Z[Y != 0] = np.log(Y[Y != 0])
+	Z[Z <= 0] = 0
+	Z /= np.max(Z)
+	#
+	Z[Y == 0] = -1
+	#
+	Y = Z
+
+
+	#[ PLOT HEATMAP ]#
+	
+	plt.clf()
+
+	# 
+	R = [len(s) for s in S]
+	spacing = 0
+	R = [0] + list(chain.from_iterable([[spacing, b] for b in R]))[1:]
+	R = np.cumsum(R)
+	R = R / max(R)
+	
+	fig = plt.figure(figsize=(math.ceil(4*phi), 4), dpi=300)
+
+	AX = [
+		fig.add_axes([a, 0, b-a, 1])
+		for (a, b) in zip(R[0::2], R[1::2])
+	]
+
+	for (n, ax) in enumerate(AX) :
+		y = np.take(Y, S[n], axis=axis_smpl)
+		ax.matshow(
+			np.moveaxis(y, axis_gene, 0), 
+			aspect='auto', origin='upper', cmap="YlGnBu", 
+			vmin=-0.1, vmax=1
+		)
 		
+		ax.set_xticks([])
+		ax.set_yticks([])
 		
-		#if (len(I) < 2) : continue
-		#if (min(I) == max(I)) : continue
-		
-		#I = np.asarray(I)
+		# Group label
+		ax.text(
+			0.95, 0.005, G[n], 
+			size=6,
+			transform=ax.transAxes, rotation=90, 
+			horizontalalignment='right', verticalalignment='bottom',
+		)
 	
-		#t = np.linspace(np.min(I), np.max(I), 100)
-		#f = stats.gaussian_kde(I)
-		
-		#c = ('b' if (n == 0) else 'r')
-		#plt.plot(t, f(t), c)
-		#if (n != 0) : plt.plot(I, f(I), c + '.')
+	for ext in PARAM['ext'] :
+		plt.savefig(OFILE['heatmap'].format(go=go_safe, ext=ext))
+	
+	plt.close()
+	
+	
+	#[ WRITE INFO ABOUT THE GO TERM ]#
+	
+	with open(OFILE['go-info'].format(go=go_safe), 'w') as f :
+		print("{} ENSG IDs in selected BC data".format(len(E)), file=f)
+		print("GO filter: {}".format(go), file=f)
+		if (go is None) : continue
+		print(GO2T[go], file=f)
+		print("{} ENSG IDs".format(len(GO2E[go])), file=f)
 
-	#plt.show()
-	
