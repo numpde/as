@@ -42,12 +42,13 @@ PARAM = {
 	
 	# Clusters/groups by 'p'atient or by 'b'atch?
 	'groups' : 'b',
+	
+	# Suspicious samples to be omitted
+	'omit samples' : {
+		"BC07LN_20", 
+	},
 }
 
-# Suspicious samples to be omitted
-STRANGE_SAMPLES = {
-	#"BC07LN_20", 
-}
 
 # Test mode
 TESTMODE = ("TEST" in sys.argv)
@@ -88,7 +89,7 @@ X = data['X']
 sample_labels = data['header']
 
 # Remove strange samples
-for h in STRANGE_SAMPLES :
+for h in PARAM['omit samples'] :
 	X = np.delete(X, sample_labels.index(h), axis=axis_smpl)
 	sample_labels.remove(h)
 
@@ -111,16 +112,22 @@ assert(groups), "Grouping failed"
 groups = sorted(list(set(groups)))
 print("Groups:", ', '.join(groups))
 
-# Collect numbers of samples of the form "g"_XX by group
-G2S = {
-	g : tuple(s for (s, h) in enumerate(sample_labels) if re.match(g + "_[0-9]+", h))
+# Collect sample labels of the form "g"_XX by group
+G2H = {
+	g : tuple(h for h in sample_labels if re.match(g + "_[0-9]+", h))
 	for g in groups 
+}
+
+# Collect the IDs of those samples
+G2S = {
+	g : tuple(sample_labels.index(h) for h in H)
+	for (g, H) in G2H.items()
 }
 
 # Split the expression matrix by groups, arrange by genes
 G2X = {
-	g : np.moveaxis(np.take(X, G2S[g], axis=axis_smpl), axis_gene, 0)
-	for g in groups 
+	g : np.moveaxis(np.take(X, S, axis=axis_smpl), axis_gene, 0)
+	for (g, S) in G2S.items()
 }
 
 # Compute differential expression for gene #n
@@ -140,11 +147,13 @@ if TESTMODE : exit()
 # Save results
 pickle.dump(
 	{ 
-		'E2KS' : E2KS, 
+		'E2KS'    : E2KS, 
 		'KS_meta' : KS_meta,
-		'groups' : groups,
-		'G2S' : G2S,
-		'script' : THIS,
+		'groups'  : groups,
+		'G2H'     : G2H,
+		'G2S'     : G2S,
+		'PARAM'   : PARAM,
+		'script'  : THIS,
 	}, 
 	open(OFILE['gene-ks'], "wb")
 )
