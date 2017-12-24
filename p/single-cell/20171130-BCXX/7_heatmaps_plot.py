@@ -11,6 +11,7 @@ import pickle
 import random
 import inspect
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 from scipy import stats
@@ -31,8 +32,13 @@ IFILE = {
 
 OFILE = {
 	'de-vs-ex' : "OUTPUT/7_heatmaps/de-vs-ex_{go}.{ext}",
+	'dx-info'  : "OUTPUT/7_heatmaps/de-vs-ex_{go}_info.txt",
+	
 	'heatmap'  : "OUTPUT/7_heatmaps/heatmap_{go}.{ext}",
-	'go-info'  : "OUTPUT/7_heatmaps/info_{go}.txt",
+	'hm-info'  : "OUTPUT/7_heatmaps/heatmap_{go}_info.txt",
+	
+	'ex-sect'  : "OUTPUT/7_heatmaps/ex-sect_{n}.{ext}",
+	'xs-info'  : "OUTPUT/7_heatmaps/ex-sect_{n}_info.txt",
 }
 
 ## ==================== PARAM :
@@ -54,11 +60,14 @@ PARAM = {
 		"GO:0006915", # apoptotic process
 		"GO:0043065", # positive regulation of apoptotic process
 		"GO:0043066", # negative regulation of apoptotic process
+		"GO:0007569", # cell aging
 	},
 	
 	# Figure formats
 	'ext' : ['png'],
 }
+
+mpl.rcParams['axes.labelsize'] = 'large'
 
 ## ====================== (!) :
 
@@ -81,12 +90,8 @@ X = BC_data['X']
 BC_E = BC_data['gene_id']
 assert(len(BC_E) == X.shape[axis_gene]), "Inconsistent gene info"
 
-# Batch to (sample index, header)
-B2SH = BC_data['B2SH']
-
-# Clusters/groups by batch
-G = sorted(list(B2SH.keys()))
-S = [ np.array([s for (s, h) in B2SH[g]]) for g in G ]
+# E2X : BC ENSG --> BC X data
+E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
 
 
 #[ LOAD KS DIFFERENTIAL EXPRESSION DATA ]#
@@ -98,7 +103,21 @@ KS_OP = 1
 KS_meta = KS_data['KS_meta'][KS_OP]
 assert(KS_meta in ['max', 'mean', 'median', 'min', 'std'])
 
+# Differential expression by ENSG
 E2DE = { e : ks[KS_OP] for (e, ks) in KS_data['E2KS'].items() }
+
+# Group to [sample indices]
+G2S = KS_data['G2S']
+
+# Clusters/groups by group
+G = sorted(list(G2S.keys()))
+S = [ np.array(G2S[g]) for g in G ]
+del G2S # Use G and S
+
+
+#[ COMPUTE EXPRESSION MAGNITUDE ]#
+
+E2EX = { e : np.mean(E2X[e]) for e in BC_E }
 
 
 #[ LOAD GO TERMS & ANNOTATION ]#
@@ -124,7 +143,73 @@ for go in list(PARAM['GO filter']) :
 		print("NOTE: {} has no gene list".format(go))
 		PARAM['GO filter'].remove(go)
 
-#[ FOR EACH GO TERM OF INTEREST ]#
+
+#[ FOR EACH SECTION OF EXPRESSION MEAN... #]
+
+ab = np.logspace(-4, 5, 20)
+for (n, (a, b)) in enumerate(zip(ab[:-1], ab[1:])) :
+	
+	plt.figure(figsize=(math.ceil(8*phi), 8), dpi=150)
+	
+	# Background
+	de = [ E2DE[e] for e in BC_E ]
+	ex = [ E2EX[e] for e in BC_E ]
+	plt.loglog(ex, de, 'r.', markersize=0.5, zorder=-20)
+	
+	E = { e for e in BC_E if (a <= E2EX[e] < b) }
+	if (not E) : continue
+
+	q = 5
+	pa = np.percentile([E2DE[e] for e in E], q)
+	pb = np.percentile([E2DE[e] for e in E], 100-q)
+	
+	xlim = plt.gca().get_xlim()
+	ylim = plt.gca().get_ylim()
+	plt.loglog([a, b, b, a, a], [pa, pa, pb, pb, pa], '-k', zorder=-30)
+	plt.loglog([a, a], ylim, '-k', zorder=-30)
+	plt.loglog([b, b], ylim, '-k', zorder=-30)
+	plt.gca().set_xlim(xlim)
+	plt.gca().set_ylim(ylim)
+	
+	E = { e for e in E if (E2DE[e] <= pa) }
+	
+	GO2F = { go : (set(F) & E)  for (go, F) in GO2E.items() }
+	GO2F = { go : F for (go, F) in GO2F.items() if F }
+	GO2F = list(sorted(GO2F.items(), key=(lambda x : len(GO2E[x[0]]))))
+	
+	H = []
+	L = []
+	
+	# Genes with known GO ID
+	for (go, F) in GO2F[0:24] :
+		de = [ E2DE[e] for e in F ]
+		ex = [ E2EX[e] for e in F ]
+		h2 = plt.loglog(ex, de, 'bo', markersize=5)[0]
+		H.append(h2)
+		L.append(GO2T.get(go, go)[0:44] + " ({} of {})".format(len(F), len(GO2E[go])))
+	
+	# Genes of unknown GO ID
+	U = (E - set(chain.from_iterable(dict(GO2F).values())))
+	if U :
+		de = [ E2DE[e] for e in U ]
+		ex = [ E2EX[e] for e in U ]
+		h3 = plt.loglog(ex, de, 'rx', markersize=4, zorder=-10)[0]
+		H.append(h3)
+		L.append("No GO ID ({})".format(len(U)))
+	
+	if H :
+		plt.legend(H, L, loc='upper left', prop={'size': 9})
+	
+	plt.xlabel('Expression mean')
+	plt.ylabel('Differential expression (KS {})'.format(KS_meta))
+	
+	for ext in PARAM['ext'] :
+		plt.savefig(OFILE['ex-sect'].format(n=n, ext=ext))
+	
+	plt.close()
+
+
+#[ FOR EACH GO TERM OF INTEREST... ]#
 
 for go in PARAM['GO filter'] :
 	
@@ -132,7 +217,7 @@ for go in PARAM['GO filter'] :
 	go_safe = str(go).replace(':', '-')
 
 
-	#[ SELECT GENES OF INTEREST ]#
+	#[ SELECT GENES FOR THIS GO TERM ]#
 
 	# Default choice: all genes
 	E = set(BC_E)
@@ -143,21 +228,18 @@ for go in PARAM['GO filter'] :
 	
 	#[ PLOT EXPRESSION VS DE ]#
 	
-	plt.clf()
-
-	# E2X : BC ENSG --> BC X data
-	E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
+	plt.figure(figsize=(math.ceil(8*phi), 8), dpi=150)
 
 	# Background
-	de = [ E2DE[e]  for e in BC_E ]
-	ex = [ np.mean(E2X[e]) for e in BC_E ]
-	plt.loglog(ex, de, 'r.', markersize=0.4)
+	de = [ E2DE[e] for e in BC_E ]
+	ex = [ E2EX[e] for e in BC_E ]
+	plt.loglog(ex, de, 'r.', markersize=0.5)
 
 	if go : 
-		de = [ E2DE[e]  for e in E ]
-		ex = [ np.mean(E2X[e]) for e in E ]
-		h2 = plt.loglog(ex, de, 'bo', markersize=2)[0]
-		plt.legend([h2], ["{} ({})".format(GO2T[go], len(E))])
+		de = [ E2DE[e] for e in E ]
+		ex = [ E2EX[e] for e in E ]
+		h2 = plt.loglog(ex, de, 'bo', markersize=5)[0]
+		plt.legend([h2], ["{} ({})".format(GO2T[go], len(E))], prop={'size': 12})
 	
 	
 	plt.xlabel('Expression mean')
@@ -198,10 +280,11 @@ for go in PARAM['GO filter'] :
 	#
 	Y = Z
 
+	plt.close()
+	
 
 	#[ PLOT HEATMAP ]#
 	
-	plt.clf()
 
 	# 
 	R = [len(s) for s in S]
@@ -244,7 +327,7 @@ for go in PARAM['GO filter'] :
 	
 	#[ WRITE INFO ABOUT THE GO TERM ]#
 	
-	with open(OFILE['go-info'].format(go=go_safe), 'w') as f :
+	with open(OFILE['hm-info'].format(go=go_safe), 'w') as f :
 		print("{} ENSG IDs in selected BC data".format(len(E)), file=f)
 		print("GO filter: {}".format(go), file=f)
 		if (go is None) : continue

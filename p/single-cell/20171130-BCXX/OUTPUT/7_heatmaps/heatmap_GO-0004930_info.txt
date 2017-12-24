@@ -1,0 +1,4 @@
+457 ENSG IDs in selected BC data
+GO filter: GO:0004930
+G-protein coupled receptor activity
+706 ENSG IDs

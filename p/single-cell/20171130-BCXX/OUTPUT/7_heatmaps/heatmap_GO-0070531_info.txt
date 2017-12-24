@@ -1,0 +1,4 @@
+7 ENSG IDs in selected BC data
+GO filter: GO:0070531
+BRCA1-A complex
+7 ENSG IDs
