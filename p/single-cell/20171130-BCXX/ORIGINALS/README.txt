@@ -84,3 +84,14 @@ following the instructions at
 
 using the list of GO IDs from the results of **0_e2go.py**.
 
+
+
+The file
+
+	go/UV/go.obo
+
+was downloaded on 2017-12-25 from
+
+	http://geneontology.org/page/download-ontology#go.obo_and_go.owl
+	http://purl.obolibrary.org/obo/go.obo
+

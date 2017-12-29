@@ -10,6 +10,7 @@ import math
 import pickle
 import random
 import inspect
+import networkx
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -24,7 +25,7 @@ from progressbar import ProgressBar as Progress
 IFILE = {
 	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
 	'GO=>ENSG' : "OUTPUT/0_e2go/go2e.txt",
-	'GO=>Info' : "ORIGINALS/go/go-summary.csv",
+	'GO=>Info' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
 	'gene-ks'  : "OUTPUT/3_proba_a/UV/gene-ks.pkl",
 }
 
@@ -57,10 +58,15 @@ PARAM = {
 		"GO:0070531", # BRCA1-A complex
 		"GO:0070532", # BRCA1-B complex
 		"GO:0070533", # BRCA1-C complex
-		"GO:0006915", # apoptotic process
 		"GO:0043065", # positive regulation of apoptotic process
 		"GO:0043066", # negative regulation of apoptotic process
 		"GO:0007569", # cell aging
+		"GO:0006915", # apoptotic process
+		"GO:0012501", # programmed cell death
+		"GO:0070265", # necrotic cell death
+		"GO:0031724", # CXCR5 chemokine receptor binding
+		"GO:0002039", # p53 binding
+		"GO:0030330", # DNA damage response, signal transduction by p53 class mediator
 	},
 	
 	# Figure formats
@@ -133,10 +139,18 @@ GO2E = {
 }
 
 # GO2T : GO ID --> GO category name
-GO2T = dict(
-	tuple(L.rstrip().split('\t')[:2])
-	for L in open(IFILE['GO=>Info'], 'r').readlines()[1:]
-)
+#
+GO2T = {
+	n : data['name']
+	for (n, data) in pickle.load(open(IFILE['GO=>Info'], 'rb')).nodes(data=True)
+}
+#
+# Old version, reading from text file
+#
+#GO2T = dict(
+	#tuple(L.rstrip().split('\t')[:2])
+	#for L in open(IFILE['GO=>Info'], 'r').readlines()[1:]
+#)
 
 for go in list(PARAM['GO filter']) :
 	if (go is not None) and (go not in GO2E) :
@@ -146,67 +160,92 @@ for go in list(PARAM['GO filter']) :
 
 #[ FOR EACH SECTION OF EXPRESSION MEAN... #]
 
-ab = np.logspace(-4, 5, 20)
-for (n, (a, b)) in enumerate(zip(ab[:-1], ab[1:])) :
-	
-	plt.figure(figsize=(math.ceil(8*phi), 8), dpi=150)
-	
-	# Background
-	de = [ E2DE[e] for e in BC_E ]
-	ex = [ E2EX[e] for e in BC_E ]
-	plt.loglog(ex, de, 'r.', markersize=0.5, zorder=-20)
-	
-	E = { e for e in BC_E if (a <= E2EX[e] < b) }
-	if (not E) : continue
 
-	q = 5
-	pa = np.percentile([E2DE[e] for e in E], q)
-	pb = np.percentile([E2DE[e] for e in E], 100-q)
+for quantile in ['-', '+'] :
 	
-	xlim = plt.gca().get_xlim()
-	ylim = plt.gca().get_ylim()
-	plt.loglog([a, b, b, a, a], [pa, pa, pb, pb, pa], '-k', zorder=-30)
-	plt.loglog([a, a], ylim, '-k', zorder=-30)
-	plt.loglog([b, b], ylim, '-k', zorder=-30)
-	plt.gca().set_xlim(xlim)
-	plt.gca().set_ylim(ylim)
+	ab = np.logspace(
+		math.log10(min(E2EX.values())) - 0.01, 
+		math.log10(max(E2EX.values())) + 0.01, 
+		20
+	)
 	
-	E = { e for e in E if (E2DE[e] <= pa) }
-	
-	GO2F = { go : (set(F) & E)  for (go, F) in GO2E.items() }
-	GO2F = { go : F for (go, F) in GO2F.items() if F }
-	GO2F = list(sorted(GO2F.items(), key=(lambda x : len(GO2E[x[0]]))))
-	
-	H = []
-	L = []
-	
-	# Genes with known GO ID
-	for (go, F) in GO2F[0:24] :
-		de = [ E2DE[e] for e in F ]
-		ex = [ E2EX[e] for e in F ]
-		h2 = plt.loglog(ex, de, 'bo', markersize=5)[0]
-		H.append(h2)
-		L.append(GO2T.get(go, go)[0:44] + " ({} of {})".format(len(F), len(GO2E[go])))
-	
-	# Genes of unknown GO ID
-	U = (E - set(chain.from_iterable(dict(GO2F).values())))
-	if U :
-		de = [ E2DE[e] for e in U ]
-		ex = [ E2EX[e] for e in U ]
-		h3 = plt.loglog(ex, de, 'rx', markersize=4, zorder=-10)[0]
-		H.append(h3)
-		L.append("No GO ID ({})".format(len(U)))
-	
-	if H :
-		plt.legend(H, L, loc='upper left', prop={'size': 9})
-	
-	plt.xlabel('Expression mean')
-	plt.ylabel('Differential expression (KS {})'.format(KS_meta))
-	
-	for ext in PARAM['ext'] :
-		plt.savefig(OFILE['ex-sect'].format(n=n, ext=ext))
-	
-	plt.close()
+	for (n, (a, b)) in enumerate(zip(ab[:-1], ab[1:])) :
+		
+		plt.figure(figsize=(math.ceil(8*phi), 8), dpi=150)
+		
+		# Background
+		if True :
+			de = [ E2DE[e] for e in BC_E ]
+			ex = [ E2EX[e] for e in BC_E ]
+			plt.loglog(ex, de, 'r.', markersize=0.5, zorder=-20)
+		
+		# Selection of genes in the expression window
+		E = { e for e in BC_E if (a <= E2EX[e] < b) }
+		
+		if (not E) : continue
+
+		q = 5
+		pa = np.percentile([E2DE[e] for e in E], q)
+		pb = np.percentile([E2DE[e] for e in E], 100-q)
+		
+		# Box
+		if True : 
+			xlim = plt.gca().get_xlim()
+			ylim = plt.gca().get_ylim()
+			plt.loglog([a, b, b, a, a], [pa, pa, pb, pb, pa], '-k', zorder=-30)
+			plt.loglog([a, a], ylim, '-k', zorder=-30)
+			plt.loglog([b, b], ylim, '-k', zorder=-30)
+			plt.gca().set_xlim(xlim)
+			plt.gca().set_ylim(ylim)
+
+		assert(quantile in ['-', '+'])
+		if (quantile == '-') : E = { e for e in E if (E2DE[e] <= pa) }
+		if (quantile == '+') : E = { e for e in E if (E2DE[e] >= pb) }
+		
+		GO2F = { go : (set(F) & E)  for (go, F) in GO2E.items() }
+		GO2F = { go : F for (go, F) in GO2F.items() if F }
+		# Sort by most specific GO terms (i.e. slimmest)
+		GO2F = list(sorted(
+			GO2F.items(), 
+			key=(lambda x : (len(GO2E[x[0]]), x[0]))
+		))
+		
+		H = [] # Handles
+		L = [] # Legend
+		
+		# Genes with known GO ID
+		for (go, F) in GO2F :
+			de = [ E2DE[e] for e in F ]
+			ex = [ E2EX[e] for e in F ]
+			h2 = plt.loglog(ex, de, 'bo', markersize=4)[0]
+			H.append(h2)
+			L.append(GO2T.get(go, go)[0:50] + " ({}/{})".format(len(F), len(GO2E[go])))
+		
+		# If too many legend items...
+		max_leg_len = 30
+		if (len(L) > max_leg_len) :
+			H = H[0:(max_leg_len+1)]
+			L = L[0:max_leg_len] + ["(And {} more GO terms...)".format(len(L) - max_leg_len)]
+		
+		# Genes without GO ID
+		U = set(E) - set(chain.from_iterable(dict(GO2F).values()))
+		if U :
+			de = [ E2DE[e] for e in U ]
+			ex = [ E2EX[e] for e in U ]
+			h3 = plt.loglog(ex, de, 'rx', markersize=4, zorder=-10)[0]
+			H.append(h3)
+			L.append("No GO ID ({} genes)".format(len(U)))
+		
+		if H :
+			plt.legend(H, L, loc='upper left', prop={'size': 8})
+		
+		plt.xlabel('Overall expression mean')
+		plt.ylabel('Inter-tumor differential expression (KS {})'.format(KS_meta))
+		
+		for ext in PARAM['ext'] :
+			plt.savefig(OFILE['ex-sect'].format(n=(str(n)+quantile), ext=ext))
+		
+		plt.close()
 
 
 #[ FOR EACH GO TERM OF INTEREST... ]#
@@ -238,12 +277,12 @@ for go in PARAM['GO filter'] :
 	if go : 
 		de = [ E2DE[e] for e in E ]
 		ex = [ E2EX[e] for e in E ]
-		h2 = plt.loglog(ex, de, 'bo', markersize=5)[0]
+		h2 = plt.loglog(ex, de, 'bo', markersize=4)[0]
 		plt.legend([h2], ["{} ({})".format(GO2T[go], len(E))], prop={'size': 12})
 	
 	
-	plt.xlabel('Expression mean')
-	plt.ylabel('Differential expression (KS {})'.format(KS_meta))
+	plt.xlabel('Overall expression mean')
+	plt.ylabel('Inter-tumor differential expression (KS {})'.format(KS_meta))
 	
 	for ext in PARAM['ext'] :
 		plt.savefig(OFILE['de-vs-ex'].format(go=go_safe, ext=ext))

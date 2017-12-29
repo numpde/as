@@ -1,4 +1,4 @@
-131 ENSG IDs in selected BC data
+150 ENSG IDs in selected BC data
 GO filter: GO:0004984
 olfactory receptor activity
-319 ENSG IDs
+150 ENSG IDs

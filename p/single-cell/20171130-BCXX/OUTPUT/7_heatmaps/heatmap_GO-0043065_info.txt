@@ -1,4 +1,4 @@
-300 ENSG IDs in selected BC data
+330 ENSG IDs in selected BC data
 GO filter: GO:0043065
 positive regulation of apoptotic process
-301 ENSG IDs
+330 ENSG IDs

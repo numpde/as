@@ -34,7 +34,7 @@ OFILE = {
 ## =================== PARAMS :
 
 # 
-biomart_url = "http://grch37.ensembl.org/biomart"
+biomart_url = "http://asia.ensembl.org/biomart"
 
 num_biomart_parallel_queries = 10
 num_biomart_ids_per_query = 100
@@ -50,9 +50,12 @@ if os.path.isfile(OFILE['E2GO']) :
 	
 	# Read the ENSG-GO associations from file
 	with open(OFILE['E2GO'], 'r') as f :
-		E_GO = [L.rstrip().split('\t') for L in f]
-		E2GO = { e_go[0] : e_go[1:] for e_go in E_GO }
-		del E_GO
+		E2GO = {
+			e_go[0] : e_go[1:] 
+			for e_go in [
+				L.rstrip().split('\t') for L in f
+			] 
+		}
 		
 	# E2GO[e] is now a list of GO IDs associated to ENSG ID e
 	
