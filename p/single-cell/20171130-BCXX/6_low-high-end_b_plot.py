@@ -88,7 +88,7 @@ def main() :
 		GO_I = sorted(((go, I) for (go, I) in GO_I), key=(lambda go_I : np.median(go_I[1])))
 		
 		# Take the most interesting ones
-		GO_I = GO_I[0:200]
+		GO_I = GO_I[0:30]
 		
 		# Plot
 		
@@ -105,7 +105,7 @@ def main() :
 		
 		
 		# Legend labels
-		L = [(GO2T.get(go, go) + " ({})".format(GO2N[go])) for (go, I) in GO_I]
+		L = [(GO2T.get(go, go) + " ({})".format(GO2N.get(go, '?'))) for (go, I) in GO_I]
 		# and font size
 		legend_font_size = 4
 		
