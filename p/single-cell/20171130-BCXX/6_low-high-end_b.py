@@ -98,7 +98,10 @@ def job(X, axis, dims, S) :
 	i = silhouette(cos_dist(np.take(X, K, axis=axis), axis), S)
 	i = list(chain.from_iterable(i.values()))
 	if i :
-		return np.mean(i) # OR: np.mean((x > 0) for x in i)
+		return (
+			np.mean(i),
+			-np.mean([(x < 0) for x in i])
+		)
 	else :
 		return None
 
@@ -172,9 +175,11 @@ def main() :
 			print("Profiling GO ID {} of {} by subsets of size {}".format(n+1, len(GO2K), dims))
 			
 			# Iterate over random subsets
-			GO2I[dims][go] = Parallel(n_jobs=PARAM['#proc'])(
-				delayed(job)(Y, axis_gene, dims, S)
-				for _ in Progress()(range(PARAM['#dots']))
+			GO2I[dims][go] = list(
+				Parallel(n_jobs=PARAM['#proc'])(
+					delayed(job)(Y, axis_gene, dims, S)
+					for _ in Progress()(range(PARAM['#dots']))
+				)
 			)
 			
 			# Do not save results if in test mode
