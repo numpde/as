@@ -15,23 +15,24 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from string import ascii_lowercase
-from numpy.matlib import repmat
-from scipy import stats
+from collections     import defaultdict
+from string          import ascii_lowercase
+from numpy.matlib    import repmat
+from scipy           import stats
 from scipy.constants import golden as phi
-from itertools import chain
+from itertools       import chain
 from multiprocessing import cpu_count
-from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
+from joblib          import Parallel, delayed
+from progressbar     import ProgressBar as Progress
+
+# 
 from networkx.drawing.nx_agraph import graphviz_layout
 
 ## ==================== INPUT :
 
 IFILE = {
 	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
-	'GO=>ENSG' : "OUTPUT/0_e2go/go2e.txt",
 	'GO=>Info' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
-	'gene-ks'  : "OUTPUT/3_proba_a/UV/gene-ks.pkl",
 	'GO=>CI'   : "OUTPUT/0_go2ci/UV/go2ci.pkl",
 }
 
@@ -114,10 +115,10 @@ mpl.rcParams['axes.labelsize'] = 'large'
 
 ## ====================== AUX :
 
-def abbr(t) :
+def abbr(t, n) :
 	D = { 
-		"negative regulation" : "-regu",
-		"positive regulation" : "+regu",
+		"negative regulation" : "neg regu",
+		"positive regulation" : "pos regu",
 		"replication" : "repl",
 		"regulation" : "regu",
 		"involved in" : "in",
@@ -130,15 +131,19 @@ def abbr(t) :
 	for (S, s) in sorted(D.items(), key=(lambda x : -len(x[0]))) :
 		t = t.replace(S, s)
 	
+	if (len(t) > (n + 3)) : 
+		t = t[0:n] + "..."
+	
 	return t
 
 ## ====================== (!) :
 
 
-## ===================== WORK :
+## ===================== DATA :
 
 #[ ]#
 
+# Clustering indices data bundle
 CI_data = pickle.load(open(IFILE['GO=>CI'], 'rb'))
 
 # GO2E : GO ID --> Clustering index
@@ -150,6 +155,15 @@ GO2E = CI_data['GO2E']
 # GO2T : GO ID --> GO category name
 GO2T = CI_data['GO2T']
 
+# N2CI : size of GO term --> [clustering indices]
+N2CI = CI_data['N2CI']
+
+# GO2WQ : GO ID --> windowed quantile
+GO2WQ = CI_data['GO2WQ']
+
+# Are those GO IDs in the GO graph?
+go_not_in_graph = set(GO2E.keys()) - set(pickle.load(open(IFILE['GO=>Info'], 'rb')).nodes())
+print("Note: {} GO IDs are not in the graph".format(len(go_not_in_graph)))
 
 
 ## DEBUG
@@ -158,6 +172,9 @@ GO2T = CI_data['GO2T']
 #print(G['GO:0031625'])
 #exit()
 #del G
+
+
+## ===================== WORK :
 
 #[ ]#
 
@@ -242,42 +259,64 @@ def plot(root, go_filename) :
 		'?' : { 'nodelist' : [], 'node_size' : [], 'node_color' : 'y' },
 	}
 	
-	min_node_size = 5
+	min_node_size = 20
 	
 	# Colormap
 	cmap = plt.cm.cool
 	
-	# The ENSG's for each GO term that are also contained in the root GO term
+	# The ENSG IDs for each GO category that are *also* contained in the root GO category
 	GO2e = {
 		go : GO2E[root] & GO2E[go]
 		for go in g.nodes
 	}
 	
 	for go in g.nodes :
-		ci = GO2CI[go]
-		if ci :
+		#ci = GO2CI[go]
+		#if ci :
+			#node_style['!']['nodelist'].append(go)
+			#node_style['!']['node_size'].append(min_node_size + len(GO2E.get(go, {})))
+			#node_style['!']['node_color'].append(cmap((ci+1)/2))
+		#else :
+			#node_style['?']['nodelist'].append(go)
+			#node_style['?']['node_size'].append(min_node_size)
+		
+		q = GO2WQ.get(go, None) # Windowed quantile
+		
+		if q :
 			node_style['!']['nodelist'].append(go)
 			node_style['!']['node_size'].append(min_node_size + len(GO2E.get(go, {})))
-			node_style['!']['node_color'].append(cmap((ci+1)/2))
+			node_style['!']['node_color'].append(cmap(q))
 		else :
 			node_style['?']['nodelist'].append(go)
 			node_style['?']['node_size'].append(min_node_size)
+		
 	
 	pos = graphviz_layout(g, prog='dot', root=root)
+	# Center
+	(cx, cy) = np.mean(list(pos.values()), axis=0)
+	pos = { i : (x - cx, y - cy) for (i, (x, y)) in pos.items() }
+	# Mirror
 	pos = { i : (x, -y) for (i, (x, y)) in pos.items() }
+	# Rotate
+	a = math.pi * (89/180)
+	pos = { i : (np.cos(a) * x - np.sin(a) * y, np.sin(a) * x + np.cos(a) * y) for (i, (x, y)) in pos.items() }
 	
-	plt.figure(figsize=(10, 15), dpi=150)
+	plt.figure(figsize=(10*math.sqrt(2), 10), dpi=300)
 
 	plt.axis('off')
 	
 	for style in node_style.values() :
 		nx.draw_networkx_nodes(g, pos, linewidths=0.1, **style)
 	
-	nx.draw_networkx_edges(g, pos, width=0.1, arrows=False, edge_color='y')
+	nx.draw_networkx_edges(g, pos, width=0.1, arrows=False, edge_color='g')
 	
 	for (go, (x, y)) in pos.items() :
-		al = { 'horizontalalignment' : 'left', 'verticalalignment' : 'bottom' }
-		plt.text(x, y, abbr(g.nodes[go]['name'])[0:45] + " ({}, {}/{})".format(go[3:], len(GO2e[go]), len(GO2E[go])), fontsize=3, rotation=60, **al)
+		
+		text = "{} ({})".format(abbr(g.nodes[go]['name'], 45), len(GO2E[go]))
+		plt.text(x + 3, y, text, fontsize=4, rotation=0, ha='left', va='bottom')
+		
+		text = "{}, {}/{} genes in root".format(go, len(GO2e[go]), len(GO2E[go]))
+		plt.text(x + 3, y, text, fontsize=1, rotation=0, ha='left', va='top')
 	
 	plt.title("{} -- {}".format(root, GO2T[root]))
 	
@@ -291,19 +330,31 @@ def plot(root, go_filename) :
 	#ax.text(0.50, 0.1, "Clustering index", va='bottom', ha='center', transform=ax.transAxes, fontsize=7)
 	
 	# STATS
-	ax = plt.axes([0.7 - 0.01, 0.03, 0.3, 0.1], facecolor='w')
+	ax = plt.axes([0.05, 0.05, 0.2, 0.1], facecolor='w')
+	
+	# Plot "almost" all GO terms
+	plt.semilogx(
+		*zip(*[(n, ci) for (n, CI) in N2CI.items() for ci in CI[0:33]]), 
+		'.', color='y', markersize=1, zorder=-10
+	)
+	
+	ylim = (-1, +1)   # Possible range of the clustering index
+	xlim = plt.xlim() # Range of current GO term sizes
 	
 	#ax.labelsize = 'small'
 	go2size = dict(zip(node_style['!']['nodelist'], node_style['!']['node_size']))
 	go2color = dict(zip(node_style['!']['nodelist'], node_style['!']['node_color']))
 	for go in g.nodes :
+		#if not (go in GO2E) : continue
+		#if not (go in GO2CI) : continue
 		if (not GO2E[go]) : continue
 		plt.semilogx(len(GO2E[go]), GO2CI[go], 'o', color=go2color[go], markersize=math.sqrt(go2size[go]))
 	
-	plt.ylim(-1, +1) # Possible range of the clustering index
-	
-	xlim = plt.xlim()
+	#if (root in GO2CI) :
 	plt.semilogx(xlim, (GO2CI[root],) * 2, '-k', linewidth=1)
+	
+	plt.ylim(ylim)
+	plt.xlim(xlim)
 	
 	plt.xlabel("Size", fontsize=6)
 	plt.ylabel("Clustering index", fontsize=6)
@@ -318,18 +369,21 @@ def plot(root, go_filename) :
 	plt.close()
 
 
+def plot_all() :
 
-for (root, x) in zip(PARAM['Top50'], ascii_lowercase) :
-	go_filename = "Top50_" + x
-	plot(root, go_filename)
+	Parallel(n_jobs=4)(
+		delayed(plot)(root, "Top50_" + x)
+		for (root, x) in zip(PARAM['Top50'], ascii_lowercase)
+	)
+	
+	Parallel(n_jobs=4)(
+		delayed(plot)(root, "Last50_" + x)
+		for (root, x) in zip(PARAM['Last50'], ascii_lowercase)
+	)
+	
+	Parallel(n_jobs=4)(
+		delayed(plot)(root, str(root).replace(':', '-'))
+		for root in sorted(PARAM['GO filter'])
+	)
 
-
-for (root, x) in zip(PARAM['Last50'], ascii_lowercase) :
-	go_filename = "Last50_" + x
-	plot(root, go_filename)
-
-
-for root in sorted(PARAM['GO filter']) :
-	go_filename = str(root).replace(':', '-')
-	plot(root, go_filename)
-
+plot_all()

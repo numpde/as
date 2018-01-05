@@ -10,6 +10,7 @@ import os.path
 import inspect
 import sys
 
+from collections import defaultdict
 from scipy import stats
 from itertools   import chain
 from multiprocessing import cpu_count
@@ -48,7 +49,7 @@ for f in OFILE.values() :
 
 PARAM = {
 	# Number of parallel computing processes
-	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
+	'#proc' : min(12, math.ceil(cpu_count() / 1.5)),
 }
 
 # Test mode
@@ -177,10 +178,43 @@ def goci_from_go(go) :
 		])
 	)
 
-# MAIN WORK IS HERE
+print("Computing clustering indices")
+
 GO2CI = dict(
 	Parallel(n_jobs=PARAM['#proc'])(
 		delayed(goci_from_go)(go)
+		for go in Progress()(np.random.permutation(GO)) 
+	)
+)
+
+# N2CI : size of GO term --> [clustering indices]
+N2CI = defaultdict(list)
+for (go, E) in GO2E.items() : 
+	if (go in GO2CI) and len(E) :
+		N2CI[len(E)].append(GO2CI[go])
+
+
+#[ COMPUTE THE WINDOWED QUANTILES FOR EACH GO TERM ]#
+
+def gowq_from_go(go) :
+	E = GO2E[go]
+	
+	if (len(E) == 0) : return (go, None)
+
+	p = stats.percentileofscore(
+		[ci for (n, CI) in N2CI.items() for ci in CI if (len(E)/2 <= n <= len(E)*2)],
+		GO2CI[go]
+	)
+	
+	q = min(1, max(0, p / 100))
+	
+	return (go, q)
+
+print("Computing windowed quantiles")
+
+GO2WQ = dict(
+	Parallel(n_jobs=PARAM['#proc'])(
+		delayed(gowq_from_go)(go)
 		for go in Progress()(np.random.permutation(GO)) 
 	)
 )
@@ -193,6 +227,8 @@ pickle.dump(
 		'GO2E'   : GO2E,
 		'GO2T'   : GO2T,
 		'GO2CI'  : GO2CI,
+		'N2CI'   : N2CI,
+		'GO2WQ'  : GO2WQ,
 		'G2S'    : G2S,
 		'S'      : S, 
 		'PARAM'  : PARAM,
