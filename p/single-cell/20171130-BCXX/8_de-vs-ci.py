@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from scipy.constants import golden as phi
 from itertools import chain
+from multiprocessing import cpu_count
+from joblib import Parallel, delayed
 from progressbar import ProgressBar as Progress
 
 ## ==================== INPUT :
@@ -36,8 +38,10 @@ for f in IFILE.values() :
 ## =================== OUTPUT :
 
 OFILE = {
-	'2d-plot' : "OUTPUT/8_de-vs-ci/de-vs-ex_{go}.{ext}",
+	'2d-plot' : "OUTPUT/8_de-vs-ci/de-vs-ex_{go}_{log}.{ext}",
 	'2d-info'  : "OUTPUT/8_de-vs-ci/de-vs-ex_{go}_info.txt",
+	
+	'ci-vs-de' : "OUTPUT/8_de-vs-ci/ci-vs-de_{log}_{way}.{ext}",
 }
 
 # Create output directories
@@ -59,12 +63,41 @@ PARAM = {
 	
 	# Figure formats
 	'ext' : ['png'],
+	
+	# Number of parallel computing processes
+	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
 }
 
 mpl.rcParams['axes.labelsize'] = 'large'
 
 ## ====================== (!) :
 
+
+# https://en.wikipedia.org/wiki/Silhouette_(clustering)
+# D = distance matrix
+# S = [[indices of cluster c] for each cluster c]
+# Returns the silhouette values by cluster
+def silhouette(D, S) :
+	assert(D.shape[0] == D.shape[1])
+	def md(i, c) : return np.mean([D[i, j] for j in c])
+	A = { c : [md(i, c) for i in c] for c in S }
+	B = { c : [min(md(i, d) for d in S if (d != c)) for i in c] for c in S }
+	s = { c : [(b - a) / max(b, a) for (a, b) in zip(A[c], B[c]) if max(b, a)] for c in S }
+	#for s in s.values() : print(sorted(s))
+	return s
+
+# Compute a distance matrix as (1 - cos(angle))
+def cos_dist(X, axis) :
+	# Covariance & norm products
+	C = np.tensordot(X, X, axes=([axis], [axis]))
+	V = np.sqrt(np.outer(np.diag(C), np.diag(C)))
+	V[V == 0] = 1
+	D = 1 - (C / V)
+	return D
+
+
+
+## ===================== WORK :
 
 #[ LOAD BC DATASET ]#
 
@@ -105,7 +138,7 @@ G2S = KS_data['G2S']
 
 # Clusters/groups by group
 G = sorted(list(G2S.keys()))
-S = [ np.array(G2S[g]) for g in G ]
+S = [ tuple(G2S[g]) for g in G ]
 del G2S # Use G and S
 
 
@@ -119,7 +152,7 @@ E2EX = { e : np.mean(E2X[e]) for e in BC_E }
 # GO2E : GO ID --> [ENSG IDs]
 # Read it from file
 GO2E = {
-	go_E[0] : go_E[1:]
+	go_E[0] : set(go_E[1:])
 	for go_E in [
 		L.rstrip().split('\t') 
 		for L in open(IFILE['GO=>ENSG'], 'r')
@@ -145,53 +178,120 @@ for go in list(PARAM['GO filter']) :
 		print("NOTE: {} has no gene list".format(go))
 		PARAM['GO filter'].remove(go)
 
+# Narrow down the gene selection (to each GO term of interest)
+GO2E = {
+	go : [
+		BC_E.index(e) 
+		for e in sorted(set(BC_E) & GO2E.get(go), key=(lambda e : -E2DE[e]))
+	]
+	for go in sorted(PARAM['GO filter'])
+}
+	
+#[ PLOT CI VS DE-CUTOFF ]#
 
-#[ FOR EACH GO TERM OF INTEREST... ]#
+if True :
+	
+	np.random.seed(0)
+	
+	def clustering_score(X) :
+		return -np.mean([(x < 0) for x in chain.from_iterable(silhouette(cos_dist(X, 0), S).values())])
+	
+	xlabel = { 
+		'm' : "Number of genes in order of mean expression",
+		'+' : "Number of most DE genes",
+		'-' : "Number of least DE genes",
+		'r' : "Number of genes in a random order",
+	}
 
-for go in PARAM['GO filter'] :
+	for way in ['m', 'r', '+', '-'] :
+		
+		plt.figure(figsize=(math.ceil(6*phi), 6), dpi=150)
+		
+		GOXS = []
+		
+		for (go, E) in GO2E.items() :
+			print(way, "/", go)
+			
+			Y = stats.mstats.zscore(np.moveaxis(X, axis_gene, 0)[E], axis=1)
+			V = Y[np.random.permutation(len(Y))]
+			W = sorted(Y, key=(lambda y : -np.mean(y)))
+			
+			def select(n, way) :
+				if (way == 'r') : return V[0:n]
+				if (way == 'm') : return W[0:n]
+				if (way == '+') : return Y[0:n]
+				if (way == '-') : return Y[-n:]
+			
+			# Compute silhouette values
+			s = Parallel(n_jobs=PARAM['#proc'])(
+				delayed(clustering_score)(select(n, way))
+				for n in Progress()(range(1, len(E)))
+			)
+			
+			x = np.linspace(0.0, 1.0, len(E))[1:].tolist() # relative
+			#x = list(range(1, len(E))) # absolute
+			
+			GOXS.append((go, x, s))
+		
+		L = [] # Legend
+		for (go, x, s) in sorted(GOXS, key=(lambda x : -np.max(x[2]))) :
+			plt.plot(x, s)
+			L.append("{} ({})".format(GO2T[go], len(GO2E[go])))
+		
+		plt.ylim(-1, 0)
+		
+		plt.xlabel(xlabel[way])
+		plt.ylabel("Clustering index (-fraction of neg. silh. values)")
+		
+		plt.legend(L, loc='upper left')
+		
+		for scale in ['linear', 'log'] :
+			plt.xscale(scale)
+			for ext in PARAM['ext'] :
+				plt.savefig(OFILE['ci-vs-de'].format(log=scale[0:3], way=way, ext=ext))
+		
+		plt.close()
+
+
+#[ FOR EACH GO TERM OF INTEREST ... ]#
+
+for (go, E) in GO2E.items() :
 	
 	# GO ID for file names
 	go_safe = str(go).replace(':', '-')
-
-
-	#[ SELECT GENES FOR THIS GO TERM ]#
-
-	# Default choice: all genes
-	E = set(BC_E)
 	
-	# Filter by GO
-	if (go is not None) : E &= set(GO2E[go])
-	
-	# Order by differential expression
-	E = list(sorted(E, key=(lambda e : -E2DE[e])))
+	#[ ... PLOT 2-GENE EXPRESSION ]#
 	
 	# Pick the top 2 for a 2d plot
 	E = E[0:2]
 	
-	# Get the indices of those genes
-	E = [BC_E.index(e) for e in E]
-	
-	#[ PLOT 2-GENE EXPRESSION ]#
-	
 	plt.figure(figsize=(math.ceil(6*phi), 6), dpi=150)
+	plt.xscale('linear')
+	plt.yscale('linear')
 	
 	colors = plt.get_cmap('hsv')(np.linspace(0.1, 1.0, len(G))).tolist()
 	
-	L = []
+	L = [] # Legend
 	for (g, s) in zip(G, S) :
 		Y = np.take(X, E, axis=axis_gene)
 		Y = np.take(Y, s, axis=axis_smpl)
 		a = np.take(Y, 0, axis=axis_gene)
 		b = np.take(Y, 1, axis=axis_gene)
-		plt.loglog(a, b, '.', markersize=8, color=colors.pop())
+		plt.plot(a, b, '.', markersize=8, color=colors.pop())
 		L.append(g)
-	
-	plt.legend(L, loc='upper left')
-	plt.xlabel("Expression gene 1")
-	plt.ylabel("Expression gene 2")
+		
+	plt.xlabel("Expression of gene 1")
+	plt.ylabel("Expression of gene 2")
 	plt.title("{} ({})".format(GO2T[go], go))
 	
-	for ext in PARAM['ext'] :
-		plt.savefig(OFILE['2d-plot'].format(go=go_safe, ext=ext))
+	for (scale, loc) in [('linear', 'upper right'), ('log', 'upper left')] :
+		plt.xscale(scale)
+		plt.yscale(scale)
+		
+		plt.legend(L, loc=loc)
+		
+		for ext in PARAM['ext'] :
+			plt.savefig(OFILE['2d-plot'].format(go=go_safe, log=scale[0:3], ext=ext))
 	
 	plt.close()
+

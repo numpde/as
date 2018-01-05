@@ -76,10 +76,16 @@ def main() :
 		GO_I = []
 		
 		for (go, I) in GO2I[dims].items() :
+			# Remove possible None's
+			I = [i for i in I if i]
+			
+			# If I contains tuples, select one entry
+			I = [(i[1] if (type(i) is tuple) else i) for i in I]
+			
 			# Remove possible NaN and Inf
 			I = [i for i in I if np.isfinite(i)]
 			
-			if (len(I) == 0) : continue
+			if (not I) : continue
 			if (min(I) == max(I)) : continue
 			
 			GO_I.append( (go, I) )

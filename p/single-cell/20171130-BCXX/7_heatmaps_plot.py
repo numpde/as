@@ -15,10 +15,10 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-from scipy import stats
-from scipy.constants import golden as phi
-from itertools import chain
-from progressbar import ProgressBar as Progress
+from scipy           import stats
+from itertools       import chain
+from scipy.constants import golden      as phi
+from progressbar     import ProgressBar as Progress
 
 ## ==================== INPUT :
 
@@ -48,6 +48,7 @@ PARAM = {
 	# GO terms of interest
 	'GO filter' : {
 		None, 
+		"GO:0032201", # telomere maintenance via semi-conservative replication
 		"GO:0001525", # angiogenesis
 		"GO:0006281", # DNA-repair
 		"GO:0006955", # immune response
