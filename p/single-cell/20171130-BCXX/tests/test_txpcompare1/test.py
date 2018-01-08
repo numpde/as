@@ -3,10 +3,10 @@
 
 ## ================== IMPORTS :
 
-
 import os
 import pickle
 import pandas
+import numpy as np
 import matplotlib.pyplot as plt
 
 ## ==================== INPUT :
@@ -24,21 +24,15 @@ for f in IFILE.values() :
 
 # See below
 
-## ==================== PARAM :
-
-## ====================== AUX :
-
-## ====================== (!) :
-
 ## ===================== DATA :
 
 
 #[ TXP FILE ]#
 
 txp = pandas.read_csv(IFILE['TXP'])
-txp_goid = txp['GO-ID'].tolist()
-txp_nsvp = txp['NSV Percentage'].tolist()
-txp_ngen = txp['Gene Numbers'].tolist()
+txp_go = txp['GO-ID'].tolist()
+txp_ci = txp['NSV Percentage'].tolist()
+txp_ng = txp['Gene Numbers'].tolist()
 
 #[ MY FILE ]#
 
@@ -54,24 +48,43 @@ GO2E = CI_data['GO2E']
 # GO2T : GO ID --> GO category name
 GO2T = CI_data['GO2T']
 
-# N2CI : size of GO term --> [clustering indices]
-N2CI = CI_data['N2CI']
-
-# GO2WQ : GO ID --> windowed quantile
-GO2WQ = CI_data['GO2WQ']
-
 
 ## ===================== WORK :
 
-plt.scatter(txp_nsvp, [GO2CI[go] for go in txp_goid])
+txp_ci = np.asarray(txp_ci)
+ra_ci  = np.asarray([GO2CI[go] for go in txp_go])
+
+txp_ng = np.asarray(txp_ng)
+ra_ng  = np.asarray([len(GO2E[go]) for go in txp_go])
+
+A = np.asarray([(abs(x - y) <= 5) for (x, y) in zip(txp_ng, ra_ng)])
+B = np.logical_not(A)
+
+h = [
+	plt.scatter(txp_ci[B], ra_ci[B], color='r'),
+	plt.scatter(txp_ci[A], ra_ci[A], color='b'),
+]
+h.append(
+	plt.plot(plt.xlim(), 1-2*np.asarray(plt.xlim()), '--k')[0]
+)
 plt.xlabel("Negative silhouette value fraction -- TXP")
 plt.ylabel("Average sign of silhouette value -- RA")
+plt.legend(h, ["size diff > 5", "size diff <= 5", "expected"], loc='lower left')
 plt.savefig("ci.png")
 plt.show()
 
-plt.scatter(txp_ngen, [len(GO2E[go]) for go in txp_goid])
+h = [
+	plt.scatter(txp_ng[B], ra_ng[B], color='r'),
+	plt.scatter(txp_ng[A], ra_ng[A], color='b'),
+]
+h.append(
+	plt.plot(plt.xlim(), plt.xlim(), '--k')[0]
+)
+plt.xscale('log')
+plt.yscale('log')
 plt.xlabel("GO category size -- TXP")
 plt.ylabel("GO category size -- RA")
+plt.legend(h, ["size diff > 5", "size diff <= 5", "expected"], loc='lower left')
 plt.savefig("go.png")
 plt.show()
 
