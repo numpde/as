@@ -45,6 +45,7 @@ for f in IFILE.values() :
 OFILE = {
 	'tree' : "OUTPUT/9_tree/tree_{go}.{ext}",
 	'info' : "OUTPUT/9_tree/tree_{go}_info.txt",
+	'cisz' : "OUTPUT/9_tree/ci-vs-sz.{ext}",
 }
 
 # Create output directories
@@ -94,18 +95,23 @@ PARAM = {
 	
 	# Further GO terms of interest
 	'GO filter' : {
-		#"GO:0001525", # angiogenesis
+		"GO:0001525", # angiogenesis
 		"GO:0006281", # DNA-repair
 		"GO:0006955", # immune response
-		#"GO:0007049", # cell cycle
-		#"GO:0016477", # cell migration
-		#"GO:0004984", # olfactory receptor activity
+		"GO:0007049", # cell cycle
+		"GO:0016477", # cell migration
+		"GO:0004984", # olfactory receptor activity
 		"GO:0045596", # negative regulation of cell differentiation
 		"GO:0045597", # positive regulation of cell differentiation
+		"GO:0000723", # telomere maintenance
+		
+		"GO:0007173", # epidermal growth factor receptor signaling pathway
+		"GO:0035004", # phosphatidylinositol 3-kinase activity
+		"GO:0051019", # mitogen-activated protein kinase binding
 	},
 	
 	# Figure formats
-	'ext' : ['png', 'eps', 'pdf'],
+	'ext' : ['png', 'pdf'],
 	
 	# Number of parallel computing processes
 	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
@@ -240,14 +246,38 @@ class gograph :
 		return g
 
 
-def plot(root, go_filename) :
+def plot_overview() :
+	
+	plt.close('all')
+
+	plt.figure(figsize=(math.ceil(6*phi), 6), dpi=150)
+
+	# Plot "almost" all GO terms
+	plt.semilogx(
+		*zip(*[(n, ci) for (n, CI) in N2CI.items() for ci in CI[0:33]]), 
+		'.', color='r', markersize=3
+	)
+	
+	plt.ylim((-1, 1))
+	
+	plt.xlabel("Size of GO category")
+	plt.ylabel("Clustering index")
+	
+	for ext in PARAM['ext'] :
+		plt.savefig(OFILE['cisz'].format(ext=ext))
+	
+	plt.close('all')
+
+
+def plot_tree(root, go_filename) :
+	
+	plt.close('all')
 
 	print(root, "--", GO2T[root], "({} genes)".format(len(GO2E[root])))
 	
 	# Ontology subtree
 	g = gograph(IFILE['GO=>Info']).subgraph(root)
-	
-	print(nx.info(g))
+	#print(nx.info(g))
 	
 	#print(root, len(GO2E[root]), GO2E[root])
 	
@@ -298,7 +328,7 @@ def plot(root, go_filename) :
 	# Mirror
 	pos = { i : (x, -y) for (i, (x, y)) in pos.items() }
 	# Rotate
-	a = math.pi * (89/180)
+	a = math.pi * (90/180)
 	pos = { i : (np.cos(a) * x - np.sin(a) * y, np.sin(a) * x + np.cos(a) * y) for (i, (x, y)) in pos.items() }
 	
 	plt.figure(figsize=(10*math.sqrt(2), 10), dpi=300)
@@ -330,13 +360,19 @@ def plot(root, go_filename) :
 	#ax.text(0.50, 0.1, "Clustering index", va='bottom', ha='center', transform=ax.transAxes, fontsize=7)
 	
 	# STATS
-	ax = plt.axes([0.05, 0.05, 0.2, 0.1], facecolor='w')
+	ax = plt.axes([0.05, 0.05, 0.2, 0.15], facecolor='w')
 	
 	# Plot "almost" all GO terms
 	plt.semilogx(
 		*zip(*[(n, ci) for (n, CI) in N2CI.items() for ci in CI[0:33]]), 
 		'.', color='y', markersize=1, zorder=-10
 	)
+	
+	plt.xlabel("Size", fontsize=6)
+	plt.ylabel("Clustering index", fontsize=6)
+	
+	ax.tick_params(axis='x', labelsize=6)
+	ax.tick_params(axis='y', labelsize=6)
 	
 	ylim = (-1, +1)   # Possible range of the clustering index
 	xlim = plt.xlim() # Range of current GO term sizes
@@ -356,11 +392,6 @@ def plot(root, go_filename) :
 	plt.ylim(ylim)
 	plt.xlim(xlim)
 	
-	plt.xlabel("Size", fontsize=6)
-	plt.ylabel("Clustering index", fontsize=6)
-	ax.tick_params(axis='x', labelsize=6)
-	ax.tick_params(axis='y', labelsize=6)
-	
 	# SAVE
 	
 	for ext in PARAM['ext'] :
@@ -369,21 +400,26 @@ def plot(root, go_filename) :
 	plt.close()
 
 
-def plot_all() :
-
-	Parallel(n_jobs=4)(
-		delayed(plot)(root, "Top50_" + x)
+def plot_trees() :
+	
+	Parallel(n_jobs=5)(
+		delayed(plot_tree)(root, str(root).replace(':', '-'))
+		for root in sorted(PARAM['GO filter'])
+	)
+	
+	Parallel(n_jobs=5)(
+		delayed(plot_tree)(root, "Top50_" + x)
 		for (root, x) in zip(PARAM['Top50'], ascii_lowercase)
 	)
 	
-	Parallel(n_jobs=4)(
-		delayed(plot)(root, "Last50_" + x)
+	Parallel(n_jobs=5)(
+		delayed(plot_tree)(root, "Last50_" + x)
 		for (root, x) in zip(PARAM['Last50'], ascii_lowercase)
 	)
-	
-	Parallel(n_jobs=4)(
-		delayed(plot)(root, str(root).replace(':', '-'))
-		for root in sorted(PARAM['GO filter'])
-	)
 
-plot_all()
+
+###
+
+plot_trees()
+plot_overview()
+

@@ -49,6 +49,7 @@ PARAM = {
 	'GO filter' : {
 		None, 
 		"GO:0032201", # telomere maintenance via semi-conservative replication
+		"GO:0010833", # telomere maintenance via telomere lengthening
 		"GO:0001525", # angiogenesis
 		"GO:0006281", # DNA-repair
 		"GO:0006955", # immune response

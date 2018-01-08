@@ -194,7 +194,7 @@ if True :
 	np.random.seed(0)
 	
 	def clustering_score(X) :
-		return -np.mean([(x < 0) for x in chain.from_iterable(silhouette(cos_dist(X, 0), S).values())])
+		return np.mean([np.sign(x) for x in chain.from_iterable(silhouette(cos_dist(X, 0), S).values())])
 	
 	xlabel = { 
 		'm' : "Number of genes in order of mean expression",
@@ -228,8 +228,8 @@ if True :
 				for n in Progress()(range(1, len(E)))
 			)
 			
-			x = np.linspace(0.0, 1.0, len(E))[1:].tolist() # relative
-			#x = list(range(1, len(E))) # absolute
+			#x = np.linspace(0.0, 1.0, len(E))[1:].tolist() # relative
+			x = list(range(1, len(E))) # absolute
 			
 			GOXS.append((go, x, s))
 		
@@ -238,10 +238,10 @@ if True :
 			plt.plot(x, s)
 			L.append("{} ({})".format(GO2T[go], len(GO2E[go])))
 		
-		plt.ylim(-1, 0)
+		plt.ylim(-1, +1)
 		
 		plt.xlabel(xlabel[way])
-		plt.ylabel("Clustering index (-fraction of neg. silh. values)")
+		plt.ylabel("Clustering index")
 		
 		plt.legend(L, loc='upper left')
 		
@@ -252,6 +252,7 @@ if True :
 		
 		plt.close()
 
+if ("ONLY1" in sys.argv) : exit()
 
 #[ FOR EACH GO TERM OF INTEREST ... ]#
 
