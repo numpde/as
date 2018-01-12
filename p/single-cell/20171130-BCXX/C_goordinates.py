@@ -26,10 +26,14 @@ from multiprocessing import cpu_count
 from joblib          import Parallel, delayed
 from progressbar     import ProgressBar as Progress
 
+# http://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html
+from sklearn.manifold import TSNE
+
 # https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html
 from scipy.cluster.hierarchy import linkage
 # https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.leaves_list.html
 from scipy.cluster.hierarchy import leaves_list
+
 
 # 
 from networkx.drawing.nx_agraph import graphviz_layout
@@ -206,6 +210,8 @@ GO2WQ = CI_data['GO2WQ']
 
 ## =============== PREPROCESS :
 
+#[ Remove repeated GO categories ]#
+
 H2GO = defaultdict(set)
 for (go, E) in GO2E.items() : H2GO[hash('+'.join(sorted(E)))].add(go)
 H2GO = dict(H2GO)
@@ -215,7 +221,9 @@ assert(all((1 == len(set('+'.join(sorted(GO2E[go])) for go in GO))) for GO in H2
 #
 # Non-redundant GO categories and their aliases
 GO2A = { min(GO) : sorted(GO) for GO in H2GO.values() }
+#
 #print("{} of {} GO categories are non-redundant".format(len(GO2A), len(GO2E)))
+assert(10000 <= len(GO2A) <= 30000), "Unexpected number of GO terms"
 #
 del H2GO
 
@@ -227,13 +235,12 @@ GO2I  = restrict(GO2I, GO2A.keys())
 GO2CI = restrict(GO2CI, GO2A.keys())
 GO2WQ = restrict(GO2WQ, GO2A.keys())
 
-print(len(GO2E))
 
 ## ===================== WORK :
 
 #[ ]#
 
-
+# Clustering index
 def CI(X) :
 	return np.mean([
 		np.sign(x) 
@@ -243,17 +250,7 @@ def CI(X) :
 def go_space() :
 	
 	# Move to the GO feature space
-	TX = goordinate_trafo(sorted(GO2I.items()), n_genes) * X
-	
-	# 
-	Y = np.asarray(TX)
-	
-	# Cut off values <= 1
-	#Y = np.zeros(TX.shape)
-	#Y[TX > 1] = TX[TX > 1]
-	
-	# Log-transform
-	#Y = np.log(Y)
+	Y = goordinate_trafo(sorted(GO2I.items()), n_genes) * X
 	
 	# Nontrivial features
 	Y = [(go, x) for (go, x) in zip(sorted(GO2I.keys()), Y.tolist()) if GO2WQ.get(go, None) and np.sum(x)]
@@ -319,51 +316,49 @@ def plot_go_space(N) :
 		#for i in np.nonzero(Y[:, n])[0] : 
 			#print(GO2T[GO[i]])
 	
-	c = [
-		plt.cm.winter(0.0),  # BC01:    ER+
-		plt.cm.winter(0.4),  # BC02:    ER+
+	cm_a = plt.cm.winter
+	cm_b = plt.cm.cool
+	cm_c = plt.cm.autumn_r
+	
+	# Legend and colors for the tumors
+	(L, c) = zip(*[
+		( "BC01 (ER+)",         cm_a(0.0) ),
+		( "BC02 (ER+)",         cm_a(0.4) ),
 		
-		plt.cm.winter(0.8),  # BC03:    ER+ and HER2+
-		plt.cm.winter(1.0),  # BC03LN
+		( "BC03 (ER+, HER2+)",  cm_a(0.8) ),
+		( "BC03LN",             cm_a(1.0) ),
 		
-		plt.cm.cool  (0.3),  # BC04:    HER2+
-		plt.cm.cool  (0.5),  # BC05:    HER2+
-		plt.cm.cool  (0.9),  # BC06:    HER2+
+		( "BC04 (HER2+)",       cm_b(0.3) ),
+		( "BC05 (HER2+)",       cm_b(0.5) ),
+		( "BC06 (HER2+)",       cm_b(0.9) ),
 		
-		plt.cm.autumn(0.0),  # BC07:    TNBC
-		plt.cm.autumn(0.1),  # BC07LN
-		plt.cm.autumn(0.3),  # BC08:    TNBC
-		plt.cm.autumn(0.5),  # BC09:    TNBC
-		plt.cm.autumn(0.6),  # BC09_Re
-		plt.cm.autumn(0.8),  # BC10:    TNBC
-		plt.cm.autumn(1.0),  # BC11:    TNBC
-	]
+		( "BC07 (TNBC)",        cm_c(0.0) ),
+		( "BC07LN",             cm_c(0.15) ),
+		( "BC08 (TNBC)",        cm_c(0.3) ),
+		( "BC09 (TNBC)",        cm_c(0.5) ),
+		( "BC09_Re",            cm_c(0.6) ),
+		( "BC10 (TNBC)",        cm_c(0.8) ),
+		( "BC11 (TNBC)",        cm_c(1.0) ),
+	])
+	#
+	# Check that the legend corresponds to the cell groups
+	assert(all((l.startswith(k) for (l, k) in zip(L, sorted(G2S.keys())))))
 	
-	
-	#print(X.shape)
-	#for (n, (g, s)) in enumerate(sorted(G2S.items())) :
-		#print(n, [np.mean(X[:, c]) for c in s])
-	
-	
+	# Do a few t-SNE runs
 	for run in range(5) : 
 		plt.close('all')
 		
-		from sklearn.manifold import TSNE
 		Z = TSNE(n_components=2).fit_transform(Y.transpose()).transpose()
 		#
 		for (n, (g, s)) in enumerate(sorted(G2S.items())) :
 			s = [c for c in s if (np.mean(X[:, c]) >= 10)]
-			plt.scatter(*Z[:, s], alpha=0.8, c=c[n], s=7) # c=plt.cm.tab20(n/19)
+			plt.scatter(*Z[:, s], alpha=0.9, c=c[n], s=13, edgecolors='k', lw=0.2)
 		#
-		plt.legend(list(sorted(G2S.keys())), prop={'size': 6}, loc='upper left')
+		plt.legend(L, prop={'size': 5}, loc='upper left')
 		plt.axis('off')
 		
 		for ext in PARAM['ext'] : 
 			plt.savefig(OFILE['tsne'].format(dim=N, run=run, ext=ext))
-		
-		#print(n)
-		#for t in [GO2T[go] for (_, go) in sorted(zip(f, GO), reverse=True)[0:5]] :
-			#print(t)
 	
 	## Reorder the features by similarity
 	#I = list(leaves_list(linkage(Y, method='complete')))

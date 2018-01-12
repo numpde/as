@@ -5,12 +5,15 @@ import obonet
 import networkx
 import pickle
 
+go_obo_url = "http://purl.obolibrary.org/obo/go.obo"
+graph_file = "OUTPUT/0_go-graph/UV/go-graph.pkl"
+
 pickle.dump(
 	obonet.read_obo(
-		"http://purl.obolibrary.org/obo/go.obo"
+		go_obo_url
 	),
 	open(
-		"OUTPUT/0_go-graph/UV/go-graph.pkl",
+		graph_file,
 		'wb'
 	)
 )

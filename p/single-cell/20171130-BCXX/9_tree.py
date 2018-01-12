@@ -10,8 +10,8 @@ import math
 import pickle
 import random
 import inspect
-import networkx as nx
 import numpy as np
+import networkx as nx
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -32,7 +32,7 @@ from networkx.drawing.nx_agraph import graphviz_layout
 
 IFILE = {
 	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
-	'GO=>Info' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
+	'GO graph' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
 	'GO=>CI'   : "OUTPUT/0_go2ci/UV/go2ci.pkl",
 }
 
@@ -55,7 +55,7 @@ for f in OFILE.values() :
 ## ==================== PARAM :
 
 PARAM = {
-	# Top 50 from TXP (2017.01.04)
+	# Top 50 from TXP (2017-01-04)
 	'Top50' : [
 		"GO:0000922", # spindle pole
 		"GO:0007062", # sister chromatid cohesion
@@ -69,7 +69,7 @@ PARAM = {
 		"GO:0005815", # microtubule organizing center
 	],
 	
-	# Last 50 from TXP (2017.01.04)
+	# Last 50 from TXP (2017-01-04)
 	'Last50' : [
 		"GO:0007275", # multicellular organism development
 		"GO:0016567", # protein ubiquitination
@@ -126,8 +126,8 @@ def abbr(t, n) :
 		"negative regulation" : "neg regu",
 		"positive regulation" : "pos regu",
 		"replication" : "repl",
-		"regulation" : "regu",
 		"involved in" : "in",
+		"regulation" : "regu",
 		"synthesis" : "syn",
 		"double" : "dbl",
 		"single" : "sgl",
@@ -168,13 +168,13 @@ N2CI = CI_data['N2CI']
 GO2WQ = CI_data['GO2WQ']
 
 # Are those GO IDs in the GO graph?
-go_not_in_graph = set(GO2E.keys()) - set(pickle.load(open(IFILE['GO=>Info'], 'rb')).nodes())
+go_not_in_graph = set(GO2E.keys()) - set(pickle.load(open(IFILE['GO graph'], 'rb')).nodes())
 print("Note: {} GO IDs are not in the graph".format(len(go_not_in_graph)))
 
 
 ## DEBUG
 
-#G = pickle.load(open(IFILE['GO=>Info'], 'rb'))
+#G = pickle.load(open(IFILE['GO graph'], 'rb'))
 #print(G['GO:0031625'])
 #exit()
 #del G
@@ -220,10 +220,10 @@ class gograph :
 		#
 		#print("Roots:", self.R)
 
-	def subgraph(self, i, depth=8) :
-		I = [i]
-		g = nx.MultiDiGraph()
-		while (I and (depth > 0) and (g.number_of_nodes() < 1000)) :
+	def subgraph(self, i, depth=8, node_limit=1000) :
+		I = [i] # Nodes to be added
+		g = nx.MultiDiGraph() # Temporary
+		while (I and (depth > 0) and (g.number_of_nodes() < node_limit)) :
 			g.add_nodes_from(I)
 			E = [(i, j) for i in I for j in sorted(self.G.predecessors(i))]
 			E = [(i, j) for (i, j) in E if ("obsolete" not in self.G.nodes[j]['name'])]
@@ -233,15 +233,13 @@ class gograph :
 
 		g = nx.MultiDiGraph(nx.subgraph(self.G, g.nodes()))
 		
+		# Remove all metainfo from nodes
+		# (it may break the call to graphviz routine)
 		for n in g.nodes() :
 			info = g.nodes[n]
 			for (k, v) in info.items() :
 				if (k == 'name') : continue
-				#if (k == 'synonym') : print(k, v)
 				g.nodes[n][k] = None
-				#print(g.nodes[n])
-		
-		#exit()
 		
 		return g
 
@@ -276,7 +274,7 @@ def plot_tree(root, go_filename) :
 	print(root, "--", GO2T[root], "({} genes)".format(len(GO2E[root])))
 	
 	# Ontology subtree
-	g = gograph(IFILE['GO=>Info']).subgraph(root)
+	g = gograph(IFILE['GO graph']).subgraph(root)
 	#print(nx.info(g))
 	
 	#print(root, len(GO2E[root]), GO2E[root])
@@ -378,7 +376,7 @@ def plot_tree(root, go_filename) :
 	xlim = plt.xlim() # Range of current GO term sizes
 	
 	#ax.labelsize = 'small'
-	go2size = dict(zip(node_style['!']['nodelist'], node_style['!']['node_size']))
+	go2size  = dict(zip(node_style['!']['nodelist'], node_style['!']['node_size']))
 	go2color = dict(zip(node_style['!']['nodelist'], node_style['!']['node_color']))
 	for go in g.nodes :
 		#if not (go in GO2E) : continue
@@ -400,19 +398,19 @@ def plot_tree(root, go_filename) :
 	plt.close()
 
 
-def plot_trees() :
+def plot_all_trees() :
 	
-	Parallel(n_jobs=5)(
+	Parallel(n_jobs=PARAM['#proc'])(
 		delayed(plot_tree)(root, str(root).replace(':', '-'))
 		for root in sorted(PARAM['GO filter'])
 	)
 	
-	Parallel(n_jobs=5)(
+	Parallel(n_jobs=PARAM['#proc'])(
 		delayed(plot_tree)(root, "Top50_" + x)
 		for (root, x) in zip(PARAM['Top50'], ascii_lowercase)
 	)
 	
-	Parallel(n_jobs=5)(
+	Parallel(n_jobs=PARAM['#proc'])(
 		delayed(plot_tree)(root, "Last50_" + x)
 		for (root, x) in zip(PARAM['Last50'], ascii_lowercase)
 	)
@@ -420,6 +418,9 @@ def plot_trees() :
 
 ###
 
-plot_trees()
-plot_overview()
+def main() :
+	plot_all_trees()
+	plot_overview()
 
+
+main()

@@ -14,4 +14,4 @@ p4:
 	rsync -Rv $$(ls OUTPUT/4_*_a/*/*/*.png) $$dest;
 
 6b:
-	echo "export PYTHONUNBUFFERED=1; source ~/.bashrc; python3 6_low-high-end_b.py 1> 6b-cout.log 2> 6b-cerr.log" | at now
+	S=6_low-high-end_b.py; echo "export PYTHONUNBUFFERED=1; source ~/.bashrc; python3 $$S 1> $$S-cout.log 2> $$S-cerr.log" | at now

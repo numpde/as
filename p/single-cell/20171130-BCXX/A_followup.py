@@ -80,6 +80,7 @@ PARAM = {
 	'GO (cluster)' : {
 		'GO:0032201', # telomere maintenance via semi-conservative replication
 		'GO:0010833', # telomere maintenance via telomere lengthening
+		'GO:0005333', # norepinephrine transmembrane transporter activity
 	},
 	
 	

@@ -10,7 +10,7 @@ from itertools   import chain
 from progressbar import ProgressBar as Progress
 from joblib      import Parallel, delayed
 
-#https://pypi.python.org/pypi/biomart/0.8.0
+# https://pypi.python.org/pypi/biomart/0.8.0
 from biomart     import BiomartServer
 
 ## ==================== INPUT :

@@ -50,6 +50,9 @@ for f in OFILE.values() :
 PARAM = {
 	# Number of parallel computing processes
 	'#proc' : min(12, math.ceil(cpu_count() / 1.5)),
+	
+	# Window width for the windowed quantiles
+	'window width' : 2,
 }
 
 # Test mode
@@ -201,8 +204,10 @@ def gowq_from_go(go) :
 	
 	if (len(E) == 0) : return (go, None)
 
+	w = math.sqrt(PARAM['window width'])
+
 	p = stats.percentileofscore(
-		[ci for (n, CI) in N2CI.items() for ci in CI if (len(E)/2 <= n <= len(E)*2)],
+		[ci for (n, CI) in N2CI.items() for ci in CI if (len(E)/w <= n <= len(E)*w)],
 		GO2CI[go]
 	)
 	
