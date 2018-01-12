@@ -1,0 +1,2636 @@
+GO ID	OBO	TXP
+GO:0000005	None	obsolete ribosomal chaperone activity
+GO:0000006	high-affinity zinc transmembrane transporter activity	high-affinity zinc uptake transmembrane transporter activity
+GO:0000008	None	obsolete thioredoxin
+GO:0000020	None	obsolete negative regulation of recombination within rDNA repeats
+GO:0000036	acyl carrier activity	ACP phosphopantetheine attachment site binding involved in fatty acid biosynthetic process
+GO:0000039	None	obsolete plasma membrane long-chain fatty acid transporter
+GO:0000040	None	low-affinity iron ion transmembrane transport
+GO:0000044	None	obsolete ascorbate stabilization
+GO:0000047	None	obsolete Rieske iron-sulfur protein
+GO:0000051	None	obsolete urea cycle intermediate metabolic process
+GO:0000059	None	obsolete protein import into nucleus, docking
+GO:0000067	None	obsolete DNA replication and chromosome cycle
+GO:0000072	None	obsolete M phase specific microtubule process
+GO:0000078	None	obsolete cytokinesis after mitosis checkpoint
+GO:0000094	None	obsolete septin assembly and septum formation
+GO:0000108	None	obsolete repairosome
+GO:0000114	None	obsolete regulation of transcription involved in G1 phase of mitotic cell cycle
+GO:0000115	None	obsolete regulation of transcription involved in S phase of mitotic cell cycle
+GO:0000116	None	obsolete regulation of transcription involved in G2-phase of mitotic cell cycle
+GO:0000174	None	obsolete inactivation of MAPK (mating sensu Saccharomyces)
+GO:0000180	None	obsolete cytosolic large ribosomal subunit
+GO:0000181	None	obsolete cytosolic small ribosomal subunit
+GO:0000190	None	obsolete MAPKKK cascade (pseudohyphal growth)
+GO:0000191	None	obsolete activation of MAPKKK (pseudohyphal growth)
+GO:0000192	None	obsolete activation of MAPKK (pseudohyphal growth)
+GO:0000193	None	obsolete activation of MAPK (pseudohyphal growth)
+GO:0000194	None	obsolete inactivation of MAPK (pseudohyphal growth)
+GO:0000195	None	obsolete nuclear translocation of MAPK (pseudohyphal growth)
+GO:0000202	None	obsolete MAPKKK cascade during sporulation (sensu Saccharomyces)
+GO:0000203	None	obsolete activation of MAPKKK during sporulation (sensu Saccharomyces)
+GO:0000204	None	obsolete activation of MAPKK during sporulation (sensu Saccharomyces)
+GO:0000205	None	obsolete activation of MAPK during sporulation (sensu Saccharomyces)
+GO:0000206	None	obsolete inactivation of MAPK during sporulation (sensu Saccharomyces)
+GO:0000207	None	obsolete nuclear translocation of MAPK during sporulation (sensu Saccharomyces)
+GO:0000211	None	obsolete protein degradation tagging activity
+GO:0000216	None	obsolete M/G1 transition of mitotic cell cycle
+GO:0000219	None	obsolete vacuolar hydrogen-transporting ATPase
+GO:0000230	None	obsolete nuclear mitotic chromosome
+GO:0000231	None	obsolete cytoplasmic mitotic chromosome
+GO:0000232	None	obsolete nuclear interphase chromosome
+GO:0000233	None	obsolete cytoplasmic interphase chromosome
+GO:0000258	None	obsolete isoleucine/valine:sodium symporter activity
+GO:0000259	None	obsolete intracellular nucleoside transmembrane transporter activity
+GO:0000260	None	obsolete hydrogen-translocating V-type ATPase activity
+GO:0000261	None	obsolete sodium-translocating V-type ATPase activity
+GO:0000263	None	obsolete heterotrimeric G-protein GTPase, alpha-subunit
+GO:0000264	None	obsolete heterotrimeric G-protein GTPase, beta-subunit
+GO:0000265	None	obsolete heterotrimeric G-protein GTPase, gamma-subunit
+GO:0000267	None	obsolete cell fraction
+GO:0000284	None	obsolete shmoo orientation
+GO:0000299	None	obsolete integral to membrane of membrane fraction
+GO:0000300	None	obsolete peripheral to membrane of membrane fraction
+GO:0000362	None	obsolete first U2-type spliceosomal transesterification activity
+GO:0000363	None	obsolete first U12-type spliceosomal transesterification activity
+GO:0000364	None	obsolete second U2-type spliceosomal transesterification activity
+GO:0000367	None	obsolete second U12-type spliceosomal transesterification activity
+GO:0000407	phagophore assembly site	pre-autophagosomal structure
+GO:0000504	None	obsolete proteasome regulatory particle (sensu Bacteria)
+GO:0000739	None	obsolete DNA strand annealing activity
+GO:0000763	None	obsolete cell morphogenesis involved in unidirectional conjugation
+GO:0000764	None	obsolete cellular morphogenesis involved in pheromone-induced unidirectional conjugation
+GO:0000826	None	obsolete inositol pyrophosphate synthase activity
+GO:0000917	division septum assembly	barrier septum assembly
+GO:0000918	division septum site selection	barrier septum site selection
+GO:0000935	division septum	barrier septum
+GO:0000975	None	regulatory region DNA binding
+GO:0000978	RNA polymerase II proximal promoter sequence-specific DNA binding	RNA polymerase II core promoter proximal region sequence-specific DNA binding
+GO:0000982	transcription factor activity, RNA polymerase II proximal promoter sequence-specific DNA binding	transcription factor activity, RNA polymerase II core promoter proximal region sequence-specific binding
+GO:0000983	transcription factor activity, RNA polymerase II core promoter sequence-specific DNA binding	transcription factor activity, RNA polymerase II core promoter sequence-specific
+GO:0000986	bacterial-type proximal promoter sequence-specific DNA binding	bacterial-type RNA polymerase core promoter proximal region sequence-specific DNA binding
+GO:0000987	proximal promoter sequence-specific DNA binding	core promoter proximal region sequence-specific DNA binding
+GO:0000997	None	mitochondrial RNA polymerase core promoter sequence-specific DNA binding
+GO:0001018	mitochondrial promoter sequence-specific DNA binding	mitochondrial RNA polymerase regulatory region DNA binding
+GO:0001044	None	mitochondrial RNA polymerase regulatory region sequence-specific DNA binding
+GO:0001045	None	mitochondrial RNA polymerase core promoter proximal region sequence-specific DNA binding
+GO:0001070	RNA binding transcription regulator activity	RNA binding transcription factor activity
+GO:0001071	None	nucleic acid binding transcription factor activity
+GO:0001074	transcription factor activity, RNA polymerase II proximal promoter sequence-specific DNA binding involved in preinitiation complex assembly	transcription factor activity, RNA polymerase II core promoter proximal region sequence-specific binding involved in preinitiation complex assembly
+GO:0001077	transcriptional activator activity, RNA polymerase II proximal promoter sequence-specific DNA binding	transcriptional activator activity, RNA polymerase II core promoter proximal region sequence-specific binding
+GO:0001078	transcriptional repressor activity, RNA polymerase II proximal promoter sequence-specific DNA binding	transcriptional repressor activity, RNA polymerase II core promoter proximal region sequence-specific binding
+GO:0001131	transcription factor activity, bacterial-type RNA polymerase proximal promoter sequence-specific DNA binding	transcription factor activity, bacterial-type RNA polymerase core promoter proximal region sequence-specific binding
+GO:0001140	transcriptional activator activity, bacterial-type RNA polymerase proximal promoter sequence-specific DNA binding	transcriptional activator activity, bacterial-type RNA polymerase core promoter proximal region sequence-specific binding
+GO:0001141	transcriptional repressor activity, bacterial-type RNA polymerase proximal promoter sequence-specific DNA binding	transcriptional repressor activity, bacterial-type RNA polymerase core promoter proximal region sequence-specific binding
+GO:0001143	transcription factor activity, mitochondrial RNA polymerase core promoter sequence-specific DNA binding	mitochondrial RNA polymerase core promoter sequence-specific DNA binding transcription factor activity
+GO:0001144	transcription factor activity, mitochondrial proximal promoter sequence-specific binding	transcription factor activity, mitochondrial RNA polymerase core promoter proximal region sequence-specific binding
+GO:0001159	None	core promoter proximal region DNA binding
+GO:0001201	RNA polymerase II transcription factor activity, metal ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcription factor activity, metal ion regulated core promoter proximal region sequence-specific binding
+GO:0001202	RNA polymerase II transcription factor activity, copper ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcription factor activity, copper ion regulated core promoter proximal region sequence-specific binding
+GO:0001203	RNA polymerase II transcription factor activity, zinc ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcription factor activity, zinc ion regulated core promoter proximal region sequence-specific DNA binding
+GO:0001205	transcriptional activator activity, RNA polymerase II distal enhancer sequence-specific DNA binding	transcriptional activator activity, RNA polymerase II distal enhancer sequence-specific binding
+GO:0001211	RNA polymerase II transcriptional activator activity, copper ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcriptional activator activity, copper ion regulated core promoter proximal region sequence-specific binding
+GO:0001212	RNA polymerase II transcriptional activator activity, zinc ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcriptional activator activity, zinc ion regulated core promoter proximal region sequence-specific binding
+GO:0001213	RNA polymerase II transcriptional activator activity, metal ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcriptional activator activity, metal ion regulated core promoter proximal region sequence-specific binding
+GO:0001214	RNA polymerase II transcriptional repressor activity, metal ion regulated proximal promoter sequence-specific DNA binding	RNA polymerase II transcriptional repressor activity, metal ion regulated core promoter proximal region sequence-specific binding
+GO:0001227	transcriptional repressor activity, RNA polymerase II transcription regulatory region sequence-specific DNA binding	transcriptional repressor activity, RNA polymerase II transcription regulatory region sequence-specific binding
+GO:0001228	transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific DNA binding	transcriptional activator activity, RNA polymerase II transcription regulatory region sequence-specific binding
+GO:0001309	None	obsolete age-dependent telomere shortening
+GO:0001404	None	obsolete invasive growth
+GO:0001506	None	obsolete neurotransmitter biosynthetic process and storage
+GO:0001509	None	obsolete legumain activity
+GO:0001511	None	obsolete fibrillin
+GO:0001524	None	obsolete globin
+GO:0001526	None	obsolete proteoglycan sulfate transfer
+GO:0001528	None	obsolete elastin
+GO:0001529	None	obsolete elastin
+GO:0001557	None	obsolete metabolic process resulting in cell growth
+GO:0001564	None	obsolete resistance to pathogenic protozoa
+GO:0001577	None	obsolete galectin
+GO:0001584	None	obsolete rhodopsin-like receptor activity
+GO:0001597	None	obsolete apelin-like receptor
+GO:0001598	None	obsolete chemokine receptor-like receptor activity
+GO:0001603	None	obsolete vasopressin-like receptor activity
+GO:0001606	None	obsolete GPR37/endothelin B-like receptor activity
+GO:0001615	None	obsolete thyrotropin releasing hormone and secretagogue-like receptors activity
+GO:0001617	None	obsolete growth hormone secretagogue-like receptor activity
+GO:0001619	None	obsolete lysosphingolipid and lysophosphatidic acid receptor activity
+GO:0001627	None	obsolete leucine-rich G-protein receptor-like receptor activity
+GO:0001628	None	obsolete gastropyloric receptor activity
+GO:0001629	None	obsolete G-protein receptor 45-like receptor activity
+GO:0001630	None	obsolete GP40-like receptor activity
+GO:0001633	None	obsolete secretin-like receptor activity
+GO:0001636	None	obsolete corticotrophin-releasing factor gastric inhibitory peptide-like receptor activity
+GO:0001683	None	obsolete axonemal dynein heavy chain
+GO:0001684	None	obsolete axonemal dynein intermediate chain
+GO:0001685	None	obsolete axonemal dynein intermediate light chain
+GO:0001686	None	obsolete axonemal dynein light chain
+GO:0001687	None	obsolete cytoplasmic dynein heavy chain
+GO:0001688	None	obsolete cytoplasmic dynein intermediate chain
+GO:0001689	None	obsolete cytoplasmic dynein intermediate light chain
+GO:0001690	None	obsolete cytoplasmic dynein light chain
+GO:0001721	None	obsolete intermediate filament associated protein
+GO:0001722	None	obsolete type I intermediate filament associated protein
+GO:0001723	None	obsolete type II intermediate filament associated protein
+GO:0001724	None	obsolete type III intermediate filament associated protein
+GO:0001753	None	obsolete adult eye photoreceptor development (sensu Drosophila)
+GO:0001950	None	obsolete plasma membrane enriched fraction
+GO:0002198	None	obsolete S/G2 transition of mitotic cell cycle
+GO:0003001	None	obsolete generation of a signal involved in cell-cell signaling
+GO:0003074	None	obsolete regulation of diuresis
+GO:0003077	None	obsolete negative regulation of diuresis
+GO:0003078	None	obsolete regulation of natriuresis
+GO:0003079	None	obsolete positive regulation of natriuresis
+GO:0003080	None	obsolete negative regulation of natriuresis
+GO:0003082	None	obsolete positive regulation of renal output by angiotensin
+GO:0003102	None	obsolete positive regulation of diuresis by angiotensin
+GO:0003103	None	obsolete positive regulation of diuresis
+GO:0003107	None	obsolete positive regulation of natriuresis by angiotensin
+GO:0003141	None	obsolete transforming growth factor beta receptor signaling pathway involved in determination of lateral mesoderm left/right asymmetry
+GO:0003673	None	obsolete Gene_Ontology
+GO:0003675	None	obsolete protein
+GO:0003683	None	obsolete lamin/chromatin binding
+GO:0003685	None	obsolete DNA repair protein
+GO:0003686	None	obsolete DNA repair enzyme
+GO:0003687	None	obsolete DNA replication factor
+GO:0003694	None	obsolete plasmid binding
+GO:0003700	DNA binding transcription factor activity	transcription factor activity, sequence-specific DNA binding
+GO:0003701	None	obsolete RNA polymerase I transcription factor activity
+GO:0003702	None	obsolete RNA polymerase II transcription factor activity
+GO:0003704	None	obsolete specific RNA polymerase II transcription factor activity
+GO:0003706	None	obsolete ligand-regulated transcription factor activity
+GO:0003709	None	obsolete RNA polymerase III transcription factor activity
+GO:0003711	None	obsolete transcription elongation regulator activity
+GO:0003715	None	obsolete transcription termination factor activity
+GO:0003716	None	obsolete RNA polymerase I transcription termination factor activity
+GO:0003717	None	obsolete RNA polymerase II transcription termination factor activity
+GO:0003718	None	obsolete RNA polymerase III transcription termination factor activity
+GO:0003719	None	obsolete transcription factor binding, cytoplasmic sequestering
+GO:0003731	None	obsolete mRNA cap binding
+GO:0003732	None	obsolete snRNA cap binding
+GO:0003733	None	obsolete ribonucleoprotein
+GO:0003734	None	obsolete small nuclear ribonucleoprotein
+GO:0003750	None	obsolete cell cycle regulator
+GO:0003754	None	obsolete chaperone activity
+GO:0003759	None	obsolete glycoprotein-specific chaperone activity
+GO:0003762	None	obsolete histone-specific chaperone activity
+GO:0003763	None	obsolete chaperonin ATPase activity
+GO:0003767	None	obsolete co-chaperone activity
+GO:0003772	None	obsolete co-chaperonin activity
+GO:0003773	None	obsolete heat shock protein activity
+GO:0003775	None	obsolete axonemal motor activity
+GO:0003776	None	obsolete muscle motor activity
+GO:0003778	None	obsolete dynactin motor
+GO:0003780	None	obsolete actin cross-linking activity
+GO:0003781	None	obsolete actin bundling activity
+GO:0003782	None	obsolete F-actin capping activity
+GO:0003783	None	obsolete barbed-end actin capping activity
+GO:0003784	None	obsolete barbed-end actin capping/severing activity
+GO:0003787	None	obsolete actin depolymerizing activity
+GO:0003788	None	obsolete actin monomer sequestering activity
+GO:0003789	None	obsolete actin filament severing activity
+GO:0003790	None	obsolete actin modulating activity
+GO:0003791	None	obsolete membrane associated actin binding
+GO:0003792	None	obsolete regulation of actin thin filament length activity
+GO:0003793	None	obsolete defense/immunity protein activity
+GO:0003794	None	obsolete acute-phase response protein activity
+GO:0003795	None	obsolete antimicrobial peptide activity
+GO:0003797	None	obsolete antibacterial peptide activity
+GO:0003798	None	obsolete male-specific antibacterial peptide activity
+GO:0003799	None	obsolete antifungal peptide activity
+GO:0003800	None	obsolete antiviral response protein activity
+GO:0003801	None	obsolete blood coagulation factor activity
+GO:0003802	None	obsolete coagulation factor VIIa activity
+GO:0003803	None	obsolete coagulation factor IXa activity
+GO:0003804	None	obsolete coagulation factor Xa activity
+GO:0003805	None	obsolete coagulation factor XIa activity
+GO:0003806	None	obsolete coagulation factor XIIa activity
+GO:0003807	None	obsolete plasma kallikrein activity
+GO:0003808	None	obsolete protein C (activated) activity
+GO:0003809	None	obsolete thrombin activity
+GO:0003811	None	obsolete complement activity
+GO:0003812	None	obsolete alternative-complement-pathway C3/C5 convertase activity
+GO:0003813	None	obsolete classical-complement-pathway C3/C5 convertase activity
+GO:0003815	None	obsolete complement component C1r activity
+GO:0003816	None	obsolete complement component C1s activity
+GO:0003817	None	obsolete complement factor D activity
+GO:0003818	None	obsolete complement factor I activity
+GO:0003819	None	obsolete major histocompatibility complex antigen
+GO:0003820	None	obsolete class I major histocompatibility complex antigen
+GO:0003821	None	obsolete class II major histocompatibility complex antigen
+GO:0003822	None	obsolete MHC-interacting protein
+GO:0003840	None	obsolete gamma-glutamyltransferase activity
+GO:0003892	None	obsolete proliferating cell nuclear antigen
+GO:0003900	None	obsolete DNA-directed RNA polymerase I activity
+GO:0003901	None	obsolete DNA-directed RNA polymerase II activity
+GO:0003902	None	obsolete DNA-directed RNA polymerase III activity
+GO:0003925	None	obsolete small monomeric GTPase activity
+GO:0003926	None	obsolete ARF small monomeric GTPase activity
+GO:0003927	None	obsolete heterotrimeric G-protein GTPase activity
+GO:0003928	None	obsolete RAB small monomeric GTPase activity
+GO:0003929	None	obsolete RAN small monomeric GTPase activity
+GO:0003930	None	obsolete RAS small monomeric GTPase activity
+GO:0003931	None	obsolete Rho small monomeric GTPase activity
+GO:0003932	None	obsolete SAR small monomeric GTPase activity
+GO:0003936	None	obsolete hydrogen-transporting two-sector ATPase activity
+GO:0003966	None	obsolete RNA-directed DNA polymerase, transposon encoded
+GO:0003967	None	obsolete RNA-directed DNA polymerase, group II intron encoded
+GO:0003969	None	obsolete RNA editase activity
+GO:0004005	None	obsolete plasma membrane cation-transporting ATPase
+GO:0004007	None	obsolete heavy metal-exporting ATPase activity
+GO:0004009	None	obsolete ATP-binding cassette (ABC) transporter activity
+GO:0004050	None	obsolete apyrase activity
+GO:0004086	None	obsolete carbamoyl-phosphate synthase activity
+GO:0004171	None	obsolete deoxyhypusine synthase activity
+GO:0004172	None	obsolete ecdysteroid UDP-glucosyl/UDP-glucuronosyl transferase activity
+GO:0004178	None	obsolete leucyl aminopeptidase activity
+GO:0004179	None	obsolete membrane alanyl aminopeptidase activity
+GO:0004182	None	obsolete carboxypeptidase A activity
+GO:0004183	None	obsolete carboxypeptidase E activity
+GO:0004184	None	obsolete lysine carboxypeptidase activity
+GO:0004186	None	obsolete carboxypeptidase C activity
+GO:0004187	None	obsolete carboxypeptidase D activity
+GO:0004188	None	obsolete serine-type Pro-X carboxypeptidase activity
+GO:0004189	None	obsolete tubulinyl-Tyr carboxypeptidase activity
+GO:0004191	None	obsolete barrierpepsin activity
+GO:0004192	None	obsolete cathepsin D activity
+GO:0004193	None	obsolete cathepsin E activity
+GO:0004194	None	obsolete pepsin A activity
+GO:0004195	None	obsolete renin activity
+GO:0004196	None	obsolete saccharopepsin activity
+GO:0004200	None	obsolete signaling (initiator) caspase activity
+GO:0004201	None	obsolete caspase-1 activity
+GO:0004202	None	obsolete caspase-2 activity
+GO:0004203	None	obsolete caspase-4 activity
+GO:0004204	None	obsolete caspase-5 activity
+GO:0004205	None	obsolete caspase-8 activity
+GO:0004206	None	obsolete caspase-10 activity
+GO:0004207	None	obsolete effector caspase activity
+GO:0004208	None	obsolete caspase-3 activity
+GO:0004209	None	obsolete caspase-6 activity
+GO:0004210	None	obsolete caspase-7 activity
+GO:0004211	None	obsolete caspase-9 activity
+GO:0004212	None	obsolete lysosomal cysteine-type endopeptidase
+GO:0004213	None	obsolete cathepsin B activity
+GO:0004214	None	obsolete dipeptidyl-peptidase I activity
+GO:0004215	None	obsolete cathepsin H activity
+GO:0004216	None	obsolete cathepsin K activity
+GO:0004217	None	obsolete cathepsin L activity
+GO:0004218	None	obsolete cathepsin S activity
+GO:0004219	None	obsolete pyroglutamyl-peptidase I activity
+GO:0004221	None	obsolete ubiquitin thiolesterase activity
+GO:0004226	None	obsolete Gly-X carboxypeptidase activity
+GO:0004228	None	obsolete gelatinase A activity
+GO:0004229	None	obsolete gelatinase B activity
+GO:0004230	None	obsolete glutamyl aminopeptidase activity
+GO:0004231	None	obsolete insulysin activity
+GO:0004232	None	obsolete interstitial collagenase activity
+GO:0004234	None	obsolete macrophage elastase activity
+GO:0004235	None	obsolete matrilysin activity
+GO:0004237	None	obsolete membrane dipeptidase activity
+GO:0004238	None	obsolete meprin A activity
+GO:0004239	None	obsolete methionyl aminopeptidase activity
+GO:0004240	None	obsolete mitochondrial processing peptidase activity
+GO:0004241	None	obsolete alpha-mitochondrial processing peptidase
+GO:0004242	None	obsolete beta-mitochondrial processing peptidase
+GO:0004243	None	obsolete mitochondrial intermediate peptidase activity
+GO:0004244	None	obsolete mitochondrial inner membrane peptidase activity
+GO:0004245	None	obsolete neprilysin activity
+GO:0004246	None	obsolete peptidyl-dipeptidase A activity
+GO:0004247	None	obsolete saccharolysin activity
+GO:0004248	None	obsolete stromelysin 1 activity
+GO:0004249	None	obsolete stromelysin 3 activity
+GO:0004250	None	obsolete aminopeptidase I activity
+GO:0004251	None	obsolete X-Pro dipeptidase activity
+GO:0004253	None	obsolete gamma-renin activity
+GO:0004254	None	obsolete acylaminoacyl-peptidase activity
+GO:0004258	None	obsolete vacuolar carboxypeptidase Y
+GO:0004261	None	obsolete cathepsin G activity
+GO:0004262	None	obsolete cerevisin activity
+GO:0004263	None	obsolete chymotrypsin activity
+GO:0004274	None	obsolete dipeptidyl-peptidase IV activity
+GO:0004275	None	obsolete enteropeptidase activity
+GO:0004276	None	obsolete furin activity
+GO:0004277	None	obsolete granzyme A activity
+GO:0004278	None	obsolete granzyme B activity
+GO:0004281	None	obsolete pancreatic elastase II activity
+GO:0004283	None	obsolete plasmin activity
+GO:0004284	None	obsolete acrosin activity
+GO:0004285	None	obsolete proprotein convertase 1 activity
+GO:0004286	None	obsolete proprotein convertase 2 activity
+GO:0004287	None	obsolete prolyl oligopeptidase activity
+GO:0004289	None	obsolete subtilase activity
+GO:0004290	None	obsolete kexin activity
+GO:0004291	None	obsolete subtilisin activity
+GO:0004293	None	obsolete tissue kallikrein activity
+GO:0004294	None	obsolete tripeptidyl-peptidase II activity
+GO:0004295	None	obsolete trypsin activity
+GO:0004299	None	obsolete proteasome endopeptidase activity
+GO:0004323	None	obsolete multicopper ferroxidase iron transport mediator activity
+GO:0004327	None	obsolete formaldehyde dehydrogenase (glutathione) activity
+GO:0004374	None	obsolete glycine cleavage system
+GO:0004384	None	obsolete membrane-associated guanylate kinase
+GO:0004428	None	obsolete inositol or phosphatidylinositol kinase activity
+GO:0004432	None	obsolete 1-phosphatidylinositol-4-phosphate kinase, class IA
+GO:0004433	None	obsolete 1-phosphatidylinositol-4-phosphate kinase, class IB
+GO:0004437	None	obsolete inositol or phosphatidylinositol phosphatase activity
+GO:0004442	None	obsolete inositol-1,4,-bisphosphate 3-phosphatase
+GO:0004443	None	obsolete inositol-1,4,-bisphosphate 4-phosphatase
+GO:0004444	None	obsolete inositol-1,4,5-trisphosphate 1-phosphatase
+GO:0004600	None	obsolete cyclophilin
+GO:0004624	None	obsolete secreted phospholipase A2 activity
+GO:0004625	None	obsolete calcium-dependent secreted phospholipase A2 activity
+GO:0004626	None	obsolete cytosolic phospholipase A2 activity
+GO:0004627	None	obsolete calcium-dependent cytosolic phospholipase A2 activity
+GO:0004628	None	obsolete calcium-independent cytosolic phospholipase A2 activity
+GO:0004680	None	obsolete casein kinase activity
+GO:0004681	None	obsolete casein kinase I activity
+GO:0004682	None	obsolete protein kinase CK2 activity
+GO:0004717	None	obsolete focal adhesion kinase activity
+GO:0004786	None	obsolete Mn, Fe superoxide dismutase
+GO:0004868	None	obsolete serpin
+GO:0004879	nuclear receptor activity	RNA polymerase II transcription factor activity, ligand-activated sequence-specific DNA binding
+GO:0004892	None	obsolete B cell receptor activity
+GO:0004894	None	obsolete T cell receptor activity
+GO:0004895	None	obsolete cell adhesion receptor activity
+GO:0004898	None	obsolete gp130
+GO:0004927	None	obsolete sevenless receptor activity
+GO:0004928	None	obsolete frizzled receptor activity
+GO:0004929	None	obsolete frizzled-2 receptor activity
+GO:0004931	extracellularly ATP-gated cation channel activity	extracellular ATP-gated cation channel activity
+GO:0004973	None	obsolete N-methyl-D-aspartate receptor-associated protein activity
+GO:0004986	None	obsolete delta-opioid receptor activity
+GO:0004987	None	obsolete kappa-opioid receptor activity
+GO:0004988	None	obsolete mu-opioid receptor activity
+GO:0005012	None	obsolete Neu/ErbB-2 receptor activity
+GO:0005013	None	obsolete neurotrophin TRK receptor activity
+GO:0005014	None	obsolete neurotrophin TRKA receptor activity
+GO:0005015	None	obsolete neurotrophin TRKB receptor activity
+GO:0005016	None	obsolete neurotrophin TRKC receptor activity
+GO:0005027	None	obsolete NGF/TNF (6 C-domain) receptor activity
+GO:0005028	None	obsolete CD40 receptor activity
+GO:0005029	None	obsolete CD27 receptor activity
+GO:0005037	None	obsolete death receptor adaptor protein activity
+GO:0005038	None	obsolete death receptor interacting protein activity
+GO:0005039	None	obsolete death receptor-associated factor activity
+GO:0005045	None	obsolete endoplasmic reticulum receptor activity
+GO:0005050	None	obsolete peroxisome receptor
+GO:0005054	None	obsolete peroxisome integral membrane receptor
+GO:0005061	None	obsolete aryl hydrocarbon receptor nuclear translocator activity
+GO:0005065	None	obsolete heterotrimeric G-protein
+GO:0005066	None	obsolete transmembrane receptor protein tyrosine kinase signaling protein activity
+GO:0005071	None	obsolete transmembrane receptor protein serine/threonine kinase signaling protein activity
+GO:0005073	None	obsolete common-partner SMAD protein
+GO:0005074	None	obsolete inhibitory SMAD protein
+GO:0005075	None	obsolete pathway-specific SMAD protein
+GO:0005076	None	obsolete receptor signaling protein serine/threonine kinase signaling protein activity
+GO:0005077	None	obsolete MAP-kinase anchoring activity
+GO:0005079	None	obsolete protein kinase A anchoring activity
+GO:0005081	None	obsolete receptor signaling protein serine/threonine phosphatase signaling protein activity
+GO:0005082	None	obsolete receptor signaling protein tyrosine phosphatase signaling protein activity
+GO:0005106	None	obsolete ephrin
+GO:0005107	None	obsolete GPI-linked ephrin
+GO:0005108	None	obsolete transmembrane ephrin
+GO:0005155	None	obsolete epidermal growth factor receptor activating ligand activity
+GO:0005156	None	obsolete epidermal growth factor receptor inhibiting ligand activity
+GO:0005177	None	obsolete neuroligin
+GO:0005180	None	obsolete peptide hormone
+GO:0005181	None	obsolete glycopeptide hormone
+GO:0005182	None	obsolete lipopeptide hormone
+GO:0005187	None	obsolete storage protein
+GO:0005188	None	obsolete larval serum protein (sensu Insecta)
+GO:0005189	None	obsolete milk protein
+GO:0005190	None	obsolete seminal fluid protein
+GO:0005191	None	obsolete acidic epididymal glycoprotein
+GO:0005192	None	obsolete urinary protein
+GO:0005193	None	obsolete major urinary protein
+GO:0005194	None	obsolete cell adhesion molecule activity
+GO:0005202	None	obsolete collagen
+GO:0005203	None	obsolete proteoglycan
+GO:0005204	None	obsolete chondroitin sulfate proteoglycan
+GO:0005205	None	obsolete chondroitin sulfate/dermatan sulfate proteoglycan
+GO:0005206	None	obsolete heparin sulfate proteoglycan
+GO:0005207	None	obsolete extracellular matrix glycoprotein
+GO:0005208	None	obsolete amyloid protein
+GO:0005209	None	obsolete plasma protein
+GO:0005211	None	obsolete plasma glycoprotein
+GO:0005234	extracellularly glutamate-gated ion channel activity	extracellular-glutamate-gated ion channel activity
+GO:0005240	None	obsolete glycine receptor-associated protein
+GO:0005241	None	obsolete inward rectifier channel
+GO:0005260	intracellularly ATP-gated chloride channel activity	intracellular ATPase-gated chloride channel activity
+GO:0005274	allantoin:proton symporter activity	allantoin uptake transmembrane transporter activity
+GO:0005281	None	obsolete general amino acid permease activity
+GO:0005301	None	obsolete valine/tyrosine/tryptophan permease activity
+GO:0005311	None	obsolete sodium:dicarboxylate/tricarboxylate symporter activity
+GO:0005318	None	obsolete phosphate:hydrogen symporter
+GO:0005320	None	obsolete apolipoprotein
+GO:0005321	None	obsolete high-density lipoprotein
+GO:0005322	None	obsolete low-density lipoprotein
+GO:0005323	None	obsolete very-low-density lipoprotein
+GO:0005325	None	peroxisomal fatty-acyl-CoA transporter activity
+GO:0005344	oxygen carrier activity	oxygen transporter activity
+GO:0005373	None	obsolete heavy metal ion porter activity
+GO:0005376	None	obsolete plasma membrane copper transporter
+GO:0005377	None	obsolete intracellular copper ion transporter
+GO:0005396	None	obsolete transmembrane conductance regulator activity
+GO:0005400	None	obsolete peroxisomal membrane transporter
+GO:0005429	None	chromaffin granule amine transmembrane transporter activity
+GO:0005430	None	synaptic vesicle amine transmembrane transporter activity
+GO:0005468	None	obsolete small-molecule carrier or transporter
+GO:0005472	None	FAD carrier activity
+GO:0005479	None	obsolete vacuolar assembly
+GO:0005480	None	obsolete vesicle transport
+GO:0005481	None	obsolete vesicle fusion
+GO:0005482	None	obsolete vesicle targeting
+GO:0005489	None	obsolete electron transporter activity
+GO:0005490	None	obsolete cytochrome P450
+GO:0005505	None	obsolete heavy metal binding
+GO:0005508	None	obsolete copper/cadmium binding
+GO:0005514	None	obsolete calcium ion storage activity
+GO:0005517	None	obsolete calmodulin inhibitor activity
+GO:0005530	None	obsolete lectin
+GO:0005531	None	obsolete galactose binding lectin
+GO:0005532	None	obsolete mannose binding lectin
+GO:0005533	None	obsolete N-acetylgalactosamine lectin
+GO:0005541	None	obsolete acyl-CoA or acyl binding
+GO:0005551	None	obsolete ubiquitin
+GO:0005552	None	obsolete polyubiquitin
+GO:0005553	None	obsolete ubiquitin-ribosomal protein fusion protein
+GO:0005555	None	obsolete blood group antigen
+GO:0005557	None	obsolete lymphocyte antigen
+GO:0005558	None	obsolete minor histocompatibility antigen
+GO:0005559	None	obsolete ribozyme
+GO:0005561	None	obsolete nucleic acid
+GO:0005562	None	obsolete RNA
+GO:0005563	None	obsolete transfer RNA
+GO:0005564	None	obsolete cytosolic tRNA
+GO:0005565	None	obsolete mitochondrial tRNA
+GO:0005566	None	obsolete ribosomal RNA
+GO:0005567	None	obsolete cytosolic ribosomal RNA
+GO:0005568	None	obsolete mitochondrial rRNA
+GO:0005569	None	obsolete small nucleolar RNA
+GO:0005570	None	obsolete small nuclear RNA
+GO:0005571	None	obsolete untranslated RNA
+GO:0005572	None	obsolete RNA polymerase II transcribed untranslated RNA
+GO:0005573	None	obsolete telomerase RNA
+GO:0005574	None	obsolete DNA
+GO:0005580	None	obsolete membrane attack complex protein alphaM chain
+GO:0005603	None	obsolete complement component C2 complex
+GO:0005613	None	obsolete laminin receptor protein
+GO:0005617	None	obsolete larval serum protein-1
+GO:0005624	None	obsolete membrane fraction
+GO:0005625	None	obsolete soluble fraction
+GO:0005626	None	obsolete insoluble fraction
+GO:0005627	None	obsolete ascus
+GO:0005645	None	obsolete RAN-binding protein
+GO:0005646	None	obsolete importin
+GO:0005647	None	obsolete importin, alpha-subunit
+GO:0005648	None	obsolete importin, beta-subunit
+GO:0005649	None	obsolete transportin
+GO:0005650	None	obsolete importin, alpha-subunit transport factor
+GO:0005651	None	obsolete exportin
+GO:0005660	None	obsolete delta-DNA polymerase cofactor complex
+GO:0005670	None	obsolete transcription-activating factor, 30kD
+GO:0005678	None	obsolete chromatin assembly complex
+GO:0005695	None	obsolete chromatid
+GO:0005696	None	obsolete telomere
+GO:0005698	None	obsolete centromere
+GO:0005707	None	obsolete interphase chromosome
+GO:0005708	None	obsolete mitotic chromosome
+GO:0005709	None	obsolete prophase chromosome
+GO:0005710	None	obsolete metaphase chromosome
+GO:0005711	None	obsolete meiotic chromosome
+GO:0005733	None	obsolete small nucleolar RNA
+GO:0005734	None	obsolete box C + D snoRNP protein
+GO:0005735	None	obsolete box H + ACA snoRNP protein
+GO:0005755	None	obsolete hydrogen-transporting ATP synthase, coupling factor CF(0)
+GO:0005781	None	obsolete peroxisome targeting signal receptor complex
+GO:0005792	None	obsolete microsome
+GO:0005799	None	obsolete coatomer
+GO:0005800	None	obsolete COPII vesicle
+GO:0005803	None	obsolete secretory vesicle
+GO:0005804	None	obsolete secretory vesicle membrane
+GO:0005805	None	obsolete ER-Golgi transport vesicle
+GO:0005806	None	obsolete Golgi-ER transport vesicle
+GO:0005808	None	obsolete Golgi-plasma membrane transport vesicle
+GO:0005809	None	obsolete Golgi-vacuole transport vesicle
+GO:0005810	None	obsolete endocytotic transport vesicle
+GO:0005817	None	obsolete centrosomal mitotic factor
+GO:0005837	None	obsolete 26S proteasome
+GO:0005888	None	obsolete proteoglycan integral to plasma membrane
+GO:0005906	None	obsolete clathrin adaptor
+GO:0005907	None	obsolete HA1 clathrin adaptor
+GO:0005908	None	obsolete HA2 clathrin adaptor
+GO:0005936	None	obsolete shmoo
+GO:0005941	None	obsolete unlocalized protein complex
+GO:0005949	None	obsolete aminoadipate-semialdehyde dehydrogenase complex
+GO:0005957	None	obsolete debranching enzyme
+GO:0005972	None	obsolete fibrinogen alpha chain
+GO:0005973	None	obsolete fibrinogen beta chain
+GO:0005974	None	obsolete fibrinogen gamma chain
+GO:0006088	None	obsolete acetate to acetyl-CoA
+GO:0006100	None	obsolete tricarboxylic acid cycle intermediate metabolic process
+GO:0006118	None	obsolete electron transport
+GO:0006125	None	obsolete thioredoxin pathway
+GO:0006126	None	obsolete other pathways of electron transport
+GO:0006128	None	obsolete oxidized glutathione reduction
+GO:0006129	None	obsolete protein-disulfide reduction
+GO:0006130	None	obsolete 6-phosphofructokinase reduction
+GO:0006131	None	obsolete dihydrolipoamide reduction
+GO:0006132	None	obsolete dihydrolipoylprotein reduction
+GO:0006133	None	obsolete 5,10-methylenetetrahydrofolate oxidation
+GO:0006134	None	obsolete dihydrobiopterin reduction
+GO:0006135	None	obsolete dihydropteridine reduction
+GO:0006143	None	obsolete purine metabolic process
+GO:0006153	None	obsolete purine nucleosidase reaction
+GO:0006155	None	obsolete adenosine deaminase reaction
+GO:0006158	None	obsolete deoxyadenosine deaminase reaction
+GO:0006162	None	obsolete purine/pyrimidine nucleoside diphosphate reduction
+GO:0006184	None	obsolete GTP catabolic process
+GO:0006197	None	obsolete adenylate deaminase reaction
+GO:0006199	None	obsolete ADP reduction
+GO:0006200	None	obsolete ATP catabolic process
+GO:0006205	None	obsolete pyrimidine metabolic process
+GO:0006224	None	obsolete uridine kinase reaction
+GO:0006247	None	obsolete TTP reduction
+GO:0006250	None	obsolete CDP reduction
+GO:0006252	None	obsolete CTP reduction
+GO:0006255	None	obsolete UDP reduction
+GO:0006280	None	obsolete mutagenesis
+GO:0006291	None	obsolete pyrimidine-dimer repair, DNA damage excision
+GO:0006292	None	obsolete pyrimidine-dimer repair, DNA damage recognition
+GO:0006299	None	obsolete short patch mismatch repair system
+GO:0006324	None	obsolete S phase-specific histone modification
+GO:0006326	None	obsolete bent DNA binding
+GO:0006327	None	obsolete random coil binding
+GO:0006328	None	obsolete AT binding
+GO:0006329	None	obsolete satellite DNA binding
+GO:0006330	None	obsolete single-stranded DNA binding
+GO:0006339	None	obsolete positive regulation of transcription of homeotic gene (trithorax group)
+GO:0006340	None	obsolete negative regulation of transcription of homeotic gene (Polycomb group)
+GO:0006341	None	obsolete chromatin insulator sequence binding
+GO:0006371	None	obsolete mRNA splicing
+GO:0006372	None	obsolete lariat formation, 5'-splice site cleavage
+GO:0006373	None	obsolete 3'-splice site cleavage, exon ligation
+GO:0006377	None	obsolete MATa1 (A1) pre-mRNA splicing
+GO:0006380	None	obsolete poly-A binding
+GO:0006387	None	obsolete snRNA capping
+GO:0006389	None	obsolete tRNA-Y splicing
+GO:0006410	None	obsolete transcription, RNA-dependent
+GO:0006439	None	obsolete aminoacyl-tRNA hydrolase reaction
+GO:0006441	None	obsolete binding to mRNA cap
+GO:0006459	None	obsolete binding unfolded ER proteins
+GO:0006460	None	obsolete peptidyl-prolyl isomerase B reaction
+GO:0006462	None	obsolete protein complex assembly, multichaperone pathway
+GO:0006466	None	obsolete protein disulfide-isomerase reaction
+GO:0006483	None	obsolete peptidyl-aspartic acid/asparagine hydroxylation
+GO:0006484	None	obsolete protein cysteine-thiol oxidation
+GO:0006494	None	obsolete protein amino acid terminal glycosylation
+GO:0006495	None	obsolete terminal O-glycosylation
+GO:0006496	None	obsolete protein amino acid terminal N-glycosylation
+GO:0006502	None	obsolete C-terminal protein prenylation
+GO:0006503	None	obsolete C-terminal protein farnesylation
+GO:0006504	None	obsolete C-terminal protein geranylgeranylation
+GO:0006510	None	obsolete ATP-dependent proteolysis
+GO:0006512	None	obsolete ubiquitin cycle
+GO:0006515	protein quality control for misfolded or incompletely synthesized proteins	misfolded or incompletely synthesized protein catabolic process
+GO:0006619	None	obsolete SRP-independent cotranslational protein-membrane targeting
+GO:0006628	None	obsolete mitochondrial translocation
+GO:0006630	None	obsolete lipid binding
+GO:0006673	inositol phosphoceramide metabolic process	inositolphosphoceramide metabolic process
+GO:0006698	None	obsolete ecdysone modification
+GO:0006717	None	obsolete juvenile hormone binding
+GO:0006731	None	obsolete coenzyme and prosthetic group metabolic process
+GO:0006755	None	obsolete carbamoyl phosphate-ADP transphosphorylation
+GO:0006762	None	obsolete dihydrofolate reduction
+GO:0006774	None	obsolete vitamin B12 reduction
+GO:0006800	None	obsolete oxygen and reactive oxygen species metabolic process
+GO:0006802	None	obsolete catalase reaction
+GO:0006803	None	obsolete glutathione conjugation reaction
+GO:0006804	None	obsolete peroxidase reaction
+GO:0006806	None	obsolete insecticide resistance
+GO:0006815	None	obsolete sodium/potassium transport
+GO:0006823	None	obsolete heavy metal ion transport
+GO:0006827	None	high-affinity iron ion transmembrane transport
+GO:0006830	None	high-affinity zinc II ion transport
+GO:0006831	None	low-affinity zinc II ion transport
+GO:0006832	None	obsolete small molecule transport
+GO:0006838	None	obsolete allantoin/allantoate transport
+GO:0006840	None	obsolete mitochondrial alpha-ketoglutarate/malate transport
+GO:0006845	None	obsolete mitochondrial aspartate/glutamate transport
+GO:0006850	mitochondrial pyruvate transmembrane transport	mitochondrial pyruvate transport
+GO:0006852	None	obsolete mitochondrial sodium/calcium ion exchange
+GO:0006854	None	obsolete ATP/ADP exchange
+GO:0006889	None	obsolete regulation of calcium in ER
+GO:0006894	None	obsolete Golgi to secretory vesicle transport
+GO:0006905	None	obsolete vesicle transport
+GO:0006912	None	obsolete phagosome formation
+GO:0006918	None	obsolete induction of apoptosis by p53
+GO:0006920	None	obsolete commitment to apoptosis
+GO:0006922	None	obsolete cleavage of lamin involved in execution phase of apoptosis
+GO:0006923	None	obsolete cleavage of cytoskeletal proteins involved in execution phase of apoptosis
+GO:0006926	None	obsolete virus-infected cell apoptotic process
+GO:0006927	None	obsolete transformed cell apoptotic process
+GO:0006943	None	obsolete chemi-mechanical coupling
+GO:0006945	None	obsolete nuclear fusion during karyogamy
+GO:0006969	None	obsolete melanotic tumor response
+GO:0006981	None	obsolete activation of SoxR protein
+GO:0006988	None	obsolete unfolded protein response, cleavage of primary transcript encoding UFP-specific transcription factor
+GO:0006989	None	obsolete unfolded protein response, ligation of mRNA encoding UFP-specific transcription factor by RNA ligase
+GO:0007002	None	obsolete centromere binding
+GO:0007003	None	obsolete telomere binding
+GO:0007011	None	obsolete regulation of cytoskeleton
+GO:0007048	None	obsolete oncogenesis
+GO:0007081	None	obsolete mitotic sister-chromatid adhesion release
+GO:0007085	None	obsolete nuclear membrane vesicle binding to chromatin
+GO:0007090	None	obsolete regulation of S phase of mitotic cell cycle
+GO:0007101	None	obsolete male meiosis centrosome cycle
+GO:0007106	None	obsolete cytokinesis, protein recruitment
+GO:0007108	None	obsolete cytokinesis, initiation of separation
+GO:0007109	None	obsolete cytokinesis, completion of separation
+GO:0007115	None	obsolete bud site selection/establishment of cell polarity (sensu Saccharomyces)
+GO:0007122	None	obsolete loss of asymmetric budding
+GO:0007123	None	obsolete bud scar accumulation
+GO:0007125	None	obsolete invasive growth
+GO:0007149	None	obsolete colony morphology
+GO:0007150	None	obsolete growth pattern
+GO:0007170	None	obsolete transmembrane receptor protein tyrosine kinase ligand binding
+GO:0007180	None	obsolete transforming growth factor beta ligand binding to type II receptor
+GO:0007201	None	obsolete G-protein dissociation
+GO:0007203	None	obsolete phosphatidylinositol-4,5-bisphosphate hydrolysis
+GO:0007230	None	obsolete calcium-o-sensing receptor pathway
+GO:0007235	None	obsolete activation of Ypd1 protein
+GO:0007236	None	obsolete activation of Ssk1 protein
+GO:0007237	None	obsolete activation of Ssk2/Ssk22 proteins
+GO:0007238	None	obsolete activation of Pbs2
+GO:0007239	None	obsolete activation of Hog1
+GO:0007240	None	obsolete nuclear translocation of Hog1
+GO:0007241	None	obsolete inactivation of Hog1
+GO:0007244	None	obsolete MAPKKK cascade (mating sensu Saccharomyces)
+GO:0007245	None	obsolete activation of MAPKKK (mating sensu Saccharomyces)
+GO:0007246	None	obsolete activation of MAPKK (mating sensu Saccharomyces)
+GO:0007247	None	obsolete activation of MAPK (mating sensu Saccharomyces)
+GO:0007248	None	obsolete nuclear translocation of MAPK (mating sensu Saccharomyces)
+GO:0007251	None	obsolete activation of the inhibitor of kappa kinase
+GO:0007261	None	obsolete JAK-induced STAT protein dimerization
+GO:0007273	None	obsolete regulation of synapse
+GO:0007336	None	obsolete bilateral process
+GO:0007337	None	obsolete unilateral process
+GO:0007342	fusion of sperm to egg plasma membrane involved in single fertilization	fusion of sperm to egg plasma membrane
+GO:0007345	None	obsolete embryogenesis and morphogenesis
+GO:0007353	None	obsolete ventral/lateral system
+GO:0007397	None	obsolete histogenesis and organogenesis
+GO:0007401	None	obsolete pan-neural process
+GO:0007471	None	obsolete prothoracic morphogenesis
+GO:0007515	None	obsolete lymph gland development
+GO:0007550	None	obsolete establishment of dosage compensation
+GO:0007551	None	obsolete maintenance of dosage compensation
+GO:0007559	None	obsolete histolysis
+GO:0007570	None	obsolete age dependent accumulation of genetic damage
+GO:0007572	None	obsolete age dependent decreased translational activity
+GO:0007573	None	obsolete age dependent increased protein content
+GO:0007574	None	obsolete cell aging (sensu Saccharomyces)
+GO:0007575	None	obsolete nucleolar size increase
+GO:0007577	None	obsolete autophagic death (sensu Saccharomyces)
+GO:0007578	None	obsolete aging dependent sterility (sensu Saccharomyces)
+GO:0007579	None	obsolete senescence factor accumulation
+GO:0007581	None	obsolete age-dependent yeast cell size increase
+GO:0007583	None	obsolete killer activity
+GO:0007590	None	obsolete fat body metabolic process (sensu Insecta)
+GO:0007592	None	obsolete protein-based cuticle development
+GO:0007607	None	obsolete taste perception
+GO:0007627	None	obsolete larval behavior (sensu Insecta)
+GO:0008001	None	obsolete fibrinogen
+GO:0008008	None	obsolete membrane attack complex protein beta2 chain
+GO:0008014	None	obsolete calcium-dependent cell adhesion molecule activity
+GO:0008018	None	obsolete structural protein of chorion (sensu Drosophila)
+GO:0008019	None	obsolete macrophage receptor activity
+GO:0008025	None	obsolete diazepam binding inhibitor activity
+GO:0008034	None	obsolete lipoprotein binding
+GO:0008041	None	obsolete storage protein of fat body (sensu Insecta)
+GO:0008042	None	obsolete iron-sulfur electron transfer carrier
+GO:0008044	None	obsolete adult behavior (sensu Insecta)
+GO:0008051	None	obsolete farnesyl-diphosphate farnesyl transferase complex
+GO:0008067	None	obsolete metabotropic glutamate, GABA-B-like receptor activity
+GO:0008068	extracellularly glutamate-gated chloride channel activity	extracellular-glutamate-gated chloride channel activity
+GO:0008075	None	obsolete receptor guanylate cyclase activity
+GO:0008077	None	obsolete Hsp70/Hsp90 organizing protein activity
+GO:0008085	None	obsolete phototransduction, visible light, light adaptation
+GO:0008100	None	obsolete lipophorin
+GO:0008105	None	asymmetric protein localization
+GO:0008125	None	obsolete pancreatic elastase I activity
+GO:0008129	None	obsolete actinidain activity
+GO:0008130	None	obsolete neutrophil collagenase activity
+GO:0008132	None	obsolete pancreatic elastase activity
+GO:0008133	None	obsolete collagenase activity
+GO:0008141	None	obsolete puparial glue (sensu Diptera)
+GO:0008148	None	obsolete negative transcription elongation factor activity
+GO:0008149	None	obsolete para-aminobenzoic acid (PABA) synthase
+GO:0008155	None	obsolete larval behavior (sensu Drosophila)
+GO:0008159	None	obsolete positive transcription elongation factor activity
+GO:0008161	None	obsolete carbamate resistance
+GO:0008162	None	obsolete cyclodiene resistance
+GO:0008163	None	obsolete DDT resistance
+GO:0008164	None	obsolete organophosphorus resistance
+GO:0008165	None	obsolete pyrethroid resistance
+GO:0008166	None	obsolete viral replication
+GO:0008167	None	obsolete sigma virus replication
+GO:0008181	None	obsolete tumor suppressor
+GO:0008189	None	obsolete apoptosis inhibitor activity
+GO:0008197	None	obsolete yolk protein
+GO:0008220	None	obsolete necrosis
+GO:0008222	None	obsolete tumor antigen
+GO:0008224	None	obsolete Gram-positive antibacterial peptide activity
+GO:0008225	None	obsolete Gram-negative antibacterial peptide activity
+GO:0008229	None	obsolete opsonin activity
+GO:0008243	None	obsolete plasminogen activator activity
+GO:0008245	None	obsolete lysosomal membrane hydrogen-transporting ATPase
+GO:0008246	None	obsolete electron transfer flavoprotein
+GO:0008248	None	obsolete pre-mRNA splicing factor activity
+GO:0008259	None	obsolete transforming growth factor beta ligand binding to type I receptor
+GO:0008268	None	obsolete receptor signaling protein tyrosine kinase signaling protein activity
+GO:0008282	inward rectifying potassium channel	ATP-sensitive potassium channel complex
+GO:0008304	None	obsolete eukaryotic translation initiation factor 4 complex
+GO:0008319	None	obsolete prenyl protein specific endopeptidase activity
+GO:0008322	None	obsolete Pro-X carboxypeptidase activity
+GO:0008337	None	obsolete selectin
+GO:0008341	None	obsolete response to cocaine (sensu Insecta)
+GO:0008342	None	obsolete larval feeding behavior (sensu Insecta)
+GO:0008350	None	obsolete kinetochore motor activity
+GO:0008351	None	obsolete microtubule severing activity
+GO:0008369	None	obsolete molecular function
+GO:0008370	None	obsolete cellular component
+GO:0008371	None	obsolete biological process
+GO:0008381	mechanosensitive ion channel activity	mechanically-gated ion channel activity
+GO:0008423	None	obsolete bleomycin hydrolase activity
+GO:0008435	None	obsolete anticoagulant activity
+GO:0008436	None	obsolete heterogeneous nuclear ribonucleoprotein
+GO:0008438	None	obsolete 1-phosphatidylinositol-5-phosphate kinase
+GO:0008439	None	obsolete monophenol monooxygenase activator activity
+GO:0008450	None	obsolete O-sialoglycoprotein endopeptidase activity
+GO:0008451	None	obsolete X-Pro aminopeptidase activity
+GO:0008462	None	obsolete endopeptidase Clp activity
+GO:0008464	None	obsolete gamma-glutamyl hydrolase activity
+GO:0008471	None	obsolete laccase activity
+GO:0008472	None	obsolete metallocarboxypeptidase D activity
+GO:0008487	None	obsolete prenyl-dependent CAAX protease activity
+GO:0008492	None	obsolete cAMP generating peptide activity
+GO:0008493	tetracycline transmembrane transporter activity	tetracycline transporter activity
+GO:0008498	None	obsolete phospholipid scrambling
+GO:0008500	None	obsolete glycine-, glutamate-, thienylcyclohexylpiperidine binding
+GO:0008517	folic acid transmembrane transporter activity	folic acid transporter activity
+GO:0008521	acetyl-CoA transmembrane transporter activity	acetyl-CoA transporter activity
+GO:0008529	None	obsolete endogenous peptide receptor activity
+GO:0008530	None	obsolete exogenous peptide receptor activity
+GO:0008533	None	obsolete astacin activity
+GO:0008538	None	obsolete proteasome activator activity
+GO:0008539	None	obsolete proteasome inhibitor activity
+GO:0008546	None	obsolete microtubule/chromatin interaction
+GO:0008547	None	obsolete protein-synthesizing GTPase activity
+GO:0008548	None	obsolete signal-recognition-particle GTPase activity
+GO:0008549	None	obsolete dynamin GTPase activity
+GO:0008550	None	obsolete tubulin GTPase activity
+GO:0008552	None	obsolete zinc, cadmium, cobalt, nickel, lead-efflux ATPase activity
+GO:0008559	xenobiotic transmembrane transporting ATPase activity	xenobiotic-transporting ATPase activity
+GO:0008563	None	obsolete alpha-factor sex pheromone exporter
+GO:0008567	None	obsolete dynein ATPase activity
+GO:0008570	None	obsolete myosin ATPase activity
+GO:0008571	None	obsolete non-chaperonin molecular chaperone ATPase activity
+GO:0008572	None	obsolete nucleoplasmin ATPase activity
+GO:0008573	None	obsolete peroxisome-assembly ATPase activity
+GO:0008575	None	obsolete proteasome ATPase activity
+GO:0008576	None	obsolete vesicle-fusing ATPase activity
+GO:0008580	None	obsolete cytoskeletal regulator activity
+GO:0008581	None	obsolete ubiquitin-specific protease 5 activity
+GO:0008605	None	obsolete protein kinase CK2 regulator activity
+GO:0008619	None	obsolete RHEB small monomeric GTPase activity
+GO:0008633	None	obsolete activation of pro-apoptotic gene products
+GO:0008634	None	obsolete negative regulation of survival gene product expression
+GO:0008636	None	obsolete activation of caspase activity by protein phosphorylation
+GO:0008638	None	obsolete protein tagging activity
+GO:0008641	ubiquitin-like modifier activating enzyme activity	small protein activating enzyme activity
+GO:0008646	None	high-affinity hexose transport
+GO:0008647	None	low-affinity hexose transport
+GO:0008648	None	obsolete tachykinin
+GO:0008651	None	obsolete actin polymerizing activity
+GO:0008665	None	2'-phosphotransferase activity
+GO:0008711	None	obsolete ADP-L-glycero-D-manno-heptose synthase activity
+GO:0008717	None	obsolete D-alanyl-D-alanine endopeptidase activity
+GO:0008724	None	obsolete DNA topoisomerase IV activity
+GO:0008751	None	obsolete NAD(P)H dehydrogenase
+GO:0008769	None	obsolete X-His dipeptidase activity
+GO:0008822	None	obsolete crotonobetaine/carnitine-CoA ligase activity
+GO:0008845	None	obsolete endonuclease VIII activity
+GO:0008846	None	obsolete endopeptidase La activity
+GO:0008848	None	obsolete enterobactin synthetase
+GO:0008931	None	obsolete murein DD-endopeptidase activity
+GO:0008943	None	obsolete glyceraldehyde-3-phosphate dehydrogenase activity
+GO:0008944	None	obsolete oligopeptidase A activity
+GO:0008945	None	obsolete oligopeptidase B activity
+GO:0008947	None	obsolete omptin activity
+GO:0008950	None	obsolete p-aminobenzoate synthetase
+GO:0008954	None	obsolete peptidoglycan synthetase activity
+GO:0008956	None	obsolete peptidyl-dipeptidase Dcp activity
+GO:0008969	None	phosphohistidine phosphatase activity
+GO:0008975	None	obsolete pitrilysin activity
+GO:0008978	None	obsolete prepilin peptidase activity
+GO:0008981	None	obsolete protease IV activity
+GO:0008985	None	obsolete pyruvate dehydrogenase (cytochrome) activity
+GO:0008991	None	obsolete serine-type signal peptidase activity
+GO:0008992	None	obsolete repressor LexA activity
+GO:0009003	None	obsolete signal peptidase activity
+GO:0009004	None	obsolete signal peptidase I activity
+GO:0009005	None	obsolete signal peptidase II activity
+GO:0009006	None	obsolete siroheme synthase activity
+GO:0009023	None	obsolete tRNA sulfurtransferase
+GO:0009049	None	obsolete aspartic-type signal peptidase activity
+GO:0009055	electron transfer activity	electron carrier activity
+GO:0009075	None	obsolete histidine family amino acid metabolic process
+GO:0009076	None	obsolete histidine family amino acid biosynthetic process
+GO:0009077	None	obsolete histidine family amino acid catabolic process
+GO:0009278	None	obsolete murein sacculus
+GO:0009280	None	obsolete cell wall inner membrane
+GO:0009296	None	obsolete flagellum assembly
+GO:0009315	None	obsolete drug resistance
+GO:0009335	None	obsolete holo-[acyl-carrier protein] synthase complex
+GO:0009351	None	obsolete dihydrolipoamide S-acyltransferase complex
+GO:0009352	None	obsolete dihydrolipoyl dehydrogenase complex
+GO:0009354	None	obsolete dihydrolipoamide S-succinyltransferase complex
+GO:0009367	None	obsolete prepilin peptidase complex
+GO:0009377	None	obsolete HslUV protease activity
+GO:0009388	None	obsolete antisense RNA
+GO:0009402	None	obsolete toxin resistance
+GO:0009406	None	obsolete virulence
+GO:0009412	None	obsolete response to heavy metal
+GO:0009417	None	obsolete fimbrin
+GO:0009457	None	obsolete flavodoxin
+GO:0009458	None	obsolete cytochrome
+GO:0009459	None	obsolete cytochrome a
+GO:0009460	None	obsolete cytochrome b
+GO:0009461	None	obsolete cytochrome c
+GO:0009462	None	obsolete cytochrome d
+GO:0009463	None	obsolete cytochrome b/b6
+GO:0009464	None	obsolete cytochrome b5
+GO:0009465	None	obsolete soluble cytochrome b562
+GO:0009466	None	obsolete class I cytochrome c
+GO:0009467	None	obsolete monoheme class I cytochrome c
+GO:0009468	None	obsolete diheme class I cytochrome c
+GO:0009469	None	obsolete class II cytochrome c
+GO:0009470	None	obsolete class IIa cytochrome c
+GO:0009471	None	obsolete class III cytochrome c
+GO:0009472	None	obsolete cytochrome c3 (tetraheme)
+GO:0009473	None	obsolete cytochrome c7 (triheme)
+GO:0009474	None	obsolete nonaheme cytochrome c
+GO:0009475	None	obsolete high-molecular-weight cytochrome c (hexadecaheme)
+GO:0009476	None	obsolete class IV cytochrome c
+GO:0009477	None	obsolete cytochrome c1
+GO:0009478	None	obsolete cytochrome c554
+GO:0009479	None	obsolete cytochrome f
+GO:0009480	None	obsolete class IIb cytochrome c
+GO:0009481	None	obsolete aa3-type cytochrome c oxidase
+GO:0009482	None	obsolete ba3-type cytochrome c oxidase
+GO:0009483	None	obsolete caa3-type cytochrome c oxidase
+GO:0009485	None	obsolete cbb3-type cytochrome c oxidase
+GO:0009487	None	obsolete glutaredoxin
+GO:0009488	None	obsolete amicyanin
+GO:0009489	None	obsolete rubredoxin
+GO:0009490	None	obsolete mononuclear iron electron carrier
+GO:0009491	None	obsolete redox-active disulfide bond electron carrier
+GO:0009492	None	obsolete 2Fe-2S electron transfer carrier
+GO:0009493	None	obsolete adrenodoxin-type ferredoxin
+GO:0009494	None	obsolete chloroplast-type ferredoxin
+GO:0009495	None	obsolete thioredoxin-like 2Fe-2S ferredoxin
+GO:0009497	None	obsolete 3Fe-4S/4Fe-4S electron transfer carrier
+GO:0009498	None	obsolete bacterial-type ferredoxin
+GO:0009499	None	obsolete monocluster bacterial-type ferredoxin
+GO:0009500	None	obsolete dicluster bacterial-type ferredoxin
+GO:0009502	None	obsolete photosynthetic electron transport chain
+GO:0009580	None	obsolete thylakoid (sensu Bacteria)
+GO:0009587	None	obsolete phototrophin mediated phototransduction
+GO:0009591	None	obsolete perception of mechanical stimulus
+GO:0009614	None	obsolete disease resistance
+GO:0009619	None	obsolete resistance to pathogenic bacteria
+GO:0009622	None	obsolete resistance to pathogenic fungi
+GO:0009632	None	obsolete freezing tolerance
+GO:0009633	None	obsolete drought tolerance
+GO:0009634	None	obsolete heavy metal sensitivity/resistance
+GO:0009781	None	obsolete photosynthetic water oxidation
+GO:0009839	None	obsolete SCF complex substrate recognition subunit
+GO:0009844	None	obsolete germination
+GO:0009858	None	obsolete compatible pollen-pistil interaction
+GO:0009869	None	obsolete incompatible pollen-pistil interaction
+GO:0009872	None	obsolete gametophytic self-incompatibility
+GO:0009874	None	obsolete sporophytic self-incompatibility
+GO:0009919	None	obsolete cytokinesis (sensu Viridiplantae)
+GO:0009935	None	obsolete nutrient import
+GO:0009936	None	obsolete expansin
+GO:0009980	None	obsolete glutamate carboxypeptidase activity
+GO:0009983	None	obsolete tyrosine aminopeptidase activity
+GO:0009984	None	obsolete adenylate forming enzyme activity
+GO:0009985	None	obsolete dihydroflavonol(thiole) lyase activity
+GO:0010131	None	obsolete sucrose catabolic process, using invertase or sucrose synthase
+GO:0010140	None	obsolete adenine, hypoxanthine and their nucleoside salvage
+GO:0010141	None	obsolete guanine, xanthine and their nucleoside salvage
+GO:0010149	None	obsolete senescence
+GO:0010153	None	obsolete polar cell elongation
+GO:0010156	None	obsolete sporocyte morphogenesis
+GO:0010163	None	high-affinity potassium ion import
+GO:0010194	None	obsolete microRNA metabolic process
+GO:0010195	None	obsolete microRNA biosynthetic process
+GO:0010320	None	obsolete arginine/lysine endopeptidase activity
+GO:0010503	None	obsolete negative regulation of cell cycle arrest in response to nitrogen starvation
+GO:0010504	None	obsolete regulation of cell cycle arrest in response to nitrogen starvation
+GO:0010505	None	obsolete positive regulation of cell cycle arrest in response to nitrogen starvation
+GO:0010538	None	obsolete Hsp27 protein regulator activity
+GO:0010539	None	obsolete Hsp27 protein inhibitor activity
+GO:0010545	None	obsolete Hsp90 protein regulator activity
+GO:0010546	None	obsolete Hsp90 protein inhibitor activity
+GO:0010579	None	positive regulation of adenylate cyclase activity involved in G-protein coupled receptor signaling pathway
+GO:0010670	None	obsolete positive regulation of oxygen and reactive oxygen species metabolic process
+GO:0010671	None	obsolete negative regulation of oxygen and reactive oxygen species metabolic process
+GO:0010702	None	obsolete regulation of histolysis
+GO:0010703	None	obsolete negative regulation of histolysis
+GO:0010834	None	obsolete telomere maintenance via telomere shortening
+GO:0010843	None	obsolete promoter binding
+GO:0010860	None	obsolete proteasome regulator activity
+GO:0010861	None	thyroid hormone receptor activator activity
+GO:0010926	None	obsolete anatomical structure formation
+GO:0010973	positive regulation of division septum assembly	positive regulation of barrier septum assembly
+GO:0010974	negative regulation of division septum assembly	negative regulation of barrier septum assembly
+GO:0014917	None	obsolete positive regulation of diuresis by pressure natriuresis
+GO:0014918	None	obsolete positive regulation of natriuresis by pressure natriuresis
+GO:0015000	None	obsolete polyferredoxin
+GO:0015001	None	obsolete high-potential iron-sulfur carrier
+GO:0015003	None	obsolete copper electron carrier
+GO:0015004	None	obsolete small blue copper electron carrier
+GO:0015005	None	obsolete azurin
+GO:0015006	None	obsolete plastocyanin
+GO:0015007	None	obsolete electron carrier, chlorophyll electron transport system
+GO:0015017	None	obsolete glypican
+GO:0015023	None	obsolete syndecan
+GO:0015025	None	obsolete GPI-anchored membrane-bound receptor
+GO:0015029	None	obsolete internalization receptor activity
+GO:0015034	None	obsolete cytochrome P450 activity
+GO:0015040	None	obsolete electron transfer flavoprotein, group I
+GO:0015041	None	obsolete electron transfer flavoprotein, group II
+GO:0015051	None	obsolete X-opioid receptor activity
+GO:0015053	None	obsolete opsin
+GO:0015058	None	obsolete epidermal growth factor-like module containing hormone receptor activity
+GO:0015059	None	obsolete blue-sensitive opsin
+GO:0015060	None	obsolete green-sensitive opsin
+GO:0015061	None	obsolete red-sensitive opsin
+GO:0015062	None	obsolete violet-sensitive opsin
+GO:0015063	None	obsolete long-wave-sensitive opsin
+GO:0015064	None	obsolete UV-sensitive opsin
+GO:0015070	None	obsolete toxin activity
+GO:0015072	None	obsolete phosphatidylinositol 3-kinase, class I, catalyst activity
+GO:0015073	None	obsolete phosphatidylinositol 3-kinase, class I, regulator activity
+GO:0015076	None	obsolete heavy metal ion transporter activity
+GO:0015088	None	copper uptake transmembrane transporter activity
+GO:0015090	low-affinity ferric iron ion transmembrane transporter activity	low-affinity iron ion transmembrane transporter activity
+GO:0015092	high-affinity ferric iron transmembrane transporter activity	high-affinity ferric iron uptake transmembrane transporter activity
+GO:0015096	None	obsolete manganese resistance permease activity
+GO:0015118	None	tellurite transmembrane transporter activity
+GO:0015176	None	obsolete holin
+GO:0015198	None	oligopeptide transporter activity
+GO:0015223	None	obsolete vitamin or cofactor transporter activity
+GO:0015224	biopterin transmembrane transporter activity	biopterin transporter activity
+GO:0015225	biotin transmembrane transporter activity	biotin transporter activity
+GO:0015229	L-ascorbic acid transmembrane transporter activity	L-ascorbic acid transporter activity
+GO:0015231	5-formyltetrahydrofolate transmembrane transporter activity	5-formyltetrahydrofolate transporter activity
+GO:0015235	None	cobalamin transporter activity
+GO:0015240	amiloride transmembrane transporter activity	amiloride transporter activity
+GO:0015241	None	aminotriazole transporter activity
+GO:0015242	None	benomyl transporter activity
+GO:0015243	cycloheximide transmembrane transporter activity	cycloheximide transporter activity
+GO:0015244	fluconazole transmembrane transporter activity	fluconazole transporter activity
+GO:0015245	fatty acid transmembrane transporter activity	fatty acid transporter activity
+GO:0015246	None	fatty-acyl group transporter activity
+GO:0015247	aminophospholipid transmembrane transporter activity	aminophospholipid transporter activity
+GO:0015252	proton channel activity	hydrogen ion channel activity
+GO:0015253	None	obsolete sugar/polyol channel activity
+GO:0015256	None	obsolete monocarboxylate channel activity
+GO:0015257	None	obsolete organic anion channel activity
+GO:0015258	None	obsolete gluconate channel activity
+GO:0015259	None	obsolete glutamate channel activity
+GO:0015260	None	obsolete isethionate channel activity
+GO:0015261	None	obsolete lactate channel activity
+GO:0015262	None	obsolete taurine channel activity
+GO:0015263	None	obsolete amine/amide/polyamine channel activity
+GO:0015282	None	obsolete NADPH oxidase-associated cytochrome b558 hydrogen channel activity
+GO:0015283	None	obsolete apoptogenic cytochrome c release channel activity
+GO:0015289	None	obsolete pore-forming toxin activity
+GO:0015303	None	obsolete galactose, glucose uniporter activity
+GO:0015305	None	obsolete lactose, galactose:proton symporter activity
+GO:0015316	None	obsolete nitrite/nitrate porter activity
+GO:0015318	inorganic molecular entity transmembrane transporter activity	inorganic solute uptake transmembrane transporter activity
+GO:0015320	None	phosphate ion carrier activity
+GO:0015323	None	obsolete type V protein secretor activity
+GO:0015331	None	obsolete asparagine/glutamine permease activity
+GO:0015332	None	obsolete leucine/valine/isoleucine permease activity
+GO:0015334	high-affinity oligopeptide transmembrane transporter activity	high-affinity oligopeptide transporter activity
+GO:0015335	None	obsolete heavy metal ion:hydrogen symporter activity
+GO:0015336	None	obsolete high affinity metal ion uptake transporter activity
+GO:0015337	None	obsolete low affinity metal ion uptake transporter activity
+GO:0015339	None	obsolete cobalt, zinc uptake permease activity
+GO:0015340	None	obsolete zinc, cadmium uptake permease activity
+GO:0015342	None	obsolete zinc, iron permease activity
+GO:0015348	None	obsolete prostaglandin/thromboxane transporter activity
+GO:0015350	methotrexate transmembrane transporter activity	methotrexate transporter activity
+GO:0015356	None	obsolete monocarboxylate (lactate, pyruvate, mevalonate) uptake/efflux porter activity
+GO:0015358	None	obsolete amino acid/choline transmembrane transporter activity
+GO:0015363	None	obsolete dicarboxylate (succinate/fumarate/malate) antiporter activity
+GO:0015372	None	obsolete glutamate/aspartate:sodium symporter activity
+GO:0015376	None	obsolete betaine/GABA:sodium symporter activity
+GO:0015388	None	potassium uptake transmembrane transporter activity
+GO:0015393	None	obsolete uracil/uridine permease activity
+GO:0015394	uridine:proton symporter activity	uridine:hydrogen ion symporter activity
+GO:0015403	None	thiamine uptake transmembrane transporter activity
+GO:0015406	None	obsolete ABC-type uptake permease activity
+GO:0015427	None	obsolete ABC-type efflux porter activity
+GO:0015428	None	obsolete type I protein secretor activity
+GO:0015429	None	obsolete peroxisomal fatty acyl transporter
+GO:0015435	None	obsolete ABC-type efflux permease activity
+GO:0015442	None	obsolete hydrogen-/sodium-translocating ATPase activity
+GO:0015443	None	obsolete sodium-transporting two-sector ATPase activity
+GO:0015447	None	obsolete type II protein secretor activity
+GO:0015448	None	obsolete type III protein (virulence-related) secretor activity
+GO:0015449	None	obsolete type IV protein (DNA-protein) secretor activity
+GO:0015461	None	obsolete endosomal oligosaccharide transporter
+GO:0015465	None	obsolete lysin activity
+GO:0015466	None	obsolete autolysin activity
+GO:0015468	None	obsolete colicin
+GO:0015469	None	obsolete channel-forming toxin activity
+GO:0015470	None	obsolete bacteriocin activity
+GO:0015472	None	obsolete fimbrium-specific chaperone activity
+GO:0015477	None	obsolete receptor porin activity
+GO:0015479	None	obsolete outer membrane exporter porin
+GO:0015480	None	obsolete secretin (sensu Bacteria)
+GO:0015482	None	obsolete voltage-gated anion channel porin activity
+GO:0015484	None	obsolete hemolysin activity
+GO:0015500	None	obsolete threonine/serine:sodium symporter activity
+GO:0015507	None	obsolete hydroxy/aromatic amino acid permease activity
+GO:0015513	high-affinity secondary active nitrite transmembrane transporter activity	nitrite uptake transmembrane transporter activity
+GO:0015521	None	obsolete bicyclomycin/sulfathiazole:hydrogen antiporter activity
+GO:0015524	None	obsolete L-arabinose/beta-D-thiogalactopyranoside:hydrogen antiporter activity
+GO:0015525	None	obsolete carbonyl cyanide m-chlorophenylhydrazone/nalidixic acid/organomercurials:hydrogen antiporter activity
+GO:0015534	None	obsolete proline/glycine/betaine:hydrogen/sodium symporter activity
+GO:0015537	xanthosine:proton symporter activity	xanthosine:hydrogen ion symporter activity
+GO:0015541	secondary active cyanate transmembrane transporter activity	secondary active cyanate uptake transmembrane transporter activity
+GO:0015543	None	obsolete lactose/glucose efflux transporter activity
+GO:0015544	phenyl propionate uniporter activity	phenyl propionate uptake uniporter activity
+GO:0015545	bicyclomycin transmembrane transporter activity	bicyclomycin transporter activity
+GO:0015547	nalidixic acid transmembrane transporter activity	nalidixic acid transporter activity
+GO:0015548	organomercurial transmembrane transporter activity	organomercurial transporter activity
+GO:0015549	carbonyl cyanide m-chlorophenylhydrazone transmembrane transporter activity	carbonyl cyanide m-chlorophenylhydrazone transporter activity
+GO:0015558	secondary active p-aminobenzoyl-glutamate transmembrane transporter activity	p-aminobenzoyl-glutamate uptake transmembrane transporter activity
+GO:0015560	None	obsolete L-idonate/D-gluconate:hydrogen symporter activity
+GO:0015563	None	uptake transmembrane transporter activity
+GO:0015566	acriflavine transmembrane transporter activity	acriflavine transporter activity
+GO:0015567	alkane transmembrane transporter activity	alkane transporter activity
+GO:0015569	None	p-aminobenzoyl-glutamate transmembrane transporter activity
+GO:0015583	None	obsolete beta-glucoside [arbutin-salicin-cellobiose] permease activity
+GO:0015596	None	obsolete glycine betaine/proline porter activity
+GO:0015597	None	obsolete histidine/arginine/lysine/ornithine porter activity
+GO:0015600	None	obsolete glutamate/aspartate porter activity
+GO:0015601	None	obsolete cystine/diaminopimelate porter activity
+GO:0015602	None	obsolete leucine/isoleucine/valine porter activity
+GO:0015607	fatty-acyl-CoA transmembrane transporter activity	fatty-acyl-CoA transporter activity
+GO:0015613	None	obsolete galactose/glucose (methylgalactoside) porter activity
+GO:0015617	None	obsolete pilin/fimbrilin exporter activity
+GO:0015635	None	short-chain fatty acid transporter activity
+GO:0015636	short-chain fatty acid transmembrane transporter activity	short-chain fatty acid uptake transporter activity
+GO:0015638	microcin transmembrane transporter activity	microcin uptake transporter activity
+GO:0015639	None	ferrous iron uptake transmembrane transporter activity
+GO:0015640	peptidoglycan peptide transmembrane transporter activity	peptidoglycan peptide transporter activity
+GO:0015641	None	obsolete lipoprotein toxin
+GO:0015642	None	obsolete bacteriolytic toxin activity
+GO:0015644	None	obsolete lipoprotein antitoxin
+GO:0015647	peptidoglycan transmembrane transporter activity	peptidoglycan transporter activity
+GO:0015654	tellurite transmembrane transporter activity	tellurite uptake transmembrane transporter activity
+GO:0015659	None	formate uptake transmembrane transporter activity
+GO:0015678	None	high-affinity copper ion transport
+GO:0015683	ferric iron transmembrane transport	high-affinity ferric iron transmembrane transport
+GO:0015780	nucleotide-sugar transmembrane transport	nucleotide-sugar transport
+GO:0015781	None	pyrimidine nucleotide-sugar transport
+GO:0015782	CMP-N-acetylneuraminate transmembrane transport	CMP-N-acetylneuraminate transport
+GO:0015783	GDP-fucose transmembrane transport	GDP-fucose transport
+GO:0015784	None	GDP-mannose transport
+GO:0015785	None	UDP-galactose transport
+GO:0015786	UDP-glucose transmembrane transport	UDP-glucose transport
+GO:0015787	UDP-glucuronic acid transmembrane transport	UDP-glucuronic acid transport
+GO:0015788	None	UDP-N-acetylglucosamine transport
+GO:0015789	UDP-N-acetylgalactosamine transmembrane transport	UDP-N-acetylgalactosamine transport
+GO:0015790	UDP-xylose transmembrane transport	UDP-xylose transport
+GO:0015832	None	obsolete holin
+GO:0015875	None	obsolete vitamin or cofactor transport
+GO:0015933	None	obsolete flavin-containing electron transporter
+GO:0015981	None	obsolete passive proton transport, down the electrochemical gradient
+GO:0015982	None	obsolete antiport
+GO:0015983	None	obsolete symport
+GO:0015984	None	obsolete uniport
+GO:0015997	None	obsolete ubiquinone biosynthetic process monooxygenase activity
+GO:0016016	None	obsolete short-wave-sensitive opsin
+GO:0016025	None	obsolete proteasome endopeptidase regulator
+GO:0016026	None	obsolete proteasome endopeptidase core
+GO:0016065	None	obsolete humoral defense mechanism (sensu Protostomia)
+GO:0016083	None	obsolete synaptic vesicle fusion
+GO:0016086	None	obsolete allatostatin
+GO:0016088	None	obsolete insulin
+GO:0016146	None	obsolete protein-synthesizing GTPase activity, initiation
+GO:0016147	None	obsolete protein-synthesizing GTPase activity, elongation
+GO:0016148	None	obsolete protein-synthesizing GTPase activity, termination
+GO:0016164	None	obsolete Mo-molybdopterin oxidoreductase activity
+GO:0016171	None	obsolete cell surface antigen
+GO:0016172	None	obsolete antifreeze activity
+GO:0016173	None	obsolete ice nucleation inhibitor activity
+GO:0016184	None	obsolete synaptic vesicle retrieval
+GO:0016186	None	obsolete synaptic vesicle fission
+GO:0016187	None	obsolete synaptic vesicle internalization
+GO:0016218	None	obsolete polyketide synthase activity
+GO:0016227	None	obsolete tRNA sulfurtransferase activity
+GO:0016251	None	obsolete general RNA polymerase II transcription factor activity
+GO:0016252	None	obsolete nonspecific RNA polymerase II transcription factor activity
+GO:0016265	None	obsolete death
+GO:0016271	None	obsolete tissue death
+GO:0016284	None	obsolete alanine aminopeptidase activity
+GO:0016285	None	obsolete cytosol alanyl aminopeptidase activity
+GO:0016299	None	obsolete regulator of G-protein signaling activity
+GO:0016304	None	obsolete phosphatidylinositol 3-kinase activity, class I
+GO:0016305	None	obsolete phosphatidylinositol 3-kinase activity, class II
+GO:0016306	None	obsolete phosphatidylinositol 3-kinase activity, class III
+GO:0016313	None	obsolete inositol-1,4,5-trisphosphate phosphatase
+GO:0016326	None	obsolete kinesin motor activity
+GO:0016329	None	obsolete apoptosis regulator activity
+GO:0016341	None	obsolete other collagen
+GO:0016343	None	obsolete cytoskeletal anchoring activity
+GO:0016347	None	obsolete calcium-independent cell adhesion molecule activity
+GO:0016351	None	obsolete drug susceptibility/resistance
+GO:0016352	None	obsolete insecticide susceptibility/resistance
+GO:0016353	None	obsolete carbamate susceptibility/resistance
+GO:0016354	None	obsolete cyclodiene susceptibility/resistance
+GO:0016355	None	obsolete DDT susceptibility/resistance
+GO:0016356	None	obsolete organophosphorus susceptibility/resistance
+GO:0016357	None	obsolete pyrethroid susceptibility/resistance
+GO:0016466	None	obsolete hydrogen-translocating A-type ATPase activity
+GO:0016467	None	obsolete hydrogen-translocating F-type ATPase activity
+GO:0016468	None	obsolete sodium-translocating F-type ATPase activity
+GO:0016484	None	obsolete proprotein convertase 2 activator activity
+GO:0016506	None	obsolete apoptosis activator activity
+GO:0016511	None	obsolete endothelin-converting enzyme activity
+GO:0016512	None	obsolete endothelin-converting enzyme 1 activity
+GO:0016527	None	obsolete brain-specific angiogenesis inhibitor activity
+GO:0016536	None	obsolete cyclin-dependent protein kinase 5 activator regulator activity
+GO:0016541	None	obsolete intein
+GO:0016550	None	obsolete insertion or deletion editing
+GO:0016551	None	obsolete posttranscriptional insertion or deletion editing
+GO:0016552	None	obsolete cotranscriptional insertion or deletion editing
+GO:0016563	None	obsolete transcription activator activity
+GO:0016564	None	obsolete transcription repressor activity
+GO:0016565	None	obsolete general transcriptional repressor activity
+GO:0016566	None	obsolete specific transcriptional repressor activity
+GO:0016582	None	obsolete non-covalent chromatin modification
+GO:0016583	None	obsolete nucleosome modeling
+GO:0016585	None	obsolete chromatin remodeling complex
+GO:0016586	RSC-type complex	RSC complex
+GO:0016626	None	obsolete oxidoreductase activity, acting on the aldehyde or oxo group of donors, other acceptors
+GO:0016637	None	obsolete oxidoreductase activity, acting on the CH-CH group of donors, other acceptors
+GO:0016644	None	obsolete oxidoreductase activity, acting on the CH-NH2 group of donors, other acceptors
+GO:0016650	None	obsolete oxidoreductase activity, acting on the CH-NH group of donors, other acceptors
+GO:0016658	None	obsolete oxidoreductase activity, acting on NADH or NADPH, flavin as acceptor
+GO:0016659	None	obsolete oxidoreductase activity, acting on NADH or NADPH, other acceptor
+GO:0016665	None	obsolete oxidoreductase activity, acting on other nitrogenous compounds as donors, other acceptors
+GO:0016674	None	obsolete oxidoreductase activity, acting on sulfur group of donors, other acceptors
+GO:0016678	None	obsolete oxidoreductase activity, acting on heme group of donors, other acceptors
+GO:0016683	None	obsolete oxidoreductase activity, acting on diphenols and related substances as donors, other acceptors
+GO:0016694	None	obsolete bacterial catalase-peroxidase activity
+GO:0016700	None	obsolete oxidoreductase activity, acting on hydrogen as donor, other acceptors
+GO:0016704	None	obsolete oxidoreductase activity, acting on single donors with incorporation of molecular oxygen, miscellaneous
+GO:0016718	None	obsolete oxidoreductase activity, acting on paired donors, with incorporation or reduction of molecular oxygen, miscellaneous
+GO:0016729	None	obsolete oxidoreductase activity, acting on CH2 groups, other acceptors
+GO:0016733	None	obsolete iron-iron nitrogenase activity
+GO:0016734	None	obsolete molybdenum-iron nitrogenase activity
+GO:0016735	None	obsolete vanadium-iron nitrogenase activity
+GO:0016739	None	obsolete oxidoreductase activity, acting on other substrates
+GO:0016764	None	obsolete transferase activity, transferring other glycosyl groups
+GO:0016771	None	obsolete transferase activity, transferring other nitrogenous groups
+GO:0016804	None	obsolete prolyl aminopeptidase activity
+GO:0016806	None	obsolete dipeptidyl-peptidase and tripeptidyl-peptidase activity
+GO:0016808	None	obsolete proprotein convertase activity
+GO:0016816	None	obsolete hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds, in other compounds
+GO:0016820	None	hydrolase activity, acting on acid anhydrides, catalyzing transmembrane movement of substances
+GO:0016821	None	obsolete hydrolase activity, acting on acid anhydrides, involved in cellular and subcellular movement
+GO:0016834	None	obsolete other carbon-carbon lyase activity
+GO:0016839	None	obsolete other carbon-oxygen lyase activity
+GO:0016845	None	obsolete other carbon-nitrogen lyase activity
+GO:0016850	None	obsolete other lyase activity
+GO:0016858	None	obsolete racemase and epimerase activity, acting on other compounds
+GO:0016865	None	obsolete intramolecular oxidoreductase activity, other intramolecular oxidoreductases
+GO:0016870	None	obsolete intramolecular transferase activity, transferring other groups
+GO:0016873	None	obsolete other isomerase activity
+GO:0016876	None	ligase activity, forming aminoacyl-tRNA and related compounds
+GO:0016883	None	obsolete other carbon-nitrogen ligase activity
+GO:0016902	None	obsolete oxidoreductase activity, acting on the CH-OH group of donors, other acceptors
+GO:0016910	None	obsolete SAP kinase 3 activity
+GO:0016911	None	obsolete SAP kinase 4 activity
+GO:0016912	None	obsolete SAP kinase 5 activity
+GO:0016915	None	obsolete activin
+GO:0016916	None	obsolete inhibin
+GO:0016919	None	obsolete nardilysin activity
+GO:0016921	None	obsolete pyroglutamyl-peptidase II activity
+GO:0016923	None	obsolete ligand-dependent thyroid hormone receptor interactor activity
+GO:0016933	extracellularly glycine-gated ion channel activity	extracellular-glycine-gated ion channel activity
+GO:0016934	extracellularly glycine-gated chloride channel activity	extracellular-glycine-gated chloride channel activity
+GO:0016943	None	obsolete RNA polymerase I transcription elongation factor activity
+GO:0016944	None	obsolete RNA polymerase II transcription elongation factor activity
+GO:0016945	None	obsolete RNA polymerase III transcription elongation factor activity
+GO:0016946	None	obsolete cathepsin F activity
+GO:0016962	None	obsolete receptor-associated protein activity
+GO:0016963	None	obsolete alpha-2 macroglobulin receptor-associated protein activity
+GO:0016969	None	obsolete hemerythrin
+GO:0016970	None	obsolete hemocyanin
+GO:0016975	None	obsolete alpha-2 macroglobulin
+GO:0016986	None	obsolete transcription initiation factor activity
+GO:0016988	None	obsolete transcription initiation factor antagonist activity
+GO:0017021	None	obsolete myosin phosphatase myosin binding
+GO:0017026	None	obsolete procollagen C-endopeptidase activity
+GO:0017027	None	obsolete transmembrane receptor protein serine/threonine kinase receptor-associated protein activity
+GO:0017028	None	obsolete protein stabilization activity
+GO:0017029	None	obsolete lysosomal protein stabilization
+GO:0017030	None	obsolete beta-galactosidase stabilization activity
+GO:0017039	None	obsolete dipeptidyl-peptidase III activity
+GO:0017043	None	obsolete adrenocorticotropin
+GO:0017052	None	obsolete insulin-like growth factor binding protein
+GO:0017063	None	obsolete phosphatidylserine-specific phospholipase A1 activity
+GO:0017072	None	obsolete tubulin-specific chaperone activity
+GO:0017074	None	obsolete procollagen N-endopeptidase activity
+GO:0017078	None	obsolete Hsc70 protein regulator activity
+GO:0017088	None	obsolete X-Pro dipeptidyl-peptidase activity
+GO:0017092	None	obsolete sterol regulatory element-binding protein site 2 protease activity
+GO:0017093	None	obsolete sterol regulatory element-binding protein protease activity
+GO:0017094	None	obsolete sterol regulatory element-binding protein site 1 protease activity
+GO:0017106	None	obsolete activin inhibitor activity
+GO:0017107	None	anion exchanger adaptor activity
+GO:0017114	None	obsolete wide-spectrum protease inhibitor activity
+GO:0017120	None	obsolete polyphosphatidylinositol phosphatase activity
+GO:0017132	cAMP-dependent guanyl-nucleotide exchange factor activity	cyclic nucleotide-dependent guanyl-nucleotide exchange factor activity
+GO:0017135	None	obsolete membrane-associated protein with guanylate kinase activity interacting
+GO:0017139	None	obsolete arsenate sensitivity/resistance
+GO:0017141	None	obsolete antibiotic susceptibility/resistance
+GO:0017142	None	obsolete toxin susceptibility/resistance
+GO:0017149	None	obsolete protein biosynthetic process inhibitor activity
+GO:0017155	None	obsolete sodium:hydrogen antiporter regulator activity
+GO:0017163	None	obsolete basal transcription repressor activity
+GO:0017164	None	obsolete nicotinic acetylcholine receptor-associated protein activity
+GO:0017165	None	obsolete dipeptidase E activity
+GO:0017170	None	obsolete KU70 binding
+GO:0017175	None	obsolete IMP-GMP specific 5'-nucleotidase activity
+GO:0018086	None	obsolete alanine racemization
+GO:0018128	None	obsolete peptidyl-serine cyclase activity
+GO:0018135	None	obsolete peptidyl-cysteine cyclase activity
+GO:0018179	None	obsolete peptidyl-cysteine desulfurization
+GO:0018183	None	obsolete enzyme active site formation via S-selenyl-L-cysteine
+GO:0018286	None	obsolete iron incorporation into iron-sulfur cluster via hexakis-L-cysteinyl triiron trisulfide
+GO:0018300	None	obsolete iron incorporation into iron-sulfur cluster via hexakis-L-cysteinyl hexairon hexasulfide
+GO:0018308	None	obsolete enzyme active site formation via N6-pyruvic acid 2-iminyl-L-lysine
+GO:0018314	None	obsolete protein-pyrroloquinoline-quinone linkage
+GO:0018337	None	obsolete enzyme active site formation via L-2',4',5'-topaquinone
+GO:0018338	None	obsolete protein amino acid cinnamylation
+GO:0018367	None	obsolete free L-amino acid racemization
+GO:0018512	None	obsolete 1,6-dihydroxy-5-methylcyclohexa-2,4-dienecarboxylate dehydrogenase activity
+GO:0018587	None	obsolete limonene 8-monooxygenase activity
+GO:0018704	None	obsolete 5-chloro-2-hydroxymuconic semialdehyde dehalogenase activity
+GO:0018779	None	obsolete 2-chloro-4,6-dihydroxy-1,3,5-triazine hydrolase activity
+GO:0018853	None	obsolete perillyl-CoA synthetase activity
+GO:0018927	None	obsolete methionine and threonine metabolic process
+GO:0018988	None	obsolete molting cycle, protein-based cuticle
+GO:0018997	None	obsolete electron transfer carrier
+GO:0018998	None	obsolete metaxin
+GO:0019000	None	obsolete endonuclease G activity
+GO:0019011	None	obsolete DNA replication accessory factor
+GO:0019032	None	obsolete viral glycoprotein
+GO:0019039	None	obsolete viral-cell fusion molecule activity
+GO:0019040	None	obsolete viral host shutoff protein
+GO:0019059	None	obsolete initiation of viral infection
+GO:0019066	None	obsolete translocation of virus into host cell
+GO:0019078	None	obsolete lytic viral budding
+GO:0019131	None	obsolete tripeptidyl-peptidase I activity
+GO:0019132	None	obsolete C-terminal processing peptidase activity
+GO:0019204	None	obsolete nucleotide phosphatase activity
+GO:0019214	None	obsolete surfactant activity
+GO:0019268	None	obsolete glutamate biosynthetic process, using glutamate dehydrogenase (NAD(P)+)
+GO:0019269	None	obsolete glutamate biosynthetic process, using glutamate synthase (NADPH)
+GO:0019443	None	obsolete tryptophan catabolic process, using tryptophanase
+GO:0019514	None	obsolete lactose hydrolysis
+GO:0019534	toxin transmembrane transporter activity	toxin transporter activity
+GO:0019575	None	obsolete sucrose catabolic process, using beta-fructofuranosidase
+GO:0019675	None	obsolete NAD phosphorylation and dephosphorylation
+GO:0019717	None	obsolete synaptosome
+GO:0019718	None	obsolete rough microsome
+GO:0019719	None	obsolete smooth microsome
+GO:0019764	None	obsolete high affinity Fc receptor activity
+GO:0019765	None	obsolete low affinity Fc receptor activity
+GO:0019790	None	obsolete ubiquitin-like hydrolase activity
+GO:0019791	None	obsolete FAT10 hydrolase activity
+GO:0019792	None	obsolete APG12 hydrolase activity
+GO:0019793	None	obsolete ISG15 carrier activity
+GO:0019794	None	obsolete nonprotein amino acid metabolic process
+GO:0019795	None	obsolete nonprotein amino acid biosynthetic process
+GO:0019796	None	obsolete nonprotein amino acid catabolic process
+GO:0019804	None	obsolete quinolinate synthetase complex
+GO:0019816	None	obsolete B cell receptor accessory molecule complex
+GO:0019830	None	obsolete cadmium sensitivity/resistance
+GO:0019831	None	obsolete chromate sensitivity/resistance
+GO:0019832	None	obsolete mercuric sensitivity/resistance
+GO:0019833	None	obsolete ice nucleation activity
+GO:0019837	None	obsolete herbicide susceptibility/resistance
+GO:0019844	None	obsolete endotoxin activity
+GO:0019845	None	obsolete exotoxin activity
+GO:0019846	None	obsolete enterotoxin activity
+GO:0019847	None	obsolete neurotoxin activity
+GO:0019848	None	obsolete conotoxin activity
+GO:0019849	None	obsolete cytotoxin activity
+GO:0019861	None	obsolete flagellum
+GO:0019873	None	obsolete tellurium sensitivity/resistance
+GO:0019880	None	obsolete bacteriocin susceptibility/resistance
+GO:0019881	None	obsolete streptomycin susceptibility/resistance
+GO:0019893	None	obsolete DNA replication inhibitor
+GO:0019936	None	obsolete inositol phospholipid-mediated signaling
+GO:0019940	None	obsolete SUMO-dependent protein catabolic process
+GO:0019942	None	obsolete NEDD8 class-dependent protein catabolic process
+GO:0019987	None	obsolete negative regulation of anti-apoptosis
+GO:0022814	None	facilitated diffusion
+GO:0022815	None	obsolete large uncharged polar molecule transmembrane transporter activity
+GO:0022825	None	obsolete copper-exporting ATPase activity
+GO:0022833	None	mechanically gated channel activity
+GO:0022854	None	obsolete active large uncharged polar molecule transmembrane transporter activity
+GO:0022865	None	transmembrane electron transfer carrier
+GO:0022866	None	transmembrane 1-electron transfer carrier
+GO:0022867	None	transmembrane 2-electron transfer carrier
+GO:0022891	None	substrate-specific transmembrane transporter activity
+GO:0022892	None	substrate-specific transporter activity
+GO:0023004	None	obsolete activation of dopamine receptor signaling pathway
+GO:0023005	None	obsolete signal initiation by neurotransmitter
+GO:0023006	None	obsolete signal initiation by amino acid
+GO:0023007	None	obsolete ligand binding to T cell receptor
+GO:0023009	None	obsolete initiation of T cell receptor signaling
+GO:0023010	None	obsolete regulation of initiation of T cell receptor signaling
+GO:0023011	None	obsolete positive regulation of initiation of T cell receptor signaling
+GO:0023012	None	obsolete initiation of T cell receptor signaling by binding of a MHC complex to T cell receptor
+GO:0023017	None	obsolete signal transmission via diffusible molecule
+GO:0023018	None	obsolete T cell activation of signal transmission via diffusible molecule
+GO:0023020	None	obsolete regulation of gene expression as a consequence of T cell signal transmission
+GO:0023036	None	obsolete initiation of signal transduction
+GO:0023037	None	obsolete signal initiation by light
+GO:0023038	None	obsolete signal initiation by diffusible mediator
+GO:0023039	None	obsolete signal initiation by physical damage
+GO:0023040	None	obsolete signaling via ionic flux
+GO:0023042	None	obsolete signaling via protein/peptide mediator
+GO:0023043	None	obsolete signaling via lipid mediator
+GO:0023044	None	obsolete signaling via chemical mediator
+GO:0023047	None	obsolete signal initiation by chemical mediator
+GO:0023048	None	obsolete signal initiation by lipid mediator
+GO:0023049	None	obsolete signal initiation by protein/peptide mediator
+GO:0023050	None	obsolete consequence of signal transmission
+GO:0023053	None	obsolete signal initiation by mechanical effect
+GO:0023054	None	obsolete signal initiation by stretch effect
+GO:0023055	None	obsolete signal initiation by peptide hormone
+GO:0023060	None	obsolete signal transmission
+GO:0023062	None	obsolete signal transmission via transcytosis
+GO:0023065	None	obsolete signal transmission via blood
+GO:0023066	None	obsolete signal transmission via vascular system
+GO:0023067	None	obsolete signal transmission via lymphatic system
+GO:0023068	None	obsolete signal transmission via phloem
+GO:0023069	None	obsolete signal transmission via xylem
+GO:0023070	None	obsolete signal transmission via air
+GO:0030005	None	obsolete cellular di-, tri-valent inorganic cation homeostasis
+GO:0030006	None	obsolete heavy cellular metal ion homeostasis
+GO:0030009	None	obsolete complement factor H activity
+GO:0030019	None	obsolete tryptase activity
+GO:0030022	None	obsolete adhesive extracellular matrix constituent
+GO:0030039	None	obsolete DNA unwinding factor
+GO:0030051	None	obsolete FK506-sensitive peptidyl-prolyl cis-trans isomerase
+GO:0030052	None	obsolete parvulin
+GO:0030053	None	obsolete immunophilin
+GO:0030063	None	obsolete murein sacculus
+GO:0030064	None	obsolete cell wall inner membrane
+GO:0030066	None	obsolete cytochrome b6
+GO:0030067	None	obsolete respiratory chain cytochrome b6
+GO:0030068	None	obsolete lytic viral life cycle
+GO:0030074	None	obsolete thylakoid (sensu Proteobacteria)
+GO:0030086	None	obsolete PSII associated light-harvesting complex II, core complex, LHCIIa subcomplex
+GO:0030087	None	obsolete PSII associated light-harvesting complex II, core complex, LHCIIc subcomplex
+GO:0030088	None	obsolete PSII associated light-harvesting complex II, core complex, LHCIId subcomplex
+GO:0030092	None	obsolete regulation of flagellum assembly
+GO:0030105	None	obsolete anaphylaxis
+GO:0030106	None	obsolete MHC class I receptor activity
+GO:0030146	None	obsolete diuresis
+GO:0030147	None	obsolete natriuresis
+GO:0030161	None	obsolete calpain inhibitor activity
+GO:0030180	None	obsolete solute:solute exchange
+GO:0030181	None	obsolete sodium:calcium exchange
+GO:0030188	None	obsolete chaperone regulator activity
+GO:0030189	None	obsolete chaperone activator activity
+GO:0030190	None	obsolete chaperone inhibitor activity
+GO:0030191	None	obsolete Hsp70/Hsc70 protein inhibitor activity
+GO:0030192	None	obsolete Hsp70/Hsc70 protein regulator activity
+GO:0030227	None	obsolete apolipoprotein E receptor activity
+GO:0030271	None	obsolete chymase activity
+GO:0030303	None	obsolete stromelysin 2 activity
+GO:0030304	None	obsolete trypsin inhibitor activity
+GO:0030319	None	obsolete cellular di-, tri-valent inorganic anion homeostasis
+GO:0030355	None	obsolete small nucleolar ribonucleoprotein
+GO:0030356	None	obsolete small cytoplasmic ribonucleoprotein
+GO:0030363	None	obsolete pre-mRNA cleavage factor activity
+GO:0030364	None	obsolete cleavage and polyadenylylation specificity factor activity
+GO:0030365	None	obsolete cleavage stimulation factor activity
+GO:0030383	None	obsolete host-pathogen interaction
+GO:0030400	None	obsolete protease substrate recruitment factor activity
+GO:0030401	None	obsolete transcription antiterminator activity
+GO:0030402	None	obsolete matrilysin-2 activity
+GO:0030403	None	obsolete collagenase 4 activity
+GO:0030404	None	obsolete collagenase 3 activity
+GO:0030405	None	obsolete matrix metalloproteinase 19 activity
+GO:0030406	None	obsolete matrix metalloproteinase 25 activity
+GO:0030415	None	obsolete carboxypeptidase A inhibitor activity
+GO:0030438	None	obsolete MAPKKK cascade during sporulation (sensu Fungi)
+GO:0030439	None	obsolete activation of MAPK during sporulation (sensu Fungi)
+GO:0030440	None	obsolete activation of MAPKK during sporulation (sensu Fungi)
+GO:0030441	None	obsolete activation of MAPKKK during sporulation (sensu Fungi)
+GO:0030442	None	obsolete inactivation of MAPK during sporulation (sensu Fungi)
+GO:0030443	None	obsolete nuclear translocation of MAPK during sporulation (sensu Fungi)
+GO:0030444	None	obsolete microtubule depolymerization during nuclear congression
+GO:0030455	None	obsolete MAPKKK cascade (mating sensu Fungi)
+GO:0030456	None	obsolete activation of MAPK (mating sensu Fungi)
+GO:0030457	None	obsolete activation of MAPKK (mating sensu Fungi)
+GO:0030458	None	obsolete activation of MAPKKK (mating sensu Fungi)
+GO:0030459	None	obsolete inactivation of MAPK (mating sensu Fungi)
+GO:0030460	None	obsolete nuclear translocation of MAPK (mating sensu Fungi)
+GO:0030463	None	obsolete cell aging (sensu Fungi)
+GO:0030464	None	obsolete aging dependent sterility (sensu Fungi)
+GO:0030465	None	obsolete autophagic death (sensu Fungi)
+GO:0030470	None	obsolete spore germination (sensu Fungi)
+GO:0030471	None	obsolete spindle pole body and microtubule cycle (sensu Fungi)
+GO:0030484	None	obsolete muscle fiber
+GO:0030489	None	obsolete processing of 27S pre-rRNA
+GO:0030508	None	obsolete thiol-disulfide exchange intermediate activity
+GO:0030528	None	obsolete transcription regulator activity
+GO:0030530	None	obsolete heterogeneous nuclear ribonucleoprotein complex
+GO:0030531	None	obsolete small cytoplasmic ribonucleoprotein complex
+GO:0030535	None	obsolete adult feeding behavior (sensu Insecta)
+GO:0030567	None	obsolete thrombin activator activity
+GO:0030568	None	obsolete plasmin inhibitor activity
+GO:0030569	None	obsolete chymotrypsin inhibitor activity
+GO:0030601	None	obsolete aminopeptidase B activity
+GO:0030602	None	obsolete chymosin activity
+GO:0030635	None	obsolete acetate derivative metabolic process
+GO:0030636	None	obsolete acetate derivative biosynthetic process
+GO:0030637	None	obsolete acetate derivative catabolic process
+GO:0030657	None	obsolete regulation of coenzyme and prosthetic group metabolic process
+GO:0030693	None	obsolete caspase activity
+GO:0030939	None	obsolete response to long-day photoperiod
+GO:0030940	None	obsolete response to short-day photoperiod
+GO:0030972	None	obsolete cleavage of cytosolic proteins involved in execution phase of apoptosis
+GO:0030974	thiamine pyrophosphate transmembrane transport	thiamine pyrophosphate transport
+GO:0030996	None	obsolete mitotic cell cycle arrest in response to nitrogen starvation
+GO:0031015	None	obsolete karyopherin docking complex
+GO:0031079	None	obsolete picornain 3C activity
+GO:0031368	None	obsolete Pro-X metallocarboxypeptidase activity
+GO:0031375	None	obsolete type II fatty acid synthase complex
+GO:0031376	None	obsolete cytosolic type II fatty acid synthase complex
+GO:0031377	None	obsolete mitochondrial type II fatty acid synthase complex
+GO:0031378	None	obsolete plastid type II fatty acid synthase complex
+GO:0031557	None	obsolete induction of programmed cell death in response to chemical stimulus
+GO:0031558	None	obsolete induction of apoptosis in response to chemical stimulus
+GO:0031565	None	obsolete cytokinesis checkpoint
+GO:0031596	None	obsolete ER proteasome complex
+GO:0031599	None	obsolete ER proteasome regulatory particle
+GO:0031602	None	obsolete ER proteasome core complex
+GO:0031605	None	obsolete ER proteasome core complex, alpha-subunit complex
+GO:0031608	None	obsolete ER proteasome core complex, beta-subunit complex
+GO:0031611	None	obsolete ER proteasome regulatory particle, base subcomplex
+GO:0031614	None	obsolete ER proteasome regulatory particle, lid subcomplex
+GO:0031684	None	heterotrimeric G-protein complex cycle
+GO:0031924	vitamin B6 transmembrane transporter activity	vitamin B6 transporter activity
+GO:0032066	None	nucleolus to nucleoplasm transport
+GO:0032146	None	ATPase-coupled thiosulfate transmembrane transporter activity
+GO:0032167	None	obsolete septin patch
+GO:0032217	riboflavin transmembrane transporter activity	riboflavin transporter activity
+GO:0032234	None	obsolete regulation of calcium ion transport via store-operated calcium channel activity
+GO:0032235	None	obsolete negative regulation of calcium ion transport via store-operated calcium channel activity
+GO:0032236	None	obsolete positive regulation of calcium ion transport via store-operated calcium channel activity
+GO:0032362	None	obsolete FAD catabolic process
+GO:0032524	None	obsolete nutrient export
+GO:0032838	plasma membrane bounded cell projection cytoplasm	cell projection cytoplasm
+GO:0032955	regulation of division septum assembly	regulation of barrier septum assembly
+GO:0033124	None	obsolete regulation of GTP catabolic process
+GO:0033125	None	obsolete negative regulation of GTP catabolic process
+GO:0033126	None	obsolete positive regulation of GTP catabolic process
+GO:0033171	None	obsolete nucleoprotein filament-forming ATPase activity
+GO:0033187	None	obsolete inositol hexakisphosphate 4-kinase or 6-kinase activity
+GO:0033199	None	obsolete inositol heptakisphosphate 4-kinase or 6-kinase activity
+GO:0033236	None	obsolete 11-beta-hydroxysteroid dehydrogenase (NAD+) activity
+GO:0033237	None	obsolete 11-beta-hydroxysteroid dehydrogenase (NADP+) activity
+GO:0033261	None	obsolete regulation of S phase
+GO:0033264	None	obsolete bontoxilysin activity
+GO:0033300	dehydroascorbic acid transmembrane transporter activity	dehydroascorbic acid transporter activity
+GO:0033392	None	obsolete actin homodimerization activity
+GO:0033547	None	obsolete myo-inositol hexakisphosphate biosynthetic process, via direct phosphorylation of inositol 1,4,5-trisphosphate
+GO:0033665	None	obsolete regulation of growth or development of symbiont in host
+GO:0033666	None	obsolete positive regulation of growth or development of symbiont in host
+GO:0033667	None	obsolete negative regulation of growth or development of symbiont in host
+GO:0033706	None	obsolete quinate/shikimate dehydrogenase activity
+GO:0033747	None	obsolete versatile peroxidase activity
+GO:0033804	None	obsolete glycine/sarcosine N-methyltransferase activity
+GO:0033805	None	obsolete sarcosine/dimethylglycine N-methyltransferase activity
+GO:0033884	None	obsolete phosphoethanolamine/phosphocholine phosphatase activity
+GO:0033903	None	obsolete endo-1,3(4)-beta-glucanase activity
+GO:0034019	None	obsolete capsanthin/capsorubin synthase activity
+GO:0034045	phagophore assembly site membrane	pre-autophagosomal structure membrane
+GO:0034187	None	obsolete apolipoprotein E binding
+GO:0034339	None	obsolete regulation of transcription from RNA polymerase II promoter by nuclear hormone receptor
+GO:0034441	plasma lipoprotein particle oxidation	plasma lipoprotein oxidation
+GO:0034497	protein localization to phagophore assembly site	protein localization to pre-autophagosomal structure
+GO:0034632	retinol transmembrane transporter activity	retinol transporter activity
+GO:0034727	piecemeal microautophagy of the nucleus	piecemeal microautophagy of nucleus
+GO:0034883	None	obsolete isonicotinate reductase activity
+GO:0034884	None	obsolete gamma-N-formylaminovinylacetaldehyde dehydrogenase activity
+GO:0034887	None	obsolete 1,4-dihydroisonicotinate 2,3-dioxygenase activity
+GO:0035109	None	obsolete imaginal disc-derived limb morphogenesis
+GO:0035110	None	obsolete leg morphogenesis
+GO:0035111	None	obsolete leg joint morphogenesis
+GO:0035121	None	obsolete tail morphogenesis
+GO:0035286	None	obsolete leg segmentation
+GO:0035300	None	obsolete inositol-1,3,4-trisphosphate 5/6-kinase activity
+GO:0035415	None	obsolete regulation of mitotic prometaphase
+GO:0035416	None	obsolete positive regulation of mitotic prometaphase
+GO:0035417	None	obsolete negative regulation of mitotic prometaphase
+GO:0035465	None	obsolete regulation of transforming growth factor beta receptor signaling pathway involved in determination of lateral mesoderm left/right asymmetry
+GO:0035555	None	obsolete initiation of Roundabout signal transduction
+GO:0035557	None	obsolete intracellular signal transduction involved in cell surface receptor linked signaling
+GO:0035558	None	obsolete phosphatidylinositol 3-kinase cascade involved in insulin receptor signaling
+GO:0035559	None	obsolete MAPKKK cascade involved in epidermal growth factor receptor signaling
+GO:0035569	None	obsolete N-terminal peptidyl-proline trimethylation
+GO:0035825	homologous recombination	reciprocal DNA recombination
+GO:0035980	None	obsolete invasive growth in response to nitrogen limitation
+GO:0035982	None	obsolete age-dependent behavioral decline
+GO:0036043	None	obsolete microspike
+GO:0036044	None	obsolete protein malonylation
+GO:0036045	None	obsolete peptidyl-lysine malonylation
+GO:0036079	None	purine nucleotide-sugar transport
+GO:0036096	None	obsolete 3'-5'-exoribonuclease activity involved in pre-miRNA 3'-end processing
+GO:0036097	None	obsolete pre-miRNA 3'-end processing
+GO:0036226	None	obsolete mitotic cell cycle arrest in response to glucose starvation
+GO:0036376	sodium ion export across plasma membrane	sodium ion export from cell
+GO:0036396	RNA N6-methyladenosine methyltransferase complex	MIS complex
+GO:0038067	None	MAP kinase activity involved in cell wall organization or biogenesis
+GO:0038068	None	MAP kinase kinase activity involved in cell wall organization or biogenesis
+GO:0038069	None	MAP kinase phosphatase activity involved in regulation of cell wall biogenesis
+GO:0038070	None	MAP kinase kinase kinase activity involved in cell wall organization or biogenesis
+GO:0038071	None	MAP kinase activity involved in conjugation with cellular fusion
+GO:0038072	None	MAP kinase kinase activity involved in conjugation with cellular fusion
+GO:0038073	None	MAP kinase kinase kinase activity involved in conjugation with cellular fusion
+GO:0038074	None	MAP kinase phosphatase activity involved in regulation of conjugation with cellular fusion
+GO:0038076	None	MAP kinase kinase activity involved in innate immune response
+GO:0038077	None	MAP kinase kinase kinase activity involved in innate immune response
+GO:0038079	None	MAP kinase activity involved in osmosensory signaling pathway
+GO:0038080	None	MAP kinase kinase activity involved in osmosensory signaling pathway
+GO:0038081	None	MAP kinase kinase kinase activity involved in osmosensory signaling pathway
+GO:0038082	None	MAP kinase phosphatase activity involved in regulation of osmosensory signaling pathway
+GO:0039541	None	obsolete suppression by virus of host RIG-I via RIG-I binding
+GO:0039542	None	obsolete suppression by virus of host RIG-I K63-linked ubiquitination
+GO:0039543	None	obsolete suppression by virus of host RIG-I activity by viral RNA 5' processing
+GO:0039544	None	obsolete suppression by virus of host RIG-I activity by RIG-I proteolysis
+GO:0039546	None	obsolete suppression by virus of host MAVS activity by MAVS proteolysis
+GO:0039549	None	obsolete suppression by virus of host IRF3 activity by inhibition of IRF3 phosphorylation
+GO:0039550	None	obsolete suppression by virus of host IRF3 activity by inhibition of DNA binding
+GO:0039551	None	obsolete suppression by virus of host IRF3 activity by positive regulation of IRF3 catabolic process
+GO:0039555	None	obsolete suppression by virus of host MDA-5 activity via MDA-5 binding
+GO:0039558	None	obsolete suppression by virus of host IRF7 activity by positive regulation of IRF7 sumoylation
+GO:0039559	None	obsolete suppression by virus of host IRF7 activity by positive regulation of IRF7 catabolic process
+GO:0039561	None	obsolete suppression by virus of host IRF9 activity by positive regulation of IRF9 localization to nucleus
+GO:0039565	None	obsolete suppression by virus of host STAT1 activity by positive regulation of STAT1 catabolic process
+GO:0039566	None	obsolete suppression by virus of host STAT1 activity by tyrosine dephosphorylation of STAT1
+GO:0039567	None	obsolete suppression by virus of host STAT1 activity by negative regulation of STAT protein import into nucleus
+GO:0039568	None	obsolete suppression by virus of host STAT1 activity by inhibition of DNA binding
+GO:0039569	None	obsolete suppression by virus of host STAT2 activity by positive regulation of STAT2 catabolic process
+GO:0039570	None	obsolete suppression by virus of host STAT2 activity by negative regulation of STAT protein import into nucleus
+GO:0039571	None	obsolete suppression by virus of host STAT1 activity by negative regulation of STAT1 tyrosine phosphorylation
+GO:0039572	None	obsolete suppression by virus of host STAT2 activity by negative regulation of STAT2 tyrosine phosphorylation
+GO:0039575	None	obsolete suppression by virus of host TYK2 activity by negative regulation of TYK2 tyrosine phosphorylation
+GO:0039577	None	obsolete suppression by virus of host JAK1 activity by negative regulation of JAK1 phosphorylation
+GO:0039578	None	obsolete suppression by virus of host JAK1 activity via JAK1 binding
+GO:0039581	None	obsolete suppression by virus of host PKR activity via double-stranded RNA binding
+GO:0039582	None	obsolete suppression by virus of host PKR activity by positive regulation of PKR nuclear localization
+GO:0039583	None	obsolete suppression by virus of host PKR activity by positive regulation of PKR catabolic process
+GO:0039589	None	suppression by virus of host TAP complex
+GO:0039598	None	obsolete induction by virus of host nuclear polyadenylation-dependent mRNA catabolic process
+GO:0039603	None	TBP-class protein binding involved in viral suppression of host transcription initiation from RNA polymerase II promoter
+GO:0039605	None	obsolete TFIIB-class transcription factor binding involved in viral suppression of host transcription initiation from RNA polymerase II promoter
+GO:0039607	None	obsolete proteolysis by virus of host translation initiation factor
+GO:0039608	None	obsolete suppression by virus of host translation initiation factor activity by induction of host protein dephosphorylation
+GO:0039655	None	obsolete transport of virus in host, cell to cell via plasmodesmata
+GO:0039659	None	obsolete suppression by virus of host TBK1-IKBKE-DDX3 complex activity
+GO:0040006	None	obsolete protein-based cuticle attachment to epithelium
+GO:0042027	None	obsolete cyclophilin-type peptidyl-prolyl cis-trans isomerase activity
+GO:0042029	None	obsolete fibrolase activity
+GO:0042031	None	obsolete angiotensin-converting enzyme inhibitor activity
+GO:0042057	None	obsolete transforming growth factor beta receptor anchoring activity
+GO:0042064	None	obsolete cell adhesion receptor regulator activity
+GO:0042072	None	obsolete cell adhesion receptor inhibitor activity
+GO:0042079	None	obsolete GPI/GSI anchor metabolic process
+GO:0042080	None	obsolete GPI/GSI anchor biosynthetic process
+GO:0042096	None	obsolete alpha-beta T cell receptor activity
+GO:0042099	None	obsolete gamma-delta T cell receptor activity
+GO:0042141	None	obsolete mating pheromone exporter
+GO:0042142	None	obsolete heavy metal chelation
+GO:0042153	None	obsolete RPTP-like protein binding
+GO:0042156	None	obsolete zinc-mediated transcriptional activator activity
+GO:0042280	None	obsolete cell surface antigen activity, host-interacting
+GO:0042290	None	obsolete URM1 hydrolase activity
+GO:0042291	None	obsolete Hub1 hydrolase activity
+GO:0042315	None	obsolete cytosol nonspecific dipeptidase activity
+GO:0042336	None	obsolete cuticle development involved in protein-based cuticle molting cycle
+GO:0042394	None	obsolete ecdysis, protein-based cuticle
+GO:0042408	None	obsolete myrcene/(E)-beta-ocimene synthase activity
+GO:0042491	inner ear auditory receptor cell differentiation	auditory receptor cell differentiation
+GO:0042499	None	obsolete signal peptide peptidase activity
+GO:0042563	None	obsolete importin alpha-subunit nuclear export complex
+GO:0042576	None	obsolete aspartyl aminopeptidase activity
+GO:0042598	None	obsolete vesicular fraction
+GO:0042669	regulation of inner ear auditory receptor cell fate specification	regulation of auditory receptor cell fate specification
+GO:0042708	None	obsolete elastase activity
+GO:0042798	None	obsolete protein neddylation during NEDD8 class-dependent protein catabolic process
+GO:0042801	None	obsolete polo kinase kinase activity
+GO:0042804	None	obsolete protein homooligomerization activity
+GO:0042808	None	obsolete neuronal Cdc2-like kinase binding
+GO:0042895	antibiotic transmembrane transporter activity	antibiotic transporter activity
+GO:0042896	chloramphenicol transmembrane transporter activity	chloramphenicol transporter activity
+GO:0042897	polymyxin transmembrane transporter activity	polymyxin transporter activity
+GO:0042898	fosmidomycin transmembrane transporter activity	fosmidomycin transporter activity
+GO:0042910	xenobiotic transmembrane transporter activity	xenobiotic transporter activity
+GO:0042911	acridine transmembrane transporter activity	acridine transporter activity
+GO:0042925	benzoate transmembrane transporter activity	benzoate transporter activity
+GO:0042926	3-hydroxyphenylpropionic acid transmembrane transporter activity	3-hydroxyphenylpropionic acid transporter activity
+GO:0042927	None	siderophore transporter activity
+GO:0042929	ferrichrome transmembrane transporter activity	ferrichrome transporter activity
+GO:0042931	enterobactin transmembrane transporter activity	enterobactin transporter activity
+GO:0042933	chrysobactin transmembrane transporter activity	chrysobactin transporter activity
+GO:0042934	achromobactin transmembrane transporter activity	achromobactin transporter activity
+GO:0042959	alkanesulfonate transmembrane transporter activity	alkanesulfonate transporter activity
+GO:0042965	None	obsolete glutaredoxin biosynthetic process
+GO:0042980	None	obsolete cystic fibrosis transmembrane conductance regulator binding
+GO:0043064	None	obsolete flagellum organization
+GO:0043075	None	obsolete sperm cell nucleus (sensu Magnoliophyta)
+GO:0043172	None	obsolete ferredoxin biosynthetic process
+GO:0043275	None	obsolete glutamate carboxypeptidase II activity
+GO:0043329	None	obsolete protein targeting to membrane involved in ubiquitin-dependent protein catabolic process via the multivesicular body sorting pathway
+GO:0043364	glycyl-radical enzyme activating activity	catalysis of free radical formation
+GO:0043411	None	obsolete myopalladin binding
+GO:0043433	negative regulation of DNA binding transcription factor activity	negative regulation of sequence-specific DNA binding transcription factor activity
+GO:0043459	None	obsolete response to short exposure to lithium ion
+GO:0043460	None	obsolete response to long exposure to lithium ion
+GO:0043498	None	obsolete cell surface binding
+GO:0043499	None	obsolete eukaryotic cell surface binding
+GO:0043526	None	obsolete neuroprotection
+GO:0043563	None	odorant transporter activity
+GO:0043581	None	obsolete mycelium development
+GO:0043736	None	obsolete DNA-3-methyladenine glycosylase IV activity
+GO:0043835	None	obsolete uracil/thymine dehydrogenase activity
+GO:0043859	None	obsolete cyanophycinase activity
+GO:0044005	None	induction by symbiont in host of tumor, nodule, or growth
+GO:0044006	None	induction by symbiont in host of tumor, nodule, or growth containing transformed cells
+GO:0044189	None	obsolete host cell microsome
+GO:0044377	RNA polymerase II proximal promoter sequence-specific DNA binding, bending	RNA polymerase II core promoter proximal region sequence-specific DNA binding, bending
+GO:0044403	symbiont process	symbiosis, encompassing mutualism through parasitism
+GO:0044408	None	obsolete growth or development of symbiont on or near host
+GO:0044412	None	obsolete growth or development of symbiont in host
+GO:0044460	None	obsolete flagellum part
+GO:0044664	None	obsolete reversion of cell type to default state involved in phenotypic switching
+GO:0044701	None	obsolete response to stimulus by single organism
+GO:0044711	None	obsolete single-organism biosynthetic process
+GO:0044749	None	high-affinity zinc II ion transmembrane import
+GO:0045012	None	obsolete MHC class II receptor activity
+GO:0045016	mitochondrial magnesium ion transmembrane transport	mitochondrial magnesium ion transport
+GO:0045020	None	obsolete error-prone DNA repair
+GO:0045021	None	obsolete error-free DNA repair
+GO:0045024	None	obsolete peptidyl-glutamyl peptide hydrolyzing enzyme activity
+GO:0045034	None	obsolete neuroblast division
+GO:0045042	None	obsolete protein import into mitochondrial intermembrane space, conservative
+GO:0045045	None	obsolete secretory pathway
+GO:0045096	None	obsolete acidic keratin
+GO:0045097	None	obsolete basic/neutral keratin
+GO:0045099	None	obsolete vimentin
+GO:0045100	None	obsolete desmin
+GO:0045101	None	obsolete glial fibrillary acidic protein
+GO:0045102	None	obsolete peripherin
+GO:0045118	None	azole transporter activity
+GO:0045139	None	obsolete copper sensitivity/resistance
+GO:0045164	None	obsolete secretin (sensu Mammalia)
+GO:0045192	None	obsolete low-density lipoprotein catabolic process
+GO:0045193	None	obsolete acetylated low-density lipoprotein catabolic process
+GO:0045194	None	obsolete oxidized low-density lipoprotein catabolic process
+GO:0045195	None	obsolete gallstone formation
+GO:0045205	None	obsolete MAPK transporter activity
+GO:0045206	None	obsolete MAPK phosphatase transporter activity
+GO:0045233	None	obsolete natural killer cell receptor activity
+GO:0045305	None	obsolete regulator of establishment of competence for transformation activity
+GO:0045306	None	obsolete inhibitor of the establishment of competence for transformation activity
+GO:0045307	None	obsolete activator of the establishment of competence for transformation activity
+GO:0045310	None	obsolete phosphoserine/phosphothreonine binding
+GO:0045319	None	obsolete SRP-independent cotranslational protein-membrane targeting, translocation
+GO:0045331	None	obsolete coenzyme-M-7-mercaptoheptanoylthreonine-phosphate-heterodisulfide hydrogenase activity
+GO:0045473	None	obsolete response to ethanol (sensu Insecta)
+GO:0045474	None	obsolete response to ether (sensu Insecta)
+GO:0045607	regulation of inner ear auditory receptor cell differentiation	regulation of auditory receptor cell differentiation
+GO:0045608	negative regulation of inner ear auditory receptor cell differentiation	negative regulation of auditory receptor cell differentiation
+GO:0045609	positive regulation of inner ear auditory receptor cell differentiation	positive regulation of auditory receptor cell differentiation
+GO:0045718	None	obsolete negative regulation of flagellum assembly
+GO:0045749	None	obsolete negative regulation of S phase of mitotic cell cycle
+GO:0045750	None	obsolete positive regulation of S phase of mitotic cell cycle
+GO:0045757	None	obsolete negative regulation of actin polymerization and/or depolymerization
+GO:0045758	None	obsolete positive regulation of actin polymerization and/or depolymerization
+GO:0045767	None	obsolete regulation of anti-apoptosis
+GO:0045768	None	obsolete positive regulation of anti-apoptosis
+GO:0045783	None	obsolete negative regulation of calcium in ER
+GO:0045784	None	obsolete positive regulation of calcium in ER
+GO:0045802	None	obsolete negative regulation of cytoskeleton
+GO:0045803	None	obsolete positive regulation of cytoskeleton
+GO:0045825	None	obsolete negative regulation of intermediate filament polymerization and/or depolymerization
+GO:0045826	None	obsolete positive regulation of intermediate filament polymerization and/or depolymerization
+GO:0045865	None	obsolete regulation of recombination within rDNA repeats
+GO:0045866	None	obsolete positive regulation of recombination within rDNA repeats
+GO:0045884	None	obsolete regulation of survival gene product expression
+GO:0045885	None	obsolete positive regulation of survival gene product expression
+GO:0045888	None	obsolete regulation of transcription of homeotic gene (Polycomb group)
+GO:0045889	None	obsolete positive regulation of transcription of homeotic gene (Polycomb group)
+GO:0045890	None	obsolete regulation of transcription of homeotic gene (trithorax group)
+GO:0045891	None	obsolete negative regulation of transcription of homeotic gene (trithorax group)
+GO:0046138	None	obsolete coenzyme and prosthetic group biosynthetic process
+GO:0046139	None	obsolete coenzyme and prosthetic group catabolic process
+GO:0046142	None	obsolete negative regulation of coenzyme and prosthetic group metabolic process
+GO:0046143	None	obsolete positive regulation of coenzyme and prosthetic group metabolic process
+GO:0046194	None	obsolete pentachlorophenol biosynthetic process
+GO:0046195	None	obsolete 4-nitrophenol biosynthetic process
+GO:0046198	None	obsolete cresol biosynthetic process
+GO:0046200	None	obsolete m-cresol biosynthetic process
+GO:0046212	None	obsolete methyl ethyl ketone biosynthetic process
+GO:0046227	None	obsolete 2,4,5-trichlorophenoxyacetic acid biosynthetic process
+GO:0046229	None	obsolete 2-aminobenzenesulfonate biosynthetic process
+GO:0046231	None	obsolete carbazole biosynthetic process
+GO:0046233	None	obsolete 3-hydroxyphenylacetate biosynthetic process
+GO:0046234	None	obsolete fluorene biosynthetic process
+GO:0046237	None	obsolete phenanthrene biosynthetic process
+GO:0046238	None	obsolete phthalate biosynthetic process
+GO:0046240	None	obsolete xylene biosynthetic process
+GO:0046241	None	obsolete m-xylene biosynthetic process
+GO:0046242	None	obsolete o-xylene biosynthetic process
+GO:0046243	None	obsolete p-xylene biosynthetic process
+GO:0046245	None	obsolete styrene biosynthetic process
+GO:0046255	None	obsolete 2,4,6-trinitrotoluene biosynthetic process
+GO:0046257	None	obsolete anaerobic 2,4,6-trinitrotoluene biosynthetic process
+GO:0046259	None	obsolete trinitrotoluene biosynthetic process
+GO:0046261	None	obsolete 4-nitrotoluene biosynthetic process
+GO:0046262	None	obsolete nitrotoluene biosynthetic process
+GO:0046264	None	obsolete thiocyanate biosynthetic process
+GO:0046266	None	obsolete triethanolamine biosynthetic process
+GO:0046268	None	obsolete toluene-4-sulfonate biosynthetic process
+GO:0046270	None	obsolete 4-toluenecarboxylate biosynthetic process
+GO:0046291	None	obsolete 6-hydroxycineole biosynthetic process
+GO:0046297	None	obsolete 2,4-dichlorobenzoate biosynthetic process
+GO:0046299	None	obsolete 2,4-dichlorophenoxyacetic acid biosynthetic process
+GO:0046301	None	obsolete 2-chloro-N-isopropylacetanilide biosynthetic process
+GO:0046303	None	obsolete 2-nitropropane biosynthetic process
+GO:0046410	None	obsolete 2-succinyl-6-hydroxy-2,4-cyclohexadiene-1-carboxylate synthase activity
+GO:0046542	None	obsolete alpha-factor export
+GO:0046560	None	obsolete scytalidopepsin B activity
+GO:0046561	None	obsolete penicillopepsin activity
+GO:0046590	None	obsolete embryonic leg morphogenesis
+GO:0046591	None	obsolete embryonic leg joint morphogenesis
+GO:0046615	None	obsolete re-entry into mitotic cell cycle after pheromone arrest (sensu Saccharomyces)
+GO:0046617	None	obsolete nucleolar size increase (sensu Saccharomyces)
+GO:0046715	active borate transmembrane transporter activity	borate transmembrane transporter activity
+GO:0046757	None	obsolete lytic virus budding from ER membrane
+GO:0046758	None	obsolete lytic virus budding from Golgi membrane
+GO:0046759	None	obsolete lytic virus budding from plasma membrane
+GO:0046779	None	obsolete suppression by virus of expression of host genes with introns
+GO:0046791	None	obsolete suppression by virus of host complement neutralization
+GO:0046800	None	obsolete enhancement of virulence
+GO:0046803	None	obsolete reduction of virulence
+GO:0046853	None	obsolete inositol or phosphatidylinositol phosphorylation
+GO:0046908	None	obsolete negative regulation of crystal formation
+GO:0046909	None	obsolete intermembrane transport
+GO:0046973	None	obsolete histone lysine N-methyltransferase activity (H3-K24 specific)
+GO:0047193	None	obsolete CDP-acylglycerol O-arachidonoyltransferase activity
+GO:0047388	[glutamine synthetase]-adenylyl-L-tyrosine phosphorylase	adenylyl-[glutamate-ammonia ligase] hydrolase activity
+GO:0047473	D-alanine [D-alanyl carrier protein] ligase activity	D-alanine-poly(phosphoribitol) ligase activity
+GO:0047687	None	obsolete ascorbate 2,3-dioxygenase activity
+GO:0047859	None	obsolete dihydroxyphenylalanine ammonia-lyase activity
+GO:0048018	receptor ligand activity	receptor agonist activity
+GO:0048151	None	obsolete hyperphosphorylation
+GO:0048184	None	obsolete follistatin binding
+GO:0048191	None	obsolete peptide stabilization activity
+GO:0048192	None	obsolete peptide antigen stabilization activity
+GO:0048196	None	obsolete plant extracellular matrix
+GO:0048228	None	obsolete actin cortical patch distribution
+GO:0048277	None	obsolete nonexocytotic vesicle docking
+GO:0048503	None	obsolete GPI anchor binding
+GO:0048516	None	obsolete trichome initiation (sensu Magnoliophyta)
+GO:0048517	None	obsolete positive regulation of trichome initiation (sensu Magnoliophyta)
+GO:0048610	None	obsolete cellular process involved in reproduction
+GO:0048622	None	obsolete reproductive sporulation
+GO:0048740	None	obsolete striated muscle fiber development
+GO:0048746	None	obsolete smooth muscle fiber development
+GO:0050027	None	obsolete L-idonate 2-dehydrogenase activity
+GO:0050424	None	obsolete alanine carboxypeptidase activity
+GO:0050425	None	obsolete carboxypeptidase B activity
+GO:0050426	None	obsolete peptidyl-glycinamidase activity
+GO:0050466	None	obsolete oxidoreductase activity, acting on X-H and Y-H to form an X-Y bond, with other acceptors
+GO:0050516	None	obsolete inositol polyphosphate multikinase activity
+GO:0050517	None	obsolete inositol hexakisphosphate kinase activity
+GO:0050523	None	obsolete oxidoreductase activity, acting on phosphorus or arsenic in donors, with other acceptors
+GO:0050749	None	obsolete apolipoprotein E receptor binding
+GO:0050800	None	obsolete hydrolase activity, acting on acid anhydrides, acting on GTP, involved in cellular and subcellular movement
+GO:0050983	None	obsolete deoxyhypusine biosynthetic process from spermidine
+GO:0051074	None	obsolete protein tetramerization activity
+GO:0051085	chaperone cofactor-dependent protein refolding	chaperone mediated protein folding requiring cofactor
+GO:0051090	regulation of DNA binding transcription factor activity	regulation of sequence-specific DNA binding transcription factor activity
+GO:0051091	positive regulation of DNA binding transcription factor activity	positive regulation of sequence-specific DNA binding transcription factor activity
+GO:0051183	None	vitamin transporter activity
+GO:0051184	cofactor transmembrane transporter activity	cofactor transporter activity
+GO:0051185	coenzyme transmembrane transporter activity	coenzyme transporter activity
+GO:0051370	None	obsolete ZASP binding
+GO:0051397	None	obsolete N-terminal basic amino acid aminopeptidase activity
+GO:0051398	None	obsolete N-terminal lysine aminopeptidase activity
+GO:0051399	None	obsolete N-terminal arginine aminopeptidase activity
+GO:0051404	None	obsolete clostripain activity
+GO:0051405	None	obsolete microbial collagenase activity
+GO:0051411	None	obsolete ALP binding
+GO:0051416	None	obsolete myotilin binding
+GO:0051419	None	obsolete nebulin binding
+GO:0051420	None	obsolete nebulette binding
+GO:0051635	None	obsolete bacterial cell surface binding
+GO:0051636	None	obsolete Gram-negative bacterial cell surface binding
+GO:0051637	None	obsolete Gram-positive bacterial cell surface binding
+GO:0051724	NAD transmembrane transporter activity	NAD transporter activity
+GO:0051727	None	obsolete cell cycle switching, meiotic to mitotic cell cycle
+GO:0051789	None	obsolete response to protein
+GO:0051819	induction by symbiont of nodulation, tumor or growth in host	induction of tumor, nodule, or growth in other organism involved in symbiotic interaction
+GO:0051820	None	induction of tumor, nodule, or growth containing transformed cells in other organism involved in symbiotic interaction
+GO:0051827	None	obsolete growth or development on or near surface of other organism during symbiotic interaction
+GO:0051831	None	obsolete growth or development in other organism during symbiotic interaction
+GO:0051842	None	obsolete evasion or tolerance of symbiont immune response
+GO:0051843	None	obsolete evasion or tolerance of symbiont defense response
+GO:0051845	None	obsolete passive evasion of symbiont immune response
+GO:0051846	None	obsolete active evasion of symbiont immune response
+GO:0051847	None	obsolete active evasion of symbiont immune response via regulation of symbiont complement system
+GO:0051848	None	obsolete active evasion of symbiont immune response via regulation of symbiont cytokine network
+GO:0051849	None	obsolete active evasion of symbiont immune response via regulation of symbiont antigen processing and presentation
+GO:0051853	None	obsolete induction in symbiont of tumor, nodule, or growth
+GO:0051854	None	obsolete induction in symbiont of tumor, nodule, or growth containing transformed cells
+GO:0051857	None	obsolete growth or development of organism on or near symbiont surface
+GO:0051863	None	obsolete translocation of DNA into symbiont
+GO:0051925	None	obsolete regulation of calcium ion transport via voltage-gated calcium channel activity
+GO:0051927	None	obsolete negative regulation of calcium ion transport via voltage-gated calcium channel activity
+GO:0051929	None	obsolete positive regulation of calcium ion transport via voltage-gated calcium channel activity
+GO:0052108	None	obsolete growth or development of symbiont during interaction with host
+GO:0052113	None	obsolete adaptation to host osmotic environment
+GO:0052114	None	obsolete adaptation to host pH environment
+GO:0052171	None	obsolete growth or development during symbiotic interaction
+GO:0052184	None	obsolete modulation by organism of symbiont hormone or growth regulator levels
+GO:0052193	None	obsolete movement in symbiont environment
+GO:0052194	None	obsolete movement on or near symbiont
+GO:0052326	None	obsolete interaction with symbiont via protein secreted by type IV secretion system
+GO:0052327	None	obsolete interaction with symbiont via protein secreted by type II secretion system
+GO:0052328	None	obsolete interaction with symbiont via protein secreted by type III secretion system
+GO:0052343	None	obsolete positive regulation by organism of symbiont phytoalexin production
+GO:0052346	None	obsolete positive regulation by organism of defense-related symbiont nitric oxide production
+GO:0052349	None	obsolete positive regulation by organism of defense-related symbiont reactive oxygen species production
+GO:0052350	None	obsolete induction by organism of induced systemic resistance in symbiont
+GO:0052351	None	obsolete induction by organism of systemic acquired resistance in symbiont
+GO:0052375	None	obsolete evasion or tolerance by organism of symbiont-produced nitric oxide
+GO:0052377	None	obsolete evasion or tolerance by organism of symbiont-produced phytoalexins
+GO:0052383	None	obsolete induction by organism of symbiont innate immunity
+GO:0052384	None	obsolete evasion or tolerance by organism of symbiont-produced reactive oxygen species
+GO:0052387	None	obsolete induction by organism of symbiont apoptosis
+GO:0052392	None	obsolete induction by organism of defense-related symbiont calcium ion flux
+GO:0052394	None	obsolete induction by organism of defense-related symbiont cell wall thickening
+GO:0052395	None	obsolete induction by organism of defense-related symbiont nitric oxide production
+GO:0052396	None	obsolete induction by organism of symbiont non-apoptotic programmed cell death
+GO:0052398	None	obsolete induction by organism of symbiont phytoalexin production
+GO:0052399	None	obsolete induction by organism of symbiont programmed cell death
+GO:0052401	None	obsolete induction by organism of defense-related symbiont reactive oxygen species production
+GO:0052402	None	obsolete induction by organism of symbiont resistance gene-dependent defense response
+GO:0052424	None	obsolete modification by organism of symbiont morphology or physiology via protein secreted by type III secretion system
+GO:0052425	None	obsolete modification by organism of symbiont morphology or physiology via protein secreted by type II secretion system
+GO:0052426	None	obsolete modification by organism of symbiont morphology or physiology via substance secreted by type IV secretion system
+GO:0052429	None	obsolete modulation by organism of symbiont B-cell mediated immune response
+GO:0052431	None	obsolete modulation by organism of symbiont T-cell mediated immune response
+GO:0052432	None	obsolete modulation by organism of symbiont apoptosis
+GO:0052434	None	obsolete modulation by organism of symbiont cell-mediated immune response
+GO:0052436	None	obsolete modulation by organism of defense-related symbiont calcium-dependent protein kinase pathway
+GO:0052437	None	obsolete modulation by organism of defense-related symbiont calcium ion flux
+GO:0052438	None	obsolete modulation by organism of defense-related symbiont callose deposition
+GO:0052439	None	obsolete modulation by organism of defense-related symbiont cell wall callose deposition
+GO:0052440	None	obsolete modulation by organism of defense-related symbiont ethylene-mediated signal transduction pathway
+GO:0052442	None	obsolete modulation by organism of defense-related symbiont jasmonic acid-mediated signal transduction pathway
+GO:0052444	None	obsolete modulation by organism of defense-related symbiont salicylic acid-mediated signal transduction pathway
+GO:0052446	None	obsolete modulation by organism of defense-related symbiont cell wall thickening
+GO:0052447	None	obsolete modulation by organism of symbiont ethylene-mediated defense response
+GO:0052448	None	obsolete modulation by organism of ethylene levels in symbiont
+GO:0052450	None	obsolete modulation by organism of induced systemic resistance in symbiont
+GO:0052451	None	obsolete modulation by organism of symbiont inflammatory response
+GO:0052452	None	obsolete modulation by organism of symbiont innate immunity
+GO:0052453	None	obsolete modulation by organism of symbiont intracellular transport
+GO:0052454	None	obsolete modulation by organism of symbiont jasmonic acid-mediated defense response
+GO:0052455	None	obsolete modulation by organism of jasmonic acid levels in symbiont
+GO:0052457	None	obsolete modulation by organism of defense-related symbiont nitric oxide production
+GO:0052458	None	obsolete modulation by organism of symbiont non-apoptotic programmed cell death
+GO:0052461	None	obsolete modulation by organism of pathogen-associated molecular pattern-induced symbiont innate immunity
+GO:0052463	None	obsolete modulation by organism of symbiont phytoalexin production
+GO:0052464	None	obsolete modulation by organism of symbiont programmed cell death
+GO:0052465	None	obsolete modulation by organism of defense-related symbiont reactive oxygen species production
+GO:0052466	None	obsolete modulation by organism of symbiont resistance gene-dependent defense response
+GO:0052467	None	obsolete modulation by organism of symbiont salicylic acid-mediated defense response
+GO:0052468	None	obsolete modulation by organism of salicylic acid levels in symbiont
+GO:0052471	None	obsolete modulation by organism of systemic acquired resistance in symbiont
+GO:0052473	None	obsolete negative regulation by organism of symbiont B-cell mediated immune response
+GO:0052474	None	obsolete negative regulation by organism of symbiont T-cell mediated immune response
+GO:0052475	None	obsolete negative regulation by organism of symbiont cell-mediated immune response
+GO:0052476	None	obsolete negative regulation by organism of defense-related symbiont MAP kinase-mediated signal transduction pathway
+GO:0052477	None	obsolete negative regulation by organism of defense-related symbiont callose deposition
+GO:0052478	None	obsolete negative regulation by organism of defense-related symbiont cell wall callose deposition
+GO:0052479	None	obsolete negative regulation by organism of defense-related symbiont ethylene-mediated signal transduction pathway
+GO:0052480	None	obsolete negative regulation by organism of defense-related symbiont jasmonic acid-mediated signal transduction pathway
+GO:0052481	None	obsolete negative regulation by organism of defense-related symbiont salicylic acid-mediated signal transduction pathway
+GO:0052484	None	obsolete negative regulation by organism of symbiont ethylene-mediated defense response
+GO:0052485	None	obsolete negative regulation by organism of symbiont inflammatory response
+GO:0052486	None	obsolete negative regulation by organism of symbiont innate immunity
+GO:0052487	None	obsolete negative regulation by organism of symbiont jasmonic acid-mediated defense response
+GO:0052488	None	obsolete negative regulation by organism of pathogen-associated molecular pattern-induced symbiont innate immunity
+GO:0052491	None	obsolete negative regulation by organism of symbiont salicylic acid-mediated defense response
+GO:0052498	None	obsolete pathogen-associated molecular pattern dependent induction by organism of symbiont innate immunity
+GO:0052499	None	obsolete pathogen-associated molecular pattern dependent modulation by organism of symbiont innate immunity
+GO:0052500	None	obsolete positive regulation by organism of symbiont apoptosis
+GO:0052503	None	obsolete positive regulation by organism of defense-related symbiont calcium-dependent protein kinase pathway
+GO:0052504	None	obsolete positive regulation by organism of defense-related symbiont callose deposition
+GO:0052505	None	obsolete positive regulation by organism of defense-related symbiont cell wall callose deposition
+GO:0052506	None	obsolete positive regulation by organism of defense-related symbiont ethylene-mediated signal transduction pathway
+GO:0052507	None	obsolete positive regulation by organism of defense-related symbiont jasmonic acid-mediated signal transduction pathway
+GO:0052508	None	obsolete positive regulation by organism of defense-related symbiont salicylic acid-mediated signal transduction pathway
+GO:0052511	None	obsolete positive regulation by organism of symbiont ethylene-mediated defense response
+GO:0052512	None	obsolete positive regulation by organism of hormone or growth regulator levels in symbiont
+GO:0052514	None	obsolete positive regulation by organism of symbiont inflammatory response
+GO:0052515	None	obsolete positive regulation by organism of symbiont innate immunity
+GO:0052516	None	obsolete positive regulation by organism of symbiont jasmonic acid-mediated defense response
+GO:0052517	None	obsolete positive regulation by organism of symbiont non-apoptotic programmed cell death
+GO:0052523	None	obsolete positive regulation by organism of symbiont programmed cell death
+GO:0052524	None	obsolete positive regulation by organism of symbiont salicylic acid-mediated defense response
+GO:0052528	None	obsolete upregulation by organism of symbiont programmed cell death
+GO:0052530	None	obsolete positive regulation by organism of symbiont resistance gene-dependent defense response
+GO:0052531	None	obsolete positive regulation by organism of defense-related symbiont calcium ion flux
+GO:0052534	None	obsolete positive regulation by organism of induced systemic resistance in symbiont
+GO:0052536	None	obsolete positive regulation by organism of systemic acquired resistance in symbiont
+GO:0052540	None	obsolete positive regulation by organism of defense-related symbiont cell wall thickening
+GO:0052554	None	obsolete modulation by organism of symbiont immune response
+GO:0052557	None	obsolete positive regulation by organism of symbiont immune response
+GO:0052560	None	obsolete induction by organism of symbiont immune response
+GO:0052563	None	obsolete negative regulation by organism of symbiont immune response
+GO:0052568	None	obsolete response to symbiont phytoalexin production
+GO:0052569	None	obsolete response to defense-related symbiont nitric oxide production
+GO:0052570	None	obsolete response to defense-related symbiont reactive oxygen species production
+GO:0052571	None	obsolete response to symbiont immune response
+GO:0052888	None	obsolete OBSOLETE:dihydroorotate oxidase (fumarate) activity
+GO:0055061	None	obsolete di-, tri-valent inorganic anion homeostasis
+GO:0055066	None	obsolete di-, tri-valent inorganic cation homeostasis
+GO:0055098	None	response to low-density lipoprotein particle stimulus
+GO:0055099	None	response to high density lipoprotein particle
+GO:0055101	None	obsolete glycerophospholipase inhibitor activity
+GO:0055124	None	obsolete premature neural plate formation
+GO:0055125	None	obsolete Nic96 complex
+GO:0055126	None	obsolete Nup82 complex
+GO:0060090	molecular adaptor activity	binding, bridging
+GO:0060122	inner ear receptor cell stereocilium organization	inner ear receptor stereocilium organization
+GO:0060277	None	obsolete negative regulation of transcription involved in G1 phase of mitotic cell cycle
+GO:0060286	None	obsolete flagellar cell motility
+GO:0060477	None	peptidyl-serine phosphorylation involved in acrosome reaction
+GO:0060565	None	obsolete inhibition of APC-Cdc20 complex activity
+GO:0060630	None	obsolete regulation of M/G1 transition of mitotic cell cycle
+GO:0060991	None	obsolete lipid tube assembly involved in cytokinesis
+GO:0061338	None	obsolete atrioventricular node impulse conduction delay
+GO:0061467	None	basolateral protein localization
+GO:0061597	None	obsolete cyclic pyranopterin monophosphate synthase activity
+GO:0061717	None	miRNA transporter activity
+GO:0061735	DNM1L-mediated stimulation of mitophagy in response to mitochondrial depolarization	dynamin-like protein-mediated stimulation of mitophagy in response to mitochondrial depolarization
+GO:0061813	None	obsolete ARID domain binding
+GO:0061839	ferrous ion transmembrane transport	high-affinity ferrous ion transmembrane transport
+GO:0061840	high-affinity ferrous iron transmembrane transporter activity	high-affinity ferrous iron uptake transmembrane transporter activity
+GO:0061927	TOC-TIC supercomplex I	None
+GO:0061928	glutathione specific gamma-glutamylcyclotransferase activity	None
+GO:0061929	gamma-glutamylaminecyclotransferase activity	None
+GO:0061930	regulation of erythrocyte enucleation	None
+GO:0061931	positive regulation of erythrocyte enucleation	None
+GO:0061932	negative regulation of erythrocyte enucleation	None
+GO:0061934	regulation of adenine biosynthetic process	None
+GO:0061935	fusion of sperm to egg plasma membrane involved in double fertilization forming two zygotes	None
+GO:0061936	fusion of sperm to egg plasma membrane involved in double fertilization forming a zygote and endosperm	None
+GO:0061938	protein localization to somatodendritic compartment	None
+GO:0061939	c-di-GMP signaling	None
+GO:0061940	regulation of c-di-GMP signaling	None
+GO:0061941	positive regulation of c-di-GMP signaling	None
+GO:0061942	negative regulation of c-di-GMP signaling	None
+GO:0061944	negative regulation of protein K48-linked ubiquitination	None
+GO:0061945	regulation of protein K48-linked ubiquitination	None
+GO:0061948	premature acrosome loss	None
+GO:0061949	regulation of premature acrosome loss	None
+GO:0061950	negative regulation of premature acrosome loss	None
+GO:0061951	establishment of protein localization to plasma membrane	None
+GO:0061952	midbody abscission	None
+GO:0061953	mRNA (adenine-N1-)-methyltransferase activity	None
+GO:0061954	positive regulation of actin filament polymerization involved in sperm capacitation	None
+GO:0061955	positive regulation of actin filament depolymerization involved in acrosome reaction	None
+GO:0061956	penetration of cumulus oophorus	None
+GO:0061957	NVT complex	None
+GO:0070188	None	obsolete Stn1-Ten1 complex
+GO:0070190	None	obsolete inositol hexakisphosphate 1-kinase or 3-kinase activity
+GO:0070215	None	obsolete MDM2 binding
+GO:0070216	None	obsolete MDM4 binding
+GO:0070270	None	obsolete mitotic catastrophe
+GO:0070361	None	mitochondrial light strand promoter anti-sense binding
+GO:0070362	None	mitochondrial heavy strand promoter anti-sense binding
+GO:0070363	None	mitochondrial light strand promoter sense binding
+GO:0070364	None	mitochondrial heavy strand promoter sense binding
+GO:0070389	None	chaperone cofactor-dependent protein refolding
+GO:0070438	None	obsolete mTOR-FKBP12-rapamycin complex
+GO:0070604	None	PBAF complex
+GO:0071142	homomeric SMAD protein complex	SMAD2 protein complex
+GO:0071143	None	SMAD3 protein complex
+GO:0071144	heteromeric SMAD protein complex	SMAD2-SMAD3 protein complex
+GO:0071145	None	SMAD2-SMAD4 protein complex
+GO:0071146	None	SMAD3-SMAD4 protein complex
+GO:0071343	None	obsolete negative regulation of establishment of actomyosin contractile ring localization
+GO:0071445	None	obsolete cellular response to protein stimulus
+GO:0071629	cytoplasm protein quality control by the ubiquitin-proteasome system	ubiquitin-dependent catabolism of misfolded proteins by cytoplasm-associated proteasome
+GO:0071630	nuclear protein quality control by the ubiquitin-proteasome system	ubiquitin-dependent catabolism of misfolded proteins by nucleus-associated proteasome
+GO:0071778	None	obsolete WINAC complex
+GO:0071876	None	obsolete initiation of adrenergic receptor signal transduction
+GO:0071884	None	vitamin D receptor activator activity
+GO:0071991	None	phytochelatin transporter activity
+GO:0071992	None	phytochelatin transmembrane transporter activity
+GO:0072333	None	obsolete anoikis by p53 class mediator
+GO:0072466	None	obsolete detection of stimulus involved in cell shape checkpoint
+GO:0072467	None	obsolete response to cell shape checkpoint signaling
+GO:0072468	None	obsolete signal transduction involved in cell shape checkpoint
+GO:0072500	None	obsolete negative regulation of transcription from RNA polymerase II promoter by nuclear hormone receptor
+GO:0072519	None	parasitism
+GO:0072668	None	obsolete tubulin complex biogenesis
+GO:0072692	None	obsolete chromatin silencing at centromere central core
+GO:0072694	None	obsolete cell cycle arrest in response to caffeine
+GO:0075013	None	obsolete growth or development of symbiont on or near host phyllosphere
+GO:0075014	None	obsolete growth or development of symbiont on or near host rhizosphere
+GO:0075065	None	obsolete growth or development of symbiont in host cell
+GO:0075066	None	obsolete growth or development of symbiont in host organelle
+GO:0075067	None	obsolete growth or development of symbiont in host intercellular space
+GO:0075068	None	obsolete growth or development of symbiont in host vascular tissue
+GO:0075301	None	obsolete cell differentiation involved in spore germination
+GO:0075305	None	obsolete modulation of growth or development of symbiont on or near host
+GO:0075309	None	obsolete negative regulation of growth or development of symbiont on or near host surface
+GO:0075337	None	obsolete positive regulation of growth or development of symbiont on or near host surface
+GO:0075338	None	obsolete modulation of growth or development of symbiont during interaction with host
+GO:0075339	None	obsolete positive regulation of growth or development of symbiont during interaction with host
+GO:0075340	None	obsolete negative regulation of growth or development of symbiont during interaction with host
+GO:0075515	None	obsolete viral entry into host cell via caveolin-mediated endocytosis followed by genetic injection through the endosome membrane
+GO:0075705	None	obsolete viral entry into host cell via clathrin-mediated endocytosis followed by genetic injection through the endosome membrane
+GO:0080010	None	obsolete regulation of oxygen and reactive oxygen species metabolic process
+GO:0080055	None	low-affinity nitrate transport
+GO:0080125	None	obsolete multicellular structure septum development
+GO:0080138	None	borate uptake transmembrane transporter activity
+GO:0080173	male-female gamete recognition during double fertilization forming a zygote and endosperm	male-female gamete recognition during double fertilization
+GO:0085030	symbiont process benefiting host	mutualism
+GO:0085031	None	commensalism
+GO:0090007	None	obsolete regulation of mitotic anaphase
+GO:0090046	None	obsolete regulation of transcription regulator activity
+GO:0090047	None	obsolete positive regulation of transcription regulator activity
+GO:0090048	None	obsolete negative regulation of transcription regulator activity
+GO:0090072	None	obsolete positive regulation of sodium ion transport via voltage-gated sodium channel activity
+GO:0090401	None	viral-induced premature senescence
+GO:0090412	None	obsolete positive regulation of transcription from RNA polymerase II promoter involved in fatty acid biosynthetic process
+GO:0090413	None	obsolete negative regulation of transcription from RNA polymerase II promoter involved in fatty acid biosynthetic process
+GO:0090416	nicotinate transmembrane transporter activity	nicotinate transporter activity
+GO:0090417	N-methylnicotinate transmembrane transporter activity	N-methylnicotinate transporter activity
+GO:0090418	None	obsolete positive regulation of transcription involved in S-phase of mitotic cell cycle
+GO:0090422	thiamine pyrophosphate transmembrane transporter activity	thiamine pyrophosphate transporter activity
+GO:0090440	abscisic acid transmembrane transporter activity	abscisic acid transporter activity
+GO:0090484	None	drug transporter activity
+GO:0090544	None	BAF-type complex
+GO:0090620	None	obsolete APC-Cdc20 complex
+GO:0090621	None	obsolete APC-fizzy-related complex
+GO:0090631	None	pre-miRNA transporter activity
+GO:0090690	None	obsolete heteroreceptor complex
+GO:0090703	None	obsolete triplex DNA unwinding
+GO:0097015	None	obsolete bacterial-type flagellar cytoplasm
+GO:0097285	None	obsolete cell-type specific apoptotic process
+GO:0097441	basal dendrite	basilar dendrite
+GO:0097469	None	obsolete cyclin-dependent protein tyrosine kinase activity
+GO:0097632	extrinsic component of phagophore assembly site membrane	extrinsic component of pre-autophagosomal structure membrane
+GO:0097633	intrinsic component of phagophore assembly site membrane	intrinsic component of pre-autophagosomal structure membrane
+GO:0097634	integral component of phagophore assembly site membrane	integral component of pre-autophagosomal structure membrane
+GO:0098631	cell adhesion mediator activity	protein binding involved in cell adhesion
+GO:0098632	cell-cell adhesion mediator activity	protein binding involved in cell-cell adhesion
+GO:0098634	cell-matrix adhesion mediator activity	protein binding involved in cell-matrix adhesion
+GO:0098663	None	transmembrane transporter activity involved in import into cell
+GO:0098667	None	sodium ion export across plasma membrane
+GO:0098668	None	potassium ion export from cell
+GO:0098701	None	endocytic import into cell
+GO:0098766	None	obsolete meiosis I M phase
+GO:0098767	None	obsolete meiosis II M phase
+GO:0098782	mechanosensitived potassium channel activity	mechanically-gated potassium channel activity
+GO:0099072	regulation of postsynaptic membrane neurotransmitter receptor levels	regulation of postsynaptic specialization membrane neurotransmitter receptor levels
+GO:0099142	intracellularly ATP-gated ion channel activity	intracellular ATP-gated ion channel activity
+GO:0099152	regulation of neurotransmitter receptor transport, endosome to postsynaptic membrane	None
+GO:0099157	trans-synaptic signalling via exosome	transynaptic signalling via exosome
+GO:0099158	regulation of recycling endosome localization within postsynapse	None
+GO:0099159	regulation of modification of postsynaptic structure	None
+GO:0099160	postsynaptic intermediate filament cytoskeleton	None
+GO:0099161	regulation of presynaptic dense core granule exocytosis	None
+GO:0099162	regulation of neurotransmitter loading into synaptic vesicle	None
+GO:0099163	synaptic signaling by nitric oxide	None
+GO:0099164	postsynaptic specialization membrane of symmetric synapse	None
+GO:0099165	postsynaptic specialization of symmetric synapse, intracellular component	None
+GO:0099166	intrinsic component of postsynaptic specialization membrane of symmetric synapse	None
+GO:0099167	integral component of postsynaptic specialization membrane of symmetric synapse	None
+GO:0099168	extrinsic component of postsynaptic specialization membrane of symmetric synapse	None
+GO:0099169	anchored component of postsynaptic specialization membrane of symmetric synapse	None
+GO:0099170	postsynaptic modulation of chemical synaptic transmission	None
+GO:0099171	presynaptic modulation of chemical synaptic transmission	None
+GO:0099172	presynapse organization	None
+GO:0099173	postsynapse organization	None
+GO:0099174	regulation of presynapse organization	None
+GO:0099175	regulation of postsynapse organization	None
+GO:0099176	regulation of retrograde trans-synaptic signaling by trans-synaptic protein complex	None
+GO:0099177	regulation of trans-synaptic signaling	None
+GO:0099178	regulation of retrograde trans-synaptic signaling by endocanabinoid	None
+GO:0099179	regulation of synaptic membrane adhesion	None
+GO:0099180	zinc ion import into synaptic vesicle	None
+GO:0099181	structural constituent of presynapse	None
+GO:0099182	presynaptic intermediate filament cytoskeleton	None
+GO:0099183	trans-synaptic signaling by BDNF, modulating synaptic transmission	None
+GO:0099184	structural constituent of postsynaptic intermediate filament cytoskeleton	None
+GO:0099185	postsynaptic intermediate filament cytoskeleton organization	None
+GO:0099186	structural constituent of postsynapse	None
+GO:0099187	presynaptic cytoskeleton organization	None
+GO:0099188	postsynaptic cytoskeleton organization	None
+GO:0099189	postsynaptic spectrin-associated cytoskeleton	None
+GO:0099190	postsynaptic spectrin-associated cytoskeleton organization	None
+GO:0099191	trans-synaptic signaling by BDNF	None
+GO:0099192	cerebellar Golgi cell to granule cell synapse	None
+GO:0100019	None	regulation of cAMP-mediated signaling by transcription from RNA polymerase II promoter
+GO:0100027	None	obsolete regulation of cell separation after cytokinesis by transcription from RNA polymerase II promoter
+GO:0100029	None	obsolete regulation of histone modification by transcription from RNA polymerase II promoter
+GO:0100030	None	obsolete regulation of histone acetylation by transcription from RNA polymerase II promoter
+GO:0100031	None	obsolete regulation of histone methylation by transcription from RNA polymerase II promoter
+GO:0100035	None	negative regulation of transmembrane transport by transcription from RNA polymerase II promoter
+GO:0100060	None	negative regulation of SREBP signaling pathway by DNA binding
+GO:0100061	None	negative regulation of SREBP signaling pathway by transcription factor catabolic process
+GO:0100062	None	positive regulation of SREBP signaling pathway by transcription factor catabolic process
+GO:0100063	None	regulation of dipeptide transmembrane transport by transcription from RNA polymerase II promoter
+GO:0101013	mechanosensitive voltage-gated sodium channel activity	mechanically-modulated voltage-gated sodium channel activity
+GO:0102025	ATPase-coupled thiosulfate transmembrane transporter activity	thiosulphate ABC transporter activity
+GO:0102033	fatty acid omega-hydroxylase activity	cytochrome P450 fatty acid omega-hydroxylase activity
+GO:0102092	5-diphosphoinositol pentakisphosphate 3-kinase activity	None
+GO:0102105	demethoxycurcumin synthase activity from feruloylacetyl-CoA	None
+GO:0102158	very-long-chain 3-hydroxyacyl-CoA dehydratase activity	None
+GO:0102162	all-trans-8'-apo-beta-carotenal 15,15'-oxygenase	<em>all</em>-<em>trans</em>-8prime-apo-beta-carotenal 15,15prime-oxygenase activity
+GO:0102163	3-hydroxyacyl-CoA-acyl carrier protein transferase activity	None
+GO:0102198	L-idonate 5-dehydrogenase activity (NAD-dependent)	L-idonate 5-dehydrogenase activity (NAD-dependent)namespace: molecular_function
+GO:0102207	very long chain fatty acid omega-hydroxylase activity	None
+GO:0102212	unsaturated chondroitin disaccharide hydrolase activity	None
+GO:0102249	phosphatidylcholine:diacylglycerol cholinephosphotransferase activity	None
+GO:0102280	choline monooxygenase activity (NADP-dependent)	None
+GO:0102545	phosphatidyl phospholipase B activity	None
+GO:0102552	lipoyl synthase activity (acting on glycine-cleavage complex H protein	None
+GO:0102553	lipoyl synthase activity (acting on pyruvate dehydrogenase E2 protein)	None
+GO:0102554	lipoyl synthase activity (acting on 2-oxoglutarate-dehydrogenase E2 protein	None
+GO:0102555	octanoyl transferase activity (acting on glycine-cleavage complex H protein)	None
+GO:0102561	D-ribose 2,5-bisphosphate 2-phosphohydrolase activity	D-ribose 2,5-bisphosphate 2-phsophohydrolase activity
+GO:0102638	[1-(2-amino-7-methyl-4-oxo-7,8-dihydro-3H-pteridin-6-yl)]ethyl-4-(beta-D-ribofuranosyl)aminobenzene 5'-phosphate synthase activity	None
+GO:0102770	inositol phosphorylceramide synthase activity	inositolphosphorylceramide synthase activity
+GO:0102799	glucosinolate glucohydrolase activity	None
+GO:0103040	aldose sugar dehydrogenase activity	None
+GO:0103068	leukotriene C4 gamma-glutamyl transferase activity	None
+GO:0103072	straight chain (R)-2-hydroxy fatty acyl-CoA lyase activity	None
+GO:0104004	cellular response to environmental stimulus	None
+GO:0104005	hijacked molecular function	None
+GO:0106038	None	obsolete vesicle assembly
+GO:0106039	None	obsolete vesicle fusion involved in vesicle assembly
+GO:0106054	tRNA U34 thiol-transferase activity	None
+GO:0106055	mannosyl-oligosaccharide 1,2-alpha-mannosidase complex	None
+GO:0106056	regulation of calcineurin-mediated signaling	None
+GO:0106057	negative regulation of calcineurin-mediated signaling	None
+GO:0106058	positive regulation of calcineurin-mediated signaling	None
+GO:0106059	tRNA (cytidine56-2'-O)-methyltransferase	None
+GO:0106060	regulation of exit from meiosis	None
+GO:0106061	negative regulation of exit from meiosis	None
+GO:0106062	positive regulation of exit from meiosis	None
+GO:0106063	G-protein coupled folate receptor activity	None
+GO:0106064	regulation of cobalamin metabolic process	None
+GO:0106068	SUMO ligase complex	None
+GO:0106069	synapsis initiation complex	None
+GO:0106070	regulation of adenylate cyclase-activating G-protein coupled receptor signaling pathway	None
+GO:0106071	positive regulation of adenylate cyclase-activating G-protein coupled receptor signaling pathway	None
+GO:0106072	negative regulation of adenylate cyclase-activating G-protein coupled receptor signaling pathway	None
+GO:0106073	dolichyl pyrophosphate Glc2Man9GlcNAc2 alpha-1,2-glucosyltransferase activity	None
+GO:0106074	aminoacyl-tRNA metabolism involved in translational fidelity	None
+GO:0106075	peptide N-succinyltransferase activity	None
+GO:0106076	peptide-lysine-N-succinyltransferase activity	None
+GO:0106077	histone succinylation	None
+GO:0106078	histone succinyltransferase activity	None
+GO:0106080	GATOR1 complex binding	None
+GO:0110050	deaminated glutathione amidase activity	None
+GO:0110051	metabolite repair	None
+GO:0110052	toxic metabolite repair	None
+GO:0110053	regulation of actin filament organization	None
+GO:0110054	regulation of actin filament annealing	None
+GO:0110055	negative regulation of actin filament annealing	None
+GO:0110056	positive regulation of actin filament annealing	None
+GO:0110057	regulation of blood vessel endothelial cell differentiation	None
+GO:0110058	positive regulation of blood vessel endothelial cell differentiation	None
+GO:0110059	negative regulation of blood vessel endothelial cell differentiation	None
+GO:0110061	regulation of angiotensin-activated signaling pathway	None
+GO:0110062	negative regulation of angiotensin-activated signaling pathway	None
+GO:0110063	positive regulation of angiotensin-activated signaling pathway	None
+GO:0110064	lncRNA catabolic process	None
+GO:0110065	regulation of mitotic telomere clustering during interphase	None
+GO:0110066	negative regulation of mitotic telomere clustering during interphase	None
+GO:0110067	ammonium transmembrane transporter complex	None
+GO:0110068	glucosylglycerate phosphorylase activity	None
+GO:0110069	syncytial embryo cellularization	None
+GO:0110070	cellularization cleavage furrow	None
+GO:0110071	cellularization cleavage furrow invagination front	None
+GO:0110072	apical constriction involved in ventral furrow formation	None
+GO:0110073	regulation of apical constriction involved in ventral furrow formation	None
+GO:0110074	positive regulation of apical constriction involved in ventral furrow formation	None
+GO:0120091	jasmonic acid hydrolase	None
+GO:0120092	crotonyl-CoA hydratase activity	None
+GO:0120093	regulation of peptidyl-lysine crotonylation	None
+GO:0120094	negative regulation of peptidyl-lysine crotonylation	None
+GO:0120095	vacuole-isolation membrane contact site	None
+GO:0120097	glycosylphosphatidylinositol-mannosyltransferase II complex	None
+GO:0120098	procentriole	None
+GO:0120099	procentriole replication complex	None
+GO:0120100	bacterial-type flagellum motor	None
+GO:0120101	bacterial-type flagellum stator complex	None
+GO:0120102	bacterial-type flagellum secretion apparatus	None
+GO:0120103	centriolar subdistal appendage	None
+GO:0120104	actomyosin contractile ring, proximal layer	None
+GO:0120105	actomyosin contractile ring, intermediate layer	None
+GO:0120106	actomyosin contractile ring, distal actin filament layer	None
+GO:0120107	bacterial-type flagellum rotor complex	None
+GO:0120108	DNA-3'-diphospho-5'-guanosine diphosphatase	None
+GO:0120109	mitotic telomere clustering and tethering at nuclear periphery	None
+GO:0120110	mitotic telomere clustering during interphase	None
+GO:0120111	neuron projection cytoplasm	None
+GO:0120112	UDP-glucose transmembrane transport into endoplasmic reticulum	None
+GO:0120113	protein localization by the NVT pathway	None
+GO:0120114	Sm-like protein family complex	None
+GO:0120115	Lsm2-8 complex	None
+GO:0120116	glucagon processing	None
+GO:0120117	T cell meandering migration	None
+GO:0120118	flagella connector	None
+GO:0120119	flagellum attachment zone	None
+GO:0120120	bilobe structure	None
+GO:0120121	tripartite attachment complex	None
+GO:0140048	manganese ion export across plasma membrane	manganese ion export from cell
+GO:0140084	sexual macrocyst formation	None
+GO:0140090	membrane curvature sensor activity	None
+GO:0140091	mBAF complex	None
+GO:0140092	bBAF complex	None
+GO:0140093	esBAF complex	None
+GO:0140096	catalytic activity, acting on a protein	None
+GO:0140097	catalytic activity, acting on DNA	None
+GO:0140098	catalytic activity, acting on RNA	None
+GO:0140101	catalytic activity, acting on a tRNA	None
+GO:0140102	catalytic activity, acting on a rRNA	None
+GO:0140103	catalytic activity, acting on a glycoprotein	None
+GO:0140104	molecular carrier activity	None
+GO:0140105	interleukin-10-mediated signaling pathway	None
+GO:0140107	high-affinity potassium ion transmembrane transporter activity	None
+GO:0140108	high-affinity glucose transmembrane transporter activity	None
+GO:0140110	transcription regulator activity	None
+GO:0140111	[choline trimethylamine-lyase]-activating enzyme activity	None
+GO:0140112	extracellular vesicle biogenesis	None
+GO:0140113	extracellular microvesicle biogenesis	None
+GO:0140114	cellular detoxification of fluoride	None
+GO:0140115	export across plasma membrane	None
+GO:0140116	fluoride export across plasma membrane	None
+GO:0140121	Lewy body formation	None
+GO:0140122	regulation of Lewy body formation	None
+GO:0140123	negative regulation of Lewy body formation	None
+GO:0140124	positive regulation of Lewy body formation	None
+GO:0140125	thiamine import across plasma membrane	None
+GO:0140131	positive regulation of lymphocyte chemotaxis	None
+GO:0140132	iron-sulfur cluster carrier activity	None
+GO:0140133	negative regulation by symbiont of host cytokine secretion	None
+GO:0140135	mechanosensitive cation channel activity	None
+GO:0140140	mitochondrial guanine nucleotide transmembrane transport	None
+GO:0140141	mitochondrial potassium ion transmembrane transport	None
+GO:0140142	nucleocytoplasmic carrier activity	None
+GO:0140145	copper ion export from vacuole	None
+GO:0140146	calcium ion import into vacuole	None
+GO:0140147	zinc ion export from vacuole	None
+GO:0150001	primary dendrite	None
+GO:0150002	distal dendrite	None
+GO:0150003	regulation of spontaneous synaptic transmission	None
+GO:0150004	dendritic spine origin	None
+GO:0150005	enzyme activator complex	None
+GO:0150006	urease activator complex	None
+GO:0150007	clathrin-dependent synaptic vesicle endocytosis	None
+GO:0150008	bulk synaptic vesicle endocytosis	None
+GO:0150011	regulation of neuron projection arborization	None
+GO:0150012	positive regulation of neuron projection arborization	None
+GO:0150013	negative regulation of neuron projection arborization	None
+GO:0150014	apical distal dendrite	None
+GO:0150015	apical proximal dendrite	None
+GO:0150016	basal distal dendrite	None
+GO:0150017	basal proximal dendrite	None
+GO:0150018	basal dendrite development	None
+GO:0150019	basal dendrite morphogenesis	None
+GO:0150020	basal dendrite arborization	None
+GO:0150021	apical dendrite morphogenesis	None
+GO:0150022	apical dendrite development	None
+GO:0150023	apical dendrite arborization	None
+GO:1900013	None	obsolete cellular response to potassium ion involved in chemotaxis to cAMP
+GO:1900014	None	obsolete cellular response to calcium ion involved in chemotaxis to cAMP
+GO:1900031	None	obsolete regulation of transcription from RNA polymerase II promoter involved in calcium-mediated signaling
+GO:1900043	None	obsolete leptin-mediated signaling pathway involved in negative regulation of appetite
+GO:1900061	None	obsolete positive regulation of transcription from RNA polymerase II promoter involved in calcium-mediated signaling
+GO:1900083	None	obsolete regulation of Sertoli cell proliferation
+GO:1900201	None	obsolete regulation of spread of virus in host, cell to cell
+GO:1900202	None	obsolete negative regulation of spread of virus in host, cell to cell
+GO:1900203	None	obsolete positive regulation of spread of virus in host, cell to cell
+GO:1900388	None	obsolete regulation of vesicle-mediated transport by regulation of transcription from RNA polymerase II promoter
+GO:1900391	None	regulation of cAMP-mediated signaling by regulation of transcription from RNA polymerase II promoter
+GO:1900405	None	obsolete regulation of cell separation after cytokinesis by regulation of transcription from RNA polymerase II promoter
+GO:1900410	None	obsolete regulation of histone modification by regulation of transcription from RNA polymerase II promoter
+GO:1900411	None	obsolete regulation of histone acetylation by regulation of transcription from RNA polymerase II promoter
+GO:1900412	None	obsolete regulation of histone methylation by regulation of transcription from RNA polymerase II promoter
+GO:1900414	None	obsolete regulation of cytokinesis by regulation of transcription from RNA polymerase II promoter
+GO:1900417	None	negative regulation of transmembrane transport by negative regulation of transcription from RNA polymerase II promoter
+GO:1900446	None	negative regulation of tRNA transcription from RNA polymerase III promoter
+GO:1900456	None	obsolete regulation of invasive growth in response to glucose limitation by regulation of transcription from RNA polymerase II promoter
+GO:1900467	None	obsolete regulation of cellular potassium ion homeostasis
+GO:1900527	None	obsolete regulation of nucleus size involved in G1 to G0 transition
+GO:1900528	None	obsolete regulation of cell shape involved in G1 to G0 transition
+GO:1900529	None	obsolete regulation of cell shape involved in cellular response to glucose starvation
+GO:1900530	None	obsolete regulation of cell shape involved in cellular response to salt stress
+GO:1900531	None	obsolete regulation of cell shape involved in cellular response to heat
+GO:1900532	None	obsolete negative regulation of cell proliferation involved in cellular hyperosmotic response
+GO:1900536	None	obsolete regulation of glucose homeostasis
+GO:1900537	None	obsolete negative regulation of glucose homeostasis
+GO:1900538	None	obsolete positive regulation of glucose homeostasis
+GO:1901037	None	obsolete regulation of transcription from RNA polymerase II promoter during M/G1 transition of mitotic cell cycle
+GO:1901043	None	obsolete protein polyubiquitination involved in cellular response to misfolded protein
+GO:1901144	None	obsolete insulin biosynthetic process
+GO:1901225	None	obsolete negative regulation of transcription from RNA polymerase II promoter involved in heart development
+GO:1901226	None	obsolete positive regulation of transcription from RNA polymerase II promoter involved in heart development
+GO:1901294	None	negative regulation of SREBP signaling pathway by negative regulation of DNA binding
+GO:1901311	None	obsolete regulation of gene expression involved in extracellular matrix organization
+GO:1901312	None	obsolete negative regulation of gene expression involved in extracellular matrix organization
+GO:1901313	None	obsolete positive regulation of gene expression involved in extracellular matrix organization
+GO:1901368	None	NAD transmembrane transporter activity
+GO:1901476	None	carbohydrate transporter activity
+GO:1901480	oleate transmembrane transporter activity	oleate transporter activity
+GO:1901486	None	negative regulation of SREBP signaling pathway by positive regulation of transcription factor catabolic process
+GO:1901487	None	negative regulation of SREBP signaling pathway by positive regulation of transcription factor catabolic process in response to increased oxygen levels
+GO:1901488	None	positive regulation of SREBP signaling pathway by negative regulation of transcription factor catabolic process
+GO:1901489	None	positive regulation of SREBP signaling pathway by negative regulation of transcription factor catabolic process in response to decreased oxygen levels
+GO:1901505	carbohydrate derivative transmembrane transporter activity	carbohydrate derivative transporter activity
+GO:1901549	None	malonic acid uptake transmembrane transporter activity
+GO:1901572	None	obsolete chemical substance metabolic process
+GO:1901573	None	obsolete chemical substance catabolic process
+GO:1901574	None	obsolete chemical substance biosynthetic process
+GO:1901603	None	biotin transmembrane transporter activity
+GO:1901619	None	obsolete tRNA methylation in response to nitrogen starvation
+GO:1901635	None	obsolete regulation of maintenance of presynaptic active zone structure
+GO:1901636	None	obsolete negative regulation of maintenance of presynaptic active zone structure
+GO:1901637	None	obsolete positive regulation of maintenance of presynaptic active zone structure
+GO:1901638	None	obsolete copper ion import into ascospore-type prospore
+GO:1901643	None	obsolete regulation of tRNA methylation in response to nitrogen starvation
+GO:1901644	None	obsolete positive regulation of tRNA methylation in response to nitrogen starvation
+GO:1901677	None	phosphate transmembrane transporter activity
+GO:1901718	None	regulation of dipeptide transmembrane transport by regulation of transcription from RNA polymerase II promoter
+GO:1902032	None	obsolete regulation of transcription from RNA polymerase II promoter involved in response to osmotic stress
+GO:1902335	None	obsolete positive chemotaxis involved in neuron migration
+GO:1902361	None	mitochondrial pyruvate transmembrane transport
+GO:1902376	None	protein denaturation involved in proteasomal ubiquitin-dependent protein catabolic process
+GO:1902432	protein localization to division septum	protein localization to barrier septum
+GO:1902592	None	obsolete multi-organism membrane budding
+GO:1902717	None	obsolete sequestering of iron ion
+GO:1902718	None	obsolete sequestering of copper ion
+GO:1902719	None	obsolete extracellular sequestering of copper ion
+GO:1902720	None	obsolete intracellular sequestering of copper ion
+GO:1902862	None	obsolete glycerol catabolic process to glycerone phosphate
+GO:1903065	None	obsolete protein localization to cell tip involved in positive regulation of establishment of cell polarity regulating cell shape
+GO:1903079	None	obsolete negative regulation of protein localization to cell tip involved in positive regulation of establishment of cell polarity regulating cell shape
+GO:1903089	5-amino-1-ribofuranosylimidazole-4-carboxamide transmembrane transporter activity	5-amino-1-ribofuranosylimidazole-4-carboxamide transporter activity
+GO:1903148	None	obsolete uracil transmembrane transporter activity involved in uracil import into cell
+GO:1903149	None	obsolete adenine transmembrane transporter activity involved in adenine import into cell
+GO:1903150	None	obsolete calcium ion transmembrane transporter activity involved in calcium ion import into cell
+GO:1903151	None	obsolete carbohydrate transmembrane transporter activity involved in carbohydrate import into cell
+GO:1903152	None	obsolete copper ion transmembrane transporter activity involved in copper ion import into cell
+GO:1903153	None	obsolete ferrous iron transmembrane transporter activity involved in ferrous iron import into cell
+GO:1903154	None	obsolete glucose transmembrane transporter activity involved in glucose import into cell
+GO:1903155	None	obsolete glutathione transmembrane transporter activity involved in glutathione import into cell
+GO:1903156	None	obsolete guanine transmembrane transporter activity involved in guanine import into cell
+GO:1903157	None	obsolete iron ion transmembrane transporter activity involved in iron ion import into cell
+GO:1903158	None	obsolete L-glutamate transmembrane transporter activity involved in L-glutamate import into cell
+GO:1903159	None	obsolete malate transmembrane transporter activity involved in malate import into cell
+GO:1903160	None	obsolete nickel cation transmembrane transporter activity involved in nickel cation import into cell
+GO:1903161	None	obsolete pantothenate transmembrane transporter activity involved in pantothenate import into cell
+GO:1903162	None	obsolete serine transmembrane transporter activity involved in serine import into cell
+GO:1903163	None	obsolete sodium ion transmembrane transporter activity involved in sodium ion import into cell
+GO:1903164	None	obsolete succinate transmembrane transporter activity involved in succinate import into cell
+GO:1903230	None	obsolete miRNA binding involved in posttranscriptional gene silencing
+GO:1903239	None	obsolete regulation of positive regulation of the force of heart contraction by chemical signal
+GO:1903240	None	obsolete negative regulation of positive regulation of the force of heart contraction by chemical signal
+GO:1903276	regulation of sodium ion export across plasma membrane	regulation of sodium ion export from cell
+GO:1903277	negative regulation of sodium ion export across plasma membrane	negative regulation of sodium ion export from cell
+GO:1903278	positive regulation of sodium ion export across plasma membrane	positive regulation of sodium ion export from cell
+GO:1903289	None	obsolete regulation of ATP catabolic process
+GO:1903290	None	obsolete negative regulation of ATP catabolic process
+GO:1903291	None	obsolete positive regulation of ATP catabolic process
+GO:1903470	None	obsolete actomyosin contractile ring assembly involved in mitotic cell cycle
+GO:1903962	arachidonate transmembrane transporter activity	arachidonate transporter activity
+GO:1903992	None	obsolete regulation of protein stabilization
+GO:1903993	None	obsolete negative regulation of protein stabilization
+GO:1903994	None	obsolete positive regulation of protein stabilization
+GO:1904079	None	obsolete negative regulation of transcription from RNA polymerase II promoter involved in negative regulation of neuron apoptotic process
+GO:1904083	None	obsolete regulation of epiboly
+GO:1904084	None	obsolete negative regulation of epiboly
+GO:1904085	None	obsolete positive regulation of epiboly
+GO:1904091	peptidyl carrier protein activity	peptidyl carrier protein activity involved in nonribosomal peptide biosynthesis
+GO:1904163	None	obsolete regulation of triglyceride homeostasis
+GO:1904164	None	obsolete negative regulation of triglyceride homeostasis
+GO:1904165	None	obsolete positive regulation of triglyceride homeostasis
+GO:1904166	None	obsolete negative regulation of cholesterol homeostasis
+GO:1904532	None	obsolete ATP-dependent microtubule motor activity, minus-end-directed involved in microtubule-based movement
+GO:1904546	None	obsolete negative regulation of cAMP-dependent protein kinase activity involved in negative regulation of glucose mediated signaling pathway
+GO:1904732	regulation of electron transfer activity	regulation of electron carrier activity
+GO:1904733	negative regulation of electron transfer activity	negative regulation of electron carrier activity
+GO:1904734	positive regulation of electron transfer activity	positive regulation of electron carrier activity
+GO:1904745	Atg1/ULK1 kinase complex assembly	ATG1/ULK1 kinase complex assembly
+GO:1904771	None	obsolete cellular response to doxorubicin
+GO:1904773	None	obsolete cellular response to tetrachloromethane
+GO:1904945	None	obsolete response to cobalt(II) acetate
+GO:1904946	None	obsolete cellular response to cobalt(II) acetate
+GO:1904983	glycine import into mitochondrion	transmembrane glycine transport from cytosol to mitochondrion
+GO:1904993	None	obsolete positive regulation of cyclin-dependent protein serine/threonine kinase activity involved in positive regulation of G2/M transition of mitotic cell cycle
+GO:1905104	None	obsolete response to ouabain
+GO:1905105	None	obsolete cellular response to ouabain
+GO:1905106	None	obsolete response to Dizocilpine
+GO:1905107	None	obsolete cellular response to Dizocilpine
+GO:1905158	None	obsolete regulation of Factor XII activation
+GO:1905159	None	obsolete negative regulation of Factor XII activation
+GO:1905160	None	obsolete positive regulation of Factor XII activation
+GO:1905248	None	obsolete regulation of memory
+GO:1905249	None	obsolete negative regulation of memory
+GO:1905250	None	obsolete positive regulation of memory
+GO:1905252	None	obsolete regulation of epidermal growth factor receptor signaling pathway involved in heart process
+GO:1905253	None	obsolete negative regulation of epidermal growth factor receptor signaling pathway involved in heart process
+GO:1905254	None	obsolete positive regulation of epidermal growth factor receptor signaling pathway involved in heart process
+GO:1905361	None	L-serine transporter activity
+GO:1905452	None	obsolete canonical Wnt signaling pathway involved in regulation of stem cell proliferation
+GO:1905500	None	obsolete heteroreceptor complex assembly
+GO:1905501	None	obsolete heteroreceptor complex disassembly
+GO:1905525	None	obsolete regulation of ferrichrome biosynthetic process by negative regulation of transcription from RNA polymerase II promoter in response to iron
+GO:1905545	None	obsolete negative regulation of regulation of ferrichrome biosynthetic process by negative regulation of transcription from RNA polymerase II promoter in response to iron
+GO:1905565	None	obsolete regulation of receptor-mediated endocytosis of low-density lipoprotein particle involved in cholesterol transport
+GO:1905566	None	obsolete negative regulation of receptor-mediated endocytosis of low-density lipoprotein particle involved in cholesterol transport
+GO:1905567	None	obsolete positive regulation of receptor-mediated endocytosis of low-density lipoprotein particle involved in cholesterol transport
+GO:1905713	None	obsolete mitochondrial calcium uptake involved in regulation of presynaptic cytosolic calcium ion concentration
+GO:1905714	None	obsolete mitochondrial calcium release involved in regulation of presynaptic cytosolic calcium ion concentration
+GO:1905718	None	obsolete mitotic spindle astral microtubule end
+GO:1905864	regulation of Atg1/ULK1 kinase complex assembly	regulation of ATG1/ULK1 kinase complex assembly
+GO:1905865	negative regulation of Atg1/ULK1 kinase complex assembly	negative regulation of ATG1/ULK1 kinase complex assembly
+GO:1905866	positive regulation of Atg1/ULK1 kinase complex assembly	positive regulation of ATG1/ULK1 kinase complex assembly
+GO:1905882	None	obsolete other organism cell wall
+GO:1905912	regulation of calcium ion export across plasma membrane	regulation of calcium ion export from cell
+GO:1905913	negative regulation of calcium ion export across plasma membrane	negative regulation of calcium ion export from cell
+GO:1905914	positive regulation of calcium ion export across plasma membrane	positive regulation of calcium ion export from cell
+GO:1990034	calcium ion export across plasma membrane	calcium ion export from cell
+GO:1990056	None	obsolete protein kinase activity required for targeting substrate to proteasomal ubiquitin-dependent protein catabolic process
+GO:1990057	None	obsolete cell cycle arrest in response to DNA damage stimulus
+GO:1990093	None	obsolete negative regulation of N-methyl-D-aspartate receptor clustering
+GO:1990094	None	obsolete positive regulation of N-methyl-D-aspartate receptor clustering
+GO:1990105	None	obsolete regulation of voltage-gated potassium channel activity
+GO:1990128	None	obsolete pre-primosome complex involved in replication initiation
+GO:1990129	None	obsolete pre-primosome complex involved in replication restart
+GO:1990132	None	obsolete release of misfolded protein from chaperone
+GO:1990149	None	obsolete COPI vesicle coating
+GO:1990187	None	obsolete protein localization to mRNA
+GO:1990241	None	obsolete nucleotide binding complex
+GO:1990242	None	obsolete innate immune response complex
+GO:1990251	Mmi1 nuclear focus	Mmi1 nuclear focus complex
+GO:1990271	None	obsolete anti-Mullerian hormone
+GO:1990278	None	obsolete positive regulation of MBF transcription factor activity
+GO:1990279	None	obsolete negative regulation of MBF transcription factor activity
+GO:1990296	None	scaffoldin complex
+GO:1990316	Atg1/ULK1 kinase complex	ATG1/ULK1 kinase complex
+GO:1990347	None	obsolete G*/A mismatch-specific adenine-DNA glycosylase activity
+GO:1990348	None	obsolete G/A mismatch specific adenine DNA glycosylase activity
+GO:1990363	None	obsolete response to hydrolysate
+GO:1990364	None	obsolete response to aldehyde
+GO:1990365	None	obsolete response to phenol
+GO:1990366	None	obsolete response to organic acid
+GO:1990368	None	obsolete process resulting in tolerance to hydrolysate
+GO:1990376	None	obsolete negative regulation of G1/S transition of mitotic cell cycle by positive regulation of transcription from RNA polymerase II promoter in response to nitrogen starvation
+GO:1990382	None	obsolete melanosome assembly
+GO:1990419	None	obsolete response to elemental metal
+GO:1990436	None	obsolete MAPK cascade involved in oxidative stress signaling pathway
+GO:1990445	None	obsolete Multiciliate cell differentiation
+GO:1990449	None	obsolete amylin receptor
+GO:1990479	None	obsolete response to lipoic acid
+GO:1990480	None	obsolete geranyl diphosphate synthase
+GO:1990493	None	obsolete cyclin H-CDK7 complex
+GO:1990494	None	obsolete regulation of mitotic cytokinesis, actomyosin contractile ring assembly
+GO:1990495	None	obsolete actin filament organization involved in mitotic cytokinetic actomyosin contractile ring assembly
+GO:1990496	None	obsolete regulation of actin filament organization involved in mitotic cytokinetic actomyosin contractile ring assembly
+GO:1990517	None	obsolete protein localization to photoreceptor outer segment
+GO:1990519	pyrimidine nucleotide import into mitochondrion	mitochondrial pyrimidine nucleotide import
+GO:1990560	None	obsolete DNA methyltransferase binding
+GO:1990568	None	obsolete MIS18 complex
+GO:1990581	None	obsolete lysosome lysis
+GO:1990582	None	obsolete intracellular membrane-bounded organelle binding
+GO:1990602	None	obsolete importin alpha-subunit nuclear import complex
+GO:1990607	None	obsolete detection of stimulus involved in cytokinesis after mitosis checkpoint
+GO:1990614	None	mitochondrial magnesium ion transmembrane transport
+GO:1990618	None	obsolete ANPR-A:ANP complex
+GO:1990628	None	obsolete Sigma-E factor negative regulation complex
+GO:1990639	None	obsolete inositol-3,4,5-trisphosphate 5-phosphatase activity
+GO:1990642	None	obsolete response to castration
+GO:1990645	None	obsolete phosphorylase dephosphorylation
+GO:1990652	None	obsolete positive regulation of pyrimidine-containing compound salvage by positive regulation of transcription from RNA polymerase II promoter
+GO:1990653	None	obsolete monounsaturated fatty acid biosynthetic process
+GO:1990721	None	obsolete prostatic acid phosphatase complex
+GO:1990740	None	obsolete non-selective anion channel activity
+GO:1990741	None	obsolete non-selective cation channel activity
+GO:1990746	None	HCN4 channel complex
+GO:1990750	None	obsolete axon shaft
+GO:1990754	None	obsolete GABAergic neuronal action potential
+GO:1990759	None	HCN2 channel complex
+GO:1990797	None	obsolete cholecystokinin secretion
+GO:1990800	None	obsolete meiotic APC-fizzy-related complex
+GO:1990806	None	obsolete ligand-gated ion channel signaling pathway
+GO:1990807	None	obsolete protein N-acetyltransferase activity
+GO:1990815	None	obsolete regulation of protein localization to cell division site after cytokinesis
+GO:1990821	None	high affinity glucose import
+GO:1990824	None	obsolete magnesium-dependent protein complex
+GO:1990835	None	obsolete insulin-like growth factor production
+GO:1990842	None	obsolete response to prenatal stress
+GO:1990848	None	obsolete Positive regulation of removal of reactive oxygen species
+GO:1990855	None	obsolete myo-inositol import across plasma membrane
+GO:1990857	None	obsolete APC-Fzr1/Mfr1 complex
+GO:1990865	None	obsolete response to intermittent hypoxia
+GO:1990866	None	obsolete response to sustained hypoxia
+GO:1990870	None	obsolete protein fibril
+GO:1990881	None	obsolete negative regulation of transcription from RNA polymerase II promoter in response to DNA damage
+GO:1990885	None	obsolete protein serine/threonine kinase binding
+GO:1990894	None	obsolete positive regulation of induction of conjugation with cellular fusion by regulation of transcription from RNA polymerase II promoter
+GO:1990897	None	obsolete CTDK-1 complex
+GO:1990908	None	obsolete Lys63-specific zinc metallopeptidase deubiquitinase activity
+GO:1990912	None	obsolete response to microwave radiation
+GO:1990921	None	obsolete proteasome localization to nuclear periphery
+GO:1990924	None	obsolete amphisome membrane
+GO:1990940	None	obsolete microtubule sliding involved in mitotic spindle elongation
+GO:1990951	None	obsolete manchette assembly
+GO:1990952	None	obsolete manchette disassembly
+GO:1990958	None	obsolete response to thyrotropin-releasing hormone
+GO:1990977	None	obsolete negative regulation of mitotic DNA replication initiation from late origin
+GO:1990978	None	obsolete response to viscosity
+GO:1990979	None	obsolete copper ion transport across blood-brain barrier
+GO:1990980	None	obsolete copper ion transport across blood-CSF barrier
+GO:1990981	None	obsolete regulation of protein localization to cell division site involved in cell separation after cytokinesis
+GO:1990982	None	obsolete Immune memory response
+GO:1990985	None	obsolete apoptosis in response to oxidative stress
+GO:2000046	None	obsolete regulation of G2 phase of mitotic cell cycle
+GO:2000135	None	obsolete positive regulation of regulation of secondary heart field cardioblast proliferation
+GO:2000153	None	obsolete regulation of flagellar cell motility
+GO:2000154	None	obsolete negative regulation of flagellar cell motility
+GO:2000190	None	obsolete negative regulation of regulation of transcription from RNA polymerase II promoter by nuclear hormone receptor
+GO:2000285	None	obsolete negative regulation of regulation of excitatory postsynaptic membrane potential
+GO:2000460	None	obsolete regulation of eukaryotic cell surface binding
+GO:2000461	None	obsolete negative regulation of eukaryotic cell surface binding
+GO:2000462	None	obsolete positive regulation of eukaryotic cell surface binding
+GO:2000498	None	obsolete regulation of induction of apoptosis in response to chemical stimulus
+GO:2000499	None	obsolete negative regulation of induction of apoptosis in response to chemical stimulus
+GO:2000500	None	obsolete positive regulation of induction of apoptosis in response to chemical stimulus
+GO:2000530	None	obsolete positive regulation of regulation of insulin secretion involved in cellular response to glucose stimulus
+GO:2000602	None	obsolete regulation of interphase of mitotic cell cycle
+GO:2000745	None	obsolete positive regulation of transcription from RNA polymerase III promoter involved in smooth muscle cell differentiation
+GO:2000976	None	obsolete regulation of transcription from RNA polymerase II promoter involved in detection of glucose
+GO:2001159	regulation of protein localization by the Cvt pathway	regulation of Cvt pathway
+GO:2001217	None	obsolete regulation of S/G2 transition of mitotic cell cycle
+GO:2001218	None	obsolete negative regulation of S/G2 transition of mitotic cell cycle
+GO:2001219	None	obsolete positive regulation of S/G2 transition of mitotic cell cycle
+GO:2001220	None	obsolete negative regulation of G2 phase of mitotic cell cycle
+GO:2001221	None	obsolete positive regulation of G2 phase of mitotic cell cycle
