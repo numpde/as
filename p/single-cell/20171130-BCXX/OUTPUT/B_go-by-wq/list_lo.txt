@@ -1,0 +1,789 @@
+GO ID	GO name	Size	Clustering index	CI quantile
+GO:0007624	ultradian rhythm	1	-0.98773006135	0.0446054136485
+GO:0060879	semicircular canal fusion	1	-0.989071038251	0.0319290888296
+GO:0033787	cyanocobalamin reductase (cyanide-eliminating) activity	1	-0.988071570577	0.0398398780023
+GO:0038101	sequestering of nodal from receptor via nodal binding	1	-0.992217898833	0.0115325962638
+GO:0048241	epinephrine transport	1	-0.995073891626	0.00114372855509
+GO:1903209	positive regulation of oxidative stress-induced cell death	1	-0.987341772152	0.0490850171559
+GO:1904479	negative regulation of intestinal absorption	1	-0.988636363636	0.0344071673656
+GO:0033626	positive regulation of integrin activation by cell surface receptor linked signal transduction	1	-0.992509363296	0.00972169271826
+GO:0020005	symbiont-containing vacuole membrane	1	-0.993630573248	0.00609988562714
+GO:0008405	arachidonic acid 11,12-epoxygenase activity	1	-0.988023952096	0.0411742279832
+GO:0052902	spermidine:oxygen oxidoreductase (3-aminopropanal-forming) activity	1	-0.99481865285	0.00257338924895
+GO:0050677	positive regulation of urothelial cell proliferation	1	-0.989071038251	0.0319290888296
+GO:0072285	mesenchymal to epithelial transition involved in metanephric renal vesicle formation	1	-0.991150442478	0.0198246282882
+GO:0021966	corticospinal neuron axon guidance	1	-0.989304812834	0.0307853602745
+GO:0003837	beta-ureidopropionase activity	1	-0.995348837209	0.000762485703393
+GO:0036017	response to erythropoietin	1	-0.988636363636	0.0344071673656
+GO:0000966	RNA 5'-end processing	1	-0.987804878049	0.0440335493709
+GO:1904506	negative regulation of telomere maintenance in response to DNA damage	1	-0.990610328638	0.0222073961113
+GO:0061618	sublamina densa	1	-0.99	0.025162028212
+GO:0047613	aconitate decarboxylase activity	1	-0.987951807229	0.0426038886771
+GO:0015633	zinc-transporting ATPase activity	1	-0.988235294118	0.037647731605
+GO:0102798	heptaldehyde:oxygen oxidoreductase activity	1	-0.993993993994	0.00505146778498
+GO:0047730	carnosine synthase activity	1	-0.99416909621	0.00438429279451
+GO:0002362	CD4-positive, CD25-positive, alpha-beta regulatory T cell lineage commitment	1	-0.989821882952	0.0268776210446
+GO:0086037	sodium:potassium-exchanging ATPase activity involved in regulation of cardiac muscle cell membrane potential	1	-0.989247311828	0.0310712924133
+GO:0050760	negative regulation of thymidylate synthase biosynthetic process	1	-0.989949748744	0.0258292032024
+GO:0005141	interleukin-10 receptor binding	1	-0.987616099071	0.0459397636294
+GO:0071614	linoleic acid epoxygenase activity	1	-0.988023952096	0.0411742279832
+GO:0050277	sedoheptulokinase activity	1	-0.987368421053	0.0480365993138
+GO:0071401	cellular response to triglyceride	1	-0.992857142857	0.00848265345025
+GO:0030184	nitric oxide transmembrane transporter activity	1	-0.993630573248	0.00609988562714
+GO:0086038	calcium:sodium antiporter activity involved in regulation of cardiac muscle cell membrane potential	1	-0.987603305785	0.0464163171941
+GO:0002839	positive regulation of immune response to tumor cell	1	-0.990610328638	0.0222073961113
+GO:0033059	cellular pigmentation	1	-0.988636363636	0.0344071673656
+GO:0032353	negative regulation of hormone biosynthetic process	1	-0.992481203008	0.0103888677087
+GO:0033087	negative regulation of immature T cell proliferation	1	-0.991649269311	0.0165840640488
+GO:0014052	regulation of gamma-aminobutyric acid secretion	1	-0.994117647059	0.00476553564621
+GO:0086069	bundle of His cell to Purkinje myocyte communication	1	-0.988304093567	0.0371711780404
+GO:0061832	basal ectoplasmic specialization	1	-0.989361702128	0.030118185284
+GO:0086060	voltage-gated sodium channel activity involved in AV node cell action potential	1	-0.989583333333	0.028879146016
+GO:1903049	negative regulation of acetylcholine-gated cation channel activity	1	-0.991967871486	0.0136294319482
+GO:0017169	CDP-alcohol phosphatidyltransferase activity	1	-0.992047713718	0.0133434998094
+GO:0045556	positive regulation of TRAIL biosynthetic process	1	-0.9921875	0.0121044605414
+GO:2000854	positive regulation of corticosterone secretion	1	-0.990196078431	0.0242089210827
+GO:1901894	regulation of calcium-transporting ATPase activity	1	-0.988764044944	0.0333587495234
+GO:0060496	mesenchymal-epithelial cell signaling involved in lung development	1	-0.989071038251	0.0319290888296
+GO:0047547	2-methylcitrate dehydratase activity	1	-0.987951807229	0.0426038886771
+GO:0018979	trichloroethylene metabolic process	1	-0.990783410138	0.0215402211209
+GO:0097145	BAK complex	1	-0.987421383648	0.0478459778879
+GO:0015802	basic amino acid transport	1	-0.990950226244	0.0211589782692
+GO:0031279	regulation of cyclase activity	1	-0.988372093023	0.0365993137629
+GO:0043400	cortisol secretion	1	-0.987341772152	0.0490850171559
+GO:1901986	response to ketamine	1	-0.988023952096	0.0411742279832
+GO:1901537	positive regulation of DNA demethylation	1	-0.993630573248	0.00609988562714
+GO:0036143	kringle domain binding	1	-0.992248062016	0.011246664125
+GO:0042494	detection of bacterial lipoprotein	1	-0.989218328841	0.0312619138391
+GO:0006507	GPI anchor release	1	-0.992857142857	0.00848265345025
+GO:0004960	thromboxane receptor activity	1	-0.994871794872	0.00171559283263
+GO:0102797	geranial:oxygen oxidoreductase activity	1	-0.993993993994	0.00505146778498
+GO:0031812	P2Y1 nucleotide receptor binding	1	-0.992395437262	0.0110560426992
+GO:0009673	low-affinity phosphate transmembrane transporter activity	1	-0.987654320988	0.045177277926
+GO:0086043	bundle of His cell action potential	1	-0.989583333333	0.028879146016
+GO:0005183	gonadotropin hormone-releasing hormone activity	1	-0.991649269311	0.0165840640488
+GO:0099555	trans-synaptic signaling by nitric oxide, modulating synaptic transmission	1	-0.988165680473	0.0387914601601
+GO:0010092	specification of animal organ identity	1	-0.988472622478	0.0359321387724
+GO:0004919	interleukin-9 receptor activity	1	-0.990338164251	0.0232558139535
+GO:1901184	regulation of ERBB signaling pathway	1	-0.991031390135	0.0207777354175
+GO:1904141	positive regulation of microglial cell migration	1	-0.991507430998	0.0179184140297
+GO:0046521	sphingoid catabolic process	1	-0.989847715736	0.02640106748
+GO:0031729	CCR4 chemokine receptor binding	1	-0.990099009901	0.0247807853603
+GO:0005590	collagen type VII trimer	1	-0.99512195122	0.000953107129241
+GO:0038193	thromboxane A2 signaling pathway	1	-0.994871794872	0.00171559283263
+GO:0034679	integrin alpha9-beta1 complex	1	-0.989795918367	0.0274494853222
+GO:0032097	positive regulation of response to food	1	-0.987341772152	0.0490850171559
+GO:0034346	positive regulation of type III interferon production	1	-0.99124726477	0.018871521159
+GO:0051121	hepoxilin metabolic process	1	-0.99209486166	0.0129622569577
+GO:0042322	negative regulation of circadian sleep/wake cycle, REM sleep	1	-0.987341772152	0.0490850171559
+GO:0051308	male meiosis chromosome separation	1	-0.987341772152	0.0490850171559
+GO:0004940	beta1-adrenergic receptor activity	1	-0.987878787879	0.0433663743805
+GO:0098875	epididymosome	1	-0.993630573248	0.00609988562714
+GO:0050655	dermatan sulfate proteoglycan metabolic process	1	-0.987525987526	0.0474647350362
+GO:0060180	female mating behavior	1	-0.991769547325	0.0160121997713
+GO:0004042	acetyl-CoA:L-glutamate N-acetyltransferase activity	1	-0.989690721649	0.0281166603126
+GO:0010968	regulation of microtubule nucleation	1	-0.991525423729	0.0172512390393
+GO:0002717	positive regulation of natural killer cell mediated immunity	1	-0.989847715736	0.02640106748
+GO:0060611	mammary gland fat development	1	-0.991507430998	0.0179184140297
+GO:0000003	reproduction	1	-0.988571428571	0.0352649637819
+GO:0071329	cellular response to sucrose stimulus	1	-0.993079584775	0.00772016774685
+GO:0010625	positive regulation of Schwann cell proliferation	1	-0.993333333333	0.00695768204346
+GO:0090534	calcium ion-transporting ATPase complex	1	-0.988764044944	0.0333587495234
+GO:0045188	regulation of circadian sleep/wake cycle, non-REM sleep	1	-0.989361702128	0.030118185284
+GO:1901751	leukotriene A4 metabolic process	1	-0.99209486166	0.0129622569577
+GO:0015913	short-chain fatty acid import	1	-0.988571428571	0.0352649637819
+GO:0050647	5-hydroxy-6E,8Z,11Z,14Z-icosatetraenoic acid binding	1	-0.988023952096	0.0411742279832
+GO:0050754	positive regulation of fractalkine biosynthetic process	1	-0.989949748744	0.0258292032024
+GO:0052904	N1-acetylspermidine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity	1	-0.99481865285	0.00257338924895
+GO:0071926	endocannabinoid signaling pathway	1	-0.992481203008	0.0103888677087
+GO:0038046	enkephalin receptor activity	1	-0.987654320988	0.045177277926
+GO:0002851	positive regulation of peripheral T cell tolerance induction	1	-0.989821882952	0.0268776210446
+GO:0010578	regulation of adenylate cyclase activity involved in G-protein coupled receptor signaling pathway	1	-0.993265993266	0.00733892489516
+GO:1904588	cellular response to glycoprotein	1	-0.988165680473	0.0387914601601
+GO:0021910	smoothened signaling pathway involved in ventral spinal cord patterning	1	-0.991150442478	0.0198246282882
+GO:1905240	negative regulation of canonical Wnt signaling pathway involved in osteoblast differentiation	1	-0.990196078431	0.0242089210827
+GO:0010855	adenylate cyclase inhibitor activity	1	-0.988372093023	0.0365993137629
+GO:0002758	innate immune response-activating signal transduction	1	-0.990267639903	0.0235417460923
+GO:1904515	positive regulation of TORC2 signaling	1	-0.991051454139	0.0205871139916
+GO:0038131	neuregulin receptor activity	1	-0.992647058824	0.00934044986657
+GO:1905035	negative regulation of antifungal innate immune response	1	-0.987829614604	0.0438429279451
+GO:1904010	response to Aroclor 1254	1	-0.988023952096	0.0411742279832
+GO:0060436	bronchiole morphogenesis	1	-0.989071038251	0.0319290888296
+GO:0003050	regulation of systemic arterial blood pressure by atrial natriuretic peptide	1	-0.988372093023	0.0365993137629
+GO:0045381	regulation of interleukin-18 biosynthetic process	1	-0.994301994302	0.00371711780404
+GO:0004621	glycosylphosphatidylinositol phospholipase D activity	1	-0.992857142857	0.00848265345025
+GO:0008554	sodium-exporting ATPase activity, phosphorylative mechanism	1	-0.988950276243	0.0327868852459
+GO:1904530	negative regulation of actin filament binding	1	-0.988571428571	0.0352649637819
+GO:0008118	N-acetyllactosaminide alpha-2,3-sialyltransferase activity	1	-0.991701244813	0.0162028211971
+GO:0005585	collagen type II trimer	1	-0.988372093023	0.0365993137629
+GO:1905920	positive regulation of CoA-transferase activity	1	-0.990361445783	0.0230651925276
+GO:0060116	vestibular receptor cell morphogenesis	1	-0.989743589744	0.0278307281738
+GO:0015636	short-chain fatty acid transmembrane transporter activity	1	-0.988571428571	0.0352649637819
+GO:2000403	positive regulation of lymphocyte migration	1	-0.988165680473	0.0387914601601
+GO:0060243	negative regulation of cell growth involved in contact inhibition	1	-0.990521327014	0.0227792603889
+GO:0085018	maintenance of symbiont-containing vacuole by host	1	-0.993630573248	0.00609988562714
+GO:0008215	spermine metabolic process	1	-0.99481865285	0.00257338924895
+GO:1990008	neurosecretory vesicle	1	-0.991649269311	0.0165840640488
+GO:2001306	lipoxin B4 biosynthetic process	1	-0.99209486166	0.0129622569577
+GO:0052903	N1-acetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity	1	-0.99481865285	0.00257338924895
+GO:0042320	regulation of circadian sleep/wake cycle, REM sleep	1	-0.989361702128	0.030118185284
+GO:0021590	cerebellum maturation	1	-0.992481203008	0.0103888677087
+GO:0040010	positive regulation of growth rate	1	-0.987341772152	0.0490850171559
+GO:0070944	neutrophil mediated killing of bacterium	1	-0.989949748744	0.0258292032024
+GO:0047936	glucose 1-dehydrogenase [NAD(P)] activity	1	-0.988118811881	0.0396492565764
+GO:0050648	5(S)-hydroxyperoxy-6E,8Z,11Z,14Z-icosatetraenoic acid binding	1	-0.988023952096	0.0411742279832
+GO:0050646	5-oxo-6E,8Z,11Z,14Z-icosatetraenoic acid binding	1	-0.988023952096	0.0411742279832
+GO:0015091	ferric iron transmembrane transporter activity	1	-0.990970654628	0.0209683568433
+GO:0035499	carnosine biosynthetic process	1	-0.99416909621	0.00438429279451
+GO:0038021	leptin receptor activity	1	-0.987628865979	0.0455585207777
+GO:0031768	ghrelin receptor binding	1	-0.987341772152	0.0490850171559
+GO:0050674	urothelial cell proliferation	1	-0.989071038251	0.0319290888296
+GO:0031935	regulation of chromatin silencing	1	-0.991919191919	0.0139153640869
+GO:2000590	negative regulation of metanephric mesenchymal cell migration	1	-0.991902834008	0.0146778497903
+GO:0008404	arachidonic acid 14,15-epoxygenase activity	1	-0.988023952096	0.0411742279832
+GO:2000212	negative regulation of glutamate metabolic process	1	-0.991266375546	0.0186808997331
+GO:0005165	neurotrophin receptor binding	1	-0.988700564972	0.0338353030881
+GO:0090675	intermicrovillar adhesion	1	-0.990521327014	0.0227792603889
+GO:0050783	cocaine metabolic process	1	-0.989361702128	0.030118185284
+GO:0021771	lateral geniculate nucleus development	1	-0.989361702128	0.030118185284
+GO:2000826	regulation of heart morphogenesis	1	-0.991150442478	0.0198246282882
+GO:0098633	collagen fibril binding	1	-0.995454545455	0.000476553564621
+GO:0005130	granulocyte colony-stimulating factor receptor binding	1	-0.987341772152	0.0490850171559
+GO:0015211	purine nucleoside transmembrane transporter activity	1	-0.991071428571	0.0203964925658
+GO:1990674	Golgi cis cisterna membrane	1	-0.988571428571	0.0352649637819
+GO:0051935	glutamate reuptake	1	-0.992673992674	0.00914982844072
+GO:0001996	positive regulation of heart rate by epinephrine-norepinephrine	1	-0.987878787879	0.0433663743805
+GO:0070253	somatostatin secretion	1	-0.994186046512	0.00400304994281
+GO:0048692	negative regulation of axon extension involved in regeneration	1	-0.991525423729	0.0172512390393
+GO:0034360	chylomicron remnant	1	-0.9921875	0.0121044605414
+GO:0015126	canalicular bile acid transmembrane transporter activity	1	-0.988950276243	0.0327868852459
+GO:1900176	negative regulation of nodal signaling pathway involved in determination of lateral mesoderm left/right asymmetry	1	-0.992217898833	0.0115325962638
+GO:0008455	alpha-1,6-mannosylglycoprotein 2-beta-N-acetylglucosaminyltransferase activity	1	-0.988047808765	0.0400304994281
+GO:0032841	calcitonin binding	1	-0.987878787879	0.0433663743805
+GO:0086063	voltage-gated sodium channel activity involved in SA node cell action potential	1	-0.989583333333	0.028879146016
+GO:0001572	lactosylceramide biosynthetic process	1	-0.988023952096	0.0411742279832
+GO:1904692	positive regulation of type B pancreatic cell proliferation	1	-0.98773006135	0.0446054136485
+GO:0010750	positive regulation of nitric oxide mediated signal transduction	1	-0.988165680473	0.0387914601601
+GO:0007371	ventral midline determination	1	-0.991150442478	0.0198246282882
+GO:1905229	cellular response to thyrotropin-releasing hormone	1	-0.988165680473	0.0387914601601
+GO:0042488	positive regulation of odontogenesis of dentin-containing tooth	1	-0.991507430998	0.0179184140297
+GO:0002059	thymine binding	1	-0.99	0.025162028212
+GO:1902232	regulation of positive thymic T cell selection	1	-0.988235294118	0.037647731605
+GO:2000534	positive regulation of renal albumin absorption	1	-0.991902834008	0.0146778497903
+GO:0002875	negative regulation of chronic inflammatory response to antigenic stimulus	1	-0.987616099071	0.0459397636294
+GO:0030662	coated vesicle membrane	1	-0.992125984252	0.012581014106
+GO:2000465	regulation of glycogen (starch) synthase activity	1	-0.992537313433	0.00953107129241
+GO:1905174	regulation of vascular smooth muscle cell dedifferentiation	1	-0.989637305699	0.0284025924514
+GO:0031687	A2A adenosine receptor binding	1	-0.989795918367	0.0274494853222
+GO:0098999	extrinsic component of postsynaptic endosome membrane	1	-0.989417989418	0.0295463210065
+GO:0036019	endolysosome	1	-0.990610328638	0.0222073961113
+GO:0031335	regulation of sulfur amino acid metabolic process	1	-0.992481203008	0.0103888677087
+GO:0070462	plus-end specific microtubule depolymerization	1	-0.990196078431	0.0242089210827
+GO:0035355	Toll-like receptor 2-Toll-like receptor 6 protein complex	1	-0.994750656168	0.00333587495234
+GO:0050333	thiamin-triphosphatase activity	1	-0.991169977925	0.0191574532978
+GO:1901877	negative regulation of calcium ion binding	1	-0.988764044944	0.0333587495234
+GO:0001642	group III metabotropic glutamate receptor activity	1	-0.988372093023	0.0365993137629
+GO:0021679	cerebellar molecular layer development	1	-0.992481203008	0.0103888677087
+GO:0033034	positive regulation of myeloid cell apoptotic process	1	-0.991902834008	0.0146778497903
+GO:0055082	cellular chemical homeostasis	1	-0.987780040733	0.0442241707968
+GO:0102102	homocarnosine synthase activity	1	-0.99416909621	0.00438429279451
+GO:0034150	toll-like receptor 6 signaling pathway	1	-0.994750656168	0.00333587495234
+GO:0048866	stem cell fate specification	1	-0.988700564972	0.0338353030881
+GO:0098843	postsynaptic endocytic zone	1	-0.9875	0.0476553564621
+GO:0050459	ethanolamine-phosphate phospho-lyase activity	1	-0.987654320988	0.045177277926
+GO:0097536	thymus epithelium morphogenesis	1	-0.988235294118	0.037647731605
+GO:0032831	positive regulation of CD4-positive, CD25-positive, alpha-beta regulatory T cell differentiation	1	-0.989821882952	0.0268776210446
+GO:0051458	corticotropin secretion	1	-0.993265993266	0.00733892489516
+GO:0051050	positive regulation of transport	1	-0.988235294118	0.037647731605
+GO:0051580	regulation of neurotransmitter uptake	1	-0.993333333333	0.00695768204346
+GO:0098640	integrin binding involved in cell-matrix adhesion	1	-0.988165680473	0.0387914601601
+GO:0044299	C-fiber	1	-0.993006993007	0.00800609988563
+GO:0031835	substance P receptor binding	1	-0.990196078431	0.0242089210827
+GO:0008792	arginine decarboxylase activity	1	-0.98755186722	0.0470834921845
+GO:0019679	propionate metabolic process, methylcitrate cycle	1	-0.987951807229	0.0426038886771
+GO:1902667	regulation of axon guidance	1	-0.988472622478	0.0359321387724
+GO:0001605	adrenomedullin receptor activity	1	-0.993079584775	0.00772016774685
+GO:1904009	cellular response to monosodium glutamate	1	-0.988023952096	0.0411742279832
+GO:1990005	granular vesicle	1	-0.98755186722	0.0470834921845
+GO:0047888	fatty acid peroxidase activity	1	-0.988950276243	0.0327868852459
+GO:0016501	prostacyclin receptor activity	1	-0.990697674419	0.0217308425467
+GO:0031983	vesicle lumen	1	-0.9921875	0.0121044605414
+GO:0007468	regulation of rhodopsin gene expression	1	-0.993957703927	0.00543271063668
+GO:1990938	peptidyl-aspartic acid autophosphorylation	1	-0.991886409736	0.0156309569196
+GO:1903034	regulation of response to wounding	1	-0.987616099071	0.0459397636294
+GO:0086061	voltage-gated sodium channel activity involved in bundle of His cell action potential	1	-0.989583333333	0.028879146016
+GO:1904535	positive regulation of telomeric loop disassembly	1	-0.990610328638	0.0222073961113
+GO:0090651	apical cytoplasm	1	-0.989949748744	0.0258292032024
+GO:1904027	negative regulation of collagen fibril organization	1	-0.995454545455	0.000476553564621
+GO:0045751	negative regulation of Toll signaling pathway	1	-0.994301994302	0.00371711780404
+GO:0004961	thromboxane A2 receptor activity	1	-0.994871794872	0.00171559283263
+GO:0045923	positive regulation of fatty acid metabolic process	1	-0.991902834008	0.0146778497903
+GO:0010743	regulation of macrophage derived foam cell differentiation	1	-0.991507430998	0.0179184140297
+GO:0034377	plasma lipoprotein particle assembly	1	-0.990867579909	0.021349599695
+GO:0051838	cytolysis by host of symbiont cells	1	-0.989304812834	0.0307853602745
+GO:0070994	detection of oxidative stress	1	-0.991902834008	0.0146778497903
+GO:0004578	chitobiosyldiphosphodolichol beta-mannosyltransferase activity	1	-0.991967871486	0.0136294319482
+GO:0007354	zygotic determination of anterior/posterior axis, embryo	1	-0.991379310345	0.0184902783073
+GO:0098921	retrograde trans-synaptic signaling by endocannabinoid	1	-0.992481203008	0.0103888677087
+GO:0042357	thiamine diphosphate metabolic process	1	-0.991169977925	0.0191574532978
+GO:0016243	regulation of autophagosome size	1	-0.991886409736	0.0156309569196
+GO:0005954	calcium- and calmodulin-dependent protein kinase complex	1	-0.988636363636	0.0344071673656
+GO:0061170	negative regulation of hair follicle placode formation	1	-0.987577639752	0.0467022493328
+GO:0050480	imidazolonepropionase activity	1	-0.993610223642	0.00667174990469
+GO:2000570	positive regulation of T-helper 2 cell activation	1	-0.989795918367	0.0274494853222
+GO:1903924	estradiol binding	1	-0.98773006135	0.0446054136485
+GO:1901307	positive regulation of spermidine biosynthetic process	1	-0.99481865285	0.00257338924895
+GO:0003335	corneocyte development	1	-0.994884910486	0.00133434998094
+GO:2000478	positive regulation of metanephric glomerular visceral epithelial cell development	1	-0.991902834008	0.0146778497903
+GO:1900076	regulation of cellular response to insulin stimulus	1	-0.992857142857	0.00848265345025
+GO:0045872	positive regulation of rhodopsin gene expression	1	-0.993957703927	0.00543271063668
+GO:0002058	uracil binding	1	-0.99	0.025162028212
+GO:1904346	positive regulation of gastric mucosal blood circulation	1	-0.987341772152	0.0490850171559
+GO:1901339	regulation of store-operated calcium channel activity	1	-0.99587628866	0.000190621425848
+GO:0043540	6-phosphofructo-2-kinase/fructose-2,6-biphosphatase complex	1	-0.989528795812	0.0293556995806
+GO:1901623	regulation of lymphocyte chemotaxis	1	-0.987603305785	0.0464163171941
+GO:0034359	mature chylomicron	1	-0.9921875	0.0121044605414
+GO:0002760	positive regulation of antimicrobial humoral response	1	-0.987951807229	0.0426038886771
+GO:0043299	leukocyte degranulation	1	-0.990267639903	0.0235417460923
+GO:0060248	detection of cell density by contact stimulus involved in contact inhibition	1	-0.991150442478	0.0198246282882
+GO:0120058	positive regulation of small intestinal transit	1	-0.987341772152	0.0490850171559
+GO:0060404	axonemal microtubule depolymerization	1	-0.990196078431	0.0242089210827
+GO:0047805	cytidylate cyclase activity	1	-0.988165680473	0.0387914601601
+GO:1902228	positive regulation of macrophage colony-stimulating factor signaling pathway	1	-0.991507430998	0.0179184140297
+GO:0090317	negative regulation of intracellular protein transport	1	-0.991902834008	0.0146778497903
+GO:0061115	lung proximal/distal axis specification	1	-0.989071038251	0.0319290888296
+GO:0007522	visceral muscle development	1	-0.992831541219	0.00895920701487
+GO:0103045	methione N-acyltransferase activity	1	-0.989690721649	0.0281166603126
+GO:1905122	polyamine import	1	-0.991886409736	0.0156309569196
+GO:0071351	cellular response to interleukin-18	1	-0.991596638655	0.0169653069005
+GO:0070539	linoleic acid binding	1	-0.988023952096	0.0411742279832
+GO:0061629	RNA polymerase II sequence-specific DNA binding transcription factor binding	1	-0.988165680473	0.0387914601601
+GO:0052899	N(1),N(12)-diacetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity	1	-0.99481865285	0.00257338924895
+GO:0001997	positive regulation of the force of heart contraction by epinephrine-norepinephrine	1	-0.987878787879	0.0433663743805
+GO:0098629	trans-Golgi network membrane organization	1	-0.98755186722	0.0470834921845
+GO:0016539	intein-mediated protein splicing	2	-0.979879275654	0.02131569276
+GO:0030298	receptor signaling protein tyrosine kinase activator activity	2	-0.970695970696	0.04796030871
+GO:0015079	potassium ion transmembrane transporter activity	2	-0.971631205674	0.04263138552
+GO:0072174	metanephric tubule formation	2	-0.976945244957	0.0275633958104
+GO:0140059	dendrite arborization	2	-0.971602434077	0.0429988974642
+GO:0010966	regulation of phosphate transport	2	-0.979166666667	0.0242557883131
+GO:0019265	glycine biosynthetic process, by transamination of glyoxylate	2	-0.96996996997	0.0499816244028
+GO:1901374	acetate ester transport	2	-0.99128540305	0.00128629180448
+GO:0047006	17-alpha,20-alpha-dihydroxypregn-4-en-3-one dehydrogenase activity	2	-0.970873786408	0.0466740169055
+GO:0072534	perineuronal net	2	-0.971659919028	0.0422638735759
+GO:0032696	negative regulation of interleukin-13 production	2	-0.973684210526	0.0385887541345
+GO:1904022	positive regulation of G-protein coupled receptor internalization	2	-0.983146067416	0.0141492098493
+GO:0031704	apelin receptor binding	2	-0.983146067416	0.0141492098493
+GO:0035379	carbon dioxide transmembrane transporter activity	2	-0.984810126582	0.0108416023521
+GO:0004958	prostaglandin F receptor activity	2	-0.973544973545	0.0389562660786
+GO:0016503	pheromone receptor activity	2	-0.974683544304	0.03730246233
+GO:1901318	negative regulation of flagellated sperm motility	2	-0.970930232558	0.0461227489893
+GO:0048641	regulation of skeletal muscle tissue development	2	-0.9795221843	0.0226019845645
+GO:0021855	hypothalamus cell migration	2	-0.978339350181	0.0249908122014
+GO:0033092	positive regulation of immature T cell proliferation in thymus	2	-0.984251968504	0.0115766262404
+GO:0005111	type 2 fibroblast growth factor receptor binding	2	-0.983086680761	0.0150679897097
+GO:0001582	detection of chemical stimulus involved in sensory perception of sweet taste	2	-0.988505747126	0.00404263138552
+GO:0031448	positive regulation of fast-twitch skeletal muscle fiber contraction	2	-0.976076555024	0.0327085630283
+GO:0072233	metanephric thick ascending limb development	2	-0.977653631285	0.0262771040059
+GO:0030103	vasopressin secretion	2	-0.987152034261	0.00698272693863
+GO:0032349	positive regulation of aldosterone biosynthetic process	2	-0.975369458128	0.0349136346931
+GO:0060903	positive regulation of meiosis I	2	-0.975609756098	0.0341786108049
+GO:0004956	prostaglandin D receptor activity	2	-0.994708994709	0.000551267916207
+GO:0070698	type I activin receptor binding	2	-0.989821882952	0.00257258360897
+GO:0004873	asialoglycoprotein receptor activity	2	-0.976833976834	0.0279309077545
+GO:0010085	polarity specification of proximal/distal axis	2	-0.98	0.0196618890114
+GO:0070378	positive regulation of ERK5 cascade	2	-0.970695970696	0.04796030871
+GO:1905747	negative regulation of saliva secretion	2	-0.976261127596	0.0316060271959
+GO:0060577	pulmonary vein morphogenesis	2	-0.979661016949	0.0220507166483
+GO:0021985	neurohypophysis development	2	-0.984905660377	0.0102903344359
+GO:0070554	synaptobrevin 2-SNAP-25-syntaxin-3-complexin complex	2	-0.972157772622	0.0415288496876
+GO:0021644	vagus nerve morphogenesis	2	-0.979797979798	0.0216832047042
+GO:0009914	hormone transport	2	-0.975560081466	0.034546122749
+GO:0033563	dorsal/ventral axon guidance	2	-0.988023952096	0.00514516721793
+GO:0016499	orexin receptor activity	2	-0.984	0.013230429989
+GO:0051466	positive regulation of corticotropin-releasing hormone secretion	2	-0.980535279805	0.0191106210952
+GO:0038194	thyroid-stimulating hormone signaling pathway	2	-0.978213507625	0.0255420801176
+GO:2000296	negative regulation of hydrogen peroxide catabolic process	2	-0.973333333333	0.0393237780228
+GO:0098583	learned vocalization behavior	2	-0.976261127596	0.0316060271959
+GO:0035759	mesangial cell-matrix adhesion	2	-0.975903614458	0.0334435869166
+GO:0099566	regulation of postsynaptic cytosolic calcium ion concentration	2	-0.979933110368	0.0205806688717
+GO:0048632	negative regulation of skeletal muscle tissue growth	2	-0.97153024911	0.0435501653804
+GO:0036117	hyaluranon cable	2	-0.981859410431	0.0176405733186
+GO:0010721	negative regulation of cell development	2	-0.97005988024	0.0496141124587
+GO:0060460	left lung morphogenesis	2	-0.98224852071	0.0172730613745
+GO:0001785	prostaglandin J receptor activity	2	-0.994708994709	0.000551267916207
+GO:0097545	axonemal outer doublet	2	-0.97153024911	0.0435501653804
+GO:0072073	kidney epithelium development	2	-0.976401179941	0.0290334435869
+GO:2000852	regulation of corticosterone secretion	2	-0.985507246377	0.00845277471518
+GO:0060560	developmental growth involved in morphogenesis	2	-0.975757575758	0.0338110988607
+GO:0004939	beta-adrenergic receptor activity	2	-0.981818181818	0.0180080852628
+GO:0008294	calcium- and calmodulin-responsive adenylate cyclase activity	2	-0.972540045767	0.0411613377435
+GO:0032305	positive regulation of icosanoid secretion	2	-0.973154362416	0.0404263138552
+GO:0003097	renal water transport	2	-0.985	0.00955531054759
+GO:0006591	ornithine metabolic process	2	-0.976331360947	0.0299522234473
+GO:0009949	polarity specification of anterior/posterior axis	2	-0.987927565392	0.00588019110621
+GO:0097241	hematopoietic stem cell migration to bone marrow	2	-0.970711297071	0.0474090407938
+GO:0010983	positive regulation of high-density lipoprotein particle clearance	2	-0.985257985258	0.00882028665932
+GO:0004500	dopamine beta-monooxygenase activity	2	-0.971326164875	0.0442851892687
+GO:0016608	growth hormone-releasing hormone activity	2	-0.987341772152	0.00661521499449
+GO:0008396	oxysterol 7-alpha-hydroxylase activity	2	-0.975359342916	0.0352811466373
+GO:0002125	maternal aggressive behavior	2	-0.97507788162	0.0363836824697
+GO:0006208	pyrimidine nucleobase catabolic process	2	-0.979423868313	0.0233370084528
+GO:0061325	cell proliferation involved in outflow tract morphogenesis	2	-0.979933110368	0.0205806688717
+GO:0004031	aldehyde oxidase activity	2	-0.985645933014	0.00808526277104
+GO:0034370	triglyceride-rich lipoprotein particle remodeling	2	-0.970674486804	0.0485115766262
+GO:1905748	hard palate morphogenesis	2	-0.976261127596	0.0316060271959
+GO:0009258	10-formyltetrahydrofolate catabolic process	2	-0.976331360947	0.0299522234473
+GO:0014056	regulation of acetylcholine secretion, neurotransmission	2	-0.991169977925	0.00183755972069
+GO:0098900	regulation of action potential	2	-0.979381443299	0.023888276369
+GO:0051659	maintenance of mitochondrion location	2	-0.971291866029	0.0448364571849
+GO:0090212	negative regulation of establishment of blood-brain barrier	2	-0.982978723404	0.0154355016538
+GO:0004027	alcohol sulfotransferase activity	2	-0.976331360947	0.0299522234473
+GO:0006212	uracil catabolic process	2	-0.979423868313	0.0233370084528
+GO:0030222	eosinophil differentiation	2	-0.987012987013	0.00735023888276
+GO:0046010	positive regulation of circadian sleep/wake cycle, non-REM sleep	2	-0.982404692082	0.0165380374862
+GO:0065010	extracellular membrane-bounded organelle	2	-0.988023952096	0.00514516721793
+GO:1901383	negative regulation of chorionic trophoblast cell proliferation	2	-0.982300884956	0.0169055494304
+GO:0002121	inter-male aggressive behavior	2	-0.9795221843	0.0226019845645
+GO:0005503	all-trans retinal binding	2	-0.988023952096	0.00514516721793
+GO:0021521	ventral spinal cord interneuron specification	2	-0.984251968504	0.0115766262404
+GO:0071288	cellular response to mercury ion	2	-0.985	0.00955531054759
+GO:0031282	regulation of guanylate cyclase activity	2	-0.98406374502	0.0126791620728
+GO:0072011	glomerular endothelium development	2	-0.970760233918	0.0470415288497
+GO:0035377	transepithelial water transport	2	-0.990521327014	0.00220507166483
+GO:0099583	neurotransmitter receptor activity involved in regulation of postsynaptic cytosolic calcium ion concentration	2	-0.979933110368	0.0205806688717
+GO:0060032	notochord regression	2	-0.975155279503	0.0360161705255
+GO:0030249	guanylate cyclase regulator activity	2	-0.98406374502	0.0126791620728
+GO:0004996	thyroid-stimulating hormone receptor activity	2	-0.978213507625	0.0255420801176
+GO:0070173	regulation of enamel mineralization	2	-0.989010989011	0.00294009555311
+GO:0043185	vascular endothelial growth factor receptor 3 binding	2	-0.988764044944	0.00330760749724
+GO:0033041	sweet taste receptor activity	2	-0.988505747126	0.00404263138552
+GO:0070169	positive regulation of biomineral tissue development	2	-0.977272727273	0.0271958838662
+GO:0097450	astrocyte end-foot	2	-0.983146067416	0.0141492098493
+GO:0061184	positive regulation of dermatome development	2	-0.982708933718	0.0161705255421
+GO:0015368	calcium:cation antiporter activity	2	-0.976470588235	0.0286659316428
+GO:0050925	negative regulation of negative chemotaxis	2	-0.978858350951	0.0246233002573
+GO:0007231	osmosensory signaling pathway	2	-0.980952380952	0.018559353179
+GO:0042309	homoiothermy	2	-0.974683544304	0.03730246233
+GO:0060183	apelin receptor signaling pathway	2	-0.983146067416	0.0141492098493
+GO:0005277	acetylcholine transmembrane transporter activity	2	-0.99128540305	0.00128629180448
+GO:0015382	sodium:sulfate symporter activity	2	-0.987878787879	0.00624770305035
+GO:1902679	negative regulation of RNA biosynthetic process	2	-0.970930232558	0.0461227489893
+GO:0031283	negative regulation of guanylate cyclase activity	2	-0.976047904192	0.0330760749724
+GO:0048878	chemical homeostasis	2	-0.977653631285	0.0262771040059
+GO:0015056	corticotrophin-releasing factor receptor activity	2	-0.984126984127	0.0121278941566
+GO:0043207	response to external biotic stimulus	2	-0.971014492754	0.0455714810731
+GO:0030817	regulation of cAMP biosynthetic process	2	-0.973262032086	0.0396912899669
+GO:0002522	leukocyte migration involved in immune response	2	-0.98	0.0196618890114
+GO:0071626	mastication	2	-0.976261127596	0.0316060271959
+GO:1901492	positive regulation of lymphangiogenesis	2	-0.982808022923	0.0158030135979
+GO:0001591	dopamine neurotransmitter receptor activity, coupled via Gi/Go	2	-0.986111111111	0.0077177508269
+GO:0015432	bile acid-exporting ATPase activity	2	-0.970588235294	0.0488790885704
+GO:0071306	cellular response to vitamin E	2	-0.973180076628	0.0400588019111
+GO:0035378	carbon dioxide transmembrane transport	2	-0.984810126582	0.0108416023521
+GO:0002507	tolerance induction	2	-0.971074380165	0.045203969129
+GO:0006589	octopamine biosynthetic process	2	-0.971326164875	0.0442851892687
+GO:0001641	group II metabotropic glutamate receptor activity	2	-0.974293059126	0.0378537302462
+GO:0036146	cellular response to mycotoxin	2	-0.974193548387	0.0382212421904
+GO:0060621	negative regulation of cholesterol import	2	-0.975308641975	0.0356486585814
+GO:1903767	sweet taste receptor complex	2	-0.988505747126	0.00404263138552
+GO:1900108	negative regulation of nodal signaling pathway	2	-0.976811594203	0.0282984196986
+GO:0032971	regulation of muscle filament sliding	2	-0.972727272727	0.0407938257993
+GO:0003171	atrioventricular valve development	2	-0.977591036415	0.0268283719221
+GO:0060230	lipoprotein lipase activator activity	2	-0.980952380952	0.018559353179
+GO:0009820	alkaloid metabolic process	2	-0.974842767296	0.0367511944138
+GO:0060302	negative regulation of cytokine activity	2	-0.972093023256	0.0418963616318
+GO:0048634	regulation of muscle organ development	2	-0.976261127596	0.0316060271959
+GO:0035841	new growing cell tip	2	-0.97037037037	0.0492466005145
+GO:0016155	formyltetrahydrofolate dehydrogenase activity	2	-0.976331360947	0.0299522234473
+GO:0015168	glycerol transmembrane transporter activity	2	-0.985	0.00955531054759
+GO:0060168	positive regulation of adenosine receptor signaling pathway	3	-0.95670995671	0.0239943542696
+GO:0021530	spinal cord oligodendrocyte cell fate specification	3	-0.952662721893	0.0276993648553
+GO:0008401	retinoic acid 4-hydroxylase activity	3	-0.971291866029	0.00670430486944
+GO:0001601	peptide YY receptor activity	3	-0.959302325581	0.0211714890614
+GO:0042369	vitamin D catabolic process	3	-0.971486761711	0.00564573041637
+GO:0002118	aggressive behavior	3	-0.933054393305	0.0444601270289
+GO:0000711	meiotic DNA repair synthesis	3	-0.941690962099	0.0358151023289
+GO:0008513	secondary active organic cation transmembrane transporter activity	3	-0.956692913386	0.0245236414961
+GO:0046878	positive regulation of saliva secretion	3	-0.957983193277	0.0222300635145
+GO:0002361	CD4-positive, CD25-positive, alpha-beta regulatory T cell differentiation	3	-0.963470319635	0.015878616796
+GO:0005927	muscle tendon junction	3	-0.963855421687	0.015172900494
+GO:0060478	acrosomal vesicle exocytosis	3	-0.948387096774	0.03105151729
+GO:0032224	positive regulation of synaptic transmission, cholinergic	3	-0.946784922395	0.0328158080452
+GO:0070175	positive regulation of enamel mineralization	3	-0.95	0.030698659139
+GO:2001069	glycogen binding	3	-0.925465838509	0.0462244177841
+GO:0015874	norepinephrine transport	3	-0.98755186722	0.000529287226535
+GO:1902723	negative regulation of skeletal muscle satellite cell proliferation	3	-0.966101694915	0.0130557515879
+GO:0036457	keratohyalin granule	3	-0.970588235294	0.00741002117149
+GO:2000195	negative regulation of female gonad development	3	-0.933147632312	0.0441072688779
+GO:0016701	oxidoreductase activity, acting on single donors with incorporation of molecular oxygen	3	-0.980815347722	0.00176429075512
+GO:0034190	apolipoprotein receptor binding	3	-0.960655737705	0.0183486238532
+GO:0016556	mRNA modification	3	-0.953727506427	0.0268172194778
+GO:0086016	AV node cell action potential	3	-0.971428571429	0.00617501764291
+GO:0018958	phenol-containing compound metabolic process	3	-0.947895791583	0.0314043754411
+GO:0060214	endocardium formation	3	-0.925343811395	0.0465772759351
+GO:0030718	germ-line stem cell population maintenance	3	-0.977859778598	0.00247000705716
+GO:1904640	response to methionine	3	-0.946169772257	0.0342272406493
+GO:0046879	hormone secretion	3	-0.946611909651	0.0331686661962
+GO:0008332	low voltage-gated calcium channel activity	3	-0.938461538462	0.0384615384615
+GO:0061056	sclerotome development	3	-0.941605839416	0.0363443895554
+GO:0004995	tachykinin receptor activity	3	-0.947368421053	0.0324629498941
+GO:0042360	vitamin E metabolic process	3	-0.96992481203	0.00846859562456
+GO:0072014	proximal tubule development	3	-0.975659229209	0.00282286520819
+GO:0004994	somatostatin receptor activity	3	-0.937172774869	0.0407551164432
+GO:0045226	extracellular polysaccharide biosynthetic process	3	-0.963488843813	0.015525758645
+GO:0021524	visceral motor neuron differentiation	3	-0.941690962099	0.0358151023289
+GO:0031649	heat generation	3	-0.95991091314	0.0199364855328
+GO:0038170	somatostatin signaling pathway	3	-0.937172774869	0.0407551164432
+GO:0001602	pancreatic polypeptide receptor activity	3	-0.964735516373	0.014820042343
+GO:0001936	regulation of endothelial cell proliferation	3	-0.967213114754	0.0116443189838
+GO:0048807	female genitalia morphogenesis	3	-0.954356846473	0.0261115031757
+GO:1990089	response to nerve growth factor	3	-0.934291581109	0.0430486944248
+GO:0051120	hepoxilin A3 synthase activity	3	-0.956607495069	0.0252293577982
+GO:0046340	diacylglycerol catabolic process	3	-0.969773299748	0.00935074100212
+GO:0032983	kainate selective glutamate receptor complex	3	-0.969849246231	0.00882145377558
+GO:0009624	response to nematode	3	-0.962962962963	0.0169371912491
+GO:0014719	skeletal muscle satellite cell activation	3	-0.946268656716	0.0338743824982
+GO:0099625	ventricular cardiac muscle cell membrane repolarization	3	-0.937007874016	0.0412844036697
+GO:0004052	arachidonate 12-lipoxygenase activity	3	-0.965174129353	0.014467184192
+GO:0001733	galactosylceramide sulfotransferase activity	3	-0.958236658933	0.0218772053634
+GO:0004980	melanocyte-stimulating hormone receptor activity	3	-0.956803455724	0.0236414961186
+GO:0051464	positive regulation of cortisol secretion	3	-0.939110070258	0.0377558221595
+GO:1904970	brush border assembly	3	-0.958762886598	0.0215243472124
+GO:0004117	calmodulin-dependent cyclic-nucleotide phosphodiesterase activity	3	-0.959798994975	0.0204657727594
+GO:0046013	regulation of T cell homeostatic proliferation	3	-0.936	0.0419901199718
+GO:0010560	positive regulation of glycoprotein biosynthetic process	3	-0.942857142857	0.0349329569513
+GO:0060579	ventral spinal cord interneuron fate commitment	3	-0.952991452991	0.0271700776288
+GO:0042596	fear response	3	-0.972899728997	0.00388143966126
+GO:0021529	spinal cord oligodendrocyte cell differentiation	3	-0.952662721893	0.0276993648553
+GO:0004967	glucagon receptor activity	3	-0.957446808511	0.0225829216655
+GO:1905144	response to acetylcholine	3	-0.979716024341	0.00211714890614
+GO:2000544	regulation of endothelial cell chemotaxis to fibroblast growth factor	3	-0.970021413276	0.00811573747354
+GO:1902495	transmembrane transporter complex	3	-0.966903073286	0.0127028934368
+GO:0034653	retinoic acid catabolic process	3	-0.944444444444	0.0345800988003
+GO:0021869	forebrain ventricular zone progenitor cell division	3	-0.928118393235	0.045871559633
+GO:1904894	positive regulation of STAT cascade	3	-0.940425531915	0.0370501058574
+GO:0021536	diencephalon development	3	-0.95703125	0.0232886379675
+GO:0031728	CCR3 chemokine receptor binding	3	-0.971428571429	0.00617501764291
+GO:0004948	calcitonin receptor activity	3	-0.934020618557	0.0434015525759
+GO:0061760	antifungal innate immune response	3	-0.939726027397	0.0374029640085
+GO:0060084	synaptic transmission involved in micturition	3	-0.972067039106	0.00494001411433
+GO:0002215	defense response to nematode	3	-0.969631236443	0.00988002822865
+GO:0098855	HCN channel complex	3	-0.954285714286	0.0264643613267
+GO:0022824	transmitter-gated ion channel activity	3	-0.952	0.0285815102329
+GO:0003095	pressure natriuresis	3	-0.950177935943	0.030345800988
+GO:1901078	negative regulation of relaxation of muscle	3	-0.982195845697	0.00141143260409
+GO:0070653	high-density lipoprotein particle receptor binding	3	-0.96062992126	0.0188779110797
+GO:0032787	monocarboxylic acid metabolic process	3	-0.965517241379	0.0141143260409
+GO:0018894	dibenzo-p-dioxin metabolic process	3	-0.959367945824	0.0208186309104
+GO:0015275	stretch-activated, cation-selective, calcium channel activity	3	-0.962577962578	0.0176429075512
+GO:0048880	sensory system development	3	-0.957081545064	0.0229357798165
+GO:0010903	negative regulation of very-low-density lipoprotein particle remodeling	3	-0.96062992126	0.0188779110797
+GO:0002025	norepinephrine-epinephrine-mediated vasodilation involved in regulation of systemic arterial blood pressure	3	-0.95991091314	0.0199364855328
+GO:0047484	regulation of response to osmotic stress	3	-0.974358974359	0.00352858151023
+GO:0010041	response to iron(III) ion	3	-0.92349726776	0.0481651376147
+GO:0071663	positive regulation of granzyme B production	3	-0.923404255319	0.0486944248412
+GO:0007320	insemination	3	-0.92523364486	0.0469301340861
+GO:0071657	positive regulation of granulocyte colony-stimulating factor production	3	-0.968337730871	0.0105857445307
+GO:1904315	transmitter-gated ion channel activity involved in regulation of postsynaptic membrane potential	3	-0.982857142857	0.00105857445307
+GO:0030197	extracellular matrix constituent, lubricant activity	3	-0.960687960688	0.0179957657022
+GO:0031735	CCR10 chemokine receptor binding	3	-0.923976608187	0.0476358503881
+GO:0015265	urea channel activity	3	-0.954692556634	0.0257586450247
+GO:0016941	natriuretic peptide receptor activity	3	-0.971887550201	0.00529287226535
+GO:0032100	positive regulation of appetite	3	-0.967517401392	0.0109386026817
+GO:0005166	neurotrophin p75 receptor binding	3	-0.970149253731	0.00776287932251
+GO:0007418	ventral midline development	3	-0.972440944882	0.00423429781228
+GO:0005588	collagen type V trimer	3	-0.951318458418	0.0289343683839
+GO:0005333	norepinephrine transmembrane transporter activity	3	-0.98755186722	0.000529287226535
+GO:0044736	acid-sensing ion channel activity	3	-0.938144329897	0.0393436838391
+GO:0050746	regulation of lipoprotein metabolic process	3	-0.963190184049	0.0162314749471
+GO:0050254	rhodopsin kinase activity	3	-0.92349726776	0.0481651376147
+GO:1902710	GABA receptor complex	3	-0.946308724832	0.0335215243472
+GO:0043163	cell envelope organization	3	-0.972222222222	0.0045871559633
+GO:0008048	calcium sensitive guanylate cyclase activator activity	4	-0.967105263158	0.0100570807285
+GO:0016048	detection of temperature stimulus	4	-0.933333333333	0.0369665670019
+GO:0008282	inward rectifying potassium channel	4	-0.956607495069	0.0207936939386
+GO:0016934	extracellularly glycine-gated chloride channel activity	4	-0.922413793103	0.0428105463441
+GO:0060513	prostatic bud formation	4	-0.956692913386	0.0202500679532
+GO:0005329	dopamine transmembrane transporter activity	4	-0.967010309278	0.0103288937211
+GO:0031838	haptoglobin-hemoglobin complex	4	-0.92270531401	0.0421310138625
+GO:0070858	negative regulation of bile acid biosynthetic process	4	-0.935897435897	0.0360152215276
+GO:0015837	amine transport	4	-0.936170212766	0.0353356890459
+GO:0005223	intracellular cGMP activated cation channel activity	4	-0.967280163599	0.00951345474314
+GO:0050051	leukotriene-B4 20-monooxygenase activity	4	-0.91788856305	0.0458004892634
+GO:0008453	alanine-glyoxylate transaminase activity	4	-0.912568306011	0.0498776841533
+GO:0030492	hemoglobin binding	4	-0.920424403183	0.0437618918184
+GO:0036101	leukotriene B4 catabolic process	4	-0.91788856305	0.0458004892634
+GO:0030300	regulation of intestinal cholesterol absorption	4	-0.951219512195	0.0241913563468
+GO:0099104	potassium channel activator activity	4	-0.93837535014	0.0331611851046
+GO:0005579	membrane attack complex	4	-0.95041322314	0.0247349823322
+GO:0042693	muscle cell fate commitment	4	-0.974874371859	0.00271812992661
+GO:0021979	hypothalamus cell differentiation	4	-0.969773299748	0.00774667029084
+GO:0050915	sensory perception of sour taste	4	-0.938144329897	0.0335689045936
+GO:0005222	intracellular cAMP activated cation channel activity	4	-0.931428571429	0.0377820059799
+GO:0031133	regulation of axon diameter	4	-0.93896713615	0.0326175591193
+GO:0005502	11-cis retinal binding	4	-0.963133640553	0.0135906496331
+GO:1990523	bone regeneration	4	-0.922077922078	0.0432182658331
+GO:1903440	amylin receptor complex	4	-0.923250564334	0.0417232943735
+GO:0071918	urea transmembrane transport	4	-0.947619047619	0.0266376732808
+GO:0072221	metanephric distal convoluted tubule development	4	-0.93786407767	0.0342484370753
+GO:2000552	negative regulation of T-helper 2 cell cytokine production	4	-0.938016528926	0.0339766240826
+GO:0009804	coumarin metabolic process	4	-0.947643979058	0.0263658602881
+GO:0051552	flavone metabolic process	4	-0.950495049505	0.0244631693395
+GO:0021759	globus pallidus development	4	-0.913279132791	0.0483827126937
+GO:0098985	asymmetric, glutamatergic, excitatory synapse	4	-0.952277657267	0.0233759173689
+GO:0021853	cerebral cortex GABAergic interneuron migration	4	-0.916317991632	0.0462082087524
+GO:2000330	positive regulation of T-helper 17 cell lineage commitment	4	-0.96	0.016036966567
+GO:0097643	amylin receptor activity	4	-0.923250564334	0.0417232943735
+GO:0043587	tongue morphogenesis	4	-0.942740286299	0.0293558032074
+GO:0007210	serotonin receptor signaling pathway	4	-0.928143712575	0.0385974449579
+GO:0034875	caffeine oxidase activity	4	-0.941176470588	0.030443055178
+GO:0004982	N-formyl peptide receptor activity	4	-0.935897435897	0.0360152215276
+GO:0097091	synaptic vesicle clustering	4	-0.965853658537	0.0111443326991
+GO:0034584	piRNA binding	4	-0.965601965602	0.0114161456918
+GO:0018685	alkane 1-monooxygenase activity	4	-0.922518159806	0.0424028268551
+GO:0005332	gamma-aminobutyric acid:sodium symporter activity	4	-0.962732919255	0.0141342756184
+GO:0060126	somatotropin secreting cell differentiation	4	-0.971014492754	0.00597988583854
+GO:0015722	canalicular bile acid transport	4	-0.92828685259	0.0381897254689
+GO:0098983	symmetric, GABA-ergic, inhibitory synapse	4	-0.91621129326	0.046887741234
+GO:0098839	postsynaptic density membrane	4	-0.969026548673	0.00842620277249
+GO:0005250	A-type (transient outward) potassium channel activity	4	-0.924302788845	0.0402283229138
+GO:0071482	cellular response to light stimulus	5	-0.894353369763	0.029197080292
+GO:0015272	ATP-activated inward rectifier potassium channel activity	5	-0.942973523422	0.00983814662012
+GO:0006704	glucocorticoid biosynthetic process	5	-0.897996357013	0.0272929228816
+GO:0086046	membrane depolarization during SA node cell action potential	5	-0.894353369763	0.029197080292
+GO:0005231	excitatory extracellular ligand-gated ion channel activity	5	-0.906693711968	0.0241193271977
+GO:0015812	gamma-aminobutyric acid transport	5	-0.954451345756	0.0069819105046
+GO:0022850	serotonin-gated cation-selective channel activity	5	-0.894353369763	0.029197080292
+GO:0004556	alpha-amylase activity	5	-0.872495446266	0.0396699460489
+GO:0046618	drug export	5	-0.865209471767	0.0447476991431
+GO:0019222	regulation of metabolic process	5	-0.868852459016	0.0415741034592
+GO:0006873	cellular ion homeostasis	5	-0.939148073022	0.0114249444621
+GO:0006778	porphyrin-containing compound metabolic process	5	-0.879781420765	0.0345921929546
+GO:0086015	SA node cell action potential	5	-0.91985428051	0.020311012377
+GO:0003956	NAD(P)+-protein-arginine ADP-ribosyltransferase activity	5	-0.865209471767	0.0447476991431
+GO:0031013	troponin I binding	5	-0.887067395264	0.0309425579181
+GO:0022849	glutamate-gated calcium ion channel activity	5	-0.940239043825	0.0111075848937
+GO:0014050	negative regulation of glutamate secretion	5	-0.97911227154	0.000634719136782
+GO:0097109	neuroligin family protein binding	5	-0.882352941176	0.0326880355443
+GO:0007506	gonadal mesoderm development	5	-0.918032786885	0.0206283719454
+GO:0103025	alpha-amylase activity (releasing maltohexaose)	5	-0.872495446266	0.0396699460489
+GO:0089717	spanning component of membrane	5	-0.908925318761	0.0233259282767
+GO:0030883	endogenous lipid antigen binding	5	-0.939024390244	0.0119009838147
+GO:0086006	voltage-gated sodium channel activity involved in cardiac muscle cell action potential	5	-0.972111553785	0.00126943827356
+GO:0046219	indolalkylamine biosynthetic process	5	-0.904214559387	0.0257061250397
+GO:0060290	transdifferentiation	5	-0.861566484517	0.0485560139638
+GO:0006547	histidine metabolic process	5	-0.880952380952	0.0330053951127
+GO:0099055	integral component of postsynaptic membrane	5	-0.861566484517	0.0485560139638
+GO:0046870	cadmium ion binding	5	-0.865209471767	0.0447476991431
+GO:0030884	exogenous lipid antigen binding	5	-0.939024390244	0.0119009838147
+GO:0051122	hepoxilin biosynthetic process	5	-0.905325443787	0.0244366867661
+GO:0034363	intermediate-density lipoprotein particle	5	-0.94921875	0.00856870834656
+GO:0022029	telencephalon cell migration	5	-0.95703125	0.00602983179943
+GO:0016098	monoterpenoid metabolic process	5	-0.920353982301	0.0199936528086
+GO:0004331	fructose-2,6-bisphosphate 2-phosphatase activity	5	-0.876138433515	0.0372897492859
+GO:0014832	urinary bladder smooth muscle contraction	5	-0.872495446266	0.0396699460489
+GO:0044245	polysaccharide digestion	5	-0.926086956522	0.0168200571247
+GO:0015747	urate transport	5	-0.968539325843	0.00253887654713
+GO:0060012	synaptic transmission, glycinergic	5	-0.922413793103	0.0188828943193
+GO:0015277	kainate selective glutamate receptor activity	5	-0.92828685259	0.0160266582037
+GO:0030252	growth hormone secretion	5	-0.865209471767	0.0447476991431
+GO:0015143	urate transmembrane transporter activity	5	-0.887067395264	0.0309425579181
+GO:0005372	water transmembrane transporter activity	5	-0.96265560166	0.00507775309426
+GO:0006003	fructose 2,6-bisphosphate metabolic process	5	-0.876138433515	0.0372897492859
+GO:0044309	neuron spine	6	-0.872495446266	0.0231367731368
+GO:2000318	positive regulation of T-helper 17 type immune response	6	-0.857923497268	0.0315315315315
+GO:1901750	leukotriene D4 biosynthetic process	6	-0.857923497268	0.0315315315315
+GO:0004321	fatty-acyl-CoA synthase activity	6	-0.876138433515	0.021294021294
+GO:0015645	fatty acid ligase activity	6	-0.876138433515	0.021294021294
+GO:0052696	flavonoid glucuronidation	6	-0.904761904762	0.0128992628993
+GO:0005432	calcium:sodium antiporter activity	6	-0.854280510018	0.0350122850123
+GO:0042866	pyruvate biosynthetic process	6	-0.857923497268	0.0315315315315
+GO:0050957	equilibrioception	6	-0.876138433515	0.021294021294
+GO:0042756	drinking behavior	6	-0.84335154827	0.0456592956593
+GO:0051932	synaptic transmission, GABAergic	6	-0.879781420765	0.0194512694513
+GO:0004024	alcohol dehydrogenase activity, zinc-dependent	6	-0.897172236504	0.014742014742
+GO:0046483	heterocycle metabolic process	6	-0.89898989899	0.013923013923
+GO:0060371	regulation of atrial cardiac muscle cell membrane depolarization	6	-0.96015936255	0.002457002457
+GO:2000252	negative regulation of feeding behavior	6	-0.932530120482	0.00778050778051
+GO:0086008	voltage-gated potassium channel activity involved in cardiac muscle cell action potential repolarization	6	-0.868852459016	0.02457002457
+GO:0005587	collagen type IV trimer	6	-0.846994535519	0.0413595413595
+GO:0052697	xenobiotic glucuronidation	6	-0.904761904762	0.0128992628993
+GO:0036374	glutathione hydrolase activity	6	-0.857923497268	0.0315315315315
+GO:0000155	phosphorelay sensor kinase activity	6	-0.941060903733	0.00532350532351
+GO:0005132	type I interferon receptor binding	6	-0.982195845697	0.0004095004095
+GO:0007635	chemosensory behavior	6	-0.894949494949	0.0151515151515
+GO:0071546	pi-body	6	-0.857923497268	0.0315315315315
+GO:0008559	xenobiotic transmembrane transporting ATPase activity	7	-0.865209471767	0.023588277341
+GO:0048007	antigen processing and presentation, exogenous lipid antigen via MHC class Ib	7	-0.83606557377	0.0482487491065
+GO:0014732	skeletal muscle atrophy	7	-0.83606557377	0.0482487491065
+GO:0061371	determination of heart left/right asymmetry	7	-0.861566484517	0.0253752680486
+GO:0004983	neuropeptide Y receptor activity	7	-0.948387096774	0.0035739814153
+GO:0010838	positive regulation of keratinocyte proliferation	7	-0.84335154827	0.0403859899929
+GO:0047760	butyrate-CoA ligase activity	7	-0.84335154827	0.0403859899929
+GO:0003996	acyl-CoA ligase activity	7	-0.865209471767	0.023588277341
+GO:0034372	very-low-density lipoprotein particle remodeling	7	-0.846994535519	0.036454610436
+GO:0043270	positive regulation of ion transport	7	-0.83606557377	0.0482487491065
+GO:0034618	arginine binding	7	-0.868852459016	0.0218012866333
+GO:1902093	positive regulation of flagellated sperm motility	7	-0.890710382514	0.0146533238027
+GO:0035385	Roundabout signaling pathway	7	-0.846994535519	0.036454610436
+GO:0019227	neuronal action potential propagation	7	-0.865209471767	0.023588277341
+GO:0035095	behavioral response to nicotine	7	-0.846994535519	0.036454610436
+GO:0003810	protein-glutamine gamma-glutamyltransferase activity	8	-0.832422586521	0.0242795104619
+GO:0030259	lipid glycosylation	8	-0.821493624772	0.0331622581919
+GO:0060080	inhibitory postsynaptic potential	8	-0.825136612022	0.0298065534939
+GO:0019511	peptidyl-proline hydroxylation	8	-0.83606557377	0.0221081721279
+GO:1903818	positive regulation of voltage-gated potassium channel activity	8	-0.913043478261	0.00355309909199
+GO:0034371	chylomicron remodeling	8	-0.84335154827	0.0191472562179
+GO:0003993	acid phosphatase activity	8	-0.879781420765	0.00690880378997
+GO:0032098	regulation of appetite	8	-0.932467532468	0.00315831030399
+GO:0015187	glycine transmembrane transporter activity	8	-0.821493624772	0.0331622581919
+GO:0006751	glutathione catabolic process	8	-0.803278688525	0.0467824713778
+GO:0097104	postsynaptic membrane assembly	8	-0.879781420765	0.00690880378997
+GO:0016998	cell wall macromolecule catabolic process	8	-0.846994535519	0.0165811290959
+GO:0045823	positive regulation of heart contraction	8	-0.828779599271	0.0268456375839
+GO:0098664	G-protein coupled serotonin receptor signaling pathway	8	-0.850637522769	0.0148045795499
+GO:0002323	natural killer cell activation involved in immune response	8	-0.943925233645	0.00157915515199
+GO:0003796	lysozyme activity	8	-0.846994535519	0.0165811290959
+GO:0030432	peristalsis	8	-0.83970856102	0.0207264113699
+GO:0007196	adenylate cyclase-inhibiting G-protein coupled glutamate receptor signaling pathway	8	-0.937369519833	0.00236873272799
+GO:0097267	omega-hydroxylase P450 pathway	8	-0.850637522769	0.0148045795499
+GO:0002827	positive regulation of T-helper 1 type immune response	9	-0.803278688525	0.0332717190388
+GO:0042908	xenobiotic transport	9	-0.821493624772	0.0247227356747
+GO:0001867	complement activation, lectin pathway	9	-0.879781420765	0.00415896487985
+GO:0048048	embryonic eye morphogenesis	9	-0.792349726776	0.0455175600739
+GO:0042599	lamellar body	9	-0.792349726776	0.0455175600739
+GO:0002024	diet induced thermogenesis	9	-0.83970856102	0.0145563770795
+GO:0055123	digestive system development	9	-0.821493624772	0.0247227356747
+GO:0000160	phosphorelay signal transduction system	9	-0.825136612022	0.0219500924214
+GO:0015844	monoamine transport	9	-0.792349726776	0.0455175600739
+GO:0022414	reproductive process	9	-0.788706739526	0.0494454713494
+GO:0015386	potassium:proton antiporter activity	9	-0.792349726776	0.0455175600739
+GO:0021799	cerebral cortex radially oriented cell migration	9	-0.84335154827	0.0129390018484
+GO:0033141	positive regulation of peptidyl-serine phosphorylation of STAT protein	10	-0.777777777778	0.0410615923886
+GO:0004993	G-protein coupled serotonin receptor activity	10	-0.846994535519	0.0077616424637
+GO:1901522	positive regulation of transcription from RNA polymerase II promoter involved in cellular response to chemical stimulus	10	-0.774134790528	0.0453179769654
+GO:0046470	phosphatidylcholine metabolic process	10	-0.788706739526	0.0310465698548
+GO:0030280	structural constituent of epidermis	10	-0.84335154827	0.00951427140711
+GO:0030851	granulocyte differentiation	10	-0.799635701275	0.0242864296445
+GO:0021879	forebrain neuron differentiation	10	-0.774134790528	0.0453179769654
+GO:0006957	complement activation, alternative pathway	10	-0.810564663024	0.0192789183776
+GO:0043117	positive regulation of vascular permeability	10	-0.799635701275	0.0242864296445
+GO:0006828	manganese ion transport	10	-0.817850637523	0.0175262894342
+GO:0008020	G-protein coupled photoreceptor activity	10	-0.774134790528	0.0453179769654
+GO:0005833	hemoglobin complex	10	-0.825136612022	0.014521782674
+GO:0005858	axonemal dynein complex	10	-0.803278688525	0.021782674011
+GO:0051918	negative regulation of fibrinolysis	10	-0.814207650273	0.0182774161242
+GO:0048020	CCR chemokine receptor binding	10	-0.792349726776	0.028292438658
+GO:0030594	neurotransmitter receptor activity	10	-0.828779599271	0.0132699048573
+GO:0031284	positive regulation of guanylate cyclase activity	10	-0.788706739526	0.0310465698548
+GO:0007216	G-protein coupled glutamate receptor signaling pathway	10	-0.876138433515	0.00450676014021
+GO:0042359	vitamin D metabolic process	10	-0.814207650273	0.0182774161242
+GO:0034378	chylomicron assembly	10	-0.803278688525	0.021782674011
+GO:0009881	photoreceptor activity	10	-0.770491803279	0.0495743615423
+GO:0015467	G-protein activated inward rectifier potassium channel activity	10	-0.8071278826	0.0200300450676
+GO:0008376	acetylgalactosaminyltransferase activity	11	-0.774134790528	0.041857273559
+GO:0032725	positive regulation of granulocyte macrophage colony-stimulating factor production	11	-0.803278688525	0.0198993595608
+GO:0052695	cellular glucuronidation	11	-0.766848816029	0.0498627630375
+GO:0042738	exogenous drug catabolic process	11	-0.770491803279	0.0457456541629
+GO:0032958	inositol phosphate biosynthetic process	11	-0.777777777778	0.0379688929552
+GO:0015250	water channel activity	11	-0.795992714026	0.0237877401647
+GO:0005344	oxygen carrier activity	12	-0.868852459016	0.0024219590958
+GO:0016805	dipeptidase activity	12	-0.752276867031	0.0489773950484
+GO:0086012	membrane depolarization during cardiac muscle cell action potential	12	-0.770491803279	0.0314854682454
+GO:0018298	protein-chromophore linkage	12	-0.755919854281	0.0438643702906
+GO:0050953	sensory perception of light stimulus	12	-0.803278688525	0.01345532831
+GO:0030239	myofibril assembly	12	-0.777777777778	0.0244886975242
+GO:0008066	glutamate receptor activity	12	-0.832422586521	0.0059203444564
+GO:0008188	neuropeptide receptor activity	12	-0.892617449664	0.0005382131324
+GO:0008392	arachidonic acid epoxygenase activity	13	-0.846994535519	0.00320699708455
+GO:0015671	oxygen transport	13	-0.781420765027	0.0163265306122
+GO:0008374	O-acyltransferase activity	13	-0.737704918033	0.0428571428571
+GO:0030553	cGMP binding	13	-0.755919854281	0.0282798833819
+GO:0001518	voltage-gated sodium channel complex	13	-0.810564663024	0.00845481049563
+GO:0035418	protein localization to synapse	13	-0.734061930783	0.0469387755102
+GO:0005126	cytokine receptor binding	13	-0.752276867031	0.0314868804665
+GO:0034122	negative regulation of toll-like receptor signaling pathway	13	-0.737704918033	0.0428571428571
+GO:0016594	glycine binding	13	-0.734061930783	0.0469387755102
+GO:0008527	taste receptor activity	14	-0.868852459016	0.00247660979637
+GO:0006833	water transport	14	-0.766848816029	0.0236653824986
+GO:0060322	head development	14	-0.770491803279	0.0217391304348
+GO:0006744	ubiquinone biosynthetic process	15	-0.719489981785	0.0422195416164
+GO:0042923	neuropeptide binding	15	-0.785063752277	0.00663449939686
+GO:0030818	negative regulation of cAMP biosynthetic process	15	-0.730418943534	0.0319662243667
+GO:0004806	triglyceride lipase activity	15	-0.723132969035	0.0392038600724
+GO:0045777	positive regulation of blood pressure	16	-0.726775956284	0.0254755434783
+GO:0022848	acetylcholine-gated cation-selective channel activity	16	-0.737704918033	0.0166440217391
+GO:0034375	high-density lipoprotein particle remodeling	17	-0.715846994536	0.0240174672489
+GO:0010529	negative regulation of transposition	17	-0.690346083789	0.0414847161572
+GO:0005234	extracellularly glutamate-gated ion channel activity	17	-0.730418943534	0.0160116448326
+GO:0019373	epoxygenase P450 pathway	17	-0.744990892532	0.0101892285298
+GO:0008528	G-protein coupled peptide receptor activity	17	-0.719489981785	0.0225618631732
+GO:0032982	myosin filament	17	-0.704918032787	0.0291120815138
+GO:0004970	ionotropic glutamate receptor activity	17	-0.730418943534	0.0160116448326
+GO:0015347	sodium-independent organic anion transmembrane transporter activity	17	-0.748633879781	0.00909752547307
+GO:0008569	ATP-dependent microtubule motor activity, minus-end-directed	18	-0.704918032787	0.0278940027894
+GO:0005452	inorganic anion exchanger activity	19	-0.675774134791	0.0456989247312
+GO:0033038	bitter taste receptor activity	19	-0.896551724138	0.000768049155146
+GO:0097381	photoreceptor disc membrane	19	-0.774134790528	0.00307219662058
+GO:0043252	sodium-independent organic anion transport	20	-0.686703096539	0.0274414850686
+GO:0008395	steroid hydroxylase activity	20	-0.723132969035	0.0108958837772
+GO:0015698	inorganic anion transport	20	-0.668488160291	0.0419693301049
+GO:0030162	regulation of proteolysis	21	-0.68306010929	0.0304783950617
+GO:0005248	voltage-gated sodium channel activity	22	-0.748633879781	0.00377833753149
+GO:0005104	fibroblast growth factor receptor binding	22	-0.657559198543	0.0335852225021
+GO:0006855	drug transmembrane transport	22	-0.719489981785	0.012174643157
+GO:0000070	mitotic sister chromatid segregation	23	-0.646630236794	0.0341013824885
+GO:0017144	drug metabolic process	23	-0.686703096539	0.0175115207373
+GO:0060076	excitatory synapse	23	-0.657559198543	0.0285714285714
+GO:0032281	AMPA glutamate receptor complex	24	-0.657559198543	0.0277033065237
+GO:0045503	dynein light chain binding	24	-0.632058287796	0.0437890974084
+GO:0007194	negative regulation of adenylate cyclase activity	25	-0.6029143898	0.0496254681648
+GO:0086010	membrane depolarization during action potential	26	-0.726775956284	0.00544015825915
+GO:0005891	voltage-gated calcium channel complex	26	-0.6029143898	0.0425321463897
+GO:0015721	bile acid and bile salt transport	27	-0.59927140255	0.0370563674322
+GO:0050907	detection of chemical stimulus involved in sensory perception	28	-0.686703096539	0.00806451612903
+GO:0060349	bone morphogenesis	29	-0.617486338798	0.0192307692308
+GO:0005261	cation channel activity	29	-0.675774134791	0.00935550935551
+GO:0042571	immunoglobulin complex, circulating	30	-0.75956284153	0.00109409190372
+GO:0005549	odorant binding	31	-0.726775956284	0.0037513397642
+GO:0036126	sperm flagellum	33	-0.570127504554	0.0345036319613
+GO:0007631	feeding behavior	34	-0.548269581056	0.032196969697
+GO:0003341	cilium movement	36	-0.537340619308	0.0291828793774
+GO:0005245	voltage-gated calcium channel activity	36	-0.617486338798	0.00972762645914
+GO:0009566	fertilization	36	-0.537340619308	0.0291828793774
+GO:0034987	immunoglobulin receptor binding	37	-0.526411657559	0.0286284953395
+GO:0050909	sensory perception of taste	38	-0.595628415301	0.0118577075099
+GO:0001942	hair follicle development	38	-0.508196721311	0.0401844532279
+GO:0007188	adenylate cyclase-modulating G-protein coupled receptor signaling pathway	40	-0.52276867031	0.0238095238095
+GO:0005230	extracellular ligand-gated ion channel activity	43	-0.479052823315	0.0351390922401
+GO:0061337	cardiac conduction	45	-0.479052823315	0.0310192023634
+GO:0060078	regulation of postsynaptic membrane potential	45	-0.624772313297	0.00147710487445
+GO:0052689	carboxylic ester hydrolase activity	47	-0.493624772313	0.0204402515723
+GO:0007586	digestion	50	-0.573770491803	0.00658978583196
+GO:0002377	immunoglobulin production	55	-0.464480874317	0.0130434782609
+GO:0030574	collagen catabolic process	61	-0.315118397086	0.036750483559
+GO:0050853	B cell receptor signaling pathway	62	-0.344262295082	0.0210325047801
+GO:0005249	voltage-gated potassium channel activity	67	-0.413479052823	0.00833333333333
+GO:0060079	excitatory postsynaptic potential	68	-0.296903460838	0.031847133758
+GO:0007368	determination of left/right symmetry	68	-0.285974499089	0.036093418259
+GO:0006956	complement activation	73	-0.431693989071	0.00454545454545
+GO:0005267	potassium channel activity	78	-0.369763205829	0.00722891566265
+GO:0035725	sodium ion transmembrane transport	78	-0.275045537341	0.0265060240964
+GO:0007218	neuropeptide signaling pathway	80	-0.340619307832	0.0122249388753
+GO:0042391	regulation of membrane potential	82	-0.238615664845	0.0425
+GO:0005262	calcium channel activity	89	-0.264116575592	0.0254237288136
+GO:0000777	condensed chromosome kinetochore	99	-0.234972677596	0.0249221183801
+GO:0006958	complement activation, classical pathway	103	-0.187613843352	0.0394736842105
+GO:0003823	antigen binding	120	-0.395264116576	0.0116279069767
+GO:0005244	voltage-gated ion channel activity	141	-0.11839708561	0.0374449339207
+GO:0007156	homophilic cell adhesion via plasma membrane adhesion molecules	144	-0.143897996357	0.0269058295964
+GO:0004984	olfactory receptor activity	150	-0.482695810565	0.00728155339806
+GO:0050911	detection of chemical stimulus involved in sensory perception of smell	150	-0.482695810565	0.00728155339806
+GO:0050776	regulation of immune response	164	-0.0564663023679	0.05
+GO:0007608	sensory perception of smell	174	-0.275045537341	0.0175438596491
+GO:0002250	adaptive immune response	237	0.0418943533698	0.0275229357798
+GO:0050896	response to stimulus	302	0.253187613843	0.0459770114943
+GO:0006412	translation	307	0.267759562842	0.0487804878049
+GO:0006955	immune response	410	0.285974499089	0.0422535211268
+GO:0002376	immune system process	561	0.406193078324	0.0350877192982

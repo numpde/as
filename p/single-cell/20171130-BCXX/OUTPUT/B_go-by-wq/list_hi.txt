@@ -1,0 +1,797 @@
+GO ID	GO name	Size	Clustering index	CI quantile
+GO:0140067	peptidyl-lysine butyrylation	1	-0.635701275046	0.97817384674
+GO:2000256	positive regulation of male germ cell proliferation	1	-0.680733944954	0.963400686237
+GO:0042543	protein N-linked glycosylation via arginine	1	-0.68306010929	0.962256957682
+GO:0035501	MH1 domain binding	1	-0.627329192547	0.983225314525
+GO:0035978	histone H2A-S139 phosphorylation	1	-0.627329192547	0.983225314525
+GO:0010769	regulation of cell morphogenesis involved in differentiation	1	-0.453287197232	0.996378192909
+GO:0140065	peptide butyryltransferase activity	1	-0.635701275046	0.97817384674
+GO:0072303	positive regulation of glomerular metanephric mesangial cell proliferation	1	-0.606557377049	0.988562714449
+GO:1990715	mRNA CDS binding	1	-0.63249516441	0.979222264583
+GO:1904796	regulation of core promoter binding	1	-0.628415300546	0.981700343119
+GO:1901624	negative regulation of lymphocyte chemotaxis	1	-0.658088235294	0.972550514678
+GO:0038154	interleukin-11-mediated signaling pathway	1	-0.63167587477	0.97979412886
+GO:0090327	negative regulation of locomotion involved in locomotory behavior	1	-0.621129326047	0.98436904308
+GO:0035248	alpha-1,4-N-acetylgalactosaminyltransferase activity	1	-0.693989071038	0.954632100648
+GO:0098594	mucin granule	1	-0.624772313297	0.983987800229
+GO:1900170	negative regulation of glucocorticoid mediated signaling pathway	1	-0.661202185792	0.971692718262
+GO:0004824	lysine-tRNA ligase activity	1	-0.672131147541	0.96807091117
+GO:0003069	acetylcholine-mediated vasodilation involved in regulation of systemic arterial blood pressure	1	-0.68306010929	0.962256957682
+GO:0007403	glial cell fate determination	1	-0.628415300546	0.981700343119
+GO:2000740	negative regulation of mesenchymal stem cell differentiation	1	-0.675774134791	0.966260007625
+GO:1905143	eukaryotic translation initiation factor 2 complex assembly	1	-0.628415300546	0.981700343119
+GO:1903883	positive regulation of interleukin-17-mediated signaling pathway	1	-0.681222707424	0.963019443385
+GO:0071206	establishment of protein localization to juxtaparanode region of axon	1	-0.453287197232	0.996378192909
+GO:0051089	constitutive protein ectodomain proteolysis	1	-0.635701275046	0.97817384674
+GO:1990969	modulation by host of viral RNA-binding transcription factor activity	1	-0.697632058288	0.952916507815
+GO:0004587	ornithine-oxo-acid transaminase activity	1	-0.562841530055	0.992375142966
+GO:0040034	regulation of development, heterochronic	1	-0.690346083789	0.956252382768
+GO:0036337	Fas signaling pathway	1	-0.690346083789	0.956252382768
+GO:0034358	plasma lipoprotein particle	1	-0.627118644068	0.983797178803
+GO:0009712	catechol-containing compound metabolic process	1	-0.686703096539	0.959778879146
+GO:0060007	linear vestibuloocular reflex	1	-0.68345323741	0.961685093404
+GO:0044854	plasma membrane raft assembly	1	-0.675774134791	0.966260007625
+GO:0060479	lung cell differentiation	1	-0.628415300546	0.981700343119
+GO:0021758	putamen development	1	-0.690288713911	0.957396111323
+GO:1903886	positive regulation of chemokine (C-C motif) ligand 20 production	1	-0.681222707424	0.963019443385
+GO:0032994	protein-lipid complex	1	-0.642987249545	0.976458253908
+GO:0044869	negative regulation by host of viral exo-alpha-sialidase activity	1	-0.380281690141	0.997331300038
+GO:0061921	peptidyl-lysine propionylation	1	-0.635701275046	0.97817384674
+GO:0010557	positive regulation of macromolecule biosynthetic process	1	-0.693989071038	0.954632100648
+GO:0016479	negative regulation of transcription from RNA polymerase I promoter	1	-0.67941712204	0.964544414792
+GO:0098759	cellular response to interleukin-8	1	-0.606557377049	0.988562714449
+GO:1905913	negative regulation of calcium ion export across plasma membrane	1	-0.530054644809	0.993900114373
+GO:0061920	protein propionyltransferase activity	1	-0.635701275046	0.97817384674
+GO:0001306	age-dependent response to oxidative stress	1	-0.68306010929	0.962256957682
+GO:0001872	(1->3)-beta-D-glucan binding	1	-0.380281690141	0.997331300038
+GO:2000452	regulation of CD8-positive, alpha-beta cytotoxic T cell extravasation	1	-0.505617977528	0.994376667937
+GO:0036317	tyrosyl-RNA phosphodiesterase activity	1	-0.653916211293	0.973980175372
+GO:0031249	denatured protein binding	1	-0.618518518519	0.984940907358
+GO:0061395	positive regulation of transcription from RNA polymerase II promoter in response to arsenic-containing substance	1	-0.690346083789	0.956252382768
+GO:0008465	glycerate dehydrogenase activity	1	-0.686703096539	0.959778879146
+GO:0102707	S-adenosyl-L-methionine:beta-alanine N-methyltransferase activity	1	-0.65	0.975028593214
+GO:1905000	regulation of membrane repolarization during atrial cardiac muscle cell action potential	1	-0.67941712204	0.964544414792
+GO:0017172	cysteine dioxygenase activity	1	-0.458333333333	0.995711017918
+GO:0015369	calcium:proton antiporter activity	1	-0.67941712204	0.964544414792
+GO:0045685	regulation of glial cell differentiation	1	-0.685009487666	0.96120853984
+GO:0002276	basophil activation involved in immune response	1	-0.672131147541	0.96807091117
+GO:0098597	observational learning	1	-0.685009487666	0.96120853984
+GO:0140069	histone butyryltransferase activity	1	-0.635701275046	0.97817384674
+GO:2000564	regulation of CD8-positive, alpha-beta T cell proliferation	1	-0.646630236794	0.975791078917
+GO:0001315	age-dependent response to reactive oxygen species	1	-0.68306010929	0.962256957682
+GO:0033233	regulation of protein sumoylation	1	-0.606557377049	0.988562714449
+GO:0055002	striated muscle cell development	1	-0.686924493554	0.958635150591
+GO:1990428	miRNA transport	1	-0.661202185792	0.971692718262
+GO:0004790	thioether S-methyltransferase activity	1	-0.65	0.975028593214
+GO:0031460	glycine betaine transport	1	-0.642987249545	0.976458253908
+GO:0032350	regulation of hormone metabolic process	1	-0.668488160291	0.9690240183
+GO:0001840	neural plate development	1	-0.628415300546	0.981700343119
+GO:0000036	acyl carrier activity	1	-0.690346083789	0.956252382768
+GO:0042628	mating plug formation	1	-0.673366834171	0.967213114754
+GO:0008785	alkyl hydroperoxide reductase activity	1	-0.690346083789	0.956252382768
+GO:0048685	negative regulation of collateral sprouting of intact axon in response to injury	1	-0.531182795699	0.993709492947
+GO:0002481	antigen processing and presentation of exogenous protein antigen via MHC class Ib, TAP-dependent	1	-0.617486338798	0.985894014487
+GO:1903725	regulation of phospholipid metabolic process	1	-0.701275045537	0.950629050705
+GO:0021757	caudate nucleus development	1	-0.690288713911	0.957396111323
+GO:0140068	histone crotonyltransferase activity	1	-0.635701275046	0.97817384674
+GO:0030504	inorganic diphosphate transmembrane transporter activity	1	-0.67941712204	0.964544414792
+GO:0003311	pancreatic D cell differentiation	1	-0.558441558442	0.993232939382
+GO:0000097	sulfur amino acid biosynthetic process	1	-0.458333333333	0.995711017918
+GO:0004838	L-tyrosine:2-oxoglutarate aminotransferase activity	1	-0.688442211055	0.958158597026
+GO:0070684	seminal clot liquefaction	1	-0.375	0.997903164316
+GO:0071664	catenin-TCF7L2 complex	1	-0.628415300546	0.981700343119
+GO:1990786	cellular response to dsDNA	1	-0.661202185792	0.971692718262
+GO:0071071	regulation of phospholipid biosynthetic process	1	-0.573770491803	0.99151734655
+GO:1901890	positive regulation of cell junction assembly	1	-0.675774134791	0.966260007625
+GO:0090673	endothelial cell-matrix adhesion	1	-0.605734767025	0.989325200152
+GO:1905774	regulation of DNA helicase activity	1	-0.67941712204	0.964544414792
+GO:1904722	positive regulation of mRNA endonucleolytic cleavage involved in unfolded protein response	1	-0.618518518519	0.984940907358
+GO:0030421	defecation	1	-0.657559198543	0.973217689668
+GO:0060588	negative regulation of lipoprotein lipid oxidation	1	-0.466933867735	0.995234464354
+GO:0044252	negative regulation of multicellular organismal metabolic process	1	-0.621129326047	0.98436904308
+GO:2000109	regulation of macrophage apoptotic process	1	-0.606557377049	0.988562714449
+GO:0005895	interleukin-5 receptor complex	1	-0.646630236794	0.975791078917
+GO:0009226	nucleotide-sugar biosynthetic process	1	-0.613843351548	0.986847121616
+GO:0004877	complement component C3b receptor activity	1	-0.346666666667	0.998570339306
+GO:1900005	positive regulation of serine-type endopeptidase activity	1	-0.346666666667	0.998570339306
+GO:0009074	aromatic amino acid family catabolic process	1	-0.688442211055	0.958158597026
+GO:0071412	cellular response to genistein	1	-0.491525423729	0.994662600076
+GO:1902251	negative regulation of erythrocyte apoptotic process	1	-0.607594936709	0.987800228746
+GO:0045900	negative regulation of translational elongation	1	-0.646630236794	0.975791078917
+GO:0070899	mitochondrial tRNA wobble uridine modification	1	-0.661202185792	0.971692718262
+GO:0075606	transport of viral material towards nucleus	1	-0.664845173042	0.970358368281
+GO:0097090	presynaptic membrane organization	1	-0.453287197232	0.996378192909
+GO:0140066	peptidyl-lysine crotonylation	1	-0.635701275046	0.97817384674
+GO:0034998	oligosaccharyltransferase I complex	1	-0.693989071038	0.954632100648
+GO:0102773	dihydroceramide kinase activity	1	-0.701275045537	0.950629050705
+GO:0002737	negative regulation of plasmacytoid dendritic cell cytokine production	1	-0.701275045537	0.950629050705
+GO:0044284	mitochondrial crista junction	1	-0.661202185792	0.971692718262
+GO:1903016	negative regulation of exo-alpha-sialidase activity	1	-0.380281690141	0.997331300038
+GO:0009400	signal transducer, downstream of receptor, with serine/threonine phosphatase activity	1	-0.668488160291	0.9690240183
+GO:0060383	positive regulation of DNA strand elongation	1	-0.67941712204	0.964544414792
+GO:0002296	T-helper 1 cell lineage commitment	1	-0.690346083789	0.956252382768
+GO:1904793	regulation of euchromatin binding	1	-0.628415300546	0.981700343119
+GO:1990386	mitotic cleavage furrow ingression	1	-0.701275045537	0.950629050705
+GO:0002731	negative regulation of dendritic cell cytokine production	1	-0.666666666667	0.96969119329
+GO:0046977	TAP binding	1	-0.686703096539	0.959778879146
+GO:0010650	positive regulation of cell communication by electrical coupling	1	-0.697632058288	0.952916507815
+GO:0004597	peptide-aspartate beta-dioxygenase activity	1	-0.610200364299	0.987418985894
+GO:0099131	ATP hydrolysis coupled ion transmembrane transport	1	-0.652014652015	0.974361418223
+GO:2001136	negative regulation of endocytic recycling	1	-0.595628415301	0.98989706443
+GO:0015990	electron transport coupled proton transport	1	-0.639344262295	0.976839496759
+GO:0019970	interleukin-11 binding	1	-0.63167587477	0.97979412886
+GO:0098973	structural constituent of postsynaptic actin cytoskeleton	1	-0.686703096539	0.959778879146
+GO:2000706	negative regulation of dense core granule biogenesis	1	-0.675774134791	0.966260007625
+GO:0042356	GDP-4-dehydro-D-rhamnose reductase activity	1	-0.613843351548	0.986847121616
+GO:1904574	negative regulation of selenocysteine insertion sequence binding	1	-0.701275045537	0.950629050705
+GO:0050823	peptide antigen stabilization	1	-0.693989071038	0.954632100648
+GO:0097275	cellular ammonia homeostasis	1	-0.269230769231	0.999428135722
+GO:0070180	large ribosomal subunit rRNA binding	1	0.0544090056285	1
+GO:0045275	respiratory chain complex III	1	-0.657559198543	0.973217689668
+GO:0050115	myosin-light-chain-phosphatase activity	1	-0.559198542805	0.992947007244
+GO:0001562	response to protozoan	1	-0.690346083789	0.956252382768
+GO:1904570	negative regulation of selenocysteine incorporation	1	-0.701275045537	0.950629050705
+GO:0044053	translocation of peptides or proteins into host cell cytoplasm	1	-0.606557377049	0.988562714449
+GO:0032058	positive regulation of translational initiation in response to stress	1	-0.595628415301	0.98989706443
+GO:0071877	regulation of adrenergic receptor signaling pathway	1	-0.588571428571	0.990468928708
+GO:0045957	negative regulation of complement activation, alternative pathway	1	-0.346666666667	0.998570339306
+GO:0043795	glyceraldehyde oxidoreductase activity	1	-0.617486338798	0.985894014487
+GO:0097276	cellular creatinine homeostasis	1	-0.269230769231	0.999428135722
+GO:0098974	postsynaptic actin cytoskeleton organization	1	-0.686703096539	0.959778879146
+GO:1904501	positive regulation of chromatin-mediated maintenance of transcription	1	-0.628415300546	0.981700343119
+GO:1904155	DN2 thymocyte differentiation	1	-0.630379746835	0.980365993138
+GO:0005009	insulin-activated receptor activity	1	-0.566484517304	0.99218452154
+GO:0007495	visceral mesoderm-endoderm interaction involved in midgut development	1	-0.454545454545	0.995996950057
+GO:0015782	CMP-N-acetylneuraminate transmembrane transport	1	-0.697632058288	0.952916507815
+GO:0006061	sorbitol biosynthetic process	1	-0.617486338798	0.985894014487
+GO:1902380	positive regulation of endoribonuclease activity	1	-0.618518518519	0.984940907358
+GO:1904246	negative regulation of polynucleotide adenylyltransferase activity	1	-0.588342440801	0.990659550133
+GO:0097212	lysosomal membrane organization	1	-0.701275045537	0.950629050705
+GO:0097309	cap1 mRNA methylation	1	-0.675774134791	0.966260007625
+GO:0061108	seminal vesicle epithelium development	1	-0.673366834171	0.967213114754
+GO:0021683	cerebellar granular layer morphogenesis	1	-0.673366834171	0.967213114754
+GO:0097573	glutathione oxidoreductase activity	1	-0.617486338798	0.985894014487
+GO:0070235	regulation of activation-induced cell death of T cells	1	-0.505617977528	0.994376667937
+GO:0075521	microtubule-dependent intracellular transport of viral material towards nucleus	1	-0.664845173042	0.970358368281
+GO:2000685	positive regulation of cellular response to X-ray	1	-0.627329192547	0.983225314525
+GO:1903371	regulation of endoplasmic reticulum tubular network organization	1	-0.661202185792	0.971692718262
+GO:0050668	positive regulation of homocysteine metabolic process	1	-0.686703096539	0.959778879146
+GO:1990968	modulation by host of RNA binding by virus	1	-0.697632058288	0.952916507815
+GO:0002397	MHC class I protein complex assembly	1	-0.693989071038	0.954632100648
+GO:0072660	maintenance of protein location in plasma membrane	1	-0.697632058288	0.952916507815
+GO:0090104	pancreatic epsilon cell differentiation	1	-0.558441558442	0.993232939382
+GO:0046122	purine deoxyribonucleoside metabolic process	1	-0.657559198543	0.973217689668
+GO:0042886	amide transport	1	-0.693989071038	0.954632100648
+GO:0097238	cellular response to methylglyoxal	1	-0.617486338798	0.985894014487
+GO:2001111	positive regulation of lens epithelial cell proliferation	1	-0.689075630252	0.957777354175
+GO:0050577	GDP-L-fucose synthase activity	1	-0.613843351548	0.986847121616
+GO:0003131	mesodermal-endodermal cell signaling	1	-0.627329192547	0.983225314525
+GO:0051638	barbed-end actin filament uncapping	1	-0.577413479053	0.991040792985
+GO:0015662	ATPase activity, coupled to transmembrane movement of ions, phosphorylative mechanism	1	-0.652014652015	0.974361418223
+GO:0005456	CMP-N-acetylneuraminate transmembrane transporter activity	1	-0.697632058288	0.952916507815
+GO:0031441	negative regulation of mRNA 3'-end processing	1	-0.697632058288	0.952916507815
+GO:0033216	ferric iron import	1	-0.617486338798	0.985894014487
+GO:0055108	Golgi to transport vesicle transport	1	-0.701275045537	0.950629050705
+GO:0004561	alpha-N-acetylglucosaminidase activity	1	-0.663366336634	0.970834921845
+GO:0070142	synaptic vesicle budding	1	-0.701275045537	0.950629050705
+GO:0097655	serpin family protein binding	1	-0.701275045537	0.950629050705
+GO:0060735	regulation of eIF2 alpha phosphorylation by dsRNA	1	-0.577413479053	0.991040792985
+GO:0007014	actin ubiquitination	1	-0.681222707424	0.963019443385
+GO:0035971	peptidyl-histidine dephosphorylation	1	-0.646630236794	0.975791078917
+GO:1900036	positive regulation of cellular response to heat	1	-0.690346083789	0.956252382768
+GO:0002502	peptide antigen assembly with MHC class I protein complex	1	-0.559633027523	0.992756385818
+GO:0043969	histone H2B acetylation	1	-0.635701275046	0.97817384674
+GO:1902905	positive regulation of supramolecular fiber organization	1	-0.661202185792	0.971692718262
+GO:1900827	positive regulation of membrane depolarization during cardiac muscle cell action potential	1	-0.697632058288	0.952916507815
+GO:1903917	positive regulation of endoplasmic reticulum stress-induced eIF2 alpha dephosphorylation	1	-0.595628415301	0.98989706443
+GO:0006430	lysyl-tRNA aminoacylation	1	-0.672131147541	0.96807091117
+GO:0016036	cellular response to phosphate starvation	1	-0.686703096539	0.959778879146
+GO:0030205	dermatan sulfate metabolic process	1	-0.690346083789	0.956252382768
+GO:0002590	negative regulation of antigen processing and presentation of peptide antigen via MHC class I	1	-0.697632058288	0.952916507815
+GO:0061394	regulation of transcription from RNA polymerase II promoter in response to arsenic-containing substance	1	-0.610200364299	0.987418985894
+GO:0070483	detection of hypoxia	1	-0.672131147541	0.96807091117
+GO:0031034	myosin filament assembly	1	-0.668488160291	0.9690240183
+GO:0042275	error-free postreplication DNA repair	1	-0.606557377049	0.988562714449
+GO:0031751	D4 dopamine receptor binding	1	-0.192612137203	0.999809378574
+GO:0031651	negative regulation of heat generation	1	-0.621129326047	0.98436904308
+GO:1901879	regulation of protein depolymerization	1	-0.610200364299	0.987418985894
+GO:0071242	cellular response to ammonium ion	1	-0.461538461538	0.99542508578
+GO:0005586	collagen type III trimer	1	-0.548172757475	0.993518871521
+GO:2000812	regulation of barbed-end actin filament capping	1	-0.693989071038	0.954632100648
+GO:0061550	cranial ganglion development	1	-0.628415300546	0.981700343119
+GO:1904977	lymphatic endothelial cell migration	1	-0.686703096539	0.959778879146
+GO:0001544	initiation of primordial ovarian follicle growth	1	-0.686703096539	0.959778879146
+GO:0045091	regulation of single stranded viral RNA replication via double stranded DNA intermediate	1	-0.390928725702	0.996759435761
+GO:1905031	regulation of membrane repolarization during cardiac muscle cell action potential	1	-0.67941712204	0.964544414792
+GO:0016530	metallochaperone activity	1	-0.650273224044	0.974647350362
+GO:0048773	erythrophore differentiation	1	-0.68306010929	0.962256957682
+GO:0031052	chromosome breakage	1	-0.627329192547	0.983225314525
+GO:0060696	regulation of phospholipid catabolic process	1	-0.573770491803	0.99151734655
+GO:1905776	positive regulation of DNA helicase activity	1	-0.67941712204	0.964544414792
+GO:1903019	negative regulation of glycoprotein metabolic process	1	-0.380281690141	0.997331300038
+GO:0018377	protein myristoylation	1	-0.668488160291	0.9690240183
+GO:0047066	phospholipid-hydroperoxide glutathione peroxidase activity	1	-0.570127504554	0.991898589401
+GO:0003979	UDP-glucose 6-dehydrogenase activity	1	-0.666666666667	0.96969119329
+GO:0097447	dendritic tree	1	-0.639042357274	0.977125428898
+GO:0000414	regulation of histone H3-K36 methylation	1	-0.686703096539	0.959778879146
+GO:0061324	canonical Wnt signaling pathway involved in positive regulation of cardiac outflow tract cell proliferation	1	-0.628415300546	0.981700343119
+GO:0046070	dGTP metabolic process	1	-0.657559198543	0.973217689668
+GO:0080058	protein deglutathionylation	1	-0.617486338798	0.985894014487
+GO:0070260	5'-tyrosyl-DNA phosphodiesterase activity	1	-0.653916211293	0.973980175372
+GO:1990583	phospholipase D activator activity	1	-0.701275045537	0.950629050705
+GO:0099641	anterograde axonal protein transport	1	-0.672131147541	0.96807091117
+GO:0004138	deoxyguanosine kinase activity	1	-0.657559198543	0.973217689668
+GO:1902213	positive regulation of prolactin signaling pathway	1	-0.661202185792	0.971692718262
+GO:0001792	polymeric immunoglobulin receptor activity	1	-0.56038647343	0.992565764392
+GO:0030748	amine N-methyltransferase activity	1	-0.65	0.975028593214
+GO:0035375	zymogen binding	1	-0.593220338983	0.990278307282
+GO:1904028	positive regulation of collagen fibril organization	1	-0.67941712204	0.964544414792
+GO:0004304	estrone sulfotransferase activity	1	-0.366459627329	0.998093785742
+GO:0051884	regulation of timing of anagen	1	-0.628415300546	0.981700343119
+GO:0002532	production of molecular mediator involved in inflammatory response	1	-0.639344262295	0.976839496759
+GO:1904156	DN3 thymocyte differentiation	1	-0.630379746835	0.980365993138
+GO:0044871	negative regulation by host of viral glycoprotein metabolic process	1	-0.380281690141	0.997331300038
+GO:0097277	cellular urea homeostasis	1	-0.269230769231	0.999428135722
+GO:0009245	lipid A biosynthetic process	1	-0.690346083789	0.956252382768
+GO:0035822	gene conversion	1	-0.697632058288	0.952916507815
+GO:0072395	signal transduction involved in cell cycle checkpoint	1	-0.689075630252	0.957777354175
+GO:0045221	negative regulation of FasL biosynthetic process	1	-0.666666666667	0.96969119329
+GO:0003877	ATP adenylyltransferase activity	1	-0.672131147541	0.96807091117
+GO:0004921	interleukin-11 receptor activity	1	-0.63167587477	0.97979412886
+GO:0001970	positive regulation of activation of membrane attack complex	1	-0.485838779956	0.994948532215
+GO:0072110	glomerular mesangial cell proliferation	1	-0.606557377049	0.988562714449
+GO:0060699	regulation of endoribonuclease activity	1	-0.577413479053	0.991040792985
+GO:0001861	complement component C4b receptor activity	1	-0.346666666667	0.998570339306
+GO:1990955	G-rich single-stranded DNA binding	1	-0.67941712204	0.964544414792
+GO:0004603	phenylethanolamine N-methyltransferase activity	1	-0.313868613139	0.999046892871
+GO:0035581	sequestering of extracellular ligand from receptor	1	-0.570127504554	0.991898589401
+GO:0060382	regulation of DNA strand elongation	1	-0.697632058288	0.952916507815
+GO:2000798	negative regulation of amniotic stem cell differentiation	1	-0.675774134791	0.966260007625
+GO:0072587	DNA topoisomerase (ATP-hydrolyzing) activator activity	1	-0.687619047619	0.958444529165
+GO:0061534	gamma-aminobutyric acid secretion, neurotransmission	1	-0.685009487666	0.96120853984
+GO:0072715	cellular response to selenite ion	1	-0.701275045537	0.950629050705
+GO:0098829	intestinal folate absorption	1	-0.506493506494	0.994090735799
+GO:0016638	oxidoreductase activity, acting on the CH-NH2 group of donors	1	-0.664845173042	0.970358368281
+GO:0048290	isotype switching to IgA isotypes	1	-0.630379746835	0.980365993138
+GO:1990930	RNA N1-methyladenosine dioxygenase activity	1	-0.67941712204	0.964544414792
+GO:0004733	pyridoxamine-phosphate oxidase activity	1	-0.664845173042	0.970358368281
+GO:0051350	negative regulation of lyase activity	1	-0.646630236794	0.975791078917
+GO:0043538	regulation of actin phosphorylation	1	-0.701275045537	0.950629050705
+GO:0002541	activation of plasma proteins involved in acute inflammatory response	1	-0.635701275046	0.97817384674
+GO:0021888	hypothalamus gonadotrophin-releasing hormone neuron development	1	-0.632058287796	0.979412886008
+GO:0031715	C5L2 anaphylatoxin chemotactic receptor binding	1	-0.485838779956	0.994948532215
+GO:0008617	guanosine metabolic process	1	-0.657559198543	0.973217689668
+GO:0061535	glutamate secretion, neurotransmission	1	-0.685009487666	0.96120853984
+GO:0090132	epithelium migration	1	-0.675774134791	0.966260007625
+GO:0047280	nicotinamide phosphoribosyltransferase activity	1	-0.6029143898	0.989515821578
+GO:0031389	Rad17 RFC-like complex	1	-0.686703096539	0.959778879146
+GO:0031699	beta-3 adrenergic receptor binding	2	-0.617486338798	0.967658948916
+GO:2000502	negative regulation of natural killer cell chemotaxis	2	-0.635701275046	0.955163542815
+GO:0014013	regulation of gliogenesis	2	-0.573770491803	0.985299522234
+GO:0002764	immune response-regulating signaling pathway	2	-0.591985428051	0.980521866961
+GO:0031750	D3 dopamine receptor binding	2	-0.59927140255	0.978500551268
+GO:0002605	negative regulation of dendritic cell antigen processing and presentation	2	-0.635701275046	0.955163542815
+GO:0070254	mucus secretion	2	-0.610200364299	0.971517824329
+GO:1905664	regulation of calcium ion import across plasma membrane	2	-0.639344262295	0.951855935318
+GO:0060297	regulation of sarcomere organization	2	-0.551912568306	0.990995957369
+GO:0034750	Scrib-APC-beta-catenin complex	2	-0.635701275046	0.955163542815
+GO:0072160	nephron tubule epithelial cell differentiation	2	-0.606557377049	0.974641675854
+GO:0050725	positive regulation of interleukin-1 beta biosynthetic process	2	-0.606557377049	0.974641675854
+GO:0001672	regulation of chromatin assembly or disassembly	2	-0.548269581056	0.991914737229
+GO:1902310	positive regulation of peptidyl-serine dephosphorylation	2	-0.595628415301	0.9796030871
+GO:0035795	negative regulation of mitochondrial membrane permeability	2	-0.544626593807	0.993201029033
+GO:0034224	cellular response to zinc ion starvation	2	-0.613843351548	0.969680264609
+GO:0070026	nitric oxide binding	2	-0.591985428051	0.980521866961
+GO:0019981	interleukin-6 binding	2	-0.573770491803	0.985299522234
+GO:0004450	isocitrate dehydrogenase (NADP+) activity	2	-0.449908925319	0.999632488056
+GO:1905064	negative regulation of vascular smooth muscle cell differentiation	2	-0.613843351548	0.969680264609
+GO:0019249	lactate biosynthetic process	2	-0.624772313297	0.964351341419
+GO:0060689	cell differentiation involved in salivary gland development	2	-0.617486338798	0.967658948916
+GO:0043067	regulation of programmed cell death	2	-0.570127504554	0.986953325983
+GO:0035718	macrophage migration inhibitory factor binding	2	-0.562841530055	0.988790885704
+GO:0061502	early endosome to recycling endosome transport	2	-0.6029143898	0.977398015436
+GO:0045976	negative regulation of mitotic cell cycle, embryonic	2	-0.621129326047	0.966188901139
+GO:0008147	structural constituent of bone	2	-0.613843351548	0.969680264609
+GO:1905065	positive regulation of vascular smooth muscle cell differentiation	2	-0.632058287796	0.959389930173
+GO:0004448	isocitrate dehydrogenase activity	2	-0.449908925319	0.999632488056
+GO:1903894	regulation of IRE1-mediated unfolded protein response	2	-0.632058287796	0.959389930173
+GO:0009609	response to symbiotic bacterium	2	-0.632058287796	0.959389930173
+GO:0004577	N-acetylglucosaminyldiphosphodolichol N-acetylglucosaminyltransferase activity	2	-0.632058287796	0.959389930173
+GO:0097057	TRAF2-GSTP1 complex	2	-0.635701275046	0.955163542815
+GO:1903378	positive regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway	2	-0.624772313297	0.964351341419
+GO:0048145	regulation of fibroblast proliferation	2	-0.577413479053	0.983278206542
+GO:0002431	Fc receptor mediated stimulatory signaling pathway	2	-0.59927140255	0.978500551268
+GO:0051446	positive regulation of meiotic cell cycle	2	-0.530054644809	0.99558985667
+GO:0001806	type IV hypersensitivity	2	-0.52276867031	0.996876148475
+GO:0004531	deoxyribonuclease II activity	2	-0.628415300546	0.962330025726
+GO:0003064	regulation of heart rate by hormone	2	-0.497267759563	0.998529952223
+GO:0072182	regulation of nephron tubule epithelial cell differentiation	2	-0.577413479053	0.983278206542
+GO:0015433	peptide antigen-transporting ATPase activity	2	-0.632058287796	0.959389930173
+GO:0034124	regulation of MyD88-dependent toll-like receptor signaling pathway	2	-0.588342440801	0.981440646821
+GO:0060066	oviduct development	2	-0.628415300546	0.962330025726
+GO:0016403	dimethylargininase activity	2	-0.511839708561	0.997427416391
+GO:0030505	inorganic diphosphate transport	2	-0.606557377049	0.974641675854
+GO:0045136	development of secondary sexual characteristics	2	-0.577413479053	0.983278206542
+GO:0010848	regulation of chromatin disassembly	2	-0.540983606557	0.994303564866
+GO:0015038	glutathione disulfide oxidoreductase activity	2	-0.632058287796	0.959389930173
+GO:0072053	renal inner medulla development	2	-0.635701275046	0.955163542815
+GO:0061047	positive regulation of branching involved in lung morphogenesis	2	-0.632058287796	0.959389930173
+GO:0035332	positive regulation of hippo signaling	2	-0.52276867031	0.996876148475
+GO:2000327	positive regulation of ligand-dependent nuclear receptor transcription coactivator activity	2	-0.621129326047	0.966188901139
+GO:1904440	positive regulation of ferrous iron import across plasma membrane	2	-0.610200364299	0.971517824329
+GO:0001547	antral ovarian follicle growth	2	-0.548269581056	0.991914737229
+GO:0030997	regulation of centriole-centriole cohesion	2	-0.613843351548	0.969680264609
+GO:0003918	DNA topoisomerase type II (ATP-hydrolyzing) activity	2	-0.581056466302	0.981991914737
+GO:0038044	transforming growth factor-beta secretion	2	-0.577413479053	0.983278206542
+GO:0007423	sensory organ development	2	-0.562841530055	0.988790885704
+GO:1990791	dorsal root ganglion development	2	-0.628415300546	0.962330025726
+GO:2000791	negative regulation of mesenchymal cell proliferation involved in lung development	2	-0.544626593807	0.993201029033
+GO:1905049	negative regulation of metallopeptidase activity	2	-0.617486338798	0.967658948916
+GO:0071460	cellular response to cell-matrix adhesion	2	-0.559198542805	0.989525909592
+GO:0002587	negative regulation of antigen processing and presentation of peptide antigen via MHC class II	2	-0.606557377049	0.974641675854
+GO:0042412	taurine biosynthetic process	2	-0.635701275046	0.955163542815
+GO:0002134	UTP binding	2	-0.591985428051	0.980521866961
+GO:0072104	glomerular capillary formation	2	-0.635701275046	0.955163542815
+GO:0004906	interferon-gamma receptor activity	2	-0.628415300546	0.962330025726
+GO:0032764	negative regulation of mast cell cytokine production	2	-0.570127504554	0.986953325983
+GO:0042351	'de novo' GDP-L-fucose biosynthetic process	2	-0.551912568306	0.990995957369
+GO:0071283	cellular response to iron(III) ion	2	-0.526411657559	0.996141124587
+GO:0021740	principal sensory nucleus of trigeminal nerve development	2	-0.555555555556	0.99026093348
+GO:0070256	negative regulation of mucus secretion	2	-0.632058287796	0.959389930173
+GO:0034164	negative regulation of toll-like receptor 9 signaling pathway	2	-0.508196721311	0.997978684307
+GO:0051270	regulation of cellular component movement	2	-0.540983606557	0.994303564866
+GO:2000017	positive regulation of determination of dorsal identity	2	-0.624772313297	0.964351341419
+GO:1990622	CHOP-ATF3 complex	2	-0.613843351548	0.969680264609
+GO:0007521	muscle cell fate determination	2	-0.566484517304	0.988055861816
+GO:0005996	monosaccharide metabolic process	2	-0.606557377049	0.974641675854
+GO:0032986	protein-DNA complex disassembly	2	-0.471766848816	0.998897464168
+GO:0007621	negative regulation of female receptivity	2	-0.59927140255	0.978500551268
+GO:0072033	renal vesicle formation	2	-0.632058287796	0.959389930173
+GO:0044334	canonical Wnt signaling pathway involved in positive regulation of epithelial to mesenchymal transition	2	-0.570127504554	0.986953325983
+GO:0070369	beta-catenin-TCF7L2 complex	2	-0.570127504554	0.986953325983
+GO:0072054	renal outer medulla development	2	-0.635701275046	0.955163542815
+GO:0060368	regulation of Fc receptor mediated stimulatory signaling pathway	2	-0.639344262295	0.951855935318
+GO:0035403	histone kinase activity (H3-T6 specific)	2	-0.635701275046	0.955163542815
+GO:0035408	histone H3-T6 phosphorylation	2	-0.635701275046	0.955163542815
+GO:2000182	regulation of progesterone biosynthetic process	2	-0.6029143898	0.977398015436
+GO:0006097	glyoxylate cycle	2	-0.449908925319	0.999632488056
+GO:0098772	molecular function regulator	2	-0.606557377049	0.974641675854
+GO:0021897	forebrain astrocyte development	2	-0.588342440801	0.981440646821
+GO:0002774	Fc receptor mediated inhibitory signaling pathway	2	-0.606557377049	0.974641675854
+GO:0036496	regulation of translational initiation by eIF2 alpha dephosphorylation	2	-0.606557377049	0.974641675854
+GO:0031523	Myb complex	2	-0.635701275046	0.955163542815
+GO:0042588	zymogen granule	2	-0.544626593807	0.993201029033
+GO:0042323	negative regulation of circadian sleep/wake cycle, non-REM sleep	2	-0.632058287796	0.959389930173
+GO:0072537	fibroblast activation	2	-0.639344262295	0.951855935318
+GO:0034157	positive regulation of toll-like receptor 7 signaling pathway	2	-0.624772313297	0.964351341419
+GO:0019060	intracellular transport of viral protein in host cell	2	-0.559198542805	0.989525909592
+GO:0042824	MHC class I peptide loading complex	2	-0.533697632058	0.995222344726
+GO:0005137	interleukin-5 receptor binding	2	-0.639344262295	0.951855935318
+GO:0051946	regulation of glutamate uptake involved in transmission of nerve impulse	2	-0.606557377049	0.974641675854
+GO:0031372	UBC13-MMS2 complex	2	-0.639344262295	0.951855935318
+GO:0032783	ELL-EAF complex	2	-0.606557377049	0.974641675854
+GO:0008615	pyridoxine biosynthetic process	2	-0.617486338798	0.967658948916
+GO:0018931	naphthalene metabolic process	2	-0.613843351548	0.969680264609
+GO:0009330	DNA topoisomerase complex (ATP-hydrolyzing)	2	-0.548269581056	0.991914737229
+GO:2000194	regulation of female gonad development	2	-0.526411657559	0.996141124587
+GO:0034685	integrin alphav-beta6 complex	2	-0.577413479053	0.983278206542
+GO:0007638	mechanosensory behavior	2	-0.624772313297	0.964351341419
+GO:1902745	positive regulation of lamellipodium organization	2	-0.573770491803	0.985299522234
+GO:0061386	closure of optic fissure	2	-0.544626593807	0.993201029033
+GO:1904434	positive regulation of ferrous iron binding	2	-0.610200364299	0.971517824329
+GO:0001554	luteolysis	2	-0.595628415301	0.9796030871
+GO:0061097	regulation of protein tyrosine kinase activity	2	-0.617486338798	0.967658948916
+GO:0061290	canonical Wnt signaling pathway involved in metanephric kidney development	2	-0.508196721311	0.997978684307
+GO:0046370	fructose biosynthetic process	2	-0.577413479053	0.983278206542
+GO:0072179	nephric duct formation	2	-0.537340619308	0.994854832782
+GO:1901536	negative regulation of DNA demethylation	2	-0.606557377049	0.974641675854
+GO:1900038	negative regulation of cellular response to hypoxia	2	-0.555555555556	0.99026093348
+GO:0001550	ovarian cumulus expansion	2	-0.621129326047	0.966188901139
+GO:0035250	UDP-galactosyltransferase activity	2	-0.573770491803	0.985299522234
+GO:0072095	regulation of branch elongation involved in ureteric bud branching	2	-0.624772313297	0.964351341419
+GO:0072079	nephron tubule formation	2	-0.632058287796	0.959389930173
+GO:1904761	negative regulation of myofibroblast differentiation	2	-0.632058287796	0.959389930173
+GO:0061197	fungiform papilla morphogenesis	2	-0.624772313297	0.964351341419
+GO:1904437	positive regulation of transferrin receptor binding	2	-0.610200364299	0.971517824329
+GO:0051990	(R)-2-hydroxyglutarate dehydrogenase activity	2	-0.566484517304	0.988055861816
+GO:0031022	nuclear migration along microfilament	2	-0.606557377049	0.974641675854
+GO:0004915	interleukin-6 receptor activity	2	-0.573770491803	0.985299522234
+GO:0045634	regulation of melanocyte differentiation	2	-0.606557377049	0.974641675854
+GO:0048295	positive regulation of isotype switching to IgE isotypes	2	-0.639344262295	0.951855935318
+GO:0033003	regulation of mast cell activation	2	-0.59927140255	0.978500551268
+GO:0072697	protein localization to cell cortex	2	-0.639344262295	0.951855935318
+GO:1904996	positive regulation of leukocyte adhesion to vascular endothelial cell	3	-0.544626593807	0.980416372618
+GO:0061198	fungiform papilla formation	3	-0.559198542805	0.973359209598
+GO:0000052	citrulline metabolic process	3	-0.479052823315	0.996118560339
+GO:0097454	Schwann cell microvillus	3	-0.577413479053	0.959068454481
+GO:1903984	positive regulation of TRAIL-activated apoptotic signaling pathway	3	-0.573770491803	0.962949894143
+GO:0060374	mast cell differentiation	3	-0.508196721311	0.993295695131
+GO:0035412	regulation of catenin import into nucleus	3	-0.562841530055	0.970889202541
+GO:1990037	Lewy body core	3	-0.573770491803	0.962949894143
+GO:0007113	endomitotic cell cycle	3	-0.44262295082	0.999470712773
+GO:0090156	cellular sphingolipid homeostasis	3	-0.537340619308	0.983768525053
+GO:0031752	D5 dopamine receptor binding	3	-0.471766848816	0.996824276641
+GO:0099503	secretory vesicle	3	-0.417122040073	1
+GO:0032613	interleukin-10 production	3	-0.533697632058	0.985532815808
+GO:0051126	negative regulation of actin nucleation	3	-0.555555555556	0.975123500353
+GO:0070434	positive regulation of nucleotide-binding oligomerization domain containing 2 signaling pathway	3	-0.544626593807	0.980416372618
+GO:0051208	sequestering of calcium ion	3	-0.573770491803	0.962949894143
+GO:0001161	intronic transcription regulatory region sequence-specific DNA binding	3	-0.581056466302	0.956422018349
+GO:0060916	mesenchymal cell proliferation involved in lung development	3	-0.577413479053	0.959068454481
+GO:0019087	transformation of host cell by virus	3	-0.551912568306	0.976711362032
+GO:0099061	integral component of postsynaptic density membrane	3	-0.526411657559	0.988532110092
+GO:0019448	L-cysteine catabolic process	3	-0.573770491803	0.962949894143
+GO:0070110	ciliary neurotrophic factor receptor complex	3	-0.573770491803	0.962949894143
+GO:0008427	calcium-dependent protein kinase inhibitor activity	3	-0.468123861566	0.997706422018
+GO:0034666	integrin alpha2-beta1 complex	3	-0.500910746812	0.99488355681
+GO:2000813	negative regulation of barbed-end actin filament capping	3	-0.566484517304	0.968419195483
+GO:0035411	catenin import into nucleus	3	-0.581056466302	0.956422018349
+GO:0070458	cellular detoxification of nitrogen compound	3	-0.581056466302	0.956422018349
+GO:1904044	response to aldosterone	3	-0.548269581056	0.978828510939
+GO:0046629	gamma-delta T cell activation	3	-0.588342440801	0.953246294989
+GO:0045626	negative regulation of T-helper 1 cell differentiation	3	-0.559198542805	0.973359209598
+GO:0002079	inner acrosomal membrane	3	-0.577413479053	0.959068454481
+GO:0090724	central region of growth cone	3	-0.504553734062	0.994354269584
+GO:0050779	RNA destabilization	3	-0.573770491803	0.962949894143
+GO:0005896	interleukin-6 receptor complex	3	-0.570127504554	0.966125617502
+GO:1901020	negative regulation of calcium ion transmembrane transporter activity	3	-0.500910746812	0.99488355681
+GO:0036018	cellular response to erythropoietin	3	-0.460837887067	0.998764996471
+GO:1904430	negative regulation of t-circle formation	3	-0.588342440801	0.953246294989
+GO:0061684	chaperone-mediated autophagy	3	-0.537340619308	0.983768525053
+GO:0016618	hydroxypyruvate reductase activity	3	-0.540983606557	0.982004234298
+GO:1902255	positive regulation of intrinsic apoptotic signaling pathway by p53 class mediator	3	-0.559198542805	0.973359209598
+GO:0030835	negative regulation of actin filament depolymerization	3	-0.508196721311	0.993295695131
+GO:0045069	regulation of viral genome replication	3	-0.486338797814	0.995765702188
+GO:0010909	positive regulation of heparan sulfate proteoglycan biosynthetic process	3	-0.533697632058	0.985532815808
+GO:0004461	lactose synthase activity	3	-0.577413479053	0.959068454481
+GO:1900060	negative regulation of ceramide biosynthetic process	3	-0.537340619308	0.983768525053
+GO:0006740	NADPH regeneration	3	-0.559198542805	0.973359209598
+GO:0000819	sister chromatid segregation	3	-0.577413479053	0.959068454481
+GO:1902309	negative regulation of peptidyl-serine dephosphorylation	3	-0.468123861566	0.997706422018
+GO:0030267	glyoxylate reductase (NADP) activity	3	-0.540983606557	0.982004234298
+GO:0102007	acyl-L-homoserine-lactone lactonohydrolase activity	3	-0.588342440801	0.953246294989
+GO:0097581	lamellipodium organization	3	-0.471766848816	0.996824276641
+GO:0031905	early endosome lumen	3	-0.533697632058	0.985532815808
+GO:0097340	inhibition of cysteine-type endopeptidase activity	3	-0.573770491803	0.962949894143
+GO:0051088	PMA-inducible membrane protein ectodomain proteolysis	3	-0.51912568306	0.98976711362
+GO:0071756	pentameric IgM immunoglobulin complex	3	-0.508196721311	0.993295695131
+GO:0008426	protein kinase C inhibitor activity	3	-0.562841530055	0.970889202541
+GO:0032564	dATP binding	3	-0.540983606557	0.982004234298
+GO:0044393	microspike	3	-0.551912568306	0.976711362032
+GO:0045064	T-helper 2 cell differentiation	3	-0.526411657559	0.988532110092
+GO:0072717	cellular response to actinomycin D	3	-0.530054644809	0.987120677488
+GO:0097475	motor neuron migration	3	-0.51912568306	0.98976711362
+GO:0032649	regulation of interferon-gamma production	3	-0.530054644809	0.987120677488
+GO:0010866	regulation of triglyceride biosynthetic process	3	-0.566484517304	0.968419195483
+GO:0003340	negative regulation of mesenchymal to epithelial transition involved in metanephros morphogenesis	3	-0.515482695811	0.991002117149
+GO:0097167	circadian regulation of translation	4	-0.526411657559	0.983555313944
+GO:0010649	regulation of cell communication by electrical coupling	4	-0.562841530055	0.961266648546
+GO:0035984	cellular response to trichostatin A	4	-0.51912568306	0.985322098396
+GO:0035771	interleukin-4-mediated signaling pathway	4	-0.559198542805	0.963577058983
+GO:0070885	negative regulation of calcineurin-NFAT signaling cascade	4	-0.551912568306	0.967518347377
+GO:0060439	trachea morphogenesis	4	-0.570127504554	0.955694482196
+GO:1903052	positive regulation of proteolysis involved in cellular protein catabolic process	4	-0.548269581056	0.970100570807
+GO:0009157	deoxyribonucleoside monophosphate biosynthetic process	4	-0.573770491803	0.952432726284
+GO:0060486	Clara cell differentiation	4	-0.515482695811	0.98668116336
+GO:0031749	D2 dopamine receptor binding	4	-0.511839708561	0.987904321827
+GO:0060750	epithelial cell proliferation involved in mammary gland duct elongation	4	-0.540983606557	0.975265017668
+GO:0018916	nitrobenzene metabolic process	4	-0.570127504554	0.955694482196
+GO:0033590	response to cobalamin	4	-0.551912568306	0.967518347377
+GO:2000767	positive regulation of cytoplasmic translation	4	-0.471766848816	0.99592280511
+GO:0048385	regulation of retinoic acid receptor signaling pathway	4	-0.566484517304	0.958548518619
+GO:1903553	positive regulation of extracellular exosome assembly	4	-0.551912568306	0.967518347377
+GO:0033600	negative regulation of mammary gland epithelial cell proliferation	4	-0.573770491803	0.952432726284
+GO:0072513	positive regulation of secondary heart field cardioblast proliferation	4	-0.573770491803	0.952432726284
+GO:1990837	sequence-specific double-stranded DNA binding	4	-0.562841530055	0.961266648546
+GO:0051286	cell tip	4	-0.548269581056	0.970100570807
+GO:0050815	phosphoserine residue binding	4	-0.566484517304	0.958548518619
+GO:0045123	cellular extravasation	4	-0.573770491803	0.952432726284
+GO:0019673	GDP-mannose metabolic process	4	-0.570127504554	0.955694482196
+GO:0072107	positive regulation of ureteric bud formation	4	-0.548269581056	0.970100570807
+GO:0042270	protection from natural killer cell mediated cytotoxicity	4	-0.548269581056	0.970100570807
+GO:0045085	negative regulation of interleukin-2 biosynthetic process	4	-0.559198542805	0.963577058983
+GO:0035088	establishment or maintenance of apical/basal cell polarity	4	-0.562841530055	0.961266648546
+GO:0042759	long-chain fatty acid biosynthetic process	4	-0.530054644809	0.981788529492
+GO:0048305	immunoglobulin secretion	4	-0.573770491803	0.952432726284
+GO:0072487	MSL complex	4	-0.464480874317	0.997281870073
+GO:0032687	negative regulation of interferon-alpha production	4	-0.508196721311	0.98926338679
+GO:0043125	ErbB-3 class receptor binding	4	-0.515482695811	0.98668116336
+GO:2001013	epithelial cell proliferation involved in renal tubule morphogenesis	4	-0.533697632058	0.979749932047
+GO:0035339	SPOTS complex	4	-0.551912568306	0.967518347377
+GO:0070100	negative regulation of chemokine-mediated signaling pathway	4	-0.537340619308	0.977575428105
+GO:1902115	regulation of organelle assembly	4	-0.508196721311	0.98926338679
+GO:0061333	renal tubule morphogenesis	4	-0.570127504554	0.955694482196
+GO:0042345	regulation of NF-kappaB import into nucleus	4	-0.566484517304	0.958548518619
+GO:0033158	regulation of protein import into nucleus, translocation	4	-0.44262295082	0.998776841533
+GO:0017018	myosin phosphatase activity	4	-0.562841530055	0.961266648546
+GO:0098706	ferric iron import across plasma membrane	4	-0.540983606557	0.975265017668
+GO:0071864	positive regulation of cell proliferation in bone marrow	4	-0.460837887067	0.997825496059
+GO:0051425	PTB domain binding	4	-0.526411657559	0.983555313944
+GO:2000401	regulation of lymphocyte migration	4	-0.544626593807	0.972546887741
+GO:0046726	positive regulation by virus of viral protein levels in host cell	4	-0.566484517304	0.958548518619
+GO:0015853	adenine transport	4	-0.573770491803	0.952432726284
+GO:0030730	sequestering of triglyceride	4	-0.566484517304	0.958548518619
+GO:1900041	negative regulation of interleukin-2 secretion	4	-0.530054644809	0.981788529492
+GO:0030260	entry into host cell	4	-0.533697632058	0.979749932047
+GO:0045759	negative regulation of action potential	4	-0.566484517304	0.958548518619
+GO:0060676	ureteric bud formation	4	-0.511839708561	0.987904321827
+GO:1990907	beta-catenin-TCF complex	4	-0.544626593807	0.972546887741
+GO:0031981	nuclear lumen	4	-0.559198542805	0.963577058983
+GO:0002906	negative regulation of mature B cell apoptotic process	4	-0.559198542805	0.963577058983
+GO:1903899	positive regulation of PERK-mediated unfolded protein response	4	-0.551912568306	0.967518347377
+GO:0032675	regulation of interleukin-6 production	4	-0.555555555556	0.965343843436
+GO:0044336	canonical Wnt signaling pathway involved in negative regulation of apoptotic process	4	-0.537340619308	0.977575428105
+GO:1905323	telomerase holoenzyme complex assembly	4	-0.515482695811	0.98668116336
+GO:0003357	noradrenergic neuron differentiation	4	-0.497267759563	0.991709703724
+GO:0060509	Type I pneumocyte differentiation	5	-0.497267759563	0.977150111076
+GO:0043559	insulin binding	5	-0.537340619308	0.953506823231
+GO:0002686	negative regulation of leukocyte migration	5	-0.51912568306	0.966359885751
+GO:0003211	cardiac ventricle formation	5	-0.351548269581	0.999523960647
+GO:0001887	selenium compound metabolic process	5	-0.511839708561	0.97238971755
+GO:0043243	positive regulation of protein complex disassembly	5	-0.530054644809	0.959854014599
+GO:0046929	negative regulation of neurotransmitter secretion	5	-0.533697632058	0.956997778483
+GO:1990668	vesicle fusion with endoplasmic reticulum-Golgi intermediate compartment (ERGIC) membrane	5	-0.52276867031	0.964931767693
+GO:0050544	arachidonic acid binding	5	-0.537340619308	0.953506823231
+GO:1903753	negative regulation of p38MAPK cascade	5	-0.479052823315	0.984290701365
+GO:1904798	positive regulation of core promoter binding	5	-0.468123861566	0.98825769597
+GO:0031087	deadenylation-independent decapping of nuclear-transcribed mRNA	5	-0.515482695811	0.969057442082
+GO:0055075	potassium ion homeostasis	5	-0.479052823315	0.984290701365
+GO:0042719	mitochondrial intermembrane space protein transporter complex	5	-0.508196721311	0.974452554745
+GO:0000056	ribosomal small subunit export from nucleus	5	-0.479052823315	0.984290701365
+GO:0036035	osteoclast development	5	-0.537340619308	0.953506823231
+GO:0061551	trigeminal ganglion development	5	-0.479052823315	0.984290701365
+GO:0033119	negative regulation of RNA splicing	5	-0.431693989071	0.996667724532
+GO:0033177	proton-transporting two-sector ATPase complex, proton-transporting domain	5	-0.526411657559	0.96255157093
+GO:0043987	histone H3-S10 phosphorylation	5	-0.530054644809	0.959854014599
+GO:0048639	positive regulation of developmental growth	5	-0.493624772313	0.978736908918
+GO:0008379	thioredoxin peroxidase activity	5	-0.533697632058	0.956997778483
+GO:0097413	Lewy body	5	-0.530054644809	0.959854014599
+GO:0035022	positive regulation of Rac protein signal transduction	5	-0.526411657559	0.96255157093
+GO:0060510	Type II pneumocyte differentiation	5	-0.504553734062	0.976039352586
+GO:0033591	response to L-ascorbic acid	5	-0.511839708561	0.97238971755
+GO:0045061	thymic T cell selection	5	-0.482695810565	0.98222786417
+GO:0002138	retinoic acid biosynthetic process	5	-0.479052823315	0.984290701365
+GO:1990535	neuron projection maintenance	5	-0.460837887067	0.991431291653
+GO:1901164	negative regulation of trophoblast cell migration	5	-0.406193078324	0.997778483021
+GO:0033088	negative regulation of immature T cell proliferation in thymus	5	-0.504553734062	0.976039352586
+GO:0006102	isocitrate metabolic process	5	-0.446265938069	0.995398286258
+GO:0021782	glial cell development	5	-0.479052823315	0.984290701365
+GO:0043426	MRF binding	5	-0.533697632058	0.956997778483
+GO:0001042	RNA polymerase I core binding	5	-0.51912568306	0.966359885751
+GO:0005642	annulate lamellae	5	-0.479052823315	0.984290701365
+GO:1902966	positive regulation of protein localization to early endosome	5	-0.486338797814	0.980958425897
+GO:0055012	ventricular cardiac muscle cell differentiation	5	-0.493624772313	0.978736908918
+GO:0031017	exocrine pancreas development	6	-0.464480874317	0.977272727273
+GO:2000667	positive regulation of interleukin-13 secretion	6	-0.471766848816	0.972972972973
+GO:1990226	histone methyltransferase binding	6	-0.504553734062	0.951474201474
+GO:0001765	membrane raft assembly	6	-0.355191256831	0.997747747748
+GO:0010694	positive regulation of alkaline phosphatase activity	6	-0.486338797814	0.961302211302
+GO:0072542	protein phosphatase activator activity	6	-0.468123861566	0.974815724816
+GO:0050672	negative regulation of lymphocyte proliferation	6	-0.431693989071	0.990376740377
+GO:0051702	interaction with symbiont	6	-0.449908925319	0.984643734644
+GO:0044354	macropinosome	6	-0.504553734062	0.951474201474
+GO:0001849	complement component C1q binding	6	-0.449908925319	0.984643734644
+GO:1990869	cellular response to chemokine	6	-0.486338797814	0.961302211302
+GO:1990948	ubiquitin ligase inhibitor activity	6	-0.366120218579	0.996928746929
+GO:0030235	nitric-oxide synthase regulator activity	6	-0.173041894353	1
+GO:0060789	hair follicle placode formation	6	-0.464480874317	0.977272727273
+GO:0061000	negative regulation of dendritic spine development	6	-0.468123861566	0.974815724816
+GO:0051902	negative regulation of mitochondrial depolarization	6	-0.460837887067	0.979524979525
+GO:0010594	regulation of endothelial cell migration	6	-0.449908925319	0.984643734644
+GO:0003916	DNA topoisomerase activity	6	-0.446265938069	0.986281736282
+GO:0010960	magnesium ion homeostasis	6	-0.457194899818	0.981572481572
+GO:0055131	C3HC4-type RING finger domain binding	6	-0.493624772313	0.957616707617
+GO:0061458	reproductive system development	6	-0.457194899818	0.981572481572
+GO:0040016	embryonic cleavage	6	-0.460837887067	0.979524979525
+GO:0072602	interleukin-4 secretion	6	-0.475409836066	0.97113022113
+GO:0046696	lipopolysaccharide receptor complex	6	-0.43897996357	0.988329238329
+GO:0042609	CD4 receptor binding	7	-0.449908925319	0.979449606862
+GO:0014009	glial cell proliferation	7	-0.384335154827	0.994102930665
+GO:0048643	positive regulation of skeletal muscle tissue development	7	-0.460837887067	0.974088634739
+GO:0006527	arginine catabolic process	7	-0.482695810565	0.956218727663
+GO:2001014	regulation of skeletal muscle cell differentiation	7	-0.475409836066	0.963545389564
+GO:0045653	negative regulation of megakaryocyte differentiation	7	-0.489981785064	0.95103645461
+GO:0006900	vesicle budding from membrane	7	-0.482695810565	0.956218727663
+GO:0002480	antigen processing and presentation of exogenous peptide antigen via MHC class I, TAP-independent	7	-0.453551912568	0.977662616154
+GO:0048672	positive regulation of collateral sprouting	7	-0.482695810565	0.956218727663
+GO:0042117	monocyte activation	7	-0.351548269581	0.99767691208
+GO:0035374	chondroitin sulfate binding	7	-0.482695810565	0.956218727663
+GO:0010737	protein kinase A signaling	7	-0.464480874317	0.971229449607
+GO:0060563	neuroepithelial cell differentiation	7	-0.457194899818	0.976233023588
+GO:1900165	negative regulation of interleukin-6 secretion	7	-0.489981785064	0.95103645461
+GO:0072091	regulation of stem cell proliferation	7	-0.468123861566	0.968370264475
+GO:0002819	regulation of adaptive immune response	7	-0.468123861566	0.968370264475
+GO:0042921	glucocorticoid receptor signaling pathway	7	-0.453551912568	0.977662616154
+GO:2000144	positive regulation of DNA-templated transcription, initiation	7	-0.413479052823	0.991779842745
+GO:0060158	phospholipase C-activating dopamine receptor signaling pathway	7	-0.479052823315	0.960507505361
+GO:0008430	selenium binding	7	-0.355191256831	0.996962115797
+GO:0044351	macropinocytosis	7	-0.475409836066	0.963545389564
+GO:2001028	positive regulation of endothelial cell chemotaxis	7	-0.420765027322	0.989099356683
+GO:0072357	PTW/PP1 phosphatase complex	7	-0.475409836066	0.963545389564
+GO:0031748	D1 dopamine receptor binding	7	-0.464480874317	0.971229449607
+GO:0032754	positive regulation of interleukin-5 production	8	-0.431693989071	0.969601263324
+GO:2000643	positive regulation of early endosome to late endosome transport	8	-0.449908925319	0.957165416502
+GO:0032873	negative regulation of stress-activated MAPK cascade	8	-0.420765027322	0.974930911962
+GO:0042788	polysomal ribosome	8	-0.344262295082	0.995657323332
+GO:0006613	cotranslational protein targeting to membrane	8	-0.417122040073	0.977497039084
+GO:0001766	membrane raft polarization	8	-0.428051001821	0.972167390446
+GO:0000463	maturation of LSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)	8	-0.431693989071	0.969601263324
+GO:0030911	TPR domain binding	8	-0.395264116576	0.984603237268
+GO:0072321	chaperone-mediated protein transport	8	-0.43897996357	0.965258586656
+GO:0042754	negative regulation of circadian rhythm	8	-0.44262295082	0.96249506514
+GO:0035308	negative regulation of protein dephosphorylation	8	-0.384335154827	0.986379786814
+GO:1904667	negative regulation of ubiquitin protein ligase activity	8	-0.275045537341	0.999210422424
+GO:0042612	MHC class I protein complex	8	-0.435336976321	0.967627319384
+GO:0061635	regulation of protein complex stability	8	-0.44262295082	0.96249506514
+GO:1901844	regulation of cell communication by electrical coupling involved in cardiac conduction	8	-0.366120218579	0.9901302803
+GO:1901029	negative regulation of mitochondrial outer membrane permeabilization involved in apoptotic signaling pathway	8	-0.402550091075	0.982431898934
+GO:0008290	F-actin capping protein complex	8	-0.449908925319	0.957165416502
+GO:0035456	response to interferon-beta	8	-0.417122040073	0.977497039084
+GO:0003680	AT DNA binding	8	-0.398907103825	0.984011054086
+GO:1990904	ribonucleoprotein complex	8	-0.43897996357	0.965258586656
+GO:0004865	protein serine/threonine phosphatase inhibitor activity	8	-0.43897996357	0.965258586656
+GO:0046887	positive regulation of hormone secretion	8	-0.420765027322	0.974930911962
+GO:0004716	signal transducer, downstream of receptor, with protein tyrosine kinase activity	9	-0.329690346084	0.994454713494
+GO:0034333	adherens junction assembly	9	-0.428051001821	0.960027726433
+GO:0060253	negative regulation of glial cell proliferation	9	-0.420765027322	0.963724584104
+GO:0106003	amyloid-beta complex	9	-0.417122040073	0.966728280961
+GO:0033148	positive regulation of intracellular estrogen receptor signaling pathway	9	-0.420765027322	0.963724584104
+GO:0002726	positive regulation of T cell cytokine production	9	-0.406193078324	0.972966728281
+GO:0033601	positive regulation of mammary gland epithelial cell proliferation	9	-0.428051001821	0.960027726433
+GO:0010941	regulation of cell death	9	-0.377049180328	0.981977818854
+GO:0019887	protein kinase regulator activity	9	-0.417122040073	0.966728280961
+GO:0033194	response to hydroperoxide	9	-0.424408014572	0.961876155268
+GO:0048715	negative regulation of oligodendrocyte differentiation	9	-0.366120218579	0.985674676525
+GO:0034629	cellular protein complex localization	9	-0.420765027322	0.963724584104
+GO:0006265	DNA topological change	9	-0.373406193078	0.982670979667
+GO:0004862	cAMP-dependent protein kinase inhibitor activity	9	-0.35883424408	0.989833641405
+GO:0006930	substrate-dependent cell migration, cell extension	9	-0.307832422587	0.996072088725
+GO:0009651	response to salt stress	9	-0.431693989071	0.95679297597
+GO:2000648	positive regulation of stem cell proliferation	9	-0.293260473588	0.998382624769
+GO:0019774	proteasome core complex, beta-subunit complex	9	-0.428051001821	0.960027726433
+GO:0090050	positive regulation of cell migration involved in sprouting angiogenesis	10	-0.366120218579	0.972959439159
+GO:0051639	actin filament network formation	10	-0.402550091075	0.952679018528
+GO:0002064	epithelial cell development	10	-0.355191256831	0.980470706059
+GO:0097062	dendritic spine maintenance	10	-0.35883424408	0.979218828242
+GO:0033327	Leydig cell differentiation	10	-0.369763205829	0.970455683525
+GO:0048660	regulation of smooth muscle cell proliferation	10	-0.391621129326	0.960190285428
+GO:0030033	microvillus assembly	10	-0.293260473588	0.99399098648
+GO:1990825	sequence-specific mRNA binding	10	-0.391621129326	0.960190285428
+GO:0032200	telomere organization	10	-0.402550091075	0.952679018528
+GO:0032060	bleb assembly	10	-0.36247723133	0.976464697046
+GO:0007167	enzyme linked receptor protein signaling pathway	10	-0.36247723133	0.976464697046
+GO:0030957	Tat protein binding	10	-0.369763205829	0.970455683525
+GO:0007084	mitotic nuclear envelope reassembly	10	-0.402550091075	0.952679018528
+GO:0048681	negative regulation of axon regeneration	10	-0.380692167577	0.964697045568
+GO:0090557	establishment of endothelial intestinal barrier	10	-0.296903460838	0.99173760641
+GO:0035067	negative regulation of histone acetylation	10	-0.36247723133	0.976464697046
+GO:0001952	regulation of cell-matrix adhesion	10	-0.366120218579	0.972959439159
+GO:1902894	negative regulation of pri-miRNA transcription from RNA polymerase II promoter	11	-0.36247723133	0.975297346752
+GO:0000276	mitochondrial proton-transporting ATP synthase complex, coupling factor F(o)	11	-0.238615664845	0.998856358646
+GO:0002237	response to molecule of bacterial origin	11	-0.35883424408	0.977813357731
+GO:0043295	glutathione binding	11	-0.296903460838	0.991765782251
+GO:0060213	positive regulation of nuclear-transcribed mRNA poly(A) tail shortening	11	-0.398907103825	0.95516925892
+GO:0032688	negative regulation of interferon-beta production	11	-0.402550091075	0.950823421775
+GO:1990403	embryonic brain development	11	-0.322404371585	0.986962488564
+GO:0060055	angiogenesis involved in wound healing	11	-0.391621129326	0.958142726441
+GO:0001841	neural tube formation	11	-0.402550091075	0.950823421775
+GO:0008097	5S rRNA binding	11	-0.300546448087	0.989935956084
+GO:0035810	positive regulation of urine volume	11	-0.373406193078	0.968206770357
+GO:0060544	regulation of necroptotic process	12	-0.315118397086	0.979817007535
+GO:0051085	chaperone cofactor-dependent protein refolding	12	-0.340619307832	0.969590958019
+GO:0031432	titin binding	12	-0.344262295082	0.967976318622
+GO:0036499	PERK-mediated unfolded protein response	12	-0.351548269581	0.964747039828
+GO:0050678	regulation of epithelial cell proliferation	12	-0.369763205829	0.950484391819
+GO:0008179	adenylate cyclase binding	12	-0.347905282332	0.966361679225
+GO:0033160	positive regulation of protein import into nucleus, translocation	12	-0.366120218579	0.953444564047
+GO:0097202	activation of cysteine-type endopeptidase activity	12	-0.307832422587	0.981969860065
+GO:0035635	entry of bacterium into host cell	12	-0.275045537341	0.993810548977
+GO:0005885	Arp2/3 protein complex	12	-0.36247723133	0.957212055974
+GO:0009987	cellular process	13	-0.293260473588	0.981632653061
+GO:1902043	positive regulation of extrinsic apoptotic signaling pathway via death domain receptors	13	-0.300546448087	0.974635568513
+GO:0045263	proton-transporting ATP synthase complex, coupling factor F(o)	13	-0.238615664845	0.996209912536
+GO:0001775	cell activation	13	-0.293260473588	0.981632653061
+GO:0000288	nuclear-transcribed mRNA catabolic process, deadenylation-dependent decay	13	-0.344262295082	0.955685131195
+GO:0031529	ruffle organization	13	-0.329690346084	0.962390670554
+GO:0060334	regulation of interferon-gamma-mediated signaling pathway	13	-0.333333333333	0.960932944606
+GO:0044548	S100 protein binding	13	-0.216757741348	0.998250728863
+GO:0061029	eyelid development in camera-type eye	13	-0.329690346084	0.962390670554
+GO:0005751	mitochondrial respiratory chain complex IV	14	-0.275045537341	0.986516235553
+GO:0031929	TOR signaling	14	-0.245901639344	0.993670886076
+GO:0000788	nuclear nucleosome	14	-0.293260473588	0.979636763897
+GO:0071391	cellular response to estrogen stimulus	14	-0.329690346084	0.960099064392
+GO:0042026	protein refolding	14	-0.296903460838	0.975784259769
+GO:0032743	positive regulation of interleukin-2 production	14	-0.296903460838	0.975784259769
+GO:0043508	negative regulation of JUN kinase activity	14	-0.234972677596	0.99559713814
+GO:1900153	positive regulation of nuclear-transcribed mRNA catabolic process, deadenylation-dependent decay	14	-0.300546448087	0.97275729224
+GO:0031089	platelet dense granule lumen	14	-0.249544626594	0.992570170611
+GO:0001191	transcriptional repressor activity, RNA polymerase II transcription factor binding	14	-0.28233151184	0.985140341222
+GO:1901185	negative regulation of ERBB signaling pathway	14	-0.326047358834	0.962575674188
+GO:0001953	negative regulation of cell-matrix adhesion	15	-0.285974499089	0.975271411339
+GO:0045088	regulation of innate immune response	15	-0.296903460838	0.966525934861
+GO:1903076	regulation of protein localization to plasma membrane	15	-0.315118397086	0.954463208685
+GO:0006337	nucleosome disassembly	16	-0.253187613843	0.97995923913
+GO:0031396	regulation of protein ubiquitination	16	-0.300546448087	0.953125
+GO:0000302	response to reactive oxygen species	16	-0.158469945355	0.99660326087
+GO:0061028	establishment of endothelial barrier	16	-0.264116575592	0.977241847826
+GO:0000307	cyclin-dependent protein kinase holoenzyme complex	16	-0.293260473588	0.959578804348
+GO:0030224	monocyte differentiation	16	-0.285974499089	0.96535326087
+GO:0036002	pre-mRNA binding	16	-0.296903460838	0.955842391304
+GO:0046688	response to copper ion	16	-0.271402550091	0.973845108696
+GO:0023026	MHC class II protein complex binding	16	-0.183970856102	0.995244565217
+GO:0008301	DNA binding, bending	17	-0.231329690346	0.976710334789
+GO:0017091	AU-rich element binding	17	-0.260473588342	0.958515283843
+GO:0004602	glutathione peroxidase activity	17	-0.183970856102	0.991266375546
+GO:0001223	transcription coactivator binding	17	-0.253187613843	0.961790393013
+GO:0046827	positive regulation of protein export from nucleus	18	-0.249544626594	0.957112970711
+GO:0098641	cadherin binding involved in cell-cell adhesion	18	-0.245901639344	0.960948396095
+GO:0046597	negative regulation of viral entry into host cell	18	-0.256830601093	0.951185495119
+GO:0006509	membrane protein ectodomain proteolysis	19	-0.194899817851	0.977342549923
+GO:0006123	mitochondrial electron transport, cytochrome c to oxygen	19	-0.220400728597	0.966973886329
+GO:0071385	cellular response to glucocorticoid stimulus	19	-0.191256830601	0.979262672811
+GO:0043409	negative regulation of MAPK cascade	20	-0.183970856102	0.974979822437
+GO:0001671	ATPase activator activity	21	-0.20218579235	0.962962962963
+GO:0042776	mitochondrial ATP synthesis coupled proton transport	21	-0.11839708561	0.989583333333
+GO:1901687	glutathione derivative biosynthetic process	21	-0.0965391621129	0.993827160494
+GO:0005753	mitochondrial proton-transporting ATP synthase complex	21	-0.0928961748634	0.99537037037
+GO:0035257	nuclear hormone receptor binding	22	-0.151183970856	0.974391267842
+GO:0071157	negative regulation of cell cycle arrest	22	-0.154826958106	0.971452560873
+GO:0071353	cellular response to interleukin-4	23	-0.147540983607	0.972350230415
+GO:0001158	enhancer sequence-specific DNA binding	23	-0.154826958106	0.966359447005
+GO:0015986	ATP synthesis coupled proton transport	23	-0.173041894353	0.956221198157
+GO:0003746	translation elongation factor activity	24	-0.0965391621129	0.987488829312
+GO:1901224	positive regulation of NIK/NF-kappaB signaling	24	-0.176684881603	0.952636282395
+GO:0044183	protein binding involved in protein folding	25	-0.0856102003643	0.985486891386
+GO:0015935	small ribosomal subunit	25	-0.0965391621129	0.980337078652
+GO:0032728	positive regulation of interferon-beta production	25	-0.154826958106	0.951779026217
+GO:0006913	nucleocytoplasmic transport	25	-0.136612021858	0.965355805243
+GO:0002181	cytoplasmic translation	26	-0.107468123862	0.972799208704
+GO:0004364	glutathione transferase activity	26	-0.0673952641166	0.989614243323
+GO:0006414	translational elongation	26	-0.0564663023679	0.992087042532
+GO:0090314	positive regulation of protein targeting to membrane	27	-0.114754098361	0.961377870564
+GO:0048147	negative regulation of fibroblast proliferation	27	-0.0892531876138	0.972338204593
+GO:0008135	translation factor activity, RNA binding	27	-0.11839708561	0.958246346555
+GO:0071901	negative regulation of protein serine/threonine kinase activity	27	-0.114754098361	0.961377870564
+GO:0048863	stem cell differentiation	28	-0.0856102003643	0.973790322581
+GO:0033077	T cell differentiation in thymus	29	-0.0491803278689	0.983887733888
+GO:1900026	positive regulation of substrate adhesion-dependent cell spreading	30	0.0491803278689	0.997811816193
+GO:0055007	cardiac muscle cell differentiation	30	-0.0819672131148	0.960065645514
+GO:0042407	cristae formation	31	-0.0710382513661	0.961414790997
+GO:1900740	positive regulation of protein insertion into mitochondrial membrane involved in apoptotic signaling pathway	31	0.0273224043716	0.99142550911
+GO:0045765	regulation of angiogenesis	31	-0.0418943533698	0.976420150054
+GO:0014065	phosphatidylinositol 3-kinase signaling	31	-0.0673952641166	0.9640943194
+GO:0051973	positive regulation of telomerase activity	34	-0.016393442623	0.964646464646
+GO:0002931	response to ischemia	36	-0.0127504553734	0.961089494163
+GO:2001237	negative regulation of extrinsic apoptotic signaling pathway	37	-0.00910746812386	0.95672436751
+GO:0030331	estrogen receptor binding	38	-0.00910746812386	0.957180500659
+GO:0038128	ERBB2 signaling pathway	38	0.0273224043716	0.973649538867
+GO:0021762	substantia nigra development	39	0.0892531876138	0.995295698925
+GO:0045429	positive regulation of nitric oxide biosynthetic process	39	0.016393442623	0.961693548387
+GO:0071364	cellular response to epidermal growth factor stimulus	40	0.1985428051	1
+GO:0019888	protein phosphatase regulator activity	40	0.016393442623	0.953781512605
+GO:0034605	cellular response to heat	42	0.0382513661202	0.958509142053
+GO:0006479	protein methylation	43	0.0710382513661	0.978770131772
+GO:0005844	polysome	43	0.0382513661202	0.953147877013
+GO:0032993	protein-DNA complex	43	0.0928961748634	0.98682284041
+GO:0045600	positive regulation of fat cell differentiation	48	0.0710382513661	0.954685099846
+GO:0042542	response to hydrogen peroxide	54	0.147540983607	0.972807017544
+GO:0035577	azurophil granule membrane	57	0.147540983607	0.959888059701
+GO:0003725	double-stranded RNA binding	60	0.173041894353	0.967307692308
+GO:0070373	negative regulation of ERK1 and ERK2 cascade	60	0.162112932605	0.958653846154
+GO:0043154	negative regulation of cysteine-type endopeptidase activity involved in apoptotic process	72	0.267759562842	0.983333333333
+GO:0030307	positive regulation of cell growth	73	0.253187613843	0.965909090909
+GO:0044297	cell body	74	0.28233151184	0.990675990676
+GO:1900034	regulation of cellular response to heat	75	0.260473588342	0.965277777778
+GO:0043086	negative regulation of catalytic activity	80	0.267759562842	0.953545232274
+GO:0042826	histone deacetylase binding	106	0.340619307832	0.953333333333
+GO:0006469	negative regulation of protein kinase activity	110	0.373406193078	0.982578397213
+GO:0071356	cellular response to tumor necrosis factor	111	0.351548269581	0.962897526502
+GO:0034774	secretory granule lumen	111	0.36247723133	0.971731448763
+GO:0051726	regulation of cell cycle	126	0.453551912568	0.991561181435
+GO:0007568	aging	165	0.486338797814	0.970430107527
+GO:0003674	molecular_function	643	0.752276867031	0.970588235294
+GO:0016301	kinase activity	675	0.752276867031	0.96875
+GO:0016310	phosphorylation	679	0.755919854281	1
+GO:0045944	positive regulation of transcription from RNA polymerase II promoter	981	0.76320582878	0.95
+GO:0016740	transferase activity	1717	0.821493624772	1
+GO:0016020	membrane	7464	0.817850637523	1
