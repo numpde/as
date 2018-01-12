@@ -1,0 +1,4 @@
+24 ENSG IDs in selected BC data
+GO filter: GO:0032201
+telomere maintenance via semi-conservative replication
+24 ENSG IDs

@@ -1,0 +1,4 @@
+15 ENSG IDs in selected BC data
+GO filter: GO:0030330
+DNA damage response, signal transduction by p53 class mediator
+15 ENSG IDs

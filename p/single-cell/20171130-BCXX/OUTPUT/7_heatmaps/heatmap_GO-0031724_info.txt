@@ -1,0 +1,4 @@
+1 ENSG IDs in selected BC data
+GO filter: GO:0031724
+CXCR5 chemokine receptor binding
+1 ENSG IDs

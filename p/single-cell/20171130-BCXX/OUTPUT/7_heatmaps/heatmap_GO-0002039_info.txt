@@ -1,0 +1,4 @@
+68 ENSG IDs in selected BC data
+GO filter: GO:0002039
+p53 binding
+68 ENSG IDs
