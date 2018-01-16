@@ -29,7 +29,7 @@ import matplotlib
 matplotlib.use("pgf")
 pgf_with_custom_preamble = {
 	"text.usetex": True,
-	"pgf.preamble": [ r"\usepackage{hyperref}" ],
+	"pgf.preamble": [ r"\usepackage[hidelinks]{hyperref}" ],
 }
 matplotlib.rcParams.update(pgf_with_custom_preamble)
 
@@ -81,6 +81,10 @@ PARAM = {
 		'GO:0032201', # telomere maintenance via semi-conservative replication
 		'GO:0010833', # telomere maintenance via telomere lengthening
 		'GO:0005333', # norepinephrine transmembrane transporter activity
+		
+		'GO:0030284', # estrogen receptor activity
+		'GO:0030520', # intracellular estrogen receptor signaling pathway
+		'GO:0038128', # ERBB2 signaling pathway (ERBB2 = ENSG00000141736)
 	},
 	
 	
@@ -215,7 +219,7 @@ def plot_clustering() :
 				C = np.tensordot(X, X, axes=([axis], [axis]))
 				V = np.sqrt(np.outer(np.diag(C), np.diag(C)))
 				V[V == 0] = 1
-				D = 1 - (C / V)
+				D = np.max(1 - (C / V), 0)
 				return D
 
 			def cos_dist(x, y) :
@@ -224,7 +228,7 @@ def plot_clustering() :
 			assert(axis_smpl == 0), "The implementation is not general"
 			
 			if (scope == 'global') :
-				L = linkage(Z, method='complete', metric=cos_dist)
+				L = linkage(Z, method='complete') #, metric=cos_dist)
 				#
 				#Y = np.zeros(X.shape)
 				#Y[X > 1] = 1
@@ -242,7 +246,7 @@ def plot_clustering() :
 				
 				for s in sorted(S) :
 					z = np.take(Z, s, axis=axis_smpl)
-					L = linkage(z, method='complete', metric=cos_dist)
+					L = linkage(z, method='complete') #, metric=cos_dist)
 					#
 					#Y = np.zeros(X.shape)
 					#Y[X > 1] = 1
@@ -265,6 +269,9 @@ def plot_clustering() :
 				ax.set_yticklabels([])
 				ax.xaxis.set_ticks_position('none')
 				ax.yaxis.set_ticks_position('none')
+				
+				# https://stackoverflow.com/questions/1639463/matplotlib-border-width
+				[i.set_linewidth(0.1) for i in ax.spines.values()]
 			#
 			#
 			ax = AX[0]
@@ -273,7 +280,7 @@ def plot_clustering() :
 			ax.imshow(XX.transpose(), aspect='auto')
 			ax.yaxis.set_ticks(range(0, n_genes))
 			ax.yaxis.set_ticklabels(map(ensg_url, E))
-			[tick.label.set_fontsize(3) for tick in ax.yaxis.get_major_ticks()]
+			[tick.label.set_fontsize(1) for tick in ax.yaxis.get_major_ticks()]
 			#list(range(1, 1 + n_genes)), list(E))
 			#
 			ax = AX[1]
@@ -287,7 +294,7 @@ def plot_clustering() :
 			ax.imshow(XX.transpose(), aspect='auto')
 			ax.yaxis.set_ticks(range(0, n_genes))
 			ax.yaxis.set_ticklabels(map(ensg_url, E))
-			[tick.label.set_fontsize(3) for tick in ax.yaxis.get_major_ticks()]
+			[tick.label.set_fontsize(1) for tick in ax.yaxis.get_major_ticks()]
 			#
 			ax = AX[3]
 			ax.imshow(np.asarray([(I2G[j], I2G[j]) for j in J]).transpose(), aspect='auto')
