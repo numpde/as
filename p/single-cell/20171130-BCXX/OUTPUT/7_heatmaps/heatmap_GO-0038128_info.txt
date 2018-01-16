@@ -1,0 +1,4 @@
+38 ENSG IDs in selected BC data
+GO filter: GO:0038128
+ERBB2 signaling pathway
+38 ENSG IDs
