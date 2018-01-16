@@ -1,0 +1,471 @@
+\documentclass[onepage]{beamer}
+\mode<presentation>{
+	\setbeamercovered{transparent}
+	%\beamertemplatenavigationsymbolsempty
+	\setbeamertemplate{footline}[frame number]
+% 	\usefonttheme{professionalfonts}
+}
+
+% https://tex.stackexchange.com/questions/34166/understanding-minipages-aligning-at-top
+\usepackage{adjustbox}
+
+% https://tex.stackexchange.com/questions/124256/how-do-i-get-numbered-entries-in-a-beamer-bibliography
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+% https://tex.stackexchange.com/questions/49048/how-to-cite-one-bibentry-in-full-length-in-the-body-text
+\usepackage{bibentry}
+\bibliographystyle{plain}
+\nobibliography*
+%
+% https://tex.stackexchange.com/questions/163827/wrong-vertical-spaces-using-bibentry-within-beamer/163842
+\def\mybeamernewblock{%
+  \usebeamercolor[fg]{bibliography entry author}%
+  \usebeamerfont{bibliography entry author}%
+  \usebeamertemplate{bibliography entry author}%
+  \def\newblock{%
+    \usebeamercolor[fg]{bibliography entry title}%
+    \usebeamerfont{bibliography entry title}%
+    \usebeamertemplate{bibliography entry title}%
+    \def\newblock{%
+      \usebeamercolor[fg]{bibliography entry location}%
+      \usebeamerfont{bibliography entry location}%
+      \usebeamertemplate{bibliography entry location}%
+      \def\newblock{%
+        \usebeamercolor[fg]{bibliography entry note}%
+        \usebeamerfont{bibliography entry note}%
+        \usebeamertemplate{bibliography entry note}}}}%
+  \leavevmode
+}
+\newenvironment{references}{\begin{itemize}\let\newblock\mybeamernewblock}{\end{itemize}}
+
+
+\setbeamersize{text margin left=10pt, text margin right=10pt}
+\setbeamertemplate{itemize items}[circle]
+
+\beamertemplatenavigationsymbolsempty
+
+% http://tex.stackexchange.com/questions/8680/how-can-i-insert-a-newline-in-a-framebox
+%\usepackage{minibox}
+%\usepackage{framed}
+%\usepackage[usestackEOL]{stackengine}
+
+% % http://tex.stackexchange.com/questions/167000/annotating-tables-with-tikz-adding-arrows
+% \usepackage{color, colortbl}
+\usepackage{tikz}
+\tikzstyle{every picture}+=[remember picture]
+%\usetikzlibrary{tikzmark, positioning, fit, shapes.misc}
+
+%% http://tex.stackexchange.com/questions/91124/itemize-removing-natural-indent
+%\usepackage{enumitem}
+
+%% http://tex.stackexchange.com/questions/41408/a-five-level-deep-list
+%\usepackage{enumitem}
+%\setlistdepth{9}
+
+% https://tex.stackexchange.com/questions/20792/how-to-superimpose-latex-on-a-picture
+\usepackage{overpic}
+
+% % http://tex.stackexchange.com/questions/32661/how-to-locate-figures-with-x-y-specified-location-in-a-presentation
+% \usepackage[absolute,overlay]{textpos} % absolute positioning of stuff
+% \setlength{\TPHorizModule}{1mm}
+% \setlength{\TPVertModule}{1mm}
+
+\usepackage{graphicx}
+\graphicspath{{../img/}}
+\AtBeginDocument{\DeclareGraphicsExtensions{.eps, .png, .gif, .pdf, .jpg}}
+
+\usepackage[makeroom]{cancel}
+
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+
+% \usepackage{amssymb}
+% \usepackage{nicefrac}
+% \usepackage{bbm}
+% \usepackage{esint}
+% \usepackage{sidecap}
+
+\usepackage{hyperref}
+% \hypersetup{pdfpagemode=FullScreen}
+
+\newcommand{\HIDE}[1]{}
+
+\newcommand{\skipline}{{\ }\\}
+
+\newcommand{\EMAIL}{{\color{blue}randreev{\tiny\color{white}.\hspace{-1.5pt}}@{\tiny\color{white}.\hspace{-1.5pt}}stat.sinica.edu.tw}}
+
+\author{\small RA}
+\subject{Talks}
+
+\newcommand{\CITE}[1]{{\footnotesize[#1]}}
+
+% \input{definitions}
+
+\providecommand{\DIV}{\mathop{\text{div}}}
+\providecommand{\GRAD}{\mathop{\text{grad}}}
+
+\providecommand{\IE}{\mathbb{E}}
+\providecommand{\IP}{\mathbb{P}}
+\providecommand{\IR}{\mathbb{R}}
+\providecommand{\IZ}{\mathbb{Z}}
+
+\providecommand{\duality}[2]{\langle #1 \rangle_{#2}}
+\providecommand{\norm}[2]{\| #1 \|_{#2}}
+\providecommand{\seminorm}[2]{| #1 |_{#2}}
+\providecommand{\VERT}{\ensuremath{| \! | \! |}}
+\newcommand{\tnorm}[2]{\VERT{#1}\VERT_{{#2}}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+
+\providecommand{\Abf}{\mathbf{A}}
+\providecommand{\Bbf}{\mathbf{B}}
+\providecommand{\Dbf}{\mathbf{D}}
+\providecommand{\Ibf}{\mathbf{I}}
+\providecommand{\Jbf}{\mathbf{J}}
+\providecommand{\Fbf}{\mathbf{F}}
+\providecommand{\Hbf}{\mathbf{H}}
+\providecommand{\Mbf}{\mathbf{M}}
+\providecommand{\Tbf}{\mathbf{T}}
+\providecommand{\Pbf}{\mathbf{P}}
+\providecommand{\Vbf}{\mathbf{V}}
+\providecommand{\pbf}{\mathbf{p}}
+\providecommand{\ubf}{\mathbf{u}}
+\providecommand{\vbf}{\mathbf{v}}
+\providecommand{\wbf}{\mathbf{w}}
+\providecommand{\ybf}{\mathbf{y}}
+\providecommand{\zbf}{\mathbf{z}}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\providecommand{\T}{\mathsf{T}}
+
+\renewcommand{\hat}[1]{\widehat{#1}}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+
+\newcommand{\rd}{\,\mathrm{d}}
+
+\newcommand{\TEXT}[1]{\quad\text{#1}\quad}
+
+% http://tex.stackexchange.com/questions/211518/beamer-vfill-and-itemize
+\def\Bottom#1{\vskip 0pt plus 1filll #1}
+\def\BottomRight#1{\Bottom{\hfill #1}}
+
+% MATLAB CODE LISTING
+\usepackage{color}
+\definecolor{DarkBlue}{rgb}{0,0,0.4}
+% \definecolor{DarkRed}{rgb}{0.3,0,0}
+\definecolor{DarkGreen}{rgb}{0,0.3,0}
+\usepackage{listings}
+\lstset{%
+	language=Python,
+	basicstyle=\bf\ttfamily\footnotesize,
+	keywordstyle=\color{DarkBlue},
+	numbers=left, numberstyle=\footnotesize, numbersep=4pt,
+	commentstyle={\color{DarkGreen}},
+% 	backgroundcolor=\color{white},
+	showspaces=false, showstringspaces=false, showtabs=false,
+	frame=none,
+	tabsize=4,
+	breaklines=true, breakatwhitespace=false,
+	emphstyle={[1]\color{blue}},
+	emphstyle={[2]\color{DarkGreen}},
+	%morekeywords={parfor,true,false},
+	xleftmargin=8pt,
+	numbers=none
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifthen}
+
+\newcommand{\REDBOX}[1]{
+	\setlength{\fboxrule}{1pt}
+	\fcolorbox{red}{SeeMeBarely}{$\displaystyle
+		#1
+	$}
+}
+
+\definecolor{SeeMeBarely}{RGB}{230,230,230}
+\definecolor{Purple}{RGB}{128,0,128}
+\definecolor{DeepPurple}{RGB}{32,0,96}
+\newcommand{\ra}[1]{{\color{blue}{#1}}}
+\newcommand{\cred}[1]{{\color{red}{#1}}}
+\newcommand{\cblu}[1]{{\color{blue}{#1}}}
+\newcommand{\cpur}[1]{{\color{Purple}{#1}}}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\newcommand{\ItemComment}[1]{\hfill{\scriptsize(#1)\normalsize}}
+
+
+% http://www.webnots.com/vibgyor-rainbow-color-codes/
+\definecolor{a}{RGB}{148, 0, 211}
+\definecolor{b}{RGB}{75, 0, 130}
+\definecolor{c}{RGB}{0, 0, 255}
+\definecolor{d}{RGB}{0, 160, 0}
+\definecolor{e}{RGB}{200, 200, 0}
+\definecolor{f}{RGB}{255, 127, 0}
+\definecolor{g}{RGB}{255, 0, 0}
+%
+\definecolor{z}{RGB}{0, 0, 0}
+\definecolor{w}{RGB}{255, 255, 255}
+
+% http://tex.stackexchange.com/questions/17611/how-does-one-type-chinese-in-latex
+\usepackage{CJKutf8}
+\AtBeginDvi{\input{zhwinfonts}}
+%
+\newcommand{\REN}{\begin{CJK*}{UTF8}{gbsn}人\end{CJK*}}
+\newcommand{\ren}[1]{{\color{#1}\REN}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{frame}[plain,t]
+	\begin{center}
+		%\small
+		%
+		Some stats on the GSE75688 BC dataset
+		%
+		\\[1\baselineskip]
+		\small
+		RA
+% 		\\[1\baselineskip]
+% 		\footnotesize
+% 		ISS, AS \\ \EMAIL
+
+		\vspace{1cm}
+
+		%
+
+	\end{center}
+
+	\Bottom{
+		\scriptsize
+		%Support: 
+		\hfill
+		Jan 16, 2018
+		\\ {\ }
+	}
+\end{frame}
+
+
+%%%
+
+%%%
+
+%%%
+
+\begin{frame}[t]{Clustering index -- overview}{}
+	\begin{center}
+		\includegraphics<1>[width=0.99\textwidth]{B_go-by-wq/ci-vs-sz_1}
+		\includegraphics<2>[width=0.99\textwidth]{B_go-by-wq/ci-vs-sz_2}
+	\end{center}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{GO terms ordered by the windowed quantile}{}
+	\begin{table}[]
+		\tiny
+		\resizebox{\columnwidth}{!}{%
+		\begin{tabular}{rlllll}
+		      & GO ID      & GO name                                               & Size & Clustering index & CI quantile  \\
+		1     & GO:1901339 & regulation of store-operated calcium channel activity & 1    & -0.9958762887    & 0.0001906214 \\
+		2     & GO:0005132 & type I interferon receptor binding                    & 6    & -0.9821958457    & 0.0004095004 \\
+		3     & GO:0098633 & collagen fibril binding                               & 1    & -0.9954545455    & 0.0004765536 \\
+		4     & GO:1904027 & negative regulation of collagen fibril organization   & 1    & -0.9954545455    & 0.0004765536 \\
+		5     & GO:0015874 & norepinephrine transport                              & 3    & -0.9875518672    & 0.0005292872 \\
+		6     & GO:0005333 & norepinephrine transmembrane transporter activity     & 3    & -0.9875518672    & 0.0005292872 \\
+		7     & GO:0008188 & neuropeptide receptor activity                        & 12   & -0.8926174497    & 0.0005382131 \\
+		8     & GO:0004956 & prostaglandin D receptor activity                     & 2    & -0.9947089947    & 0.0005512679 \\
+		9     & GO:0001785 & prostaglandin J receptor activity                     & 2    & -0.9947089947    & 0.0005512679 \\
+		10    & GO:0014050 & negative regulation of glutamate secretion            & 5    & -0.9791122715    & 0.0006347191 \\
+		11    & GO:0003837 & beta-ureidopropionase activity                        & 1    & -0.9953488372    & 0.0007624857 \\
+		12    & GO:0033038 & bitter taste receptor activity                        & 19   & -0.8965517241    & 0.0007680492 \\
+		13    & GO:0005590 & collagen type VII trimer                              & 1    & -0.9951219512    & 0.0009531071 \\
+		...   &            &                                                       &      &                  &              \\
+		17483 & GO:0070180 & large ribosomal subunit rRNA binding                  & 1    & 0.0544090056     & 1            \\
+		17484 & GO:0099503 & secretory vesicle                                     & 3    & -0.4171220401    & 1            \\
+		17485 & GO:0030235 & nitric-oxide synthase regulator activity              & 6    & -0.1730418944    & 1            \\
+		17486 & GO:0071364 & cellular response to epidermal growth factor stimulus & 40   & 0.1985428051     & 1            \\
+		17487 & GO:0016310 & phosphorylation                                       & 679  & 0.7559198543     & 1            \\
+		17488 & GO:0016740 & transferase activity                                  & 1717 & 0.8214936248     & 1            \\
+		17489 & GO:0016020 & membrane                                              & 7464 & 0.8178506375     & 1           
+		\end{tabular}
+		}
+	\end{table}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Transformation to ``GO space''}{}
+	In ``GO space'', 
+	\begin{itemize}
+	\item
+		the coordinates are the GO terms
+	\item
+		whose value is the sum of gene expression in that GO category.
+	\end{itemize}
+	
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Transformation to ``GO space''}{}
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{C_goordinates/CI-vs-NxGO}
+	\end{center}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Transformation to ``GO space''}{}
+	First 
+	{\only<01>{60}}%
+	{\only<02->{20}}
+	GO-ordinates
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{C_goordinates/tsne_dim=60_run=1_sub=all}
+		\includegraphics<02>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=all}
+		
+		\includegraphics<03>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=0}
+		\includegraphics<04>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=1}
+		\includegraphics<05>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=2}
+		\includegraphics<06>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=3}
+		\includegraphics<07>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=4}
+		\includegraphics<08>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=5}
+		\includegraphics<09>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=6}
+		\includegraphics<10>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=7}
+		\includegraphics<11>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=8}
+		\includegraphics<12>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=9}
+		\includegraphics<13>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=10}
+		\includegraphics<14>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=11}
+		\includegraphics<15>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=12}
+		\includegraphics<16>[width=0.9\textwidth]{C_goordinates/tsne_dim=20_run=1_sub=13}
+	\end{center}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Tumor classifier based on ``DNA-replication''}{}
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{9_tree/tree_Top50_c}
+	\end{center}
+\end{frame}
+
+%%%
+
+\begin{frame}[t,fragile]{Tumor classifier based on ``DNA-replication''}{}
+\begin{lstlisting}
+m = Sequential([
+	Dropout(rate=0.6, input_shape=(num_genes,)),
+	Dense(num_classes, kernel_regularizer=L1L2(1, 1)),
+	Activation('softmax'),
+])
+
+m.compile(loss='categorical_crossentropy', optimizer='adam')
+
+m.fit(X, Y, epochs=9000)
+\end{lstlisting}
+\end{frame}
+
+%%%
+
+\begin{frame}[t]{Tumor classifier based on ``DNA-replication''}{}
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{D_classifier-nn/samples}
+		\includegraphics<02>[width=0.9\textwidth]{D_classifier-nn/confusion}
+	\end{center}
+\end{frame}
+
+%%
+
+\begin{frame}[t]{Transformation to ``GO space''}{}
+	First 20 GO-ordinates
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=1}
+		\includegraphics<02>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=2}
+		\includegraphics<03>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=3}
+		\includegraphics<04>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=4}
+		\includegraphics<05>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=5}
+		\includegraphics<06>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=6}
+		\includegraphics<07>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=7}
+		\includegraphics<08>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=8}
+		\includegraphics<09>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=9}
+		\includegraphics<10>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=10}
+		\includegraphics<11>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=11}
+		\includegraphics<12>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=12}
+		\includegraphics<13>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=13}
+		\includegraphics<14>[width=0.9\textwidth]{C_goordinates-D/tsne_dim=20_run=1_sub=all}
+	\end{center}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Extra}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+\newcounter{finalframe}
+\setcounter{finalframe}{\value{framenumber}}
+% Backup frames follow
+%
+%
+%\begin{frame}
+%	Appendix
+%\end{frame}
+%
+%%
+%
+%\begin{frame}
+%	%
+%\end{frame}
+%
+%
+% FINAL SLIDE
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[plain,b]
+	\hfill
+	\tiny
+	\color{gray}
+	this slide is intentionally left blank
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% {
+% \tiny
+% \bibliography{../../../r/refs}
+% }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{framenumber}{\value{finalframe}}
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
