@@ -108,6 +108,15 @@ PARAM = {
 		"GO:0007173", # epidermal growth factor receptor signaling pathway
 		"GO:0035004", # phosphatidylinositol 3-kinase activity
 		"GO:0051019", # mitogen-activated protein kinase binding
+		
+		# Estrogen-related GO terms
+		"GO:0030520", # intracellular estrogen receptor signaling pathway
+		"GO:0030284", # estrogen receptor activity
+		"GO:0030331", # estrogen receptor binding
+		"GO:0038049", # transcription factor activity, ligand-activated RNA polymerase II transcription factor binding
+		
+		# HER2
+		"GO:0038128", # ERBB2 signaling pathway (ERBB2 = ENSG00000141736)
 	},
 	
 	# Figure formats
@@ -121,33 +130,33 @@ mpl.rcParams['axes.labelsize'] = 'large'
 
 ## ====================== AUX :
 
-def abbr(t, n) :
+# Abbreviate a GO term t, truncating it to max_len characters
+def abbr(t, max_len) :
 	D = { 
-		"negative regulation" : "neg regu",
-		"positive regulation" : "pos regu",
 		"replication" : "repl",
 		"involved in" : "in",
 		"regulation" : "regu",
 		"synthesis" : "syn",
+		"negative" : "neg",
+		"positive" : "pos",
 		"double" : "dbl",
 		"single" : "sgl",
 		"error" : "err",
 	}
 	
-	for (S, s) in sorted(D.items(), key=(lambda x : -len(x[0]))) :
-		t = t.replace(S, s)
-	
-	if (len(t) > (n + 3)) : 
-		t = t[0:n] + "..."
+	for pair in D.items() : t = t.replace(*pair)
+
+	if (len(t) > max_len) : t = t[0:(max_len-3)] + "..."
 	
 	return t
 
 ## ====================== (!) :
 
+pass
 
 ## ===================== DATA :
 
-#[ ]#
+#[ Load GO terms and their windowed quantiles ]#
 
 # Clustering indices data bundle
 CI_data = pickle.load(open(IFILE['GO=>CI'], 'rb'))
@@ -182,7 +191,7 @@ print("Note: {} GO IDs are not in the graph".format(len(go_not_in_graph)))
 
 ## ===================== WORK :
 
-#[ ]#
+#[ Class to restrict the complete GO graph to a subset of nodes ]#
 
 class gograph :
 
@@ -244,6 +253,8 @@ class gograph :
 		return g
 
 
+#[ Plot all GO categories in one graph: clustering index vs size ]#
+
 def plot_overview() :
 	
 	plt.close('all')
@@ -266,6 +277,8 @@ def plot_overview() :
 	
 	plt.close('all')
 
+
+#[ Plot the GO subtree of "root" ]#
 
 def plot_tree(root, go_filename) :
 	
@@ -398,6 +411,8 @@ def plot_tree(root, go_filename) :
 	plt.close()
 
 
+#[ Plot the GO subtrees for all GO terms of interest ]#
+
 def plot_all_trees() :
 	
 	Parallel(n_jobs=PARAM['#proc'])(
@@ -418,9 +433,6 @@ def plot_all_trees() :
 
 ###
 
-def main() :
+if __name__ == "__main__":
 	plot_all_trees()
 	plot_overview()
-
-
-main()

@@ -1,5 +1,5 @@
 
-# RA, 2018-01-11
+# RA, 2018-01-15
 
 ## ================== IMPORTS :
 
@@ -45,6 +45,9 @@ IFILE = {
 	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
 	'GO graph' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
 	'GO=>CI'   : "OUTPUT/0_go2ci/UV/go2ci.pkl",
+	
+	'tsne runs'  : "OUTPUT/C_goordinates/tsne_runs.pkl",
+	'classified' : "OUTPUT/D_classifier-nn/classified.pkl",
 }
 
 # Check existence of input files
@@ -54,12 +57,9 @@ for f in IFILE.values() :
 ## =================== OUTPUT :
 
 OFILE = {
-	'tsne runs' : "OUTPUT/C_goordinates/tsne_runs.pkl",
 	
-	'tsne'      : "OUTPUT/C_goordinates/tsne_dim={dim}_run={run}_sub={sub}.{ext}",
-	'tsne info' : "OUTPUT/C_goordinates/tsne_dim={dim}.txt",
-	
-	'ci vs N'   : "OUTPUT/C_goordinates/CI-vs-NxGO.{ext}",
+	'tsne'      : "OUTPUT/C_goordinates-D/tsne_dim={dim}_run={run}_sub={sub}.{ext}",
+	'tsne info' : "OUTPUT/C_goordinates-D/tsne_dim={dim}.txt",
 }
 
 # Create output directories
@@ -245,7 +245,7 @@ GO2WQ = restrict(GO2WQ, GO2A.keys())
 #[ ]#
 
 
-def data_in_go_space(N=None, norm_features=True, norm_samples=False) :
+def data_in_go_space(N=None, norm_features=True, norm_samples=True) :
 	
 	# Move to the GO feature space
 	assert(axis_gene == 0)
@@ -273,85 +273,32 @@ def data_in_go_space(N=None, norm_features=True, norm_samples=False) :
 	if norm_features : 
 		Y = np.vstack((y / (np.sum(y) or 1)) for y in Y)
 	
-	# Normalize data sample-wise
-	if norm_samples :
-		Y = np.vstack((s / (np.sum(s) or 1)) for s in Y.transpose()).transpose()
+	## Normalize data sample-wise
+	#if norm_samples :
+		#Y = np.vstack((s / (np.sum(s) or 1)) for s in Y.transpose()).transpose()
 	
 	return (GO, Y)
 
 
 def plot_CI_vs_N() :
-	(GO, Y) = data_in_go_space()
-	
-	# Z-normalize data feature-wise
-	Y = [stats.mstats.zscore(x) for x in Y]
-	
-	plt.close('all')
-	plt.xlabel("Number of GO terms (by windowed quantile)")
-	plt.ylabel("Clustering index")
-	
-	n = 1
-	while (n < len(GO)) :
-		ci = CI(np.vstack(Y[0:math.ceil(n)]), axis_gene)
-		plt.semilogx(n, ci, 'o', c=('b' if (ci < 0) else 'r'))
-		n *= 1.2
-		
-		plt.ylim((-1, 1))
-	
-	for ext in PARAM['ext'] : 
-		plt.savefig(OFILE['ci vs N'].format(ext=ext))
+	pass
 
-	plt.close('all')
-
-
-def compute_tSNE_in_go_space(N, nruns=3) :
-	# Get the BC data transformed to "GO space"
-	(GO, Y) = data_in_go_space(N)
-	
-	# Data layout
-	assert(axis_gene == 0)
-	assert(axis_smpl == 1)
-	
-	# Run t-SNE a few times
-	runs = [
-		{ 
-			'N' : N, 
-			'Y' : Y,
-			'Z' : TSNE(n_components=2, random_state=run).fit_transform(Y.T).T,
-			'GO' : GO, 
-			'run' : run,
-			'axis_gene' : axis_gene,
-			'axis_smpl' : axis_smpl,
-		}
-		for run in range(nruns)
-	]
-	
-	return runs
 
 
 def compute_all_tSNE_in_go_space() :
 	
-	runs_filename = OFILE['tsne runs']
+	runs_filename = IFILE['tsne runs']
 	
-	if os.path.isfile(runs_filename) :
-		print("File {} with t-SNE runs exists. Skipping the computation.".format(runs_filename))
-	else :
-		runs = list(chain.from_iterable(
-			Parallel(n_jobs=PARAM['#proc'])(
-				delayed(compute_tSNE_in_go_space)(N)
-				for N in [5, 10, 15, 20, 30, 40, 60, 100, 200]
-			)
-		))
-		
-		pickle.dump(
-			{ 'runs' : runs, 'script': THIS },
-			open(runs_filename, 'wb')
-		)
-		
+	assert(os.path.isfile(runs_filename)), ("File {} with t-SNE not found.".format(runs_filename))
+
 	return pickle.load(open(runs_filename, 'rb'))['runs']
 
 
 def plot_tSNE_in_go_space() :
+	
+	# Predicted class
+	Yp = pickle.load(open(IFILE['classified'], 'rb'))['Yp']
+	assert(Yp.shape[0] == n_samples)
 	
 	for run_info in compute_all_tSNE_in_go_space() :
 		
@@ -398,9 +345,6 @@ def plot_tSNE_in_go_space() :
 		
 		plt.close('all')
 		
-		# Scatter plot of *all* samples with no color
-		plt.scatter(*Z, s=16, facecolors='None', edgecolors='k', lw=0.1)
-		
 		# Clean the axes
 		plt.xticks([], [])#; plt.xlabel("t-SNE 1")
 		plt.yticks([], [])#; plt.ylabel("t-SNE 2")
@@ -408,25 +352,34 @@ def plot_tSNE_in_go_space() :
 		# Handles and texts for the legend
 		HL = []
 		
-		# Iterate over the cell groups
-		for (n, (g, s)) in enumerate(sorted(G2S.items())) :
+		for background in [True, False] :
+			# Iterate over the cell groups
+			for (n, (g, s)) in enumerate(sorted(G2S.items())) :
+				
+				# NN classification of this sample into this group
+				sz = 1 + (30 * Yp[s, n])
 			
-			# For one particular configuration:
-			# Save intermediate plots showing individual groups better
-			if ( (N, run) == (20, 1) ) :
-				for ext in PARAM['ext'] : 
-					plt.savefig(OFILE['tsne'].format(dim=N, run=run, sub=n, ext=ext))
-			
-			# Keep only the "healthy" cells, assuming most cells are healthy
-			s = [c for c in s if (np.mean(X[:, c]) >= np.median(X[:, c])/2)]
-			
-			# Scatter plot of the cell group
-			h = plt.scatter(*Z[:, s], alpha=0.8, c=c[n], s=16, edgecolors='k', lw=0.2)
-			
-			# Fill in the number of samples in the legend
-			HL.append(( h, L[n].format(len(s)) ))
-			
-			plt.legend(*zip(*HL), prop={'size': 5}, loc='upper left')
+				if background :
+					# Scatter plot with no color
+					plt.scatter(*Z[:, s], s=sz, facecolors='None', edgecolors='k', lw=0.1)
+				
+				else :
+					# For one particular configuration:
+					# Save intermediate plots showing individual groups better
+					if ( (N, run) == (20, 1) ) :
+						for ext in PARAM['ext'] : 
+							plt.savefig(OFILE['tsne'].format(dim=N, run=run, sub=n, ext=ext))
+					
+					# Keep only the "healthy" cells, assuming most cells are healthy
+					s = [c for c in s if (np.mean(X[:, c]) >= np.median(X[:, c])/2)]
+					
+					# Scatter plot of the cell group
+					h = plt.scatter(*Z[:, s], alpha=0.8, c=c[n], s=sz, edgecolors='k', lw=0.2)
+					
+					# Fill in the number of samples in the legend
+					HL.append(( h, L[n].format(len(s)) ))
+					
+					plt.legend(*zip(*HL), prop={'size': 5}, loc='upper left')
 		
 		for ext in PARAM['ext'] : 
 			plt.savefig(OFILE['tsne'].format(dim=N, run=run, sub="all", ext=ext))
@@ -434,5 +387,4 @@ def plot_tSNE_in_go_space() :
 ###
 
 if (__name__ == "__main__") :
-	#plot_CI_vs_N()
 	plot_tSNE_in_go_space()
