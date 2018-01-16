@@ -47,7 +47,7 @@ IFILE = {
 	'GO=>CI'   : "OUTPUT/0_go2ci/UV/go2ci.pkl",
 	
 	'tsne runs'  : "OUTPUT/C_goordinates/tsne_runs.pkl",
-	'classified' : "OUTPUT/D_classifier-nn/classified.pkl",
+	'classified' : "OUTPUT/D_classifier-nn/classified_epochs=9000.pkl",
 }
 
 # Check existence of input files
@@ -357,7 +357,7 @@ def plot_tSNE_in_go_space() :
 			for (n, (g, s)) in enumerate(sorted(G2S.items())) :
 				
 				# NN classification of this sample into this group
-				sz = 1 + (30 * Yp[s, n])
+				sz = 5 + (30 * Yp[s, n])
 			
 				if background :
 					# Scatter plot with no color

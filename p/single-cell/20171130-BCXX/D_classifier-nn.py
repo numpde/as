@@ -56,7 +56,7 @@ for f in IFILE.values() :
 ## =================== OUTPUT :
 
 OFILE = {
-	'classified' : "OUTPUT/D_classifier-nn/classified.pkl",
+	'classified' : "OUTPUT/D_classifier-nn/classified_epochs={epochs}.pkl",
 	
 	'samples'    : "OUTPUT/D_classifier-nn/samples.{ext}",
 	'confusion'  : "OUTPUT/D_classifier-nn/confusion.{ext}",
@@ -153,13 +153,12 @@ GO2T = CI_data['GO2T']
 
 
 def test() :
-	#X = np.asarray(BC_X)
-	#go = "GO:0006260" # DNA replication
-	#X = np.take(X, GO2I[go], axis=axis_gene)
+	go = "GO:0006260" # DNA replication
+	X = np.take(BC_X, GO2I[go], axis=axis_gene)
 	
-	rec = [rec for rec in pickle.load(open(IFILE['tsne runs'], 'rb'))['runs'] if ((rec['N'] == 20) and (rec['run'] == 1))][0]
-	X = np.moveaxis(rec['Y'], rec['axis_smpl'], axis_smpl)
-	assert(X.shape[axis_smpl] == n_samples)
+	#rec = [rec for rec in pickle.load(open(IFILE['tsne runs'], 'rb'))['runs'] if ((rec['N'] == 200) and (rec['run'] == 1))][0]
+	#X = np.moveaxis(rec['Y'], rec['axis_smpl'], axis_smpl)
+	#assert(X.shape[axis_smpl] == n_samples)
 	
 	assert(axis_smpl == 0)
 	
@@ -182,6 +181,8 @@ def test() :
 	from keras.models import Sequential
 	from keras.layers import Dense, Conv2D, MaxPooling2D, Dropout, Flatten, Activation
 	from keras        import regularizers
+	
+	from keras.callbacks import LambdaCallback
 
 	# https://stackoverflow.com/questions/39547279/loading-weights-in-th-format-when-keras-is-set-to-tf-format
 	from keras import backend as keras_backend
@@ -191,53 +192,85 @@ def test() :
 	import keras.optimizers
 	
 	model = Sequential([
-		Dense(num_classes, input_dim=X.shape[axis_gene], kernel_regularizer=keras.regularizers.l2(0.01)),
-		Dropout(rate=0.5),
+		Dropout(rate=0.6, input_shape=(X.shape[axis_gene],)),
+		Dense(num_classes, kernel_regularizer=keras.regularizers.l1_l2(1, 1)),
 		Activation('softmax'),
 	])
 	
 	opt = 'adam'
 	#opt = keras.optimizers.SGD(lr=0.0001, decay=1e-6, momentum=0.9, nesterov=True)
 	model.compile(loss='categorical_crossentropy', optimizer=opt, metrics=['accuracy'])
+	#model.compile(loss='mean_absolute_error', optimizer=opt, metrics=['accuracy'])
 	
-	model.fit(X, Y, epochs=10000)
-	Yp = model.predict(X)
+	#figs = { 1 : plt.figure(), 2 : plt.figure() }
 	
-	pickle.dump({ 'Yp' : Yp, 'script' : THIS }, open(OFILE['classified'], 'wb'))
+	def plot_model_prediction() :
+		
+		Yp = model.predict(X)
+		
+		def sort_by_prediction(Yp) :
+			for (n, s) in enumerate(S) :
+				Yp[s, :] = Yp[sorted(s, key=(lambda c : -Yp[c, n])), :]
+			return Yp
 	
-	def sort(Y) :
-		for (n, s) in enumerate(S) :
-			Y[s, :] = Y[sorted(s, key=(lambda c : -Y[c, n])), :]
-		return Y
+		plt.ion()
+		
+		plt.figure(1)
+		
+		f = plt
+		
+		f.imshow(sort_by_prediction(Yp).T, aspect='auto')
+		f.xlabel("Samples")
+		f.ylabel("Classified as")
+		f.gca().xaxis.set_label_position('top') 
+		f.xticks([], [])
+		f.yticks(range(num_classes), sorted(G2S.keys()), rotation=45)
+		f.tick_params(axis='both', which='major', labelsize=8)
+		for ext in PARAM['ext'] : f.savefig(OFILE['samples'].format(ext=ext))
+		#f.show()
+		
+		# Confusion matrix
+		C = np.vstack(
+			np.mean(Yp[s, :], axis=0)
+			for (g, s) in sorted(G2S.items())
+		)
+		
+		plt.figure(2)
+		
+		f.imshow(C.T, vmin=0, vmax=1)
+		f.xlabel("Class")
+		f.ylabel("Classified as")
+		f.gca().xaxis.set_label_position('top') 
+		f.xticks(range(num_classes), sorted(G2S.keys()), rotation=45)
+		f.yticks(range(num_classes), sorted(G2S.keys()), rotation=45)
+		f.tick_params(axis='both', which='major', labelsize=8)
+		for ext in PARAM['ext'] : f.savefig(OFILE['confusion'].format(ext=ext))
+		#f.show()
+		
+		plt.pause(0.1)
 	
-	plt.ion()
 	
-	plt.figure()
-	plt.imshow(sort(Yp).T, aspect='auto')
-	plt.ylabel("Class")
-	plt.xlabel("Predictions for each sample")
-	plt.gca().xaxis.set_label_position('top') 
-	plt.xticks([], [])
-	plt.yticks(range(num_classes), sorted(G2S.keys()), rotation=45)
-	plt.tick_params(axis='both', which='major', labelsize=8)
-	for ext in PARAM['ext'] : plt.savefig(OFILE['samples'].format(ext=ext))
-	plt.show()
+	def save_model_prediction(epochs) :
+		pickle.dump(
+			{ 'Yp' : model.predict(X), 'script' : THIS }, 
+			open(OFILE['classified'].format(epochs=epochs), 'wb')
+		)
 	
-	C = np.vstack(
-		np.mean(Yp[s, :], axis=0)
-		for (g, s) in sorted(G2S.items())
-	)
+	def every_epoch(epoch, logs) :
+		
+		epochs = epoch + 1
+		
+		if (0 == (epochs % 1000)) :
+			plot_model_prediction()
+		
+		if (0 == (epochs % 1000)) :
+			save_model_prediction(epochs)
 	
-	plt.figure()
-	plt.imshow(C, vmin=0, vmax=1)
-	plt.ylabel("Class")
-	plt.xlabel("Classified as")
-	plt.gca().xaxis.set_label_position('top') 
-	plt.xticks(range(num_classes), sorted(G2S.keys()), rotation=45)
-	plt.yticks(range(num_classes), sorted(G2S.keys()), rotation=45)
-	plt.tick_params(axis='both', which='major', labelsize=8)
-	for ext in PARAM['ext'] : plt.savefig(OFILE['confusion'].format(ext=ext))
-	plt.show()
+	model.fit(X, Y, epochs=9000, callbacks=[LambdaCallback(on_epoch_end=every_epoch)])
+	
+	##
+	
+	
 
 	input()
 
