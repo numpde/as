@@ -1,0 +1,30 @@
+GO:1901339	1	regulation of store-operated calcium channel activity	
+GO:0005132	6	type I interferon receptor binding	
+GO:0098633	1	collagen fibril binding	GO:1904027 -- negative regulation of collagen fibril organization
+GO:0005333	3	norepinephrine transmembrane transporter activity	GO:0015874 -- norepinephrine transport
+GO:0001785	2	prostaglandin J receptor activity	GO:0004956 -- prostaglandin D receptor activity
+GO:0014050	5	negative regulation of glutamate secretion	
+GO:0003837	1	beta-ureidopropionase activity	
+GO:0005590	1	collagen type VII trimer	
+GO:1904315	3	transmitter-gated ion channel activity involved in regulation of postsynaptic membrane potential	
+GO:0048241	1	epinephrine transport	
+GO:0086006	5	voltage-gated sodium channel activity involved in cardiac muscle cell action potential	
+GO:0005277	2	acetylcholine transmembrane transporter activity	GO:1901374 -- acetate ester transport
+GO:0003335	1	corneocyte development	
+GO:1901078	3	negative regulation of relaxation of muscle	
+GO:0002323	8	natural killer cell activation involved in immune response	
+GO:0004960	1	thromboxane receptor activity	GO:0004961 -- thromboxane A2 receptor activity / GO:0038193 -- thromboxane A2 signaling pathway
+GO:0016701	3	oxidoreductase activity, acting on single donors with incorporation of molecular oxygen	
+GO:0014056	2	regulation of acetylcholine secretion, neurotransmission	
+GO:1905144	3	response to acetylcholine	
+GO:0035377	2	transepithelial water transport	
+GO:0007196	8	adenylate cyclase-inhibiting G-protein coupled glutamate receptor signaling pathway	
+GO:0060371	6	regulation of atrial cardiac muscle cell membrane depolarization	
+GO:0030718	3	germ-line stem cell population maintenance	
+GO:0015747	5	urate transport	
+GO:0070698	2	type I activin receptor binding	
+GO:0008215	1	spermine metabolic process	GO:0052899 -- N(1),N(12)-diacetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:0052902 -- spermidine:oxygen oxidoreductase (3-aminopropanal-forming) activity / GO:0052903 -- N1-acetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:0052904 -- N1-acetylspermidine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:1901307 -- positive regulation of spermidine biosynthetic process
+GO:0042693	4	muscle cell fate commitment	
+GO:0072014	3	proximal tubule development	
+GO:0070173	2	regulation of enamel mineralization	
+GO:0032098	8	regulation of appetite	

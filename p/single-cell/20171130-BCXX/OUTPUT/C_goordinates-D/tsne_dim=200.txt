@@ -1,0 +1,200 @@
+GO:1901339	1	regulation of store-operated calcium channel activity	
+GO:0005132	6	type I interferon receptor binding	
+GO:0098633	1	collagen fibril binding	GO:1904027 -- negative regulation of collagen fibril organization
+GO:0005333	3	norepinephrine transmembrane transporter activity	GO:0015874 -- norepinephrine transport
+GO:0001785	2	prostaglandin J receptor activity	GO:0004956 -- prostaglandin D receptor activity
+GO:0014050	5	negative regulation of glutamate secretion	
+GO:0003837	1	beta-ureidopropionase activity	
+GO:0005590	1	collagen type VII trimer	
+GO:1904315	3	transmitter-gated ion channel activity involved in regulation of postsynaptic membrane potential	
+GO:0048241	1	epinephrine transport	
+GO:0086006	5	voltage-gated sodium channel activity involved in cardiac muscle cell action potential	
+GO:0005277	2	acetylcholine transmembrane transporter activity	GO:1901374 -- acetate ester transport
+GO:0003335	1	corneocyte development	
+GO:1901078	3	negative regulation of relaxation of muscle	
+GO:0002323	8	natural killer cell activation involved in immune response	
+GO:0004960	1	thromboxane receptor activity	GO:0004961 -- thromboxane A2 receptor activity / GO:0038193 -- thromboxane A2 signaling pathway
+GO:0016701	3	oxidoreductase activity, acting on single donors with incorporation of molecular oxygen	
+GO:0014056	2	regulation of acetylcholine secretion, neurotransmission	
+GO:1905144	3	response to acetylcholine	
+GO:0035377	2	transepithelial water transport	
+GO:0007196	8	adenylate cyclase-inhibiting G-protein coupled glutamate receptor signaling pathway	
+GO:0060371	6	regulation of atrial cardiac muscle cell membrane depolarization	
+GO:0030718	3	germ-line stem cell population maintenance	
+GO:0015747	5	urate transport	
+GO:0070698	2	type I activin receptor binding	
+GO:0008215	1	spermine metabolic process	GO:0052899 -- N(1),N(12)-diacetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:0052902 -- spermidine:oxygen oxidoreductase (3-aminopropanal-forming) activity / GO:0052903 -- N1-acetylspermine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:0052904 -- N1-acetylspermidine:oxygen oxidoreductase (3-acetamidopropanal-forming) activity / GO:1901307 -- positive regulation of spermidine biosynthetic process
+GO:0042693	4	muscle cell fate commitment	
+GO:0072014	3	proximal tubule development	
+GO:0070173	2	regulation of enamel mineralization	
+GO:0032098	8	regulation of appetite	
+GO:0043185	2	vascular endothelial growth factor receptor 3 binding	
+GO:0034150	1	toll-like receptor 6 signaling pathway	GO:0035355 -- Toll-like receptor 2-Toll-like receptor 6 protein complex
+GO:0047484	3	regulation of response to osmotic stress	
+GO:1903818	8	positive regulation of voltage-gated potassium channel activity	
+GO:0004983	7	neuropeptide Y receptor activity	
+GO:0045381	1	regulation of interleukin-18 biosynthetic process	GO:0045751 -- negative regulation of Toll signaling pathway
+GO:0042596	3	fear response	
+GO:0070253	1	somatostatin secretion	
+GO:0001582	2	detection of chemical stimulus involved in sensory perception of sweet taste	GO:0033041 -- sweet taste receptor activity / GO:1903767 -- sweet taste receptor complex
+GO:0001867	9	complement activation, lectin pathway	
+GO:0007418	3	ventral midline development	
+GO:0035499	1	carnosine biosynthetic process	GO:0047730 -- carnosine synthase activity / GO:0102102 -- homocarnosine synthase activity
+GO:0043163	3	cell envelope organization	
+GO:0014052	1	regulation of gamma-aminobutyric acid secretion	
+GO:0060084	3	synaptic transmission involved in micturition	
+GO:0102797	1	geranial:oxygen oxidoreductase activity	GO:0102798 -- heptaldehyde:oxygen oxidoreductase activity
+GO:0005372	5	water transmembrane transporter activity	
+GO:0005503	2	all-trans retinal binding	
+GO:0033563	2	dorsal/ventral axon guidance	
+GO:0065010	2	extracellular membrane-bounded organelle	
+GO:0016941	3	natriuretic peptide receptor activity	
+GO:0000155	6	phosphorelay sensor kinase activity	
+GO:0007468	1	regulation of rhodopsin gene expression	GO:0045872 -- positive regulation of rhodopsin gene expression
+GO:0042369	3	vitamin D catabolic process	
+GO:0009949	2	polarity specification of anterior/posterior axis	
+GO:0060126	4	somatotropin secreting cell differentiation	
+GO:0022029	5	telencephalon cell migration	
+GO:0020005	1	symbiont-containing vacuole membrane	GO:0030184 -- nitric oxide transmembrane transporter activity / GO:0085018 -- maintenance of symbiont-containing vacuole by host
+GO:0098875	1	epididymosome	
+GO:1901537	1	positive regulation of DNA demethylation	
+GO:0031728	3	CCR3 chemokine receptor binding	
+GO:0086016	3	AV node cell action potential	
+GO:0015382	2	sodium:sulfate symporter activity	
+GO:0016608	2	growth hormone-releasing hormone activity	
+GO:0050480	1	imidazolonepropionase activity	
+GO:0008401	3	retinoic acid 4-hydroxylase activity	
+GO:0003993	8	acid phosphatase activity	
+GO:0097104	8	postsynaptic membrane assembly	
+GO:0010625	1	positive regulation of Schwann cell proliferation	GO:0051580 -- regulation of neurotransmitter uptake
+GO:0015812	5	gamma-aminobutyric acid transport	
+GO:0030103	2	vasopressin secretion	
+GO:0010578	1	regulation of adenylate cyclase activity involved in G-protein coupled receptor signaling pathway	GO:0051458 -- corticotropin secretion
+GO:0030222	2	eosinophil differentiation	
+GO:0036457	3	keratohyalin granule	
+GO:0001591	2	dopamine neurotransmitter receptor activity, coupled via Gi/Go	
+GO:0001605	1	adrenomedullin receptor activity	GO:0071329 -- cellular response to sucrose stimulus
+GO:0021979	4	hypothalamus cell differentiation	
+GO:0005166	3	neurotrophin p75 receptor binding	
+GO:2000252	6	negative regulation of feeding behavior	
+GO:0044299	1	C-fiber	
+GO:0004031	2	aldehyde oxidase activity	
+GO:2000544	3	regulation of endothelial cell chemotaxis to fibroblast growth factor	
+GO:0098839	4	postsynaptic density membrane	
+GO:2000852	2	regulation of corticosterone secretion	
+GO:0042360	3	vitamin E metabolic process	
+GO:0004621	1	glycosylphosphatidylinositol phospholipase D activity	GO:0006507 -- GPI anchor release / GO:0071401 -- cellular response to triglyceride / GO:1900076 -- regulation of cellular response to insulin stimulus
+GO:0034363	5	intermediate-density lipoprotein particle	
+GO:0010983	2	positive regulation of high-density lipoprotein particle clearance	
+GO:0032983	3	kainate selective glutamate receptor complex	
+GO:0007522	1	visceral muscle development	
+GO:0051935	1	glutamate reuptake	
+GO:0038131	1	neuregulin receptor activity	
+GO:0046340	3	diacylglycerol catabolic process	
+GO:0005223	4	intracellular cGMP activated cation channel activity	
+GO:2000465	1	regulation of glycogen (starch) synthase activity	
+GO:0003097	2	renal water transport	GO:0015168 -- glycerol transmembrane transporter activity / GO:0071288 -- cellular response to mercury ion
+GO:0033626	1	positive regulation of integrin activation by cell surface receptor linked signal transduction	
+GO:0015272	5	ATP-activated inward rectifier potassium channel activity	
+GO:0002215	3	defense response to nematode	
+GO:0008048	4	calcium sensitive guanylate cyclase activator activity	
+GO:0021985	2	neurohypophysis development	
+GO:0005329	4	dopamine transmembrane transporter activity	
+GO:0021590	1	cerebellum maturation	GO:0021679 -- cerebellar molecular layer development / GO:0031335 -- regulation of sulfur amino acid metabolic process / GO:0032353 -- negative regulation of hormone biosynthetic process
+GO:0071926	1	endocannabinoid signaling pathway	GO:0098921 -- retrograde trans-synaptic signaling by endocannabinoid
+GO:0071657	3	positive regulation of granulocyte colony-stimulating factor production	
+GO:0035378	2	carbon dioxide transmembrane transport	GO:0035379 -- carbon dioxide transmembrane transporter activity
+GO:0032100	3	positive regulation of appetite	
+GO:0031812	1	P2Y1 nucleotide receptor binding	
+GO:0022849	5	glutamate-gated calcium ion channel activity	
+GO:0097091	4	synaptic vesicle clustering	
+GO:0036143	1	kringle domain binding	
+GO:0034584	4	piRNA binding	
+GO:0006873	5	cellular ion homeostasis	
+GO:0038101	1	sequestering of nodal from receptor via nodal binding	GO:1900176 -- negative regulation of nodal signaling pathway involved in determination of lateral mesoderm left/right asymmetry
+GO:0021521	2	ventral spinal cord interneuron specification	
+GO:0033092	2	positive regulation of immature T cell proliferation in thymus	
+GO:0001936	3	regulation of endothelial cell proliferation	
+GO:0030883	5	endogenous lipid antigen binding	GO:0030884 -- exogenous lipid antigen binding
+GO:0031983	1	vesicle lumen	GO:0034359 -- mature chylomicron / GO:0034360 -- chylomicron remnant
+GO:0045556	1	positive regulation of TRAIL biosynthetic process	
+GO:0015056	2	corticotrophin-releasing factor receptor activity	
+GO:0030662	1	coated vesicle membrane	
+GO:0030249	2	guanylate cyclase regulator activity	GO:0031282 -- regulation of guanylate cyclase activity
+GO:1902495	3	transmembrane transporter complex	
+GO:0052696	6	flavonoid glucuronidation	GO:0052697 -- xenobiotic glucuronidation
+GO:0021799	9	cerebral cortex radially oriented cell migration	
+GO:0051121	1	hepoxilin metabolic process	GO:1901751 -- leukotriene A4 metabolic process / GO:2001306 -- lipoxin B4 biosynthetic process
+GO:1902723	3	negative regulation of skeletal muscle satellite cell proliferation	
+GO:0016499	2	orexin receptor activity	
+GO:0017169	1	CDP-alcohol phosphatidyltransferase activity	
+GO:0005502	4	11-cis retinal binding	
+GO:0004578	1	chitobiosyldiphosphodolichol beta-mannosyltransferase activity	
+GO:1903049	1	negative regulation of acetylcholine-gated cation channel activity	
+GO:0031935	1	regulation of chromatin silencing	
+GO:0046483	6	heterocycle metabolic process	
+GO:0032787	3	monocarboxylic acid metabolic process	
+GO:0005332	4	gamma-aminobutyric acid:sodium symporter activity	
+GO:0031704	2	apelin receptor binding	GO:0060183 -- apelin receptor signaling pathway / GO:1904022 -- positive regulation of G-protein coupled receptor internalization
+GO:0097450	2	astrocyte end-foot	
+GO:0004052	3	arachidonate 12-lipoxygenase activity	
+GO:0002024	9	diet induced thermogenesis	
+GO:1902093	7	positive regulation of flagellated sperm motility	
+GO:0033034	1	positive regulation of myeloid cell apoptotic process	GO:0045923 -- positive regulation of fatty acid metabolic process / GO:0070994 -- detection of oxidative stress / GO:0090317 -- negative regulation of intracellular protein transport / GO:2000478 -- positive regulation of metanephric glomerular visceral epithelial cell development / GO:2000534 -- positive regulation of renal albumin absorption / GO:2000590 -- negative regulation of metanephric mesenchymal cell migration
+GO:0004024	6	alcohol dehydrogenase activity, zinc-dependent	
+GO:0097267	8	omega-hydroxylase P450 pathway	
+GO:0098664	8	G-protein coupled serotonin receptor signaling pathway	
+GO:0001602	3	pancreatic polypeptide receptor activity	
+GO:0005111	2	type 2 fibroblast growth factor receptor binding	
+GO:0007635	6	chemosensory behavior	
+GO:0005927	3	muscle tendon junction	
+GO:0090212	2	negative regulation of establishment of blood-brain barrier	
+GO:0045226	3	extracellular polysaccharide biosynthetic process	
+GO:0016243	1	regulation of autophagosome size	GO:1905122 -- polyamine import / GO:1990938 -- peptidyl-aspartic acid autophosphorylation
+GO:1901492	2	positive regulation of lymphangiogenesis	
+GO:0002361	3	CD4-positive, CD25-positive, alpha-beta regulatory T cell differentiation	
+GO:0060180	1	female mating behavior	
+GO:0015277	5	kainate selective glutamate receptor activity	
+GO:2000330	4	positive regulation of T-helper 17 cell lineage commitment	
+GO:0061184	2	positive regulation of dermatome development	
+GO:0008118	1	N-acetyllactosaminide alpha-2,3-sialyltransferase activity	
+GO:0050746	3	regulation of lipoprotein metabolic process	
+GO:0046010	2	positive regulation of circadian sleep/wake cycle, non-REM sleep	
+GO:0003796	8	lysozyme activity	GO:0016998 -- cell wall macromolecule catabolic process
+GO:0005183	1	gonadotropin hormone-releasing hormone activity	GO:0033087 -- negative regulation of immature T cell proliferation / GO:1990008 -- neurosecretory vesicle
+GO:0044245	5	polysaccharide digestion	
+GO:1901383	2	negative regulation of chorionic trophoblast cell proliferation	
+GO:0009624	3	response to nematode	
+GO:0071351	1	cellular response to interleukin-18	
+GO:0010968	1	regulation of microtubule nucleation	
+GO:0048692	1	negative regulation of axon extension involved in regeneration	
+GO:0060460	2	left lung morphogenesis	
+GO:0036117	2	hyaluranon cable	
+GO:0015275	3	stretch-activated, cation-selective, calcium channel activity	
+GO:0010743	1	regulation of macrophage derived foam cell differentiation	GO:0042488 -- positive regulation of odontogenesis of dentin-containing tooth / GO:0060611 -- mammary gland fat development / GO:1902228 -- positive regulation of macrophage colony-stimulating factor signaling pathway / GO:1904141 -- positive regulation of microglial cell migration
+GO:0030197	3	extracellular matrix constituent, lubricant activity	
+GO:0004939	2	beta-adrenergic receptor activity	
+GO:0034190	3	apolipoprotein receptor binding	
+GO:0007354	1	zygotic determination of anterior/posterior axis, embryo	
+GO:0007231	2	osmosensory signaling pathway	
+GO:0060230	2	lipoprotein lipase activator activity	
+GO:2000212	1	negative regulation of glutamate metabolic process	
+GO:0034346	1	positive regulation of type III interferon production	
+GO:0010903	3	negative regulation of very-low-density lipoprotein particle remodeling	GO:0070653 -- high-density lipoprotein particle receptor binding
+GO:0060012	5	synaptic transmission, glycinergic	
+GO:0051466	2	positive regulation of corticotropin-releasing hormone secretion	
+GO:0034371	8	chylomicron remodeling	
+GO:0042357	1	thiamine diphosphate metabolic process	GO:0050333 -- thiamin-triphosphatase activity
+GO:0051932	6	synaptic transmission, GABAergic	
+GO:0002522	2	leukocyte migration involved in immune response	
+GO:0010085	2	polarity specification of proximal/distal axis	
+GO:0007371	1	ventral midline determination	GO:0021910 -- smoothened signaling pathway involved in ventral spinal cord patterning / GO:0060248 -- detection of cell density by contact stimulus involved in contact inhibition / GO:0072285 -- mesenchymal to epithelial transition involved in metanephric renal vesicle formation / GO:2000826 -- regulation of heart morphogenesis
+GO:0002025	3	norepinephrine-epinephrine-mediated vasodilation involved in regulation of systemic arterial blood pressure	GO:0031649 -- heat generation
+GO:0016098	5	monoterpenoid metabolic process	
+GO:0060513	4	prostatic bud formation	
+GO:0086015	5	SA node cell action potential	
+GO:0015211	1	purine nucleoside transmembrane transporter activity	
+GO:0004117	3	calmodulin-dependent cyclic-nucleotide phosphodiesterase activity	
+GO:0061325	2	cell proliferation involved in outflow tract morphogenesis	
+GO:0099566	2	regulation of postsynaptic cytosolic calcium ion concentration	GO:0099583 -- neurotransmitter receptor activity involved in regulation of postsynaptic cytosolic calcium ion concentration
+GO:1904515	1	positive regulation of TORC2 signaling	

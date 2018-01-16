@@ -1,0 +1,5 @@
+GO:1901339	1	regulation of store-operated calcium channel activity	
+GO:0005132	6	type I interferon receptor binding	
+GO:0098633	1	collagen fibril binding	GO:1904027 -- negative regulation of collagen fibril organization
+GO:0005333	3	norepinephrine transmembrane transporter activity	GO:0015874 -- norepinephrine transport
+GO:0001785	2	prostaglandin J receptor activity	GO:0004956 -- prostaglandin D receptor activity

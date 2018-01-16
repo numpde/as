@@ -1,6 +1,14 @@
 **/UV/**
 !**/UV/unversioned
 
+
+**/s/*/img/*
+
+**/tex/**
+!**/tex/*.tex
+!**/tex/*.bib
+!**/tex/makefile
+
 .*.swp
 
 *.*~
