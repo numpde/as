@@ -69,6 +69,7 @@ PARAM = {
 		"GO:0031724", # CXCR5 chemokine receptor binding
 		"GO:0002039", # p53 binding
 		"GO:0030330", # DNA damage response, signal transduction by p53 class mediator
+		"GO:0038128", # ERBB2 signaling pathway (ERBB2 = ENSG00000141736)
 	},
 	
 	# Figure formats
