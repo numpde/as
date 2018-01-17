@@ -207,7 +207,7 @@ def job(N, M) :
 		for _ in range(M)
 	]
 
-def compute() :
+def COMPUTE() :
 	
 	# For each GO category, generate M random subsets of the same size
 	M = PARAM['M']
@@ -234,9 +234,9 @@ def compute() :
 
 ## ============ PLOTTING WORK :
 
-def plot() :
-	#
+def PLOT() :
 	
+	# Load the clustering indices of random subsets
 	RUNS = [
 		pickle.load(open(f, 'rb'))
 		for f in list_files(OFILE['runs'].format(ver="*"))
@@ -314,6 +314,6 @@ def plot() :
 
 if (__name__ == "__main__") :
 	
-	if ("COMPUTE" in sys.argv) : compute()
-	if ("PLOT"    in sys.argv) : plot()
+	if ("COMPUTE" in sys.argv) : COMPUTE()
+	if ("PLOT"    in sys.argv) : PLOT()
 
