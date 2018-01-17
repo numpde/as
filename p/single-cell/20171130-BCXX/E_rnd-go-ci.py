@@ -254,16 +254,16 @@ def PLOT() :
 	#    'g' = GO category
 	NC_ALL = [(runs['NC'], 'r') for runs in RUNS] + [(NC_GO, 'g')]
 	
-	for K in [2**k for k in range(0, 10)] :
+	for K in [2**k for k in range(0, 11)] :
 		print("Subset size:", K)
 		
 		w = math.sqrt(2)
 
 		plt.clf()
 		
-		# Plot handles and legends
-		H = { 'r' : [], 'g' : [] }
-		L = { 'r' : [], 'g' : [] }
+		# Handles and legends
+		H = { 'r' : [], 'g' : [], '--' : None }
+		L = { 'r' : [], 'g' : [], '--' : None }
 		
 		for (NC, tag) in NC_ALL :
 			# Filter subsets by size
@@ -292,16 +292,26 @@ def PLOT() :
 			if (tag == 'g') :
 				plt.plot(C, f(C), ('.' + tag), markersize=3)
 		
-		plt.xlim([-1, 1])
-		plt.ylim([0, max(plt.ylim())])
+		H['--'] = plt.plot(-1, 0, '--k')[0]
+		L['--'] = "5% and 95%"
+		
+		ylim = max(plt.ylim())
+		plt.yticks(range(12))
+		
+		# Optional:
+		ylim = 11.5
 		
 		xx = np.linspace(-1, 1, 9)
 		plt.xticks(xx, [Fraction(x) for x in xx])
 		
+		plt.xlim([-1, 1])
+		plt.ylim([0, ylim])
+		
 		plt.legend(
-			[ H['r'][0], H['g'][0] ],
-			[ L['r'][0], L['g'][0] ],
-			loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
+			[ H['r'][0], H['g'][0], H['--'] ],
+			[ L['r'][0], L['g'][0], L['--'] ],
+			#loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
+			loc = 'upper left'
 		)
 		
 		plt.xlabel("Clustering index")
