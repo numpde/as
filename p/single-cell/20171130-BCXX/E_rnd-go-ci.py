@@ -1,12 +1,18 @@
 
 # RA, 2018-01-16
 
+# Run as
+#	python3 E_rnd-go-ci.py COMPUTE
+# or 
+#	python3 E_rnd-go-ci.py PLOT
+
 ## ================== IMPORTS :
 
 import re
 import os
 import sys
 import math
+import time
 import pickle
 import random
 import inspect
@@ -26,6 +32,7 @@ from multiprocessing import cpu_count
 from joblib          import Parallel, delayed
 from progressbar     import ProgressBar as Progress
 from glob            import glob as list_files
+from fractions       import Fraction
 
 from sklearn.metrics.pairwise import euclidean_distances as euc_dist
 
@@ -61,7 +68,7 @@ PARAM = {
 	# Number of parallel computing processes
 	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
 	
-	# Number of random subsets per category size
+	# Number of random subsets per GO category
 	'M' : 10,
 }
 
@@ -72,8 +79,8 @@ mpl.rcParams['axes.labelsize'] = 'large'
 # This script
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
-## ====================== (!) :
 
+## ====================== (!) :
 
 # https://en.wikipedia.org/wiki/Silhouette_(clustering)
 # D = distance matrix
@@ -107,6 +114,7 @@ def CI(X, feature_axis) :
 		np.sign(x) 
 		for x in chain.from_iterable(silhouette(dist(X), S).values())
 	])
+
 
 ## ===================== DATA :
 
@@ -191,6 +199,7 @@ GO2WQ = restrict(GO2WQ, GO2A.keys())
 ## =========== COMPUTING WORK :
 
 Z = stats.mstats.zscore(BC_X, axis=axis_smpl).tolist()
+assert(axis_gene == 0) # tolist() above assumes this
 
 def job(N, M) :
 	return [
@@ -199,13 +208,15 @@ def job(N, M) :
 	]
 
 def compute() :
-	assert(axis_gene == 0)
 	
+	# For each GO category, generate M random subsets of the same size
 	M = PARAM['M']
 	
-	ver = 1000
-	while os.path.isfile(OFILE['runs'].format(ver=ver)) : ver += 1
+	ver = time.strftime("%Y%m%d-%H%M%S")
+	print("Results will be written to:")
+	print(OFILE['runs'].format(ver=ver))
 	
+	# Main computation loop
 	NC = list(chain.from_iterable(
 		Parallel(n_jobs=PARAM['#proc'])(
 			delayed(job)(len(E), M)
@@ -214,6 +225,7 @@ def compute() :
 		)
 	))
 	
+	# Save the results
 	pickle.dump(
 		{ 'NC' : NC, 'M' : M, 'script' : THIS },
 		open(OFILE['runs'].format(ver=ver), 'wb')
@@ -230,67 +242,78 @@ def plot() :
 		for f in list_files(OFILE['runs'].format(ver="*"))
 	]
 	
-	NC = RUNS[0]['NC']
-
-	for n in range(0, 10) :
-		
-		N = 2 ** n
-		print("Subset size:", N)
+	# RUNS[i]['NC'] is a list of the form
+	#    [(n1, c1), (n2, c2), ...]
+	# where n is the subset size and c is the clustering index
+	
+	# Make a similar list for the GO categories
+	NC_GO = [(len(E), GO2CI[go]) for (go, E) in GO2E.items() if (len(E) and (go in GO2CI))]
+	
+	# Collect all those lists with a tag
+	#    'r' = random subset
+	#    'g' = GO category
+	NC_ALL = [(runs['NC'], 'r') for runs in RUNS] + [(NC_GO, 'g')]
+	
+	for K in [2**k for k in range(0, 10)] :
+		print("Subset size:", K)
 		
 		w = math.sqrt(2)
-		
-		C = [(c, n) for (n, c) in NC if (N/w < n < N*w)]
-		if not C : continue
-		NR = set(n for (_, n) in C)
-		C = sorted(c for (c, n) in C)
-		f = gaussian_kde(C)
-		
-		D = [(go, len(E)) for (go, E) in GO2E.items() if (N/w < len(E) < N*w)]
-		if not D : continue
-		NG = set(n for (_, n) in D)
-		D = sorted(GO2CI[go] for (go, _) in D if (go in GO2CI))
-		g = gaussian_kde(D)
-		
-		t = np.linspace(min(min(C), min(D)), max(max(C), max(D)), 100)
-		
-		cp = np.percentile(C, [5, 95])
-		dp = np.percentile(D, [5, 95])
-		
+
 		plt.clf()
-		plt.plot(t, f(t), '-r')
-		plt.plot(t, g(t), '-b')
 		
-		xlim = plt.xlim()
-		ylim = plt.ylim()
+		# Plot handles and legends
+		H = { 'r' : [], 'g' : [] }
+		L = { 'r' : [], 'g' : [] }
 		
-		plt.plot((cp[0], cp[0]), (0, f(cp[0])), '--r')
-		plt.plot((dp[0], dp[0]), (0, g(dp[0])), '--b')
-		plt.plot((cp[1], cp[1]), (0, f(cp[1])), '--r')
-		plt.plot((dp[1], dp[1]), (0, g(dp[1])), '--b')
+		for (NC, tag) in NC_ALL :
+			# Filter subsets by size
+			(N, C) = zip(*[(n, c) for (n, c) in NC if (K/w < n < K*w)])
+			if not C : continue
 		
-		plt.plot(D, g(D), '.b', markersize=3)
+			f = gaussian_kde(C)
+		
+			t = np.linspace(-1, 1, 257)
+		
+		
+			h = plt.plot(t, f(t), ('-' + tag))
+			
+			H[tag].append( h[0] )
+			L[tag].append(
+				("Random subsets" if (tag == 'r') else "GO categories") 
+				+
+				" of size {}--{}".format(min(N), max(N))
+			)
+			
+			# Indicate the 5% and 95% sections
+			for p in np.percentile(C, [5, 95]) :
+				plt.plot((p, p), (0, f(p)), ('--' + tag))
+		
+			# Plot also the data points for the GO categories
+			if (tag == 'g') :
+				plt.plot(C, f(C), ('.' + tag), markersize=3)
 		
 		plt.xlim([-1, 1])
-		plt.ylim([0, ylim[1]])
+		plt.ylim([0, max(plt.ylim())])
+		
+		xx = np.linspace(-1, 1, 9)
+		plt.xticks(xx, [Fraction(x) for x in xx])
 		
 		plt.legend(
-			[
-				"Random subsets of size {}--{}".format(min(NR), max(NR)), 
-				"GO categories of size {}--{}".format(min(NG), max(NG)),
-				"5% and 95%",
-				"5% and 95%",
-			],
-			loc = 'upper left',
+			[ H['r'][0], H['g'][0] ],
+			[ L['r'][0], L['g'][0] ],
+			loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
 		)
 		
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative frequency")
 		
-		plt.savefig(OFILE['plot'].format(rng=n))
+		plt.savefig(OFILE['plot'].format(rng=K))
 
-###
+
+## ===================== MAIN :
 
 if (__name__ == "__main__") :
+	
 	if ("COMPUTE" in sys.argv) : compute()
 	if ("PLOT"    in sys.argv) : plot()
 
