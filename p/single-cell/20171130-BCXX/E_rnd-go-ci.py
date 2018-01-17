@@ -25,6 +25,7 @@ from itertools       import chain
 from multiprocessing import cpu_count
 from joblib          import Parallel, delayed
 from progressbar     import ProgressBar as Progress
+from glob            import glob as list_files
 
 from sklearn.metrics.pairwise import euclidean_distances as euc_dist
 
@@ -45,7 +46,9 @@ for f in IFILE.values() :
 ## =================== OUTPUT :
 
 OFILE = {
-	'runs' : "OUTPUT/E_rnd-go-ci/UV/E_rnd-go-ci.pkl",
+	'runs' : "OUTPUT/E_rnd-go-ci/UV/E_rnd-go-ci_{ver}.pkl",
+	
+	'plot' : "OUTPUT/E_rnd-go-ci/freq_{rng}.pdf",
 }
 
 # Create output directories
@@ -55,14 +58,11 @@ for f in OFILE.values() :
 ## ==================== PARAM :
 
 PARAM = {
-	# Figure formats
-	'ext' : ['png', 'pdf'],
-	
 	# Number of parallel computing processes
 	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
 	
 	# Number of random subsets per category size
-	'M' : 1,
+	'M' : 10,
 }
 
 mpl.rcParams['axes.labelsize'] = 'large'
@@ -207,20 +207,26 @@ def compute() :
 		Parallel(n_jobs=PARAM['#proc'])(
 			delayed(job)(len(E), M)
 			for (_, E) in Progress()(GO2E.items())
+			if len(E)
 		)
 	))
 	
 	pickle.dump(
 		{ 'NC' : NC, 'M' : M, 'script' : THIS },
-		open(OFILE['runs'], 'wb')
+		open(OFILE['runs'].format(ver=1), 'wb')
 	)
 
 def plot() :
-	runs = pickle.load(open(OFILE['runs'], 'rb'))
+	#
 	
-	NC = runs['NC']
+	RUNS = [
+		pickle.load(open(f, 'rb'))
+		for f in list_files(OFILE['runs'].format(ver="*"))
+	]
+	
+	NC = RUNS[0]['NC']
 
-	for n in range(1, 10) :
+	for n in range(0, 10) :
 		
 		N = 2 ** n
 		print("Subset size:", N)
@@ -241,19 +247,40 @@ def plot() :
 		
 		t = np.linspace(min(min(C), min(D)), max(max(C), max(D)), 100)
 		
+		cp = np.percentile(C, [5, 95])
+		dp = np.percentile(D, [5, 95])
+		
 		plt.clf()
 		plt.plot(t, f(t), '-r')
 		plt.plot(t, g(t), '-b')
+		
+		xlim = plt.xlim()
+		ylim = plt.ylim()
+		
+		plt.plot((cp[0], cp[0]), (0, f(cp[0])), '--r')
+		plt.plot((dp[0], dp[0]), (0, g(dp[0])), '--b')
+		plt.plot((cp[1], cp[1]), (0, f(cp[1])), '--r')
+		plt.plot((dp[1], dp[1]), (0, g(dp[1])), '--b')
+		
 		plt.plot(D, g(D), '.b', markersize=3)
+		
+		plt.xlim([-1, 1])
+		plt.ylim([0, ylim[1]])
+		
 		plt.legend(
 			[
 				"Random subsets of size {}--{}".format(min(NR), max(NR)), 
-				"GO categories of size {}--{}".format(min(NG), max(NG))
-			]
+				"GO categories of size {}--{}".format(min(NG), max(NG)),
+				"5% and 95%",
+				"5% and 95%",
+			],
+			loc = 'upper left',
 		)
+		
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative frequency")
-		plt.show()
+		
+		plt.savefig(OFILE['plot'].format(rng=n))
 
 ###
 
