@@ -188,7 +188,7 @@ GO2CI = restrict(GO2CI, GO2A.keys())
 GO2WQ = restrict(GO2WQ, GO2A.keys())
 
 
-## ===================== WORK :
+## =========== COMPUTING WORK :
 
 Z = stats.mstats.zscore(BC_X, axis=axis_smpl).tolist()
 
@@ -203,6 +203,9 @@ def compute() :
 	
 	M = PARAM['M']
 	
+	ver = 1000
+	while os.path.isfile(OFILE['runs'].format(ver=ver)) : ver += 1
+	
 	NC = list(chain.from_iterable(
 		Parallel(n_jobs=PARAM['#proc'])(
 			delayed(job)(len(E), M)
@@ -213,8 +216,11 @@ def compute() :
 	
 	pickle.dump(
 		{ 'NC' : NC, 'M' : M, 'script' : THIS },
-		open(OFILE['runs'].format(ver=1), 'wb')
+		open(OFILE['runs'].format(ver=ver), 'wb')
 	)
+
+
+## ============ PLOTTING WORK :
 
 def plot() :
 	#
