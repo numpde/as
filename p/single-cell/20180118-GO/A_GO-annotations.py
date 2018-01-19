@@ -32,7 +32,6 @@ from operator import itemgetter
 
 pass
 
-
 ## ==================== PARAM :
 
 PARAM = {
@@ -53,12 +52,10 @@ OFILE = {
 }
 
 # Create output directories
-for f in OFILE.values() :
-	os.makedirs(os.path.dirname(f), exist_ok=True)
+for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 
 
 ## ===================== WORK :
-
 
 # Download GO annotation file
 def download() :
@@ -67,7 +64,7 @@ def download() :
 		# https://stackoverflow.com/a/7244263/3609568
 		# Download the zipped file
 		with urllib.request.urlopen(remote) as response :
-			# Unzip t
+			# Unzip it
 			with gzip.GzipFile(fileobj=response) as uncompressed :
 				# Open a local file for writing a bytes object
 				with open(local, 'wb') as f :
@@ -79,16 +76,22 @@ def download() :
 
 # Read the GO annotations table
 # Perform some consistency checks
-# Make bipartite graphs 
-#  H of primary symbols <--> synonyms
-#  G of primary symbols <--> GO terms
-# Returns the triple of (set of primary symbols, G, H)
+# Returns the tuple 
+#   (S0, G, H, S01)
+# where
+#   S0 is the set of primary symbols
+# G, H are bipartite graphs:
+#   H of primary symbols <--> synonyms
+#   G of primary symbols <--> GO terms
+# and
+#   S01 is the set of synonyms that appear as primary symbols
+#   (they are omitted from the graphs)
 def read_goa(filename) :
 	
 	# Use pandas to load the GO annotations table
 	# http://www.geneontology.org/page/go-annotation-file-format-20
-	names = ['DB', 'ID', 'Symbol', 'Q', 'GO', 'DB Ref', 'Evidence', 'With/From', 'Aspect', 'Name', 'Synonyms', 'Type', 'Taxon', 'Date', 'Assigned by', 'Extension', 'Gene product ID']
-	data = read_table(filename, index_col=False, comment='!', sep='\t', header=None, nrows=None, names=names)
+	columns = ['DB', 'ID', 'Symbol', 'Q', 'GO', 'DB Ref', 'Evidence', 'With/From', 'Aspect', 'Name', 'Synonyms', 'Type', 'Taxon', 'Date', 'Assigned by', 'Extension', 'Gene product ID']
+	data = read_table(filename, index_col=False, comment='!', sep='\t', header=None, nrows=None, names=columns)
 	
 	# Check that each ID has at exactly one (primary) symbol
 	# (but some symbols have multiple IDs)
@@ -97,7 +100,7 @@ def read_goa(filename) :
 	assert(all((d == 1) for (n, d) in g.degree() if n.startswith('ID:')))
 	del g
 	
-	# Obtain the symbol synonyms
+	# Obtain the symbol synonyms (excluding itself)
 	SYN = [
 		(s, set(syn.split('|')) - set(s))
 		for (s, syn) in zip(data['Symbol'], data['Synonyms'])
@@ -112,18 +115,23 @@ def read_goa(filename) :
 	# Now can collaps the list to a dict
 	SYN = dict(SYN)
 	
-	# Remove the (primary) symbol from the synonyms
-	SYN = {
-		s0 : [s for s in syn if (s not in SYN.keys())]
-		for (s0, syn) in SYN.items()
-	}
-	
 	# Primary symbols
 	S0 = set(SYN.keys())
+	
+	# Primary symbols that appear as synonyms
+	S01 = S0 & set(chain.from_iterable(SYN.values()))
+	
+	# Remove the primary symbols from the synonyms
+	SYN = { s0 : (syn - S01) for (s0, syn) in SYN.items() }
+	
 	# All synonyms (excluding the primary symbols)
 	S1 = set(chain.from_iterable(SYN.values()))
+	
 	# They should be disjoint by now:
 	assert(not (S0 & S1))
+	
+	# For bipartite graphs, see
+	# https://networkx.github.io/documentation/stable/reference/algorithms/bipartite.html
 	
 	# Make a bipartite graph "ID" <--> "Synonyms"
 	H = nx.Graph()
@@ -133,28 +141,27 @@ def read_goa(filename) :
 	# There should be no self-loops
 	assert(all((a != b) for (a, b) in H.edges()))
 	# Each synonym belongs to at least one primary symbol
-	for s in S1 : assert(H.degree(s) >= 1)
+	assert(all(H.degree(s) for s in S1))
 	
 	# Make a bipartite graph "Primary gene symbols" <--> "GO terms"
-	# https://networkx.github.io/documentation/stable/reference/algorithms/bipartite.html
 	G = nx.Graph()
 	assert(S0 == set(data['Symbol']))
 	G.add_nodes_from(data['Symbol'], is_symbol=1, is_go=0)
 	G.add_nodes_from(data['GO'],     is_symbol=0, is_go=1)
 	G.add_edges_from(zip(data['Symbol'], data['GO']))
 	
-	return (S0, G, H)
+	return (S0, G, H, S01)
 
 
 def process() :
 	
-	(S0, G, H) = read_goa(OFILE['GOA'])
+	(S, G, H, _) = read_goa(OFILE['GOA'])
 	
 	# Symbols and synonyms
 	
 	with open(OFILE['synonyms'], 'w') as f :
 		print("Primary symbol", "Non-ambiguous synonyms", "Ambiguous synonyms", sep='\t', file=f)
-		for s in sorted(S0) : 
+		for s in sorted(S) : 
 			# Ambiguous synonyms
 			a = sorted(n for n in H.neighbors(s) if (H.degree(n) >= 2))
 			# Non-ambiguous synonyms
@@ -172,16 +179,17 @@ def process() :
 	
 	with open(OFILE['symb->go'], 'w') as f :
 		print("Primary symbol", "GO terms", sep='\t', file=f)
-		for s in sorted(S0) : 
+		for s in sorted(S) : 
 			print(s, '|'.join(sorted(G.neighbors(s))), sep='\t', file=f)
 
 	with open(OFILE['go->symb'], 'w') as f :
 		print("GO term", "Primary symbol", sep='\t', file=f)
-		for s in sorted(set(G.nodes()) - S0) : 
+		for s in sorted(set(G.nodes()) - S) : 
 			assert(s.startswith("GO:"))
 			print(s, '|'.join(sorted(G.neighbors(s))), sep='\t', file=f)
 
 
+## ===================== MAIN :
 
 if (__name__ == "__main__") :
 
