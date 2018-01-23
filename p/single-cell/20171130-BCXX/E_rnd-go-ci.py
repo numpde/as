@@ -3,7 +3,7 @@
 
 # Run as
 #	python3 E_rnd-go-ci.py COMPUTE
-# or 
+#	python3 E_rnd-go-ci.py LIST
 #	python3 E_rnd-go-ci.py PLOT
 
 ## ================== IMPORTS :
@@ -55,6 +55,8 @@ for f in IFILE.values() :
 OFILE = {
 	'runs' : "OUTPUT/E_rnd-go-ci/UV/E_rnd-go-ci_{ver}.pkl",
 	
+	'list' : "OUTPUT/E_rnd-go-ci/list.txt",
+	
 	'plot' : "OUTPUT/E_rnd-go-ci/freq_{rng}.pdf",
 }
 
@@ -70,6 +72,9 @@ PARAM = {
 	
 	# Number of random subsets per GO category
 	'M' : 10,
+	
+	# Exclude genes w/o GO category
+	'GO union only' : True,
 }
 
 mpl.rcParams['axes.labelsize'] = 'large'
@@ -198,6 +203,15 @@ GO2WQ = restrict(GO2WQ, GO2A.keys())
 
 ## =========== COMPUTING WORK :
 
+# Exclude genes w/o GO category
+if PARAM['GO union only'] :
+	E = set(chain.from_iterable(GO2E.values()))
+	BC_X = np.take(BC_X, [n for (n, e) in enumerate(BC_E) if e in E] , axis=axis_gene)
+	print("Keeping {}/{} genes".format(len(E), len(BC_E)))
+	# Those are invalidated:
+	del E2I
+	del BC_E
+
 Z = stats.mstats.zscore(BC_X, axis=axis_smpl).tolist()
 assert(axis_gene == 0) # tolist() above assumes this
 
@@ -227,9 +241,40 @@ def COMPUTE() :
 	
 	# Save the results
 	pickle.dump(
-		{ 'NC' : NC, 'M' : M, 'script' : THIS },
+		{ 'NC' : NC, 'script' : THIS, 'PARAM' : PARAM },
 		open(OFILE['runs'].format(ver=ver), 'wb')
 	)
+
+
+## ======== LIST GO QUANTILES :
+
+def LIST() :
+	
+	# Load the clustering indices of random subsets
+	NC = list(chain.from_iterable(
+		pickle.load(open(f, 'rb'))['NC']
+		for f in list_files(OFILE['runs'].format(ver="*"))
+	))
+	
+	Q = []
+	for (go, E) in Progress()(list(GO2E.items())) :
+		if not E : continue
+		if not GO2CI.get(go, None) : continue
+	
+		ci = GO2CI[go]
+		
+		w = math.sqrt(2)
+		C = [c for (n, c) in NC if (n/w < len(E) <= n*w)]
+		
+		q = np.mean([(c < ci) for c in C])
+		
+		Q.append( (go, q, len(C), len(E), GO2T[go]) )
+	
+	Q = sorted(Q, key=(lambda x : x[1]))
+	
+	with open(OFILE['list'], 'w') as f :
+		print("GO term", "CI quantile", "Random subsets", "GO size", "GO name", sep='\t', file=f)
+		for q in Q : print(*q, sep='\t', file=f)
 
 
 ## ============ PLOTTING WORK :
@@ -267,7 +312,7 @@ def PLOT() :
 		
 		for (NC, tag) in NC_ALL :
 			# Filter subsets by size
-			(N, C) = zip(*[(n, c) for (n, c) in NC if (K/w < n < K*w)])
+			(N, C) = zip(*[(n, c) for (n, c) in NC if (K/w <= n < K*w)])
 			if not C : continue
 		
 			f = gaussian_kde(C)
@@ -325,5 +370,6 @@ def PLOT() :
 if (__name__ == "__main__") :
 	
 	if ("COMPUTE" in sys.argv) : COMPUTE()
+	if ("LIST"    in sys.argv) : LIST()
 	if ("PLOT"    in sys.argv) : PLOT()
 
