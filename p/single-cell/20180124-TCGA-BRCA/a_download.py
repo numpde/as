@@ -4,6 +4,7 @@
 # Run as
 #    python3 a_download.py > tmp.log
 
+
 ## ================== IMPORTS :
 
 import os
@@ -16,11 +17,13 @@ from time import sleep
 from joblib import Parallel, delayed
 from progressbar import ProgressBar as Progress
 
+
 ## ==================== INPUT :
 
 IFILE = {
 	'manifest' : "ORIGINALS/TCGA-BRCA-01/gdc_manifest.2018-01-24T03_39_35.725692.txt",
 }
+
 
 ## =================== OUTPUT :
 
@@ -43,14 +46,15 @@ PARAM = {
 	'max retry' : 10,
 }
 
+
 ## ====================== AUX :
 
 # https://stackoverflow.com/questions/107705/disable-output-buffering
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 1)
 sys.stderr = os.fdopen(sys.stderr.fileno(), 'w', 1)
 
-## ===================== WORK :
 
+## ===================== WORK :
 
 def job(uuid, name, md5, retry=0) :
 	
@@ -89,14 +93,20 @@ def job(uuid, name, md5, retry=0) :
 		if (retry >= PARAM['max retry']) :
 			raise e
 		
-		return job(uuid, name, md5, retry+1)
+		return job(uuid, name, md5, retry + 1)
 
 
-mani = pandas_read(IFILE['manifest'], index_col=False, sep='\t')
+def main() :
 
-OK = Parallel(n_jobs=PARAM['requests'], batch_size=5, verbose=0)(
-	delayed(job)(*q)
-	for q in Progress()(sorted(zip(mani['id'], mani['filename'], mani['md5'])))
-)
+	mani = pandas_read(IFILE['manifest'], index_col=False, sep='\t')
 
-print("md5 success: {}/{} files.".format(sum(ok for (_, _, ok) in OK), len(mani.index)))
+	OK = Parallel(n_jobs=PARAM['requests'], batch_size=5, verbose=0)(
+		delayed(job)(*q)
+		for q in Progress()(sorted(zip(mani['id'], mani['filename'], mani['md5'])))
+	)
+
+	print("md5 success: {}/{} files.".format(sum(ok for (_, _, ok) in OK), len(mani.index)))
+
+
+if (__name__ == "__main__") :
+	main()
