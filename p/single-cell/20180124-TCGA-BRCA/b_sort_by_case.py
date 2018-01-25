@@ -6,7 +6,6 @@
 
 ## ================== IMPORTS :
 
-import gzip
 import sys
 import os
 import json
