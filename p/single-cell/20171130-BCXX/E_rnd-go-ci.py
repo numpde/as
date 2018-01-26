@@ -55,9 +55,9 @@ for f in IFILE.values() :
 OFILE = {
 	'runs' : "OUTPUT/E_rnd-go-ci/UV/E_rnd-go-ci_{ver}.pkl",
 	
-	'list' : "OUTPUT/E_rnd-go-ci/list.txt",
+	'list' : "OUTPUT/E_rnd-go-ci/list_pivot={pivot}_gonly={union}.txt",
 	
-	'plot' : "OUTPUT/E_rnd-go-ci/freq_{rng}.pdf",
+	'plot' : "OUTPUT/E_rnd-go-ci/freq_pivot={pivot}.pdf",
 }
 
 # Create output directories
@@ -251,30 +251,51 @@ def COMPUTE() :
 def LIST() :
 	
 	# Load the clustering indices of random subsets
+	RUNS = [
+		pickle.load(open(f, 'rb'))
+		for f in sorted(list_files(OFILE['runs'].format(ver="*")))
+	]
+	
+	# Fix old format (before 2018-01-23)
+	for (i, run) in enumerate(RUNS) :
+		if not ('PARAM' in run) :
+			RUNS[i]['PARAM'] = { 'GO union only' : False }
+	
+	# Load the clustering indices of random subsets
 	NC = list(chain.from_iterable(
-		pickle.load(open(f, 'rb'))['NC']
-		for f in list_files(OFILE['runs'].format(ver="*"))
+		run['NC']
+		for run in RUNS
+		if (run['PARAM']['GO union only'] == PARAM['GO union only'])
 	))
 	
-	Q = []
-	for (go, E) in Progress()(list(GO2E.items())) :
-		if not E : continue
-		if not GO2CI.get(go, None) : continue
-	
-		ci = GO2CI[go]
+	Q = dict()
+	for K in [2**k for k in range(0, 13)] :
+		print("Pivot:", K)
 		
 		w = math.sqrt(2)
-		C = [c for (n, c) in NC if (n/w < len(E) <= n*w)]
+		C = [c for (n, c) in NC if (K/w <= n < K*w)]
 		
-		q = np.mean([(c < ci) for c in C])
+		QK = []
 		
-		Q.append( (go, q, len(C), len(E), GO2T[go]) )
+		for (go, E) in Progress()(GO2E.items()) :
+			if not (K/w <= len(E) < K*w) : continue
+			if not GO2CI.get(go, None) : continue
+		
+			ci = GO2CI[go]
+			
+			q = np.mean([(c < ci) for c in C])
+			
+			QK.append( (go, len(E), K, GO2T[go], GO2WQ[go], q, len(C)) )
+		
+		Q[K] = sorted(QK, key=(lambda x : x[5]))
 	
-	Q = sorted(Q, key=(lambda x : x[1]))
+	filename = OFILE['list'].format(pivot="all", union=PARAM['GO union only'])
 	
-	with open(OFILE['list'], 'w') as f :
-		print("GO term", "CI quantile", "Random subsets", "GO size", "GO name", sep='\t', file=f)
-		for q in Q : print(*q, sep='\t', file=f)
+	with open(filename, 'w') as f :
+		print("GO term", "GO size", "Size pivot", "GO name", "CI quantile (GO)", "CI quantile (random)", "Number of random subsets", sep='\t', file=f)
+		for (K, QK) in sorted(Q.items()) :
+			for q in QK : 
+				print(*q, sep='\t', file=f)
 
 
 ## ============ PLOTTING WORK :
@@ -284,9 +305,26 @@ def PLOT() :
 	# Load the clustering indices of random subsets
 	RUNS = [
 		pickle.load(open(f, 'rb'))
-		for f in list_files(OFILE['runs'].format(ver="*"))
+		for f in sorted(list_files(OFILE['runs'].format(ver="*")))
 	]
 	
+	# Fix old format (before 2018-01-23)
+	for (i, run) in enumerate(RUNS) :
+		if not ('PARAM' in run) :
+			RUNS[i]['PARAM'] = { 'GO union only' : False }
+	
+	# Add the tag according to underlying sampling set
+	for (i, run) in enumerate(RUNS) :
+		RUNS[i]['tag'] = ('m' if run['PARAM']['GO union only'] else 'r')
+	
+	# Tag to legend
+	T2L = {
+		'r' : "Random subsets (all genes)", 
+		'm' : "Random subsets (GO genes)", 
+		'g' : "GO categories",
+		'-' : "5% and 95%",
+	}
+		
 	# RUNS[i]['NC'] is a list of the form
 	#    [(n1, c1), (n2, c2), ...]
 	# where n is the subset size and c is the clustering index
@@ -296,8 +334,9 @@ def PLOT() :
 	
 	# Collect all those lists with a tag
 	#    'r' = random subset
+	#    'm' = random subset (genes from the GO union)
 	#    'g' = GO category
-	NC_ALL = [(runs['NC'], 'r') for runs in RUNS] + [(NC_GO, 'g')]
+	NC_ALL = [(runs['NC'], runs['tag']) for runs in RUNS] + [(NC_GO, 'g')]
 	
 	for K in [2**k for k in range(0, 11)] :
 		print("Subset size:", K)
@@ -306,28 +345,25 @@ def PLOT() :
 
 		plt.clf()
 		
-		# Handles and legends
-		H = { 'r' : [], 'g' : [], '--' : None }
-		L = { 'r' : [], 'g' : [], '--' : None }
+		# Handles and legends will be filled in here
+		H = { tag : [] for tag in T2L.keys() }
+		L = { tag : [] for tag in T2L.keys() }
 		
 		for (NC, tag) in NC_ALL :
 			# Filter subsets by size
 			(N, C) = zip(*[(n, c) for (n, c) in NC if (K/w <= n < K*w)])
 			if not C : continue
-		
-			f = gaussian_kde(C)
-		
-			t = np.linspace(-1, 1, 257)
-		
-		
-			h = plt.plot(t, f(t), ('-' + tag))
 			
-			H[tag].append( h[0] )
-			L[tag].append(
-				("Random subsets" if (tag == 'r') else "GO categories") 
-				+
-				" of size {}--{}".format(min(N), max(N))
-			)
+			f = gaussian_kde(C)
+			
+			t = np.linspace(-1, 1, 257)
+			
+			plt.plot(t, f(t), ('-' + tag))
+			
+			h = plt.plot(-1, 0, ('-' + tag), linewidth=4)[0]
+			
+			H[tag].append( h )
+			L[tag].append( "{} of size {}--{}".format(T2L[tag], min(N), max(N)) )
 			
 			# Indicate the 5% and 95% sections
 			for p in np.percentile(C, [5, 95]) :
@@ -337,14 +373,14 @@ def PLOT() :
 			if (tag == 'g') :
 				plt.plot(C, f(C), ('.' + tag), markersize=3)
 		
-		H['--'] = plt.plot(-1, 0, '--k')[0]
-		L['--'] = "5% and 95%"
+		H['-'] = [ plt.plot(-1, 0, '--k')[0] ]
+		L['-'] = [ T2L['-'] ]
 		
 		ylim = max(plt.ylim())
-		plt.yticks(range(12))
+		plt.yticks(range(15))
 		
 		# Optional:
-		ylim = 11.5
+		ylim = 12.5
 		
 		xx = np.linspace(-1, 1, 9)
 		plt.xticks(xx, [Fraction(x) for x in xx])
@@ -353,8 +389,8 @@ def PLOT() :
 		plt.ylim([0, ylim])
 		
 		plt.legend(
-			[ H['r'][0], H['g'][0], H['--'] ],
-			[ L['r'][0], L['g'][0], L['--'] ],
+			[ H[tag][0] for tag in ['r', 'm', 'g', '-'] ],
+			[ L[tag][0] for tag in ['r', 'm', 'g', '-'] ],
 			#loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
 			loc = 'upper left'
 		)
@@ -362,7 +398,7 @@ def PLOT() :
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative frequency")
 		
-		plt.savefig(OFILE['plot'].format(rng=K))
+		plt.savefig(OFILE['plot'].format(pivot=K))
 
 
 ## ===================== MAIN :

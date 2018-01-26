@@ -141,4 +141,4 @@ for i in range(n):
 						(img_height + margin) * j: (img_height + margin) * j + img_height] = img.reshape((img_width, img_height))
 
 
-imsave('OUTPUT/e/excites_tone_{}.png'.format(output_index), stitched_filters)
+imsave('OUTPUT/e1/excites_tone_{}.png'.format(output_index), stitched_filters)

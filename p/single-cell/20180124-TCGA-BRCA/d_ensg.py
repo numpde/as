@@ -53,74 +53,64 @@ TESTMODE = ("TEST" in sys.argv)
 
 ## ===================== WORK :
 
-# [ PART 1 ]
 
-if os.path.isfile(OFILE['dump']) :
+# Fetch 'attributes' keyed by the first entry of 'attributes'
+def biomart_this(dataset, attributes, E, retry=0) :
 	
-	print("Note:", OFILE['dump'], "already exists.")
+	try :
+		
+		response = dataset.search(
+			{
+				'filters' : { attributes[0] : E }, 
+				'attributes': attributes 
+			}, 
+			header=0
+		).content.decode("utf-8")
+		
+		return [r.split('\t') for r in response.splitlines()]
+	
+	except Exception as e :
+		
+		print("Error on try {}: {}".format(retry, e))
+		
+		if (retry >= num_biomart_max_retry) : raise e
+		
+		sleep(retry)
+		
+		return biomart_this(dataset, attributes, E, retry + 1)
 
-else :
-	# Download ENSG info from ensembl
-	
+
+# Download ENSG info from ensembl into a dataframe
+def download(E, attributes) :
+
 	# Get biomart record by ENSG ID
 	# Q&A: https://www.biostars.org/p/3570/
-	
+
 	# See also
 	# https://www.ncbi.nlm.nih.gov/guide/howto/find-func-gene/
-	
+
 	# "The Ensembl genome database project"
 	# Nucleic Acids Res. 2002 Jan 1; 30(1): 38–41.
 	# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC99161/
-	
-	# List of relevant ENSG IDs
-	E = pickle.load(open(IFILE['TCGA'], "rb"))['X']['ENSG']
-	
+
 	# Drop the version extension, make unique
 	E = set(e[0:15] for e in E)
-	
+
 	# Take only ENSG IDs
 	E = sorted(e for e in E if e.startswith("ENSG0"))
-	
+
 	if TESTMODE : 
-		E = E[-5:]
+		E = E[0:5]
 		num_biomart_ids_per_query = 1
-	
+
 	print("Downloading info for {} ENSGs...".format(len(E)))
-	
+
 	# Connect to biomart
 	biomart = BiomartServer(biomart_url)
 	sapiens = biomart.datasets['hsapiens_gene_ensembl']
 
 	#sapiens.show_filters()
 	#sapiens.show_attributes()
-	
-	# The first entry must be 'ensembl_gene_id'
-	attributes = [ 'ensembl_gene_id', 'hgnc_symbol', 'go_id' ]
-	
-	# Fetch attributes for a list of genes
-	def biomart_this(E, retry=0) :
-		
-		try :
-			
-			response = sapiens.search(
-				{
-					'filters' : { attributes[0] : E }, 
-					'attributes': attributes 
-				}, 
-				header=0
-			).content.decode("utf-8")
-			
-			return [r.split('\t') for r in response.splitlines()]
-		
-		except Exception as e :
-			
-			print("Error on try {}: {}".format(retry, e))
-			
-			if (retry >= num_biomart_max_retry) : raise e
-			
-			sleep(retry)
-			
-			return biomart_this(E, retry + 1)
 
 	# Partition the list L into chunks of size sz
 	# https://stackoverflow.com/a/312466/3609568
@@ -132,28 +122,28 @@ else :
 	# (biomart is queried via an URL that can't be too long)
 	data = list(chain.from_iterable(
 		Parallel(n_jobs=num_biomart_parallel_queries, batch_size=1)(
-			delayed(biomart_this)(E_part) 
+			delayed(biomart_this)(sapiens, attributes, E_part) 
 			for E_part in Progress()(partition(E, num_biomart_ids_per_query))
 		)
 	))
-	
+
 	#dump_data_file = "d_ensg_received_data.log"
 	#print("Dumping response to", dump_data_file)
 	#with open(dump_data_file, 'w') as f :
 		#f.write('\n'.join(data))
-	
+
 	# Make sure all data records have the expected number of entries
 	#for row in data: row.extend([None] * (len(attributes) - len(row)))
 	assert(all((len(row) == len(attributes)) for row in data))
-	
+
 	print("Creating data frame...")
-	
+
 	# Convert to pandas dataframe, with 'attributes' as column names
 	df = pd.DataFrame(data=dict(zip(attributes, list(zip(*data))))).sort_values(attributes[0])
 	del data
-	
+
 	print("Merging by ENSG...")
-	
+
 	# Make list of strings unique, filter nontrivial, sort, concatenate
 	def cat(L) : return '|'.join(sorted(set(x for x in L if x)))
 	# Group by ENSG
@@ -161,28 +151,27 @@ else :
 	# Rearrange columns to desired order
 	df = df[attributes]
 	
-	print("Saving...")
+	return df
+
+
+def main() :
 	
+	if os.path.isfile(OFILE['dump']) :
+		print("Note:", OFILE['dump'], "already exists. Exiting.")
+		return
+	
+	# Dataframe
+	df = download(
+		# List of relevant ENSG IDs
+		pickle.load(open(IFILE['TCGA'], "rb"))['X']['ENSG'],
+		
+		# The first entry must be 'ensembl_gene_id'
+		[ 'ensembl_gene_id', 'hgnc_symbol', 'go_id' ],
+	)
+
 	# Save to text file
 	df.to_csv(OFILE['dump'], sep='\t', index=False)
 
-exit()
 
-# [ PART 2 ]
-
-with open(OFILE['All GO'], 'w') as f :
-	for go in sorted(set(chain.from_iterable(E2GO.values()))) :
-		print(go, file=f)
-
-
-# [ PART 3 ]
-
-# GO2E : GO ID --> [ENSG IDs]
-GO2E = { go : [] for go in set(chain.from_iterable(E2GO.values())) }
-for (e, GO) in E2GO.items() : 
-	for go in GO :
-		GO2E[go].append(e)
-
-with open(OFILE['GO2E'], 'w') as f :
-	for (go, E) in GO2E.items() :
-		print('\t'.join([go] + E), file=f)
+if (__name__ == "__main__") :
+	main()

@@ -49,13 +49,14 @@ for (n, (s, T)) in enumerate(CT) :
 	I = np.array(img)
 	
 	#plt.ion()
-	#plt.imshow(I, cmap='Greys')
+	#plt.imshow(I, cmap='grey')
 	#plt.show()
 	
 	X[n, :, :] = I
 	
 	T = list(set(T))
 	Y[n, T] = 1 / len(T)
+
 
 # Save images of characters and their tones
 
