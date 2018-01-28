@@ -56,6 +56,12 @@ was obtained on 2018-01-28 using the command
 	curl --request POST --header "Content-Type: application/json" --data @transcriptome_list_payload.json 'https://api.gdc.cancer.gov/files' > transcriptome_list.tsv
 
 
+The file 
+
+	h.all.v6.1.symbols.gmt
+
+is from KL, Jan 2017.
+
 
 
 RA, 2017-01-24
