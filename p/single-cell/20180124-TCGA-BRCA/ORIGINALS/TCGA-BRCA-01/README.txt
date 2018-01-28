@@ -47,5 +47,15 @@ More about TCGA-BRCA:
 	https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/Expression_mRNA_Pipeline/
 
 
+The file
+
+	transcriptome_list.tsv
+
+was obtained on 2018-01-28 using the command
+
+	curl --request POST --header "Content-Type: application/json" --data @transcriptome_list_payload.json 'https://api.gdc.cancer.gov/files' > transcriptome_list.tsv
+
+
+
 
 RA, 2017-01-24
