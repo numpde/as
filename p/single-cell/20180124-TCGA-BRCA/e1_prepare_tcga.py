@@ -44,6 +44,10 @@ for f in OFILE.values() :
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
+# Log which files are written
+def logged_open(filename, mode='r', *argv, **kwargs) :
+	print("({}):\t{}".format(mode, filename))
+	return open(filename, mode, *argv, **kwargs)
 
 ## ===================== WORK :
 
@@ -52,9 +56,9 @@ def prepare() :
 	# Read ENSG info file
 	ENSG = pd.read_table(IFILE['ENSG'])
 	# Rename columns
-	ENSG = ENSG.rename(columns={ 'ensembl_gene_id' : 'ENSG', 'hgnc_symbol' : 'Symbol' })
+	ENSG = ENSG.rename(columns={ 'ensembl_gene_id' : 'ENSG', 'hgnc_symbol' : 'symbol' })
 	# Select only those columns
-	ENSG = ENSG[['ENSG', 'Symbol']]
+	ENSG = ENSG[['ENSG', 'symbol']]
 	# Omit rows with missing data
 	ENSG = ENSG.dropna(axis=0, how='any')
 
@@ -67,27 +71,36 @@ def prepare() :
 	X = X.merge(ENSG, left_index=True, right_index=True, how='inner')
 	# Index by Symbol, summing over subgroups
 	# The ENSG index column is dropped
-	X = X.groupby('Symbol').sum()
+	X = X.groupby('symbol').sum()
 	
 	# Read the subtype classification
 	C = pd.read_table(IFILE['subtype'])
-	# Split sample ID "TCGA-AN-A0FL-01A-11R-A034-07" (e.g.)
-	# into patient ID "TCGA-AN-A0FL" and "01A-11R-A034-07"
-	(P, S) = zip(*[(s[0:12], s[13:]) for s in C['Sample']])
-	del C['Sample']
-	C['Patient'] = P
-	C['sample'] = S
-	
-	#print(C[ C['PAM50'] == "Her2" ])
-	#exit()
+	# Rename columns
+	C = C.rename(columns={ 
+		# Example value
+		
+		# TCGA-AN-A0FL-01A-11R-A034-07
+		'Sample' : 'aliquot_barcode',
+		
+		# Tumor
+		'Type' : 'tissue_type', 
+		
+		# -13 
+		'Siglust' : 'SigClust', # SIC!
+		
+		# LumA / LumB / Her2 / Basal / Normal
+		'PAM50' : 'PAM50',
+	})
+	# Append a column with patient ID (also the case ID)
+	C['patient_barcode'] = [s[0:12] for s in C['aliquot_barcode']]
 	
 	pickle.dump(
 		{
 			'X' : X,
-			'C' : C,
+			'subtype' : C,
 			'script' : THIS,
 		},
-		open(OFILE['DATA'], 'wb')
+		logged_open(OFILE['DATA'], 'wb')
 	)
 
 

@@ -27,6 +27,7 @@ from progressbar import ProgressBar as Progress
 
 IFILE = {
 	'casefile' : "OUTPUT/b_cases/UV/{caseid}/{name}",
+	'filemeta' : "ORIGINALS/TCGA-BRCA-01/transcriptome_list.tsv",
 }
 
 
@@ -80,7 +81,8 @@ def files_by_patient() :
 		# Case UUID
 		c = os.path.basename(os.path.normpath(p))
 		
-		def one(L) :
+		# Expects an empty list or a singleton
+		def onlyone(L) :
 			if not L : return None
 		
 			assert(type(L) == list)
@@ -94,30 +96,93 @@ def files_by_patient() :
 		F['FPKM-UQ']      = glob(p + "*FPKM-UQ.txt*")
 		F['htseq.counts'] = glob(p + "*htseq.counts*")
 		
-		F['clinical']     = one(glob(p + "*clinical*"))
-		F['biospecimen']  = one(glob(p + "*biospecimen*"))
+		F['clinical']     = onlyone(glob(p + "*clinical*"))
+		F['biospecimen']  = onlyone(glob(p + "*biospecimen*"))
 		
-		if (not F['clinical']) : 
-			print("")
-			print("No 'clinical' file in", p)
-			continue
+		if not F['clinical'] : 
+			print("Note: No 'clinical' file in", p)
 		
-		patient_barcode = get_patient_barcode(F['clinical'])
-		assert(not patient_barcode in P2FF), "Duplicate patient barcode."
+		# Not all cases have the 'clinical' file, so cannot use
+		#     get_patient_barcode(F['clinical'])
+		# Use the case UUID instead:
+		patient_uuid = c
 		
-		P2FF[patient_barcode] = F
+		assert(not patient_uuid in P2FF), "Duplicate patient barcode."
+		
+		P2FF[patient_uuid] = F
 		
 	return P2FF
 
 
+def get_transcriptome_file_info() :
+
+	FI = pd.read_table(IFILE['filemeta'])
+
+	FI.rename(inplace=True, columns={
+		# [Found in biospecimen / clinical file?] Example(s):
+		
+		# [Y/N] TCGA-E9-A3QA-01A-61R-A22K-07
+		'cases.0.samples.0.portions.0.analytes.0.aliquots.0.submitter_id' : 
+			'aliquot_barcode', 
+		
+		# [Y/N] 8a7e272c-39f2-42e6-b1d5-7225cf12fceb
+		'cases.0.samples.0.portions.0.analytes.0.aliquots.0.aliquot_id' : 
+			'aliquot_uuid',
+		
+		# [Y/N] Primary Tumor / Solid Tissue Normal / Metastatic
+		'cases.0.samples.0.sample_type' : 
+			'sample_type',  
+		
+		# [Y/N] 27e8b056-063f-4742-a591-b98fb9a948a5
+		'cases.0.samples.0.sample_id' : 
+			'sample_uuid',  
+		
+		# [Y/Y] TCGA-E9-A3QA
+		'cases.0.submitter_id' : 
+			'patient_barcode', 
+		
+		# [Y/Y] f3cb557d-23e4-4fd1-81ca-db1a3f56d56e
+		'cases.0.case_id' : 
+			'patient_uuid', 
+		
+		# [N/N] 148d950b-4202-4f3f-be15-84735cd08a48.FPKM.txt.gz
+		'file_name' : 
+			'file_name', 
+		
+		# [N/N] HTSeq - FPKM
+		'analysis.workflow_type' : 
+			'type', 
+		
+		# [N/N] Transcriptome Profiling
+		'data_category' : 
+			'data_category',
+		
+		# [N/N] Gene ... / Isoform ... / miRNA Expression Quantification
+		'data_type' : 
+			'data_type', 
+		
+		# [N/N] 61b737e2-5a35-4c17-b674-f4ddce8355bb
+		'file_id' : 
+			'file_uuid', 
+	})
+	
+	# Remove the rendundant column 'id'
+	assert((FI['id'] == FI['file_uuid']).all())
+	del FI['id']
+
+	return FI
+
+
 def XX_by_patient() :
+	
+	FI = get_transcriptome_file_info()
 	
 	P2FF = files_by_patient()
 	
 	print("There are {} patients.".format(len(P2FF)))
 	print("No FPKM data found for {} patient(s).".format(sum(not F['FPKM'] for F in P2FF.values())))
 	
-	P2XX = dict()
+	P2XX = defaultdict(list)
 	
 	print("Collecting FPKM data...")
 	
@@ -128,21 +193,32 @@ def XX_by_patient() :
 		#print("Patient:", p)
 		#print("Path:", os.path.dirname(F['clinical']))
 		
-		P2XX[p] = [
-			pd.read_table(
-				gzip.open(filename, 'rb'), 
-				names=['ENSG', "{}_{}".format(p, n)]
-			).sort_values('ENSG')
+		for (n, filename) in enumerate(F['FPKM']) :
 			
-			for (n, filename) in enumerate(F['FPKM'])
-		]
+			# Constency of patient UUID info coming from the directory tree and the 'filemeta' list
+			patient_uuid = FI.loc[ FI['file_name'] == os.path.basename(filename), 'patient_uuid' ].item()
+			assert(p == patient_uuid), "Patient ID mismatch"
+			
+			# Aliquot ID of this file (file of different data kinds that belong together share this ID)
+			aliquot_barcode = FI.loc[ FI['file_name'] == os.path.basename(filename), 'aliquot_barcode' ].item()
+			
+			P2XX[p].append(
+				pd.read_table(
+					# The file contains two columns
+					gzip.open(filename, 'rb'), 
+					# These will be the headers of the columns
+					names = [ 'ENSG', aliquot_barcode ]
+				).sort_values('ENSG')
+			)
 	
-	return P2XX	
+	P2XX = dict(P2XX)
+	
+	return (FI, P2XX)
 
 
 def get_combined_table() :
 	
-	P2XX = XX_by_patient()
+	(FI, P2XX) = XX_by_patient()
 	
 	print("Combining...")
 	
@@ -152,33 +228,33 @@ def get_combined_table() :
 		for data in XX :
 			E = E | set(data['ENSG'])
 	
-	combined = pd.DataFrame(data={'ENSG' : sorted(E)})
+	# Table with all transcriptomes
+	X = pd.DataFrame(data={'ENSG' : sorted(E)})
 	
 	for (_, XX) in Progress()(sorted(P2XX.items())) :
 		for (n, data) in enumerate(XX) :
-			combined = pd.merge(combined, data, on='ENSG', how='outer')
+			X = pd.merge(X, data, on='ENSG', how='outer')
 	
-	return combined
+	return { 'FI' : FI, 'X' : X }
 
 
 def main() :
 	
-	X = get_combined_table()
+	bundle = get_combined_table()
+	
+	bundle['script'] = THIS
 	
 	print("Writing files...")
 	
 	# Write into a pickle file
 	pickle.dump(
-		{
-			'X' : X,
-			'script' : THIS,
-		},
+		bundle,
 		open(OFILE['combined'].format(ext="pkl"), 'wb')
 	)
 	
 	# Write into a txt file
 	if PARAM['dump txt'] :
-		X.to_csv(OFILE['combined'].format(ext="txt"), sep='\t', index=False)
+		bundle['X'].to_csv(OFILE['combined'].format(ext="txt"), sep='\t', index=False)
 
 
 ## ==================== ENTRY :
