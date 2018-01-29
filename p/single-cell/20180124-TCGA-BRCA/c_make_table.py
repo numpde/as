@@ -26,7 +26,7 @@ from progressbar import ProgressBar as Progress
 ## ==================== INPUT :
 
 IFILE = {
-	'casefile' : "OUTPUT/b_cases/UV/{caseid}/{name}",
+	'casefile' : "OUTPUT/a_cases/UV/{caseid}/{name}",
 	'filemeta' : "ORIGINALS/TCGA-BRCA-01/transcriptome_list.tsv",
 }
 
@@ -38,8 +38,7 @@ OFILE = {
 }
 
 # Create output directories
-for f in OFILE.values() :
-	os.makedirs(os.path.dirname(f), exist_ok=True)
+for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 
 ## ==================== PARAM :
 
