@@ -1,4 +1,4 @@
-The files UV/
+The files 
 
 	c1.all.v6.1.entrez.gmt
 	c1.all.v6.1.symbols.gmt
