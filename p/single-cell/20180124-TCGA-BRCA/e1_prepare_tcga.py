@@ -44,10 +44,11 @@ for f in OFILE.values() :
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
-# Log which files are written
+# Log which files are opened
 def logged_open(filename, mode='r', *argv, **kwargs) :
 	print("({}):\t{}".format(mode, filename))
 	return open(filename, mode, *argv, **kwargs)
+
 
 ## ===================== WORK :
 
