@@ -72,11 +72,8 @@ logged_open = open
 # Cosine similarity between two pandas series
 def cosine_similarity(a, b) :
 	def dot(a, b) : return (a * b).sum()
-	s = math.sqrt(dot(a, a) * dot(b, b))
-	if (s == 0) :
-		print(a)
-		print(b)
-	return 1 - (dot(a, b) / s)
+	norms = math.sqrt(dot(a, a) * dot(b, b))
+	return 1 - (dot(a, b) / norms)
 
 
 ## ===================== WORK :
