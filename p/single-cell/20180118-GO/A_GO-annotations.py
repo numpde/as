@@ -226,13 +226,13 @@ def process_obo() :
 	
 	# GO names
 	with open(OFILE['go->name'], 'w') as f :
-		print("GO term", "GO name", sep='\t', file=f)
+		print("GO term", "GO name", "GO namespace", sep='\t', file=f)
 		for n in sorted(G.nodes) : 
-			print(n, G.nodes[n]['name'], sep='\t', file=f)
+			print(n, G.nodes[n]['name'], G.nodes[n]['namespace'], sep='\t', file=f)
 
 
 def process() :
-	#process_goa()
+	process_goa()
 	process_obo()
 
 
