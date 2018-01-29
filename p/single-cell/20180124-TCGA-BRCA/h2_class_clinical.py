@@ -190,7 +190,7 @@ def COMPUTE() :
 			plot(N)
 			plt.title("{} ({})".format(meta['info'], len(meta['set'])), fontsize=6)
 			
-			plt.ylabel(method + " normed cos-dist to...")
+			plt.ylabel(method + " normed cos-sim to...")
 			
 			# Filename for figure
 			f = OFILE['classified'].format(method=method, geneset=nicer(setid))

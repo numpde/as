@@ -72,6 +72,7 @@ def zscore(S) : return (S - S.mean()) / S.std()
 ## ====================== (!) :
 
 # Cosine similarity between two pandas dataframes (column-wise)
+# https://en.wikipedia.org/wiki/Cosine_similarity
 def cosine_similarity(A, B) :
 	
 	# Drop zero columns
@@ -92,15 +93,11 @@ def cosine_similarity(A, B) :
 	# Cosines
 	c = na.dot(d).dot(nb)
 	
-	# Cosine similarities
-	s = 1 - c
-	del c
-	
 	# Check expected dimensions
-	assert(s.shape == (len(A.columns), len(B.columns)))
+	assert(c.shape == (len(A.columns), len(B.columns)))
 	
 	# Return as dataframe
-	return pd.DataFrame(s, index=A.columns, columns=B.columns)
+	return pd.DataFrame(c, index=A.columns, columns=B.columns)
 
 
 ## ===================== WORK :

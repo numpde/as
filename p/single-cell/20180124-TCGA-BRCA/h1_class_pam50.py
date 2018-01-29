@@ -140,7 +140,7 @@ def plot(N) :
 	plt.tick_params(axis='x', which='major', labelsize=6)
 	plt.tick_params(axis='y', which='major', labelsize=8)
 	plt.colorbar()
-	plt.ylabel("Normed cos-dist to...")
+	plt.ylabel("Normed cos-sim to...")
 
 
 def COMPUTE() :
