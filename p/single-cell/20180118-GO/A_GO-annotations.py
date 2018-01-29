@@ -68,6 +68,9 @@ OFILE = {
 	
 	# GO graph -- contains the GO category names
 	'graph' : "OUTPUT/UV/go_graph.pkl",
+	
+	# GO category names
+	'go->name' : "OUTPUT/go2name.txt",
 }
 
 # Create output directories
@@ -214,15 +217,22 @@ def process_goa() :
 
 
 def process_obo() :
-
-	pickle.dump(
-		obonet.read_obo(OFILE['OBO']),
-		open(OFILE['graph'], 'wb')
-	)
+	
+	# GO graph
+	G = obonet.read_obo(OFILE['OBO'])
+	
+	# Write the graph to file
+	pickle.dump(G, open(OFILE['graph'], 'wb'))
+	
+	# GO names
+	with open(OFILE['go->name'], 'w') as f :
+		print("GO term", "GO name", sep='\t', file=f)
+		for n in sorted(G.nodes) : 
+			print(n, G.nodes[n]['name'], sep='\t', file=f)
 
 
 def process() :
-	process_goa()
+	#process_goa()
 	process_obo()
 
 
