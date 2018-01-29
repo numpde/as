@@ -179,16 +179,12 @@ def COMPUTE() :
 	# Load gene subsets of interest
 	gene_subsets = pickle.load(logged_open(IFILE['sets'], 'rb'))['S']
 	
-	if TESTMODE :
-		similarity = [
-			compute(subset['set'], subset)
-			for subset in Progress()(gene_subsets)
-		]
-	else :
-		similarity = Parallel(n_jobs=PARAM['#proc'])(
-			delayed(compute)(subset['set'], subset)
-			for subset in Progress()(gene_subsets)
-		)
+	if TESTMODE : PARAM['#proc'] = 1
+
+	similarity = Parallel(n_jobs=PARAM['#proc'])(
+		delayed(compute)(subset['set'], subset)
+		for subset in Progress()(gene_subsets)
+	)
 	
 	pickle.dump(
 		{
