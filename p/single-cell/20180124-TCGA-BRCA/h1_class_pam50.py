@@ -61,8 +61,8 @@ THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 # Check if pandas series has unique items
 def is_unique(S) : return (S.unique().size == S.size)
 
-def nicer(filename) : 
-	return filename.replace(":", "")
+# Change GO:000 to GO-000 in filenames
+def nicer(filename) : return filename.replace("GO:", "GO-")
 
 ## ====================== (!) :
 
