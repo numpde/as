@@ -28,6 +28,13 @@ from itertools import chain
 from itertools import groupby
 from operator import itemgetter
 
+# For parsing the GO obo file
+import obonet
+
+# For writing binary files
+import pickle
+
+
 ## ==================== INPUT :
 
 pass
@@ -38,17 +45,29 @@ PARAM = {
 	# GO annotations
 	# http://geneontology.org/gene-associations/readme/goa_human.README
 	'GOA URL gaf' : "ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz",
+	
+	# GO core ontology (GO graph)
+	# http://www.geneontology.org/page/download-ontology
+	'GO graph URL' : "http://purl.obolibrary.org/obo/go.obo",
 }
 
 ## =================== OUTPUT :
 
 OFILE = {
+	# GO annotations -- includes the gene list
 	'GOA' : "ORIGINALS/UV/goa_human.gaf",
 	
+	# Associations
 	'synonyms' : "OUTPUT/synonyms.txt",
 	'symb->go' : "OUTPUT/symb2go.txt",
 	'go->symb' : "OUTPUT/go2symb.txt",
 	'syn2symb' : "OUTPUT/syn2symb.txt",
+	
+	# GO graph -- contains the GO category names
+	'OBO' : "ORIGINALS/UV/go.obo",
+	
+	# GO graph -- contains the GO category names
+	'graph' : "OUTPUT/UV/go_graph.pkl",
 }
 
 # Create output directories
@@ -61,17 +80,22 @@ for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 def download() :
 	
 	def get(remote, local) :
+		if os.path.isfile(local) :
+			print("Skipping download:", remote)
+			return
+		
 		# https://stackoverflow.com/a/7244263/3609568
 		# Download the zipped file
 		with urllib.request.urlopen(remote) as response :
 			# Unzip it
-			with gzip.GzipFile(fileobj=response) as uncompressed :
+			with (gzip.GzipFile(fileobj=response) if remote.endswith("gz") else response) as uncompressed :
 				# Open a local file for writing a bytes object
 				with open(local, 'wb') as f :
 					# Write the unzipped contents
 					f.write(uncompressed.read())
 	
 	get(PARAM['GOA URL gaf'], OFILE['GOA'])
+	get(PARAM['GO graph URL'], OFILE['OBO'])
 
 
 # Read the GO annotations table
@@ -153,7 +177,7 @@ def read_goa(filename) :
 	return (S0, G, H, S01)
 
 
-def process() :
+def process_goa() :
 	
 	(S, G, H, _) = read_goa(OFILE['GOA'])
 	
@@ -187,6 +211,19 @@ def process() :
 		for s in sorted(set(G.nodes()) - S) : 
 			assert(s.startswith("GO:"))
 			print(s, '|'.join(sorted(G.neighbors(s))), sep='\t', file=f)
+
+
+def process_obo() :
+
+	pickle.dump(
+		obonet.read_obo(OFILE['OBO']),
+		open(OFILE['graph'], 'wb')
+	)
+
+
+def process() :
+	process_goa()
+	process_obo()
 
 
 ## ===================== MAIN :
