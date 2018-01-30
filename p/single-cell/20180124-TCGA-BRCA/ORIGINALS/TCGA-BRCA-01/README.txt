@@ -55,6 +55,18 @@ was obtained on 2018-01-28 using the command
 
 	curl --request POST --header "Content-Type: application/json" --data @transcriptome_list_payload.json 'https://api.gdc.cancer.gov/files' > transcriptome_list.tsv
 
+Its main purpose is to associate aliquot barcodes to expression files. Alternatively, use the suggestion by the GDC Help Desk:
+
+	The following command would get you the entity ID:
+
+	https://api.gdc.cancer.gov/files/e8342825-161b-434a-8c0d-dde58da71b6a?pretty=true&fields=associated_entities.entity_submitter_id
+
+	This is more or less a shortcut to the aliquot ID, because the aliquot is what this file was produced from. 
+
+	https://api.gdc.cancer.gov/files/e8342825-161b-434a-8c0d-dde58da71b6a?pretty=true&fields=cases.samples.portions.analytes.aliquots.submitter_id
+
+	For a list of available fields, use this address (or replace files with cases):
+	https://api.gdc.cancer.gov/files/_mapping
 
 
 RA, 2017-01-24
