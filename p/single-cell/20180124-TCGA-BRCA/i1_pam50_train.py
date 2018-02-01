@@ -76,23 +76,11 @@ THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 # Check if pandas series has unique items
 def is_unique(S) : return (S.unique().size == S.size)
 
-# zscore transform of a pandas series
-def zscore(S) : return (S - np.mean(S)) / np.std(S)
-
-# normalization of a pandas series
-def normcol(S) : return S / np.sum(np.abs(S))
-
-# softmax of a pandas series
-def softmax(S, amp=1) : return np.exp(amp*S) / np.sum(np.exp(amp*S))
-
-# Change GO:000 to GO-000 in filenames
-def nicer(filename) : return filename.replace("GO:", "GO-")
-
 
 
 ## ====================== (!) :
 
-# 
+# Read the PAM50 classification of TCGA samples
 def get_tcga_pam50() :
 	
 	# PAM50
