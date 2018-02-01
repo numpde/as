@@ -2,7 +2,12 @@
 # RA, 2018-01-30
 
 # Run as
-#    python3 i*.py
+#    python3 i*.py TRAIN
+#    python3 i*.py PLOT
+
+# Requires the module
+#    utils/make_keras_picklable.py
+
 
 ## ================== IMPORTS :
 
@@ -17,6 +22,10 @@ import matplotlib.pyplot as plt
 
 from keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
+
+from keras import backend as keras_backend
+
+from utils import make_keras_picklable
 
 
 ## ==================== INPUT :
@@ -34,8 +43,13 @@ IFILE = {
 ## =================== OUTPUT :
 
 OFILE = {
-	#'classified' : "OUTPUT/h3_class/{ext}/{A}-{B}/{method}/{geneset}.pdf",
+	'model' : "OUTPUT/i1_pam50/trained.pkl",
+	
+	'tsne-plot' : "OUTPUT/i1_pam50/tsne_{set}.{ext}"
 }
+
+# Create output directories
+for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 
 
 ## ==================== PARAM :
@@ -43,15 +57,15 @@ OFILE = {
 TESTMODE = ("TEST" in sys.argv)
 
 PARAM = {
-	# Number of parallel computing processes
-	'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.2)),
+	## Number of parallel computing processes
+	#'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.2)),
 	
 	# Record just in case
 	'testmode' : TESTMODE,
 	
 	# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3283537/
-	#'SCMGENE' : ["ER", "HER2", "AURKA"],
-	'SCMGENE' : ["ESR1", "ERBB2", "AURKA"], # HGNC approved symbols
+	# suggests ["ER", "HER2", "AURKA"], or as HGNC approved symbols:
+	'SCMGENE' : ["ESR1", "ERBB2", "AURKA"],
 	
 	# Source: https://www.biostars.org/p/77590/
 	# Replaced ORC6L by ORC6 (http://www.genecards.org/cgi-bin/carddisp.pl?gene=ORC6)
@@ -77,7 +91,7 @@ def is_unique(S) : return (S.unique().size == S.size)
 ## ====================== (!) :
 
 # Read the PAM50 classification of TCGA samples
-def get_tcga_pam50() :
+def get_tcga_pam50_labels() :
 	
 	# PAM50
 	P = pickle.load(open(IFILE['TCGA-PAM50'], 'rb'))['subtype']
@@ -99,29 +113,64 @@ def get_tcga_pam50() :
 
 ## ===================== WORK :
 
+
+#
+def make_tsne_plots(M) :
+	(X, Y, L, P, x) = (M['X'], M['Y'], M['L'], M['P'], M['x'][2][1].T)
+	(I_train, I_valid) = (M['I'], np.logical_not(M['I']))
+	
+	y = np.argmax(Y, axis=1)
+	p = np.argmax(P, axis=1)
+	
+	for (i, s) in [(I_train, "train"), (I_valid, "valid")] :
+	
+		plt.clf()
+		
+		j = np.logical_not(i)
+		
+		hy = [None] * len(L)
+		hp = [None] * len(L)
+		
+		h0 = [ plt.scatter(x[0][0], x[1][0], c="white", s=0) ] * len(L)
+		
+		plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=10, lw=2)
+		plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=11, lw=2)
+		
+		for (n, _) in enumerate(L) :
+			hy[n] = plt.scatter(x[0][(y == n) & i], x[1][(y == n) & i], c=("C{}".format(n)), s=30, marker=10)
+		
+		for (n, _) in enumerate(L) :
+			hp[n] = plt.scatter(x[0][(p == n) & i], x[1][(p == n) & i], c=("C{}".format(n)), s=30, marker=11)
+		
+		plt.legend(h0 + hy + hp, L + (["Ref"] * len(L)) + (["Est"] * len(L)), ncol=3, prop={'size': 8})
+		
+		plt.xticks([], [])
+		plt.yticks([], [])
+		
+		plt.savefig(OFILE['tsne-plot'].format(set=s, ext="pdf"))
+
+
+def PLOT() :
+	M = pickle.load(open(OFILE['model'], 'rb'))
+	make_tsne_plots(M)
+
+
 # 
 def train(X, Y, L) :
 	
 	from keras.models import Sequential
-	from keras.layers import Dense, Dropout, Activation
+	from keras.layers import Dense, Dropout, Activation, BatchNormalization
 	from keras        import regularizers
 	
 	from keras.callbacks import LambdaCallback
 	
 	from sklearn.model_selection import train_test_split
 	
-	# https://stackoverflow.com/questions/39547279/loading-weights-in-th-format-when-keras-is-set-to-tf-format
-	from keras import backend as keras_backend
-	keras_backend.set_image_data_format('channels_first')
-	
-	import keras.regularizers
+	from keras.regularizers import l2 as L2
 	import keras.optimizers
 	
-	## Omit this class
-	#I = (Y[:, L.index("LumA")] == 0)
-	#X = X[I, :]
-	#Y = Y[I, :]
-	#L.remove("LumA")
+	# https://stackoverflow.com/questions/39547279/loading-weights-in-th-format-when-keras-is-set-to-tf-format
+	keras_backend.set_image_data_format('channels_first')
 	
 	# Number of classes
 	num_classes = Y.shape[1]
@@ -132,13 +181,15 @@ def train(X, Y, L) :
 	model = Sequential([
 		PassiveInput(),
 		
-		Dense(8*num_classes, activation='softplus', kernel_regularizer=keras.regularizers.l2(1e-2)),
+		BatchNormalization(),
+		
+		Dense(8*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
-		Dense(6*num_classes, activation='softplus', kernel_regularizer=keras.regularizers.l2(1e-2)),
+		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
-		Dense(4*num_classes, activation='softplus', kernel_regularizer=keras.regularizers.l2(1e-2)),
+		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
-		Dense(2*num_classes, activation='softplus', kernel_regularizer=keras.regularizers.l2(1e-2)),
+		Dense(2*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		
 		ActiveOutput(),
 	])
@@ -147,17 +198,21 @@ def train(X, Y, L) :
 	
 	
 	validation_split = 0.2
-	(X_train, X_test, Y_train, Y_test) = train_test_split(X, Y, test_size=validation_split, random_state=42)
+	#
+	np.random.seed(42)
+	#
+	I_valid = (np.random.rand(len(Y)) <= validation_split)
+	I_train = np.logical_not(I_valid)
+	
 	
 	for _ in range(10) :
 		
-		model.fit(X_train, Y_train, epochs=1000, validation_split=0.1)
-		
+		model.fit(X[I_train], Y[I_train], epochs=1000, validation_split=0.1)
 		
 		# Display the confusion matrices
-		plt.clf()
 		
-		for (n, (x, y, t)) in enumerate([(X_train, Y_train, "Train set"), (X_test, Y_test, "Test set")]) :
+		for (n, (i, t)) in enumerate([(I_train, "Train set"), (I_valid, "Test set")]) :
+			(x, y) = (X[i], Y[i])
 		
 			# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
 			# C[i, j] = Number of samples from group i predicted as j
@@ -167,10 +222,10 @@ def train(X, Y, L) :
 			assert(all(abs(1 - C.sum(axis=1)) <= 1e-10))
 			
 			plt.ion()
-			plt.subplot(1, 2, n+1)
+			plt.subplot(1, 2, n+1).cla()
 			# Note the transpose: display predictions along the y-axis
 			plt.imshow(C.T, cmap=plt.cm.Blues, origin='lower', vmin=0, vmax=1)
-			plt.xlabel("Given class")
+			plt.xlabel("Reference class")
 			plt.xticks(range(num_classes), L)
 			if (n == 0) :
 				plt.ylabel("Classified as...")
@@ -179,13 +234,43 @@ def train(X, Y, L) :
 				plt.yticks([])
 			plt.title(t)
 			plt.pause(0.1)
+	
+	
+	# Record t-SNE embeddings of the data
+	
+	from sklearn.manifold import TSNE
+	
+	# 2nd embedding
+	xx2 = [
+		TSNE(n_components=2, random_state=rs).fit_transform(X)
+		for rs in range(10)
+	]
+	
+	# 3d embedding
+	xx3 = [
+		TSNE(n_components=3, random_state=rs).fit_transform(X)
+		for rs in range(10)
+	]
+	
+	# Collect all info
+	
+	M = {
+		'X' : X,
+		'Y' : Y,
+		'L' : L,
+		'I' : I_train,
+		'P' : model.predict(X),
+		'x' : [None, None, xx2, xx3],
+		'm' : model,
+	}
+	
+	return M
 
-	input()
 
-
-def get_XY() :
-	# For an aliquot_barcode a, C[a] is its reference PAM50 type
-	C = get_tcga_pam50()
+def get_training_data() :
+	
+	# For an aliquot_barcode 'a', C[a] is its reference PAM50 type
+	C = get_tcga_pam50_labels()
 	
 	# Load TCGA expression data
 	A = pickle.load(open(IFILE['TCGA'], 'rb'))['X']
@@ -215,22 +300,27 @@ def get_XY() :
 	X = A.astype(float).as_matrix()
 	Y = to_categorical(C.cat.codes)
 	
-	# Category labels
+	# Class labels
 	L = list(C.cat.categories)
 	
 	assert(X.shape[0] == Y.shape[0])
 	assert(X.shape[1] == len(genes))
-	assert(Y.shape[1] == len(set(C.unique())))
+	assert(Y.shape[1] == len(L))
 	
 	return (X, Y, L)
 
 
-def main() :
-	train(*get_XY())
+def TRAIN() :
+	M = train(*get_training_data())
+	pickle.dump(M, open(OFILE['model'], 'wb'))
+
 
 
 ## ==================== ENTRY :
 
 if (__name__ == "__main__") :
-	main()
-
+	if ("TRAIN" in sys.argv) : TRAIN()
+	if ("PLOT"  in sys.argv) : PLOT()
+	
+	# https://github.com/tensorflow/tensorflow/issues/3388#issuecomment-271107725
+	keras_backend.clear_session()
