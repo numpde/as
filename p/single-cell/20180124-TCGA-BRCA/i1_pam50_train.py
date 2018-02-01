@@ -15,10 +15,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from multiprocessing import cpu_count
-from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
-
 from keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
 
