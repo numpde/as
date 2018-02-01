@@ -45,7 +45,7 @@ PARAM = {
 	'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.2)),
 	
 	# Classification methods
-	'Methods' : {
+	'Classification' : {
 		'ER status' : {
 			'key' : 'er_status_by_ihc',
 			'sub' : ["Positive", "Negative", "Indeterminate"],
@@ -86,6 +86,7 @@ def abbr(L) :
 		for (a, b) in ab.items() : L = L.replace(a, b)
 		return L
 	else :
+		# Guess that L is an iterable
 		return [abbr(i) for i in L]
 
 ## ====================== (!) :
@@ -99,9 +100,9 @@ pass
 def classify(M, method) :
 	
 	# Clinical classification key in datatable
-	clinikey = PARAM['Methods'][method]['key']
+	clinikey = PARAM['Classification'][method]['key']
 	# Possible subtypes
-	subtypes = PARAM['Methods'][method]['sub']
+	subtypes = PARAM['Classification'][method]['sub']
 	
 	# Note:
 	# M is a (TCGA bulk sample) x (BCXX single cell sample) similarity matrix
@@ -178,7 +179,7 @@ def COMPUTE() :
 	all_cossim = pickle.load(open(IFILE['cossim'], 'rb'))['cossim']
 	
 	for cossim in Progress()(all_cossim) :
-		for method in PARAM['Methods'].keys() :
+		for method in PARAM['Classification'].keys() :
 			meta = cossim['meta']
 			setid = meta['id']
 			
