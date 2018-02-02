@@ -133,16 +133,20 @@ def make_confusion_plots(M) :
 		C = C / C.sum(axis=1, keepdims=True)
 		assert(all(abs(1 - C.sum(axis=1)) <= 1e-10))
 		
-		plt.subplot(1, 2, n+1).cla()
+		plt.subplot(1, 2, 1+n).cla()
+
 		# Note the transpose: display predictions along the y-axis
 		plt.imshow(C.T, cmap=plt.cm.Blues, origin='lower', vmin=0, vmax=1)
+
 		plt.xlabel("Reference class")
 		plt.xticks(range(len(L)), L)
+		
 		if (n == 0) :
 			plt.ylabel("Classified as...")
 			plt.yticks(range(len(L)), L)
 		else :
 			plt.yticks([])
+			
 		plt.title(t + " ({} samples)".format(sum(i)))
 	
 	# "pnorm" means normalization over the prediction vector
@@ -165,23 +169,21 @@ def make_tsne_plots(M) :
 	y = np.argmax(Y, axis=1)
 	p = np.argmax(P, axis=1)
 	
-	
+	# Separate scatter plots for the training and the test set
 	for (i, s) in [(I, "train"), (~I, "valid")] :
 		
 		plt.figure(figsize=(8, 5))
 		
-		j = np.logical_not(i)
-		
-		# Plot handles for reference andpredicted 
+		# Plot handles for reference and predicted classes
 		hy = [None] * len(L)
 		hp = [None] * len(L)
 		
-		# Dummy plots to arrange the legend
+		# Dummy handles to arrange the legend
 		h0 = [ plt.scatter(x[0][0], x[1][0], c="white", s=0) ] * len(L)
 		
 		## The 'other' samples
-		#plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=10, lw=2)
-		#plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=11, lw=2)
+		#plt.scatter(x[0][~i], x[1][~i], edgecolors="gray", facecolors="", s=30, marker=10, lw=2)
+		#plt.scatter(x[0][~i], x[1][~i], edgecolors="gray", facecolors="", s=30, marker=11, lw=2)
 		
 		plt.scatter(x[0][(y != p) & i], x[1][(y != p) & i], edgecolors="black", facecolors="", s=70, marker='o', lw=0.5)
 		
