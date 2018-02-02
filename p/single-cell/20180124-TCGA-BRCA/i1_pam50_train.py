@@ -2,8 +2,8 @@
 # RA, 2018-01-30
 
 # Run as
-#    python3 i*.py TRAIN
-#    python3 i*.py PLOT
+#    python3 i1*.py TRAIN
+#    python3 i1*.py PLOT
 
 # Requires the module
 #    utils/make_keras_picklable.py
@@ -215,8 +215,7 @@ def PLOT() :
 # Train the keras classifier
 #    X = samples row-wise (channel first)
 #    Y = "sample x class" binary matrix
-#    L = labels for the classes
-def train(X, Y, L) :
+def train(X, Y) :
 	
 	from keras.models import Sequential
 	from keras.layers import Dense, Dropout, Activation, BatchNormalization
@@ -245,9 +244,11 @@ def train(X, Y, L) :
 		
 		Dense(8*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
-		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-1)),
+		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
-		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-0)),
+		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
+		#Dropout(0.5),
+		#Dense(2*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		
 		ActiveOutput(),
 	])
@@ -262,33 +263,25 @@ def train(X, Y, L) :
 	# Indices of the training set
 	I_train = ~I_valid
 	
-	for _ in range(10) :
-		
+	# Training outer loop
+	for _ in range(5) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
 		model.fit(X[I_train], Y[I_train], epochs=1000, validation_split=0.1)
 		
-		# Package all data for export
-		
-		M = {
-			'X' : X,
-			'Y' : Y,
-			'L' : L,
-			'I' : I_train,
-			'P' : model.predict(X),
-			'm' : model,
-		}
-		
-		#plt.ion()
-		#plt.show()
-		#make_confusion_plots(M)
-		#plt.pause(0.1)
-	
+	# Package for export
+	M = {
+		'X' : X,
+		'Y' : Y,
+		'I' : I_train,
+		'P' : model.predict(X),
+		'm' : model,
+	}
 	
 	return M
 
 
-# Prepare the training data X, Y, L
+# Prepare the training data X, Y, F(eatures), L(abels)
 def get_training_data() :
 	
 	# For an aliquot_barcode 'a', C[a] is its reference PAM50 type
@@ -303,7 +296,8 @@ def get_training_data() :
 	# Has a gene subset been specified?
 	if genes :
 		# Keep only those genes in the expression table
-		A = A.loc[ A.index.isin(genes), : ]
+		assert(set(genes) <= set(A.index))
+		A = A.loc[ genes, : ]
 		
 		# Requested genes not found in the expression table
 		gnitt = (set(genes) - set(A.index))
@@ -311,12 +305,23 @@ def get_training_data() :
 	else :
 		# The gene subset is "all genes"
 		genes = sorted(A.index)
+		
+	# Normalize sample-wise (after feature selection)
+	for c in A.columns : A[c] /= A[c].sum()
+	
+	# Drop missing/invalid data
+	A = A.dropna()
 	
 	# Index the expression table by aliquot_barcode
 	A = A.transpose()
 	
 	# Keep samples with known class only, aligning the index
 	(A, C) = A.align(C, join='inner', axis=0)
+	
+	# Features = gene list
+	F = genes
+	# The column order is synchronized with it
+	assert(list(A.columns) == F)
 	
 	# Convert to keras-friendly format
 	X = A.astype(float).as_matrix()
@@ -329,11 +334,16 @@ def get_training_data() :
 	assert(X.shape[1] == len(genes))
 	assert(Y.shape[1] == len(L))
 	
-	return (X, Y, L)
+	return (X, Y, F, L)
 
 
 def TRAIN() :
-	M = train(*get_training_data())
+	(X, Y, F, L) = get_training_data()
+	M = train(X, Y)
+	M['F'] = F
+	M['L'] = L
+	M['param'] = PARAM
+	M['script'] = THIS
 	pickle.dump(M, open(OFILE['model'], 'wb'))
 
 
