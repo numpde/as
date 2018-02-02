@@ -43,9 +43,11 @@ IFILE = {
 ## =================== OUTPUT :
 
 OFILE = {
-	'model' : "OUTPUT/i1_pam50/trained.pkl",
+	'model' : "OUTPUT/i1_pam50/UV/trained.pkl",
 	
-	'tsne-plot' : "OUTPUT/i1_pam50/tsne_{set}.{ext}"
+	'tsne-plot' : "OUTPUT/i1_pam50/tsne_{set}.{ext}",
+	
+	'conf-class' : "OUTPUT/i1_pam50/conf_class_{norm}.{ext}",
 }
 
 # Create output directories
@@ -87,7 +89,6 @@ THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 def is_unique(S) : return (S.unique().size == S.size)
 
 
-
 ## ====================== (!) :
 
 # Read the PAM50 classification of TCGA samples
@@ -111,34 +112,84 @@ def get_tcga_pam50_labels() :
 	return P
 
 
-## ===================== WORK :
+## ========== WORK (PLOTTING) :
 
-
-#
-def make_tsne_plots(M) :
-	(X, Y, L, P, x) = (M['X'], M['Y'], M['L'], M['P'], M['x'][2][1].T)
-	(I_train, I_valid) = (M['I'], np.logical_not(M['I']))
+# Show and save the class confusion matrices
+# (Normalized over the prediction vector)
+def make_confusion_plots(M) :
 	
+	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
+	
+	plt.figure(figsize=(10, 5))
+	
+	# Left and right panels
+	for (n, (i, t)) in enumerate([(I, "Training set"), (~I, "Test set")]) :
+		(x, y, p) = (X[i], Y[i], P[i])
+	
+		# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
+		# C[i, j] = Number of samples from group i predicted as j
+		C = confusion_matrix(np.argmax(y, axis=1), np.argmax(p, axis=1))
+		# Normalize the prediction vector for each given class
+		C = C / C.sum(axis=1, keepdims=True)
+		assert(all(abs(1 - C.sum(axis=1)) <= 1e-10))
+		
+		plt.subplot(1, 2, n+1).cla()
+		# Note the transpose: display predictions along the y-axis
+		plt.imshow(C.T, cmap=plt.cm.Blues, origin='lower', vmin=0, vmax=1)
+		plt.xlabel("Reference class")
+		plt.xticks(range(len(L)), L)
+		if (n == 0) :
+			plt.ylabel("Classified as...")
+			plt.yticks(range(len(L)), L)
+		else :
+			plt.yticks([])
+		plt.title(t + " ({} samples)".format(sum(i)))
+	
+	# "pnorm" means normalization over the prediction vector
+	plt.savefig(OFILE['conf-class'].format(norm="pnorm", ext="pdf"))
+	plt.close()
+
+
+# Show and save the t-SNE overview of the reference and predicted classes
+def make_tsne_plots(M) :
+	
+	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
+	
+	# 2d t-SNE embedding
+	from sklearn.manifold import TSNE
+	x = TSNE(n_components=2, random_state=1).fit_transform(X).T
+	
+	# Note: M['x'][d][n] is the n-th run of the d-dim t-SNE embedding
+	
+	# Convert "probabilities" to class code
 	y = np.argmax(Y, axis=1)
 	p = np.argmax(P, axis=1)
 	
-	for (i, s) in [(I_train, "train"), (I_valid, "valid")] :
 	
-		plt.clf()
+	for (i, s) in [(I, "train"), (~I, "valid")] :
+		
+		plt.figure(figsize=(8, 5))
 		
 		j = np.logical_not(i)
 		
+		# Plot handles for reference andpredicted 
 		hy = [None] * len(L)
 		hp = [None] * len(L)
 		
+		# Dummy plots to arrange the legend
 		h0 = [ plt.scatter(x[0][0], x[1][0], c="white", s=0) ] * len(L)
 		
-		plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=10, lw=2)
-		plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=11, lw=2)
+		## The 'other' samples
+		#plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=10, lw=2)
+		#plt.scatter(x[0][j], x[1][j], edgecolors="gray", facecolors="", s=30, marker=11, lw=2)
 		
+		plt.scatter(x[0][(y != p) & i], x[1][(y != p) & i], edgecolors="black", facecolors="", s=70, marker='o', lw=0.5)
+		
+		# Plot the reference classes of samples
 		for (n, _) in enumerate(L) :
 			hy[n] = plt.scatter(x[0][(y == n) & i], x[1][(y == n) & i], c=("C{}".format(n)), s=30, marker=10)
 		
+		# Plot the predicted classes of samples
 		for (n, _) in enumerate(L) :
 			hp[n] = plt.scatter(x[0][(p == n) & i], x[1][(p == n) & i], c=("C{}".format(n)), s=30, marker=11)
 		
@@ -148,14 +199,21 @@ def make_tsne_plots(M) :
 		plt.yticks([], [])
 		
 		plt.savefig(OFILE['tsne-plot'].format(set=s, ext="pdf"))
+		plt.close()
 
 
 def PLOT() :
 	M = pickle.load(open(OFILE['model'], 'rb'))
+	make_confusion_plots(M)
 	make_tsne_plots(M)
 
 
-# 
+## ========== WORK (TRAINING) :
+
+# Train the keras classifier
+#    X = samples row-wise (channel first)
+#    Y = "sample x class" binary matrix
+#    L = labels for the classes
 def train(X, Y, L) :
 	
 	from keras.models import Sequential
@@ -196,77 +254,41 @@ def train(X, Y, L) :
 	
 	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	
-	
+	# Partition into train and validation
 	validation_split = 0.2
-	#
 	np.random.seed(42)
-	#
+	# Indices of the validation set
 	I_valid = (np.random.rand(len(Y)) <= validation_split)
-	I_train = np.logical_not(I_valid)
-	
+	# Indices of the training set
+	I_train = ~I_valid
 	
 	for _ in range(10) :
 		
+		# Use a separate small validation split for online inspection
+		# Due to the outer loop, this is not a true training/validation split
 		model.fit(X[I_train], Y[I_train], epochs=1000, validation_split=0.1)
 		
-		# Display the confusion matrices
+		# Package all data for export
 		
-		for (n, (i, t)) in enumerate([(I_train, "Train set"), (I_valid, "Test set")]) :
-			(x, y) = (X[i], Y[i])
+		M = {
+			'X' : X,
+			'Y' : Y,
+			'L' : L,
+			'I' : I_train,
+			'P' : model.predict(X),
+			'm' : model,
+		}
 		
-			# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
-			# C[i, j] = Number of samples from group i predicted as j
-			C = confusion_matrix(np.argmax(y, axis=1), np.argmax(model.predict(x), axis=1))
-			# Normalize the prediction vector for each given class
-			C = C / C.sum(axis=1, keepdims=True)
-			assert(all(abs(1 - C.sum(axis=1)) <= 1e-10))
-			
-			plt.ion()
-			plt.subplot(1, 2, n+1).cla()
-			# Note the transpose: display predictions along the y-axis
-			plt.imshow(C.T, cmap=plt.cm.Blues, origin='lower', vmin=0, vmax=1)
-			plt.xlabel("Reference class")
-			plt.xticks(range(num_classes), L)
-			if (n == 0) :
-				plt.ylabel("Classified as...")
-				plt.yticks(range(num_classes), L)
-			else :
-				plt.yticks([])
-			plt.title(t)
-			plt.pause(0.1)
+		#plt.ion()
+		#plt.show()
+		#make_confusion_plots(M)
+		#plt.pause(0.1)
 	
-	
-	# Record t-SNE embeddings of the data
-	
-	from sklearn.manifold import TSNE
-	
-	# 2nd embedding
-	xx2 = [
-		TSNE(n_components=2, random_state=rs).fit_transform(X)
-		for rs in range(10)
-	]
-	
-	# 3d embedding
-	xx3 = [
-		TSNE(n_components=3, random_state=rs).fit_transform(X)
-		for rs in range(10)
-	]
-	
-	# Collect all info
-	
-	M = {
-		'X' : X,
-		'Y' : Y,
-		'L' : L,
-		'I' : I_train,
-		'P' : model.predict(X),
-		'x' : [None, None, xx2, xx3],
-		'm' : model,
-	}
 	
 	return M
 
 
+# Prepare the training data X, Y, L
 def get_training_data() :
 	
 	# For an aliquot_barcode 'a', C[a] is its reference PAM50 type
