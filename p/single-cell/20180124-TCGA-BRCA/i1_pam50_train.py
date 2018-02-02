@@ -247,7 +247,7 @@ def train(X, Y, L) :
 		Dropout(0.5),
 		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-1)),
 		Dropout(0.5),
-		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
+		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-0)),
 		
 		ActiveOutput(),
 	])
