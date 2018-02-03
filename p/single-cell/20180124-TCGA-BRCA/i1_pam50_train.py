@@ -48,6 +48,8 @@ OFILE = {
 	'tsne-plot' : "OUTPUT/i1_pam50/tsne_{set}.{ext}",
 	
 	'conf-class' : "OUTPUT/i1_pam50/conf_class_{norm}.{ext}",
+	
+	'model-plot' : "OUTPUT/i1_pam50/model.{ext}",
 }
 
 # Create output directories
@@ -114,9 +116,15 @@ def get_tcga_pam50_labels() :
 
 ## ========== WORK (PLOTTING) :
 
+# Visualize the keras neural network model
+def plot_model(M) :
+	from keras.utils.vis_utils import plot_model
+	plot_model(M['m'], to_file=OFILE['model-plot'].format(ext="pdf"), show_shapes=True, show_layer_names=False)
+
+
 # Show and save the class confusion matrices
 # (Normalized over the prediction vector)
-def make_confusion_plots(M) :
+def plot_confusion_matrices(M) :
 	
 	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
 	
@@ -160,7 +168,7 @@ def make_confusion_plots(M) :
 
 
 # Show and save the t-SNE overview of the reference and predicted classes
-def make_tsne_plots(M) :
+def plot_tsne_samples(M) :
 	
 	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
 	
@@ -256,8 +264,9 @@ def make_tsne_plots(M) :
 
 def PLOT() :
 	M = pickle.load(open(OFILE['model'], 'rb'))
-	make_confusion_plots(M)
-	make_tsne_plots(M)
+	plot_model(M)
+	plot_confusion_matrices(M)
+	plot_tsne_samples(M)
 
 
 ## ========== WORK (TRAINING) :
@@ -269,6 +278,7 @@ def train(X, Y) :
 	
 	from keras.models import Sequential
 	from keras.layers import Dense, Dropout, Activation, BatchNormalization
+	from keras.engine.topology import Input
 	from keras        import regularizers
 	
 	from keras.callbacks import LambdaCallback
@@ -284,21 +294,14 @@ def train(X, Y) :
 	# Number of classes
 	num_classes = Y.shape[1]
 	
-	def PassiveInput() : return Dropout(0, input_shape=X.shape[1:])
-	def ActiveOutput() : return Dense(Y.shape[1], activation='softmax')
-	
 	model = Sequential([
-		PassiveInput(),
-		
-		BatchNormalization(),
-		
-		Dense(8*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
-		Dropout(0.5),
-		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
-		Dropout(0.5),
-		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
-		
-		ActiveOutput(),
+		BatchNormalization(input_shape=X.shape[1:]),
+		Dense(8*num_classes, kernel_regularizer=L2(1e-2)),
+		Activation('softplus'),
+		Dense(4*num_classes, kernel_regularizer=L2(1e-1)),
+		Activation('softplus'),
+		Dense(num_classes),
+		Activation('softmax')
 	])
 	
 	
@@ -313,10 +316,10 @@ def train(X, Y) :
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 	
 	# Training outer loop
-	for _ in range(5) :
+	for _ in range(10) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
-		model.fit(X[I_train], Y[I_train], epochs=500, validation_split=0.1)
+		model.fit(X[I_train], Y[I_train], epochs=100, validation_split=0.1)
 		
 	# Package for export
 	M = {

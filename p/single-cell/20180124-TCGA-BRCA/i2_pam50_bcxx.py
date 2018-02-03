@@ -102,19 +102,24 @@ def predict_bcxx(singlecell=True) :
 	# BCXX expression as pandas table
 	B = pickle.load(open(IFILE['BCXX'], 'rb'))['X']
 	
-	if not singlecell :
-		# Cell ID to tumor ID
-		c2t = (lambda c : c[:-3])
-		# Get the average expression in each tumor
-		B = B.groupby(by=c2t, axis=1).mean()
-	
 	# Trained PAM50 predictor bundle
 	M = pickle.load(open(IFILE['predictor'], 'rb'))
 	
 	# Select genes = features
 	B = B.loc[ M['F'], : ]
 	
-	# Normalize sample-wise (after feature selection)
+	# Omit "dying" cells
+	def drop(s) : return (s < s.median()/5)
+	B = B.loc[ :, ~drop(B.sum(axis=0)) ]
+	
+	# Simulate bulk sequencing?
+	if not singlecell :
+		# Cell ID to tumor ID
+		c2t = (lambda c : c[:-3])
+		# Get the average expression in each tumor
+		B = B.groupby(by=c2t, axis=1).mean()
+	
+	# Normalize sample-wise (after feature selection / grouping)
 	for c in B.columns : B[c] /= B[c].sum()
 	
 	# Classsify samples and assemble into a dataframe

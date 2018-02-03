@@ -59,7 +59,7 @@ def prepare() :
 	X = pd.read_table(IFILE['BCXX'])
 	# Rename column
 	X = X.rename(columns={ "gene_name" : "Symbol" })
-	# Keep only those columns
+	# Keep only the single sample columns
 	X = X[["Symbol"] + [c for c in X if re.match("BC[0-9]+.*_[0-9]+", c)]]
 	# Reindex by Symbol, summing over subgroups
 	X = X.groupby("Symbol").sum()
