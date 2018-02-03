@@ -122,13 +122,16 @@ def make_confusion_plots(M) :
 	
 	plt.figure(figsize=(10, 5))
 	
+	# Convert "probabilities" to class code
+	y = np.argmax(Y, axis=1)
+	p = np.argmax(P, axis=1)
+	
 	# Left and right panels
 	for (n, (i, t)) in enumerate([(I, "Training set"), (~I, "Test set")]) :
-		(x, y, p) = (X[i], Y[i], P[i])
 	
 		# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
 		# C[i, j] = Number of samples from group i predicted as j
-		C = confusion_matrix(np.argmax(y, axis=1), np.argmax(p, axis=1))
+		C = confusion_matrix(y[i], p[i])
 		# Normalize the prediction vector for each given class
 		C = C / C.sum(axis=1, keepdims=True)
 		assert(all(abs(1 - C.sum(axis=1)) <= 1e-10))
@@ -147,7 +150,9 @@ def make_confusion_plots(M) :
 		else :
 			plt.yticks([])
 			
-		plt.title(t + " ({} samples)".format(sum(i)))
+		plt.title(t + " ({}/{} samples correct)".format(sum((y == p) & i), sum(i)))
+	
+	plt.tight_layout()
 	
 	# "pnorm" means normalization over the prediction vector
 	plt.savefig(OFILE['conf-class'].format(norm="pnorm", ext="pdf"))
@@ -170,7 +175,7 @@ def make_tsne_plots(M) :
 	p = np.argmax(P, axis=1)
 	
 	# Separate scatter plots for the training and the test set
-	for (i, s) in [(I, "train"), (~I, "valid")] :
+	for (i, s, t) in [(I, "train", "Training set"), (~I, "valid", "Test set")] :
 		
 		plt.figure(figsize=(8, 5))
 		
@@ -200,7 +205,52 @@ def make_tsne_plots(M) :
 		plt.xticks([], [])
 		plt.yticks([], [])
 		
+		plt.title(t + " ({}/{} samples correct)".format(sum((y == p) & i), sum(i)))
+		
+		plt.tight_layout()
+		
 		plt.savefig(OFILE['tsne-plot'].format(set=s, ext="pdf"))
+		plt.close()
+	
+	
+	# Generate random samples and plot the t-SNE embedding
+	if True :
+		
+		# Note: t-SNE does not have a "predict" function
+		#
+		# Reusing the t-SNE embedding from training data?
+		# https://github.com/jkrijthe/Rtsne/issues/6
+		#
+		# Once I have a t-SNE map, how can I embed incoming test points in that map?
+		# https://lvdmaaten.github.io/publications/papers/AISTATS_2009.pdf
+		
+		n = 1000
+		
+		Z = np.abs(np.random.rand(n, X.shape[1]))
+		for i in range(Z.shape[0]) : Z[i, :] /= np.sum(Z[i, :])
+		
+		# 2d t-SNE embedding
+		from sklearn.manifold import TSNE
+		x = TSNE(n_components=2, random_state=1).fit_transform(Z).T
+		
+		# Class predictions for the random pseudo-samples
+		y = np.argmax(M['m'].predict(Z), axis=1)
+		
+		plt.figure(figsize=(8, 5))
+		
+		for (n, _) in enumerate(L) :
+			plt.scatter(x[0][y == n], x[1][y == n], c=("C{}".format(n)), s=30, marker=11)
+		
+		plt.legend(L)
+		
+		plt.xticks([], [])
+		plt.yticks([], [])
+		
+		plt.title("Random pseudo-samples")
+		
+		plt.tight_layout()
+		
+		plt.savefig(OFILE['tsne-plot'].format(set="random", ext="pdf"))
 		plt.close()
 
 
@@ -247,13 +297,10 @@ def train(X, Y) :
 		Dense(6*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		Dropout(0.5),
 		Dense(4*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
-		#Dropout(0.5),
-		#Dense(2*num_classes, activation='softplus', kernel_regularizer=L2(1e-2)),
 		
 		ActiveOutput(),
 	])
 	
-	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
 	
 	# Partition into train and validation
 	validation_split = 0.2
@@ -263,11 +310,13 @@ def train(X, Y) :
 	# Indices of the training set
 	I_train = ~I_valid
 	
+	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+	
 	# Training outer loop
 	for _ in range(5) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
-		model.fit(X[I_train], Y[I_train], epochs=1000, validation_split=0.1)
+		model.fit(X[I_train], Y[I_train], epochs=500, validation_split=0.1)
 		
 	# Package for export
 	M = {
