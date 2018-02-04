@@ -2,7 +2,7 @@
 # RA, 2018-01-30
 
 # Run as
-#    python3 i2*.py TRAIN
+#    python3 i2*.py
 
 
 ## ============ LOCAL IMPORTS :
@@ -98,6 +98,17 @@ def bcxx_groups(P) :
 	return (G, S)
 
 
+def predict(M, B) :
+	
+	# Normalize sample
+	def n(c) : return c / np.sum(c)
+	
+	# Classify samples and assemble into a dataframe
+	P = pd.DataFrame(M['m'].predict(B.apply(n).as_matrix().T).T, index=M['L'], columns=B.columns)
+
+	return P
+	
+
 def predict_bcxx(singlecell=True) :
 	# BCXX expression as pandas table
 	B = pickle.load(open(IFILE['BCXX'], 'rb'))['X']
@@ -108,9 +119,9 @@ def predict_bcxx(singlecell=True) :
 	# Select genes = features
 	B = B.loc[ M['F'], : ]
 	
-	# Omit "dying" cells
-	def drop(s) : return (s < s.median()/5)
-	B = B.loc[ :, ~drop(B.sum(axis=0)) ]
+	## Omit "dying" cells
+	#def drop(s) : return (s < s.median()/5)
+	#B = B.loc[ :, ~drop(B.sum(axis=0)) ]
 	
 	# Simulate bulk sequencing?
 	if not singlecell :
@@ -119,16 +130,46 @@ def predict_bcxx(singlecell=True) :
 		# Get the average expression in each tumor
 		B = B.groupby(by=c2t, axis=1).mean()
 	
-	# Normalize sample-wise (after feature selection / grouping)
-	for c in B.columns : B[c] /= B[c].sum()
+	# 
+	P = predict(M, B)
 	
-	# Classsify samples and assemble into a dataframe
-	P = pd.DataFrame(M['m'].predict(B.T).T, index=M['L'], columns=B.columns)
-	
-	return P
+	return (B, M, P)
 
 
 ## ===================== WORK :
+
+
+## == SC-TO-BULK PREDICTIONS == ##
+
+def plot_sc2bulk() :
+	
+	(B, M, P) = predict_bcxx(singlecell=True)
+	
+	# Class labels
+	L = M['L']
+		
+	plt.figure(figsize=(10, 7))
+	
+	# Attempt to construct a tumor of subtype c0
+	for c0 in L :
+		# Sort the classification by their proximity to class c0
+		P = P.sort_values(by=c0, axis=1, ascending=False)
+		# Sort the samples accordingly
+		b = B[P.columns]
+		# Subtype prediction for artificial subtumors
+		p = [
+			predict(M, pd.DataFrame(data={(n+1) : b.loc[:, :c].mean(axis=1)}))
+			for (n, c) in enumerate(b.columns)
+		]
+		# Convert this to a dataframe
+		p = pd.concat(p, join='inner', axis=1)
+		
+		plt.loglog(1 - P.loc[c0, :], list(p.loc[c0, :]))
+		
+	plt.legend(L)
+	
+	plt.show()
+	plt.close()
 
 
 ## == SINGLE CELL PREDICTIONS == ##
@@ -264,7 +305,7 @@ def plot_singlecell_subtypes(P) :
 
 
 def plot_singlecell() :
-	P = predict_bcxx(singlecell=True)
+	(B, M, P) = predict_bcxx(singlecell=True)
 	plot_singlecell_samples(P)
 	plot_singlecell_subtypes(P)
 
@@ -303,13 +344,15 @@ def plot_bulk_subtypes(P) :
 		plt.close()
 
 def plot_bulk() :
-	P = predict_bcxx(singlecell=False)
+	(B, M, P) = predict_bcxx(singlecell=False)
 	plot_bulk_subtypes(P)
 
 
 ## ==================== ENTRY :
 
 if (__name__ == "__main__") :
+	plot_sc2bulk()
+	exit()
 	plot_bulk()
 	plot_singlecell()
 	
