@@ -353,6 +353,6 @@ def OVERVIEW() :
 ## ==================== ENTRY :
 
 if (__name__ == "__main__") :
-	#PREPARE()
+	PREPARE()
 	OVERVIEW()
 
