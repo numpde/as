@@ -50,6 +50,8 @@ OFILE = {
 	'conf-class' : "OUTPUT/i1_pam50/conf_class_{norm}.{ext}",
 	
 	'model-plot' : "OUTPUT/i1_pam50/model.{ext}",
+	
+	'expression-heatmap' : "OUTPUT/i1_pam50/expression-heatmap/{pam50}.{ext}",
 }
 
 # Create output directories
@@ -120,6 +122,53 @@ def get_tcga_pam50_labels() :
 def plot_model(M) :
 	from keras.utils.vis_utils import plot_model
 	plot_model(M['m'], to_file=OFILE['model-plot'].format(ext="pdf"), show_shapes=True, show_layer_names=False)
+
+
+# Expression heatmaps of the PAM50 genes
+def plot_expression_heatmaps(M) :
+	
+	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
+	
+	pam50 = PARAM['PAM50-genes']
+	
+	# Each sample is normalized
+	assert(all(abs(np.sum(X, axis=1) - 1) <= 1e-10))
+	
+	## Normalize gene-wise
+	#from scipy import stats
+	#X = stats.zscore(X, axis=0)
+	#assert(all(abs(np.sum(X, axis=0) - 0) <= 1e-10))
+	
+	y = np.argmax(P, axis=1)
+	
+	for (n, c) in enumerate(L) :
+		
+		x = X[y == n]
+		p = P[y == n][:, n]
+		i = sorted(range(len(p)), key=(lambda i : -p[i]))
+		
+		x = x[i]
+		p = p[i]
+		
+		plt.figure(figsize=(8, 5), dpi=200)
+		# Green to red: RdYlGn_r  /  White to red: Reds
+		plt.imshow(x.T, cmap=plt.cm.Reds, aspect='auto')
+		
+		plt.xticks(range(sum(y == n)), [])
+		plt.xlabel('{} samples classified as "{}"'.format(sum(y == n), c))
+		
+		plt.yticks(range(len(pam50)), pam50, size=5)
+		
+		plt.tight_layout()
+		
+		plt.savefig(OFILE['expression-heatmap'].format(pam50=c, ext="pdf"))
+		plt.close()
+	
+	exit()
+	
+	#for (c, g) in M.items() :
+		#plt.imshow(X.loc[, g])
+		#plt.show()
 
 
 # Show and save the class confusion matrices
@@ -264,6 +313,7 @@ def plot_tsne_samples(M) :
 
 def PLOT() :
 	M = pickle.load(open(OFILE['model'], 'rb'))
+	plot_expression_heatmaps(M)
 	plot_model(M)
 	plot_confusion_matrices(M)
 	plot_tsne_samples(M)
