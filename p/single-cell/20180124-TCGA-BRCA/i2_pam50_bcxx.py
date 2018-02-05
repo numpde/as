@@ -49,6 +49,8 @@ OFILE = {
 	'pred-sc-bygroup' : "OUTPUT/i2_pam50_bcxx/pred_singlecell/bygroup/{group}.{ext}",
 	
 	'pred-bulk' : "OUTPUT/i2_pam50_bcxx/pred_bulk/bygroup/{group}.{ext}",
+	
+	'pred-sc2bulk' : "OUTPUT/i2_pam50_bcxx/pred_sc2bulk/all.{ext}",
 }
 
 # Create output directories
@@ -101,7 +103,7 @@ def bcxx_groups(P) :
 def predict(M, B) :
 	
 	# Normalize sample
-	def n(c) : return c / np.sum(c)
+	def n(c) : return c / (np.sum(c) or 1)
 	
 	# Classify samples and assemble into a dataframe
 	P = pd.DataFrame(M['m'].predict(B.apply(n).as_matrix().T).T, index=M['L'], columns=B.columns)
@@ -115,6 +117,10 @@ def predict_bcxx(singlecell=True) :
 	
 	# Trained PAM50 predictor bundle
 	M = pickle.load(open(IFILE['predictor'], 'rb'))
+	
+	# Use spike-in to reweight samples
+	W = np.sqrt(B[B.index == "EC2"].values * B[B.index == "EC15"].values).flatten()
+	for (w, c) in zip(W/sum(W), B.columns) : B[c] *= (w or 1)
 	
 	# Select genes = features
 	B = B.loc[ M['F'], : ]
@@ -147,8 +153,11 @@ def plot_sc2bulk() :
 	
 	# Class labels
 	L = M['L']
-		
-	plt.figure(figsize=(10, 7))
+	
+	plt.figure(figsize=(8, 5), dpi=100)
+	
+	# Handles for the legend
+	H = []
 	
 	# Attempt to construct a tumor of subtype c0
 	for c0 in L :
@@ -158,17 +167,35 @@ def plot_sc2bulk() :
 		b = B[P.columns]
 		# Subtype prediction for artificial subtumors
 		p = [
-			predict(M, pd.DataFrame(data={(n+1) : b.loc[:, :c].mean(axis=1)}))
+			predict(M, pd.DataFrame(data={c : b.loc[:, :c].mean(axis=1)}))
 			for (n, c) in enumerate(b.columns)
 		]
 		# Convert this to a dataframe
 		p = pd.concat(p, join='inner', axis=1)
 		
-		plt.loglog(1 - P.loc[c0, :], list(p.loc[c0, :]))
+		c = P.ix[c0].values   # single cell confidence
+		n = np.arange(len(c)) # number of cells in bulk
+		y = p.ix[c0].values   # bulk confidence
+		# Cut-off below this confidence
+		minc = 0.08
+		(c, n, y) = (c[c >= minc], n[c >= minc], y[c >= minc])
+		# https://matplotlib.org/users/colormaps.html
+		cmap = [plt.cm.Purples, plt.cm.Blues, plt.cm.Greens, plt.cm.Oranges, plt.cm.Reds][L.index(c0)]
 		
-	plt.legend(L)
+		h0 = plt.plot(c, y, '.-', color=cmap(200), markersize=5, lw=1)[0]
+		#h1 = plt.scatter(c, y, c=c, cmap=cmap, s=10)
+		
+		H.append(h0)
 	
-	plt.show()
+	#plt.gca().invert_xaxis()
+	plt.legend(H, L)
+	
+	plt.xlabel("Lower confidence bound for single cell")
+	plt.ylabel("Bulk confidence for the same subtype")
+	
+	plt.tight_layout()
+	
+	plt.savefig(OFILE['pred-sc2bulk'].format(ext="pdf"))
 	plt.close()
 
 
@@ -216,7 +243,7 @@ def plot_singlecell_samples(P) :
 		im = ax.imshow(
 			P[s].as_matrix(), 
 			aspect='auto', origin=origin, cmap=plt.cm.Blues,
-			vmin=-0.1, vmax=1
+			vmin=0, vmax=1
 		)
 		
 		ax.set_xticks([])
@@ -237,9 +264,9 @@ def plot_singlecell_samples(P) :
 	cb = plt.colorbar(im, cax=cax, ticks=[0, 0.5, 1])
 	#
 	cb.set_clim(0, 1)
-	cax.set_yticklabels(["0%", "50%", "100%"], rotation=90)
-	cax.tick_params(labelsize=5)
+	cax.set_yticklabels(["0%", "confidence", "100%"], va='center', rotation=90, size=5)
 	cax.yaxis.set_ticks_position('left')
+	cax.tick_params(axis='both', which='both', length=0)
 	
 	# Class labels
 	
@@ -291,12 +318,11 @@ def plot_singlecell_subtypes(P) :
 		from mpl_toolkits.axes_grid1 import make_axes_locatable
 		cax = make_axes_locatable(plt.gca()).append_axes("right", "2%", pad="3%")
 		cb = plt.colorbar(im, cax=cax, ticks=[0, 0.5, 1])
-		cax.tick_params(labelsize=5) 
 		#
 		cb.set_clim(0, 1)
-		cax.set_yticklabels(["0%", "50%", "100%"], rotation=90)
-		cax.tick_params(labelsize=5)
+		cax.set_yticklabels(["0%", "confidence", "100%"], va='center', rotation=90, size=5)
 		cax.yaxis.set_ticks_position('left')
+		cax.tick_params(axis='both', which='both', length=0)
 		
 		# Save to disk
 		
@@ -352,9 +378,8 @@ def plot_bulk() :
 
 if (__name__ == "__main__") :
 	plot_sc2bulk()
-	exit()
-	plot_bulk()
 	plot_singlecell()
+	plot_bulk()
 	
 	# https://github.com/tensorflow/tensorflow/issues/3388#issuecomment-271107725
 	keras_backend.clear_session()
