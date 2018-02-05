@@ -2,12 +2,14 @@
 # RA, 2018-01-26
 
 # Run as
-#    python3 e1*.py
+#    python3 e1*.py PREPARE
+#    python3 e1*.py OVERVIEW
 
 
 ## ================== IMPORTS :
 
 import os
+import sys
 import pickle
 import inspect
 import pandas as pd
@@ -311,7 +313,7 @@ def plot_pam50_overview(M) :
 		S = pd.DataFrame(0, index=M[p].cat.categories, columns=M[c].cat.categories)
 		for (_, r) in m.iterrows() : S.loc[r[p], r[c]] += 1
 		
-		def norm(s) : return s / sum(s)
+		def norm(s) : return s / (sum(s) or 1)
 		
 		im = plt.imshow(S.apply(norm, axis=0), cmap=plt.cm.Blues, aspect='auto', vmin=0, vmax=1)
 		ax = plt.gca()
@@ -319,11 +321,13 @@ def plot_pam50_overview(M) :
 		for (x, j) in enumerate(S.columns) :
 			for (y, i) in enumerate(S.index) :
 				plt.text(x, y, S.loc[i, j], va='center', ha='center')
-		
+
+		ax.tick_params(axis='both', which='both', length=0)
+
 		plt.xticks(range(len(S.columns)), short(S.columns))
 		plt.xlabel(c)
 		plt.yticks(range(len(S.index)), S.index)
-		plt.ylabel("Classified as...")
+		plt.ylabel("Classified (in TCGA) as...")
 	
 		plt.tight_layout()
 		
@@ -338,9 +342,11 @@ def plot_pam50_overview(M) :
 		cax.tick_params(labelsize=5) 
 		#
 		cb.set_clim(0, 1)
-		cax.set_yticklabels(["0%", "50%", "100%"], rotation=90)
-		cax.tick_params(labelsize=5)
+		cax.set_yticklabels(["0%", "proportion", "100%"], va='center', rotation=90)
 		cax.yaxis.set_ticks_position('left')
+		cax.tick_params(axis='both', which='both', length=0)
+		
+		# Save to disk
 		
 		plt.savefig(OFILE['pam50-overview'].format(status=(c.replace(" ", "-")), ext="pdf"))
 		plt.close()
@@ -353,6 +359,6 @@ def OVERVIEW() :
 ## ==================== ENTRY :
 
 if (__name__ == "__main__") :
-	PREPARE()
-	OVERVIEW()
+	if ("PREPARE"  in sys.argv) : PREPARE()
+	if ("OVERVIEW" in sys.argv) : OVERVIEW()
 

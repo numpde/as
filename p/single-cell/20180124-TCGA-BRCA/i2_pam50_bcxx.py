@@ -50,7 +50,8 @@ OFILE = {
 	
 	'pred-bulk' : "OUTPUT/i2_pam50_bcxx/pred_bulk/bygroup/{group}.{ext}",
 	
-	'pred-sc2bulk' : "OUTPUT/i2_pam50_bcxx/pred_sc2bulk/all.{ext}",
+	'pred-sc2bulk-img' : "OUTPUT/i2_pam50_bcxx/pred_sc2bulk/img/conf-win={win}.{ext}",
+	'pred-sc2bulk-dat' : "OUTPUT/i2_pam50_bcxx/pred_sc2bulk/dat/offendants.pkl",
 }
 
 # Create output directories
@@ -69,6 +70,9 @@ PARAM = {
 	'testmode' : TESTMODE,
 	
 	'PAM50-types' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
+	
+	# Max number of cells in the artificial tumor
+	'sc2bulk-N' : 20,
 	
 	## Extension for plots
 	#'ext' : { 'pdf', 'png' },
@@ -115,7 +119,7 @@ def predict_bcxx(singlecell=True) :
 	# BCXX expression as pandas table
 	B = pickle.load(open(IFILE['BCXX'], 'rb'))['X']
 	
-	# Trained PAM50 predictor bundle
+	# Trained PAM50 predictor bundle-+*
 	M = pickle.load(open(IFILE['predictor'], 'rb'))
 	
 	# Use spike-in to reweight samples
@@ -154,10 +158,13 @@ def plot_sc2bulk() :
 	# Class labels
 	L = M['L']
 	
-	plt.figure(figsize=(8, 5), dpi=100)
+	plt.figure(figsize=(6, 4), dpi=100)
 	
 	# Handles for the legend
 	H = []
+	
+	# List of "worst offendant" artificial tumors by class
+	T = dict()
 	
 	# Attempt to construct a tumor of subtype c0
 	for c0 in L :
@@ -166,36 +173,63 @@ def plot_sc2bulk() :
 		# Sort the samples accordingly
 		b = B[P.columns]
 		# Subtype prediction for artificial subtumors
+		def assemble_tumor(c) :
+			# Take the columns up to column 'c'
+			t = b.loc[:, :c]
+			# Take at most N cells
+			return t[t.columns[-PARAM['sc2bulk-N']:]]
+		#
 		p = [
-			predict(M, pd.DataFrame(data={c : b.loc[:, :c].mean(axis=1)}))
+			predict(M, pd.DataFrame(data={c : assemble_tumor(c).mean(axis=1)}))
 			for (n, c) in enumerate(b.columns)
 		]
 		# Convert this to a dataframe
 		p = pd.concat(p, join='inner', axis=1)
 		
-		c = P.ix[c0].values   # single cell confidence
-		n = np.arange(len(c)) # number of cells in bulk
+		f = P.ix[c0].values   # single cell confidence
+		n = np.arange(len(f)) # number of cells in bulk
 		y = p.ix[c0].values   # bulk confidence
+		
 		# Cut-off below this confidence
-		minc = 0.08
-		(c, n, y) = (c[c >= minc], n[c >= minc], y[c >= minc])
+		minf = 0.01
+		(f, n, y) = (f[f >= minf], n[f >= minf], y[f >= minf])
+		
 		# https://matplotlib.org/users/colormaps.html
 		cmap = [plt.cm.Purples, plt.cm.Blues, plt.cm.Greens, plt.cm.Oranges, plt.cm.Reds][L.index(c0)]
 		
-		h0 = plt.plot(c, y, '.-', color=cmap(200), markersize=5, lw=1)[0]
-		#h1 = plt.scatter(c, y, c=c, cmap=cmap, s=10)
+		h0 = plt.plot(f, y, '.-', color=cmap(200), markersize=5, lw=1)[0]
+		#h1 = plt.scatter(f, y, c=f, cmap=cmap, s=10)
+		
+		# The "worst offendant"
+		m = np.argmax(y * (f <= 0.1))
+		plt.scatter(f[m], y[m], s=30, c=cmap(200))
+		t = assemble_tumor(b.columns[n[m]])
+		T[c0] = t
 		
 		H.append(h0)
 	
 	#plt.gca().invert_xaxis()
-	plt.legend(H, L)
+	plt.legend(H, L, loc='lower right')
 	
 	plt.xlabel("Lower confidence bound for single cell")
 	plt.ylabel("Bulk confidence for the same subtype")
 	
+	plt.xticks(np.linspace(0, 1, 11))
+	plt.yticks(np.linspace(0, 1, 11))
+	
+	plt.ylim((-0.03, 1.03))
 	plt.tight_layout()
 	
-	plt.savefig(OFILE['pred-sc2bulk'].format(ext="pdf"))
+	# Save the offendants to disk
+	
+	pickle.dump({'worst' : T}, open(OFILE['pred-sc2bulk-dat'], 'wb'))
+	
+	# Save image extracts to disk
+	
+	for x in [0, 1, 2, 3, 4, 5] :
+		plt.xlim(((x/10) - 0.01, (0.5 + x/10) + 0.01))
+		plt.savefig(OFILE['pred-sc2bulk-img'].format(win=x, ext="pdf"))
+	
 	plt.close()
 
 
