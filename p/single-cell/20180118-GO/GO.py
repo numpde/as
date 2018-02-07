@@ -2,7 +2,7 @@
 # RA, 2018-01-18
 
 # Run as
-#    python3 A*.py download process
+#    python3 GO.py download process
 
 ## ================== IMPORTS :
 

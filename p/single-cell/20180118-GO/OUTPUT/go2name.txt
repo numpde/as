@@ -620,7 +620,6 @@ GO:0000993	RNA polymerase II core binding	molecular_function
 GO:0000994	RNA polymerase III core binding	molecular_function
 GO:0000995	transcription factor activity, core RNA polymerase III binding	molecular_function
 GO:0000996	promoter selection factor activity	molecular_function
-GO:0000999	RNA polymerase III type 1 promoter transcriptional preinitiation complex assembly	biological_process
 GO:0001000	bacterial-type RNA polymerase core enzyme binding	molecular_function
 GO:0001001	mitochondrial single-subunit type RNA polymerase binding	molecular_function
 GO:0001002	RNA polymerase III type 1 promoter sequence-specific DNA binding	molecular_function
@@ -628,35 +627,25 @@ GO:0001003	RNA polymerase III type 2 promoter sequence-specific DNA binding	mole
 GO:0001004	RNA polymerase III assembly factor activity, TFIIIB recruiting	molecular_function
 GO:0001006	RNA polymerase III type 3 promoter sequence-specific DNA binding	molecular_function
 GO:0001007	transcription factor activity, RNA polymerase III transcription factor binding	molecular_function
-GO:0001009	transcription from RNA polymerase III type 2 promoter	biological_process
 GO:0001010	transcription factor activity, sequence-specific DNA binding transcription factor recruiting	molecular_function
 GO:0001011	transcription factor activity, sequence-specific DNA binding, RNA polymerase recruiting	molecular_function
 GO:0001012	RNA polymerase II regulatory region DNA binding	molecular_function
 GO:0001013	RNA polymerase I regulatory region DNA binding	molecular_function
-GO:0001014	snoRNA transcription from a type 2 RNA polymerase III promoter	biological_process
+GO:0001014	snoRNA transcription by RNA polymerase III	biological_process
 GO:0001015	snoRNA transcription by RNA polymerase II	biological_process
 GO:0001016	RNA polymerase III regulatory region DNA binding	molecular_function
 GO:0001017	bacterial-type RNA polymerase regulatory region DNA binding	molecular_function
 GO:0001018	mitochondrial promoter sequence-specific DNA binding	molecular_function
 GO:0001019	plastid RNA polymerase regulatory region DNA binding	molecular_function
-GO:0001020	RNA polymerase III type 3 promoter transcriptional preinitiation complex assembly	biological_process
-GO:0001021	RNA polymerase III type 2 promoter transcriptional preinitiation complex assembly	biological_process
-GO:0001022	transcription initiation from RNA polymerase III type 1 promoter	biological_process
-GO:0001023	transcription initiation from RNA polymerase III type 2 promoter	biological_process
-GO:0001024	transcription initiation from RNA polymerase III type 3 promoter	biological_process
 GO:0001025	RNA polymerase III transcription factor binding	molecular_function
 GO:0001026	TFIIIB-type transcription factor activity	molecular_function
 GO:0001030	RNA polymerase III type 1 promoter DNA binding	molecular_function
 GO:0001031	RNA polymerase III type 2 promoter DNA binding	molecular_function
 GO:0001032	RNA polymerase III type 3 promoter DNA binding	molecular_function
 GO:0001034	RNA polymerase III transcription factor activity, sequence-specific DNA binding	molecular_function
-GO:0001035	transcription from RNA polymerase III type 3 promoter	biological_process
-GO:0001036	transcription initiation from RNA polymerase III hybrid type promoter	biological_process
 GO:0001037	RNA polymerase III hybrid type promoter DNA binding	molecular_function
 GO:0001039	RNA polymerase III hybrid type promoter sequence-specific DNA binding	molecular_function
-GO:0001041	transcription from a RNA polymerase III hybrid type promoter	biological_process
 GO:0001042	RNA polymerase I core binding	molecular_function
-GO:0001043	RNA polymerase III hybrid type promoter transcriptional preinitiation complex assembly	biological_process
 GO:0001046	core promoter sequence-specific DNA binding	molecular_function
 GO:0001047	core promoter binding	molecular_function
 GO:0001048	RNA polymerase IV core binding	molecular_function
@@ -792,9 +781,7 @@ GO:0001182	promoter clearance from RNA polymerase I promoter	biological_process
 GO:0001183	transcription elongation from RNA polymerase I promoter for nuclear large rRNA transcript	biological_process
 GO:0001184	promoter clearance from RNA polymerase I promoter for nuclear large rRNA transcript	biological_process
 GO:0001186	transcription factor activity, RNA polymerase I transcription factor recruiting	molecular_function
-GO:0001187	transcription factor activity, RNA polymerase I CORE element binding transcription factor recruiting	molecular_function
 GO:0001188	RNA polymerase I transcriptional preinitiation complex assembly	biological_process
-GO:0001189	RNA polymerase I transcriptional preinitiation complex assembly at the promoter for the nuclear large rRNA transcript	biological_process
 GO:0001190	transcriptional activator activity, RNA polymerase II transcription factor binding	molecular_function
 GO:0001191	transcriptional repressor activity, RNA polymerase II transcription factor binding	molecular_function
 GO:0001192	maintenance of transcriptional fidelity during DNA-templated transcription elongation	biological_process
@@ -3763,7 +3750,6 @@ GO:0005267	potassium channel activity	molecular_function
 GO:0005272	sodium channel activity	molecular_function
 GO:0005274	allantoin:proton symporter activity	molecular_function
 GO:0005275	amine transmembrane transporter activity	molecular_function
-GO:0005276	vesicular amino acid:proton antiporter activity	molecular_function
 GO:0005277	acetylcholine transmembrane transporter activity	molecular_function
 GO:0005278	acetylcholine:proton antiporter activity	molecular_function
 GO:0005280	amino acid:proton symporter activity	molecular_function
@@ -3814,7 +3800,6 @@ GO:0005353	fructose transmembrane transporter activity	molecular_function
 GO:0005354	galactose transmembrane transporter activity	molecular_function
 GO:0005355	glucose transmembrane transporter activity	molecular_function
 GO:0005356	glucose:proton symporter activity	molecular_function
-GO:0005357	constitutive glucose:proton symporter activity	molecular_function
 GO:0005358	high-affinity glucose:proton symporter activity	molecular_function
 GO:0005359	low-affinity glucose:proton symporter activity	molecular_function
 GO:0005360	insulin-responsive glucose:proton symporter activity	molecular_function
@@ -3859,7 +3844,6 @@ GO:0005476	carnitine:acyl carnitine antiporter activity	molecular_function
 GO:0005477	pyruvate secondary active transmembrane transporter activity	molecular_function
 GO:0005483	soluble NSF attachment protein activity	molecular_function
 GO:0005484	SNAP receptor activity	molecular_function
-GO:0005487	nuclear pore activity	molecular_function
 GO:0005488	binding	molecular_function
 GO:0005496	steroid binding	molecular_function
 GO:0005497	androgen binding	molecular_function
@@ -4899,7 +4883,6 @@ GO:0006813	potassium ion transport	biological_process
 GO:0006814	sodium ion transport	biological_process
 GO:0006816	calcium ion transport	biological_process
 GO:0006817	phosphate ion transport	biological_process
-GO:0006818	hydrogen transport	biological_process
 GO:0006820	anion transport	biological_process
 GO:0006821	chloride transport	biological_process
 GO:0006824	cobalt ion transport	biological_process
@@ -5953,7 +5936,7 @@ GO:0008543	fibroblast growth factor receptor signaling pathway	biological_proces
 GO:0008544	epidermis development	biological_process
 GO:0008545	JUN kinase kinase activity	molecular_function
 GO:0008551	cadmium-exporting ATPase activity	molecular_function
-GO:0008553	hydrogen-exporting ATPase activity, phosphorylative mechanism	molecular_function
+GO:0008553	proton-exporting ATPase activity, phosphorylative mechanism	molecular_function
 GO:0008554	sodium-exporting ATPase activity, phosphorylative mechanism	molecular_function
 GO:0008555	chloride-transporting ATPase activity	molecular_function
 GO:0008556	potassium-transporting ATPase activity	molecular_function
@@ -9114,7 +9097,6 @@ GO:0015989	light-driven proton transport	biological_process
 GO:0015990	electron transport coupled proton transport	biological_process
 GO:0015991	ATP hydrolysis coupled proton transport	biological_process
 GO:0015992	proton transport	biological_process
-GO:0015993	molecular hydrogen transport	biological_process
 GO:0015994	chlorophyll metabolic process	biological_process
 GO:0015995	chlorophyll biosynthetic process	biological_process
 GO:0015996	chlorophyll catabolic process	biological_process
@@ -14201,7 +14183,6 @@ GO:0032018	2-methylbutanol:NADP oxidoreductase activity	molecular_function
 GO:0032019	mitochondrial cloud	cellular_component
 GO:0032020	ISG15-protein conjugation	biological_process
 GO:0032021	NELF complex	cellular_component
-GO:0032022	multicellular pellicle formation	biological_process
 GO:0032023	trypsinogen activation	biological_process
 GO:0032024	positive regulation of insulin secretion	biological_process
 GO:0032025	response to cobalt ion	biological_process
@@ -15863,7 +15844,7 @@ GO:0033760	2'-deoxymugineic-acid 2'-dioxygenase activity	molecular_function
 GO:0033761	mugineic-acid 3-dioxygenase activity	molecular_function
 GO:0033762	response to glucagon	biological_process
 GO:0033763	proline 3-hydroxylase activity	molecular_function
-GO:0033764	steroid dehydrogenase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor	molecular_function
+GO:0033764	steroid dehydrogenase activity, , acting on the CH-OH group of donors, NAD or NADP as acceptor.	molecular_function
 GO:0033765	steroid dehydrogenase activity, acting on the CH-CH group of donors	molecular_function
 GO:0033766	2-hydroxyquinoline 8-monooxygenase activity	molecular_function
 GO:0033767	4-hydroxyacetophenone monooxygenase activity	molecular_function
@@ -17056,7 +17037,7 @@ GO:0034988	Fc-gamma receptor I complex binding	molecular_function
 GO:0034990	nuclear mitotic cohesin complex	cellular_component
 GO:0034991	nuclear meiotic cohesin complex	cellular_component
 GO:0034992	microtubule organizing center attachment site	cellular_component
-GO:0034993	LINC complex	cellular_component
+GO:0034993	meiotic nuclear membrane microtubule tethering complex	cellular_component
 GO:0034994	microtubule organizing center attachment site organization	biological_process
 GO:0034995	SC5b-7 complex	cellular_component
 GO:0034996	RasGAP-Fyn-Lyn-Yes complex	cellular_component
@@ -17856,10 +17837,6 @@ GO:0035822	gene conversion	biological_process
 GO:0035823	short tract gene conversion	biological_process
 GO:0035824	long tract gene conversion	biological_process
 GO:0035825	homologous recombination	biological_process
-GO:0035826	rubidium ion transport	biological_process
-GO:0035827	rubidium ion transmembrane transporter activity	molecular_function
-GO:0035828	renal rubidium ion transport	biological_process
-GO:0035829	renal rubidium ion absorption	biological_process
 GO:0035830	palmatine metabolic process	biological_process
 GO:0035831	palmatine biosynthetic process	biological_process
 GO:0035832	berbamunine metabolic process	biological_process
@@ -18458,7 +18435,7 @@ GO:0036438	maintenance of lens transparency	biological_process
 GO:0036439	glycerol-3-phosphate dehydrogenase [NADP+] activity	molecular_function
 GO:0036440	citrate synthase activity	molecular_function
 GO:0036441	2-dehydropantolactone reductase activity	molecular_function
-GO:0036442	hydrogen-exporting ATPase activity	molecular_function
+GO:0036442	proton-exporting ATPase activity	molecular_function
 GO:0036443	dermatan 6-sulfotransferase activity	molecular_function
 GO:0036444	mitochondrial calcium uptake	biological_process
 GO:0036445	neuronal stem cell division	biological_process
@@ -19660,8 +19637,8 @@ GO:0042786	active evasion of host immune response via regulation of host antigen
 GO:0042787	protein ubiquitination involved in ubiquitin-dependent protein catabolic process	biological_process
 GO:0042788	polysomal ribosome	cellular_component
 GO:0042789	mRNA transcription by RNA polymerase II	biological_process
-GO:0042790	transcription of nucleolar large rRNA by RNA polymerase I	biological_process
-GO:0042791	5S class rRNA transcription from RNA polymerase III type 1 promoter	biological_process
+GO:0042790	nucleolar large rRNA transcription by RNA polymerase I	biological_process
+GO:0042791	5S class rRNA transcription by RNA polymerase III	biological_process
 GO:0042792	mitochondrial rRNA transcription	biological_process
 GO:0042793	plastid transcription	biological_process
 GO:0042794	plastid rRNA transcription	biological_process
@@ -26553,7 +26530,7 @@ GO:0051410	detoxification of nitrogen compound	biological_process
 GO:0051412	response to corticosterone	biological_process
 GO:0051413	response to cortisone	biological_process
 GO:0051414	response to cortisol	biological_process
-GO:0051415	interphase microtubule nucleation by interphase microtubule organizing center	biological_process
+GO:0051415	microtubule nucleation by interphase microtubule organizing center	biological_process
 GO:0051417	microtubule nucleation by spindle pole body	biological_process
 GO:0051418	microtubule nucleation by microtubule organizing center	biological_process
 GO:0051421	regulation of endo-1,4-beta-xylanase activity	biological_process
@@ -29931,6 +29908,9 @@ GO:0061959	response to (R)-carnitine	biological_process
 GO:0061960	regulation of heme oxygenase activity	biological_process
 GO:0061961	positive regulation of heme oxygenase activity	biological_process
 GO:0061962	negative regulation of heme oxygenase activity	biological_process
+GO:0061963	regulation of entry into reproductive diapause	biological_process
+GO:0061964	negative regulation of entry into reproductive diapause	biological_process
+GO:0061965	positive regulation of entry into reproductive diapause	biological_process
 GO:0065001	specification of axis polarity	biological_process
 GO:0065002	intracellular protein transmembrane transport	biological_process
 GO:0065003	macromolecular complex assembly	biological_process
@@ -30192,7 +30172,7 @@ GO:0070254	mucus secretion	biological_process
 GO:0070255	regulation of mucus secretion	biological_process
 GO:0070256	negative regulation of mucus secretion	biological_process
 GO:0070257	positive regulation of mucus secretion	biological_process
-GO:0070258	inner membrane complex	cellular_component
+GO:0070258	inner membrane pellicle complex	cellular_component
 GO:0070259	tyrosyl-DNA phosphodiesterase activity	molecular_function
 GO:0070260	5'-tyrosyl-DNA phosphodiesterase activity	molecular_function
 GO:0070262	peptidyl-serine dephosphorylation	biological_process
@@ -36832,10 +36812,14 @@ GO:0106080	GATOR1 complex binding	molecular_function
 GO:0106081	maltose import across plasma membrane	biological_process
 GO:0106082	sucrose import across plasma membrane	biological_process
 GO:0106083	nuclear membrane protein complex	cellular_component
-GO:0106084	spindle pole body anchor complex	cellular_component
+GO:0106084	nuclear membrane mitotic spindle pole body tethering complex	cellular_component
 GO:0106088	regulation of cell adhesion involved in sprouting angiogenesis	biological_process
 GO:0106089	negative regulation of cell adhesion involved in sprouting angiogenesis	biological_process
 GO:0106090	positive regulation of cell adhesion involved in sprouting angiogenesis	biological_process
+GO:0106091	glial cell projection elongation	biological_process
+GO:0106092	glial cell projection elongation involved in axon ensheathment	biological_process
+GO:0106093	EDS1 disease-resistance complex	cellular_component
+GO:0106094	nuclear membrane microtubule tethering complex	cellular_component
 GO:0110001	toxin-antitoxin complex	cellular_component
 GO:0110002	regulation of tRNA methylation	biological_process
 GO:0110003	regulation of tRNA C5-cytosine methylation	biological_process
@@ -36906,6 +36890,14 @@ GO:0110073	regulation of apical constriction involved in ventral furrow formatio
 GO:0110074	positive regulation of apical constriction involved in ventral furrow formation	biological_process
 GO:0110075	regulation of ferroptosis	biological_process
 GO:0110076	negative regulation of ferroptosis	biological_process
+GO:0110077	vesicle-mediated intercellular transport	biological_process
+GO:0110078	TTT complex	cellular_component
+GO:0110079	regulation of placenta blood vessel development	biological_process
+GO:0110080	positive regulation of placenta blood vessel development	biological_process
+GO:0110081	negative regulation of placenta blood vessel development	biological_process
+GO:0110082	regulation of protein localization to cell division site involved in mitotic actomyosin contractile ring assembly	biological_process
+GO:0110083	positive regulation of protein localization to cell division site involved in mitotic actomyosin contractile ring assembly	biological_process
+GO:0110084	negative regulation of protein localization to cell division site involved in mitotic actomyosin contractile ring assembly	biological_process
 GO:0120001	apical plasma membrane urothelial plaque	cellular_component
 GO:0120002	fusiform vesicle	cellular_component
 GO:0120003	hinge region between urothelial plaques of apical plasma membrane	cellular_component
@@ -36932,7 +36924,7 @@ GO:0120025	plasma membrane bounded cell projection	cellular_component
 GO:0120026	host cell uropod	cellular_component
 GO:0120027	regulation of osmosensory signaling pathway	biological_process
 GO:0120028	negative regulation of osmosensory signaling pathway	biological_process
-GO:0120029	hydrogen ion export across plasma membrane	biological_process
+GO:0120029	proton export across plasma membrane	biological_process
 GO:0120030	positive regulation of cilium beat frequency involved in ciliary motility	biological_process
 GO:0120031	plasma membrane bounded cell projection assembly	biological_process
 GO:0120032	regulation of plasma membrane bounded cell projection assembly	biological_process
@@ -37017,6 +37009,7 @@ GO:0120119	flagellum attachment zone	cellular_component
 GO:0120120	bilobe structure	cellular_component
 GO:0120121	tripartite attachment complex	cellular_component
 GO:0120122	prolactin metabolic process	biological_process
+GO:0120123	ubiquitin activating enzyme complex	cellular_component
 GO:0140007	KICSTOR complex	cellular_component
 GO:0140009	L-aspartate import across plasma membrane	biological_process
 GO:0140010	D-aspartate transmembrane transporter activity	molecular_function
@@ -37113,6 +37106,10 @@ GO:0140142	nucleocytoplasmic carrier activity	molecular_function
 GO:0140145	copper ion export from vacuole	biological_process
 GO:0140146	calcium ion import into vacuole	biological_process
 GO:0140147	zinc ion export from vacuole	biological_process
+GO:0140157	ammonium import across plasma membrane	biological_process
+GO:0140159	borate export across plasma membrane	biological_process
+GO:0140160	zinc II ion import across plasma membrane	biological_process
+GO:0140161	monocarboxylate:sodium symporter activity	molecular_function
 GO:0150001	primary dendrite	cellular_component
 GO:0150002	distal dendrite	cellular_component
 GO:0150003	regulation of spontaneous synaptic transmission	biological_process
@@ -37134,6 +37131,7 @@ GO:0150020	basal dendrite arborization	biological_process
 GO:0150021	apical dendrite morphogenesis	biological_process
 GO:0150022	apical dendrite development	biological_process
 GO:0150023	apical dendrite arborization	biological_process
+GO:0150024	oxidised low-density lipoprotein particle clearance	biological_process
 GO:0198738	cell-cell signaling by wnt	biological_process
 GO:1900000	regulation of anthocyanin catabolic process	biological_process
 GO:1900001	negative regulation of anthocyanin catabolic process	biological_process
@@ -41830,7 +41828,7 @@ GO:1904913	regulation of establishment of macromolecular complex localization to
 GO:1904914	negative regulation of establishment of macromolecular complex localization to telomere	biological_process
 GO:1904915	positive regulation of establishment of macromolecular complex localization to telomere	biological_process
 GO:1904916	transmembrane L-lysine transport from lysosomal lumen to cytosol	biological_process
-GO:1904917	transmembrane L-arginine transport from lysosomal lumen to cytosol	biological_process
+GO:1904917	L-arginine transmembrane transport from lysosomal lumen to cytosol	biological_process
 GO:1904918	transmembrane L-histidine transport from lysosomal lumen to cytosol	biological_process
 GO:1904919	transmembrane L-cystine transport from lysosomal lumen to cytosol	biological_process
 GO:1904920	regulation of MAPK cascade involved in axon regeneration	biological_process
@@ -43558,7 +43556,7 @@ GO:1990805	central cylinder	cellular_component
 GO:1990808	F-bar domain binding	molecular_function
 GO:1990809	endoplasmic reticulum tubular network membrane organization	biological_process
 GO:1990810	microtubule anchoring at mitotic spindle pole body	biological_process
-GO:1990811	Msd1-Wdr8-Pkl1 complex	cellular_component
+GO:1990811	MWP complex	cellular_component
 GO:1990812	growth cone filopodium	cellular_component
 GO:1990813	meiotic centromeric cohesion protection	biological_process
 GO:1990814	DNA/DNA annealing activity	molecular_function
@@ -44365,15 +44363,9 @@ GO:2000676	positive regulation of type B pancreatic cell apoptotic process	biolo
 GO:2000677	regulation of transcription regulatory region DNA binding	biological_process
 GO:2000678	negative regulation of transcription regulatory region DNA binding	biological_process
 GO:2000679	positive regulation of transcription regulatory region DNA binding	biological_process
-GO:2000680	regulation of rubidium ion transport	biological_process
-GO:2000681	negative regulation of rubidium ion transport	biological_process
-GO:2000682	positive regulation of rubidium ion transport	biological_process
 GO:2000683	regulation of cellular response to X-ray	biological_process
 GO:2000684	negative regulation of cellular response to X-ray	biological_process
 GO:2000685	positive regulation of cellular response to X-ray	biological_process
-GO:2000686	regulation of rubidium ion transmembrane transporter activity	biological_process
-GO:2000687	negative regulation of rubidium ion transmembrane transporter activity	biological_process
-GO:2000688	positive regulation of rubidium ion transmembrane transporter activity	biological_process
 GO:2000689	actomyosin contractile ring assembly actin filament organization	biological_process
 GO:2000690	regulation of cardiac muscle cell myoblast differentiation	biological_process
 GO:2000691	negative regulation of cardiac muscle cell myoblast differentiation	biological_process
