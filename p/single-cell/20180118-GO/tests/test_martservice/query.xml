@@ -1,2 +1,0 @@
-<!DOCTYPE Query><Query client="true" processor="TSV" limit="-1" header="1"><Dataset name="hsapiens_gene_ensembl" config="gene_ensembl_config"><Filter name="chromosome_name" value="1" filter_list=""/><Attribute name="ensembl_gene_id"/><Attribute name="ensembl_transcript_id"/></Dataset></Query>
-
