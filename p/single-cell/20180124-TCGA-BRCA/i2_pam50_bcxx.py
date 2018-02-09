@@ -25,10 +25,6 @@ from itertools import chain
 
 from keras import backend as keras_backend
 
-from keras.utils import to_categorical
-from sklearn.metrics import confusion_matrix
-
-
 
 ## ==================== INPUT :
 
@@ -104,13 +100,26 @@ def bcxx_groups(P) :
 	return (G, S)
 
 
+# Normalization as in the training
+def normalize(A) :
+	
+	# Normalize columns-wise
+	for c in A.columns : A[c] /= sum(A[c])
+	
+	# Drop missing/invalid data
+	A = A.dropna()
+	
+	# Log-transform
+	A = np.log(1 + A)
+	
+	return A
+
+
 def predict(M, B) :
 	
-	# Normalize sample
-	def n(c) : return c / (np.sum(c) or 1)
-	
 	# Classify samples and assemble into a dataframe
-	P = pd.DataFrame(M['m'].predict(B.apply(n).as_matrix().T).T, index=M['L'], columns=B.columns)
+	# Normalization should be done only once!
+	P = pd.DataFrame(M['m'].predict(normalize(B).as_matrix().T).T, index=M['L'], columns=B.columns)
 
 	return P
 	
@@ -169,7 +178,7 @@ def plot_sc2bulk() :
 	# Attempt to construct a tumor of subtype c0
 	for c0 in L :
 		# Sort the classification by their proximity to class c0
-		P = P.sort_values(by=c0, axis=1, ascending=False)
+		P = P.sort_values(by=c0, axis=1, ascending=True)
 		# Sort the samples accordingly
 		b = B[P.columns]
 		# Subtype prediction for artificial subtumors
@@ -197,21 +206,22 @@ def plot_sc2bulk() :
 		# https://matplotlib.org/users/colormaps.html
 		cmap = [plt.cm.Purples, plt.cm.Blues, plt.cm.Greens, plt.cm.Oranges, plt.cm.Reds][L.index(c0)]
 		
-		h0 = plt.plot(f, y, '.-', color=cmap(200), markersize=5, lw=1)[0]
+		markers = ['o', '^', 'v', '*', 's']
+		
+		h0 = plt.plot(f, y, linestyle='-', marker=markers[L.index(c0)], color=cmap(200), markersize=3, lw=1)[0]
 		#h1 = plt.scatter(f, y, c=f, cmap=cmap, s=10)
 		
 		# The "worst offendant"
 		m = np.argmax(y * (f <= 0.1))
-		plt.scatter(f[m], y[m], s=30, c=cmap(200))
+		#plt.scatter(f[m], y[m], s=30, c=cmap(200))
 		t = assemble_tumor(b.columns[n[m]])
 		T[c0] = t
 		
 		H.append(h0)
+
+	plt.legend(H, L, loc='lower left')
 	
-	#plt.gca().invert_xaxis()
-	plt.legend(H, L, loc='lower right')
-	
-	plt.xlabel("Lower confidence bound for single cell")
+	plt.xlabel("Upper confidence bound for single cell")
 	plt.ylabel("Bulk confidence for the same subtype")
 	
 	plt.xticks(np.linspace(0, 1, 11))
@@ -228,6 +238,7 @@ def plot_sc2bulk() :
 	
 	for x in [0, 1, 2, 3, 4, 5] :
 		plt.xlim(((x/10) - 0.01, (0.5 + x/10) + 0.01))
+		plt.gca().invert_xaxis()
 		plt.savefig(OFILE['pred-sc2bulk-img'].format(win=x, ext="pdf"))
 	
 	plt.close()

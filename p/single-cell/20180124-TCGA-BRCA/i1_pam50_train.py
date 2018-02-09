@@ -116,6 +116,20 @@ def get_tcga_pam50_labels() :
 	return P
 
 
+def normalize(A) :
+	
+	# Normalize columns-wise
+	for c in A.columns : A[c] /= sum(A[c])
+	
+	# Drop missing/invalid data
+	A = A.dropna()
+	
+	# Log-transform
+	A = np.log(1 + A)
+	
+	return A
+
+
 ## ========== WORK (PLOTTING) :
 
 # Visualize the keras neural network model
@@ -131,13 +145,13 @@ def plot_expression_heatmaps(M) :
 	
 	pam50 = PARAM['PAM50-genes']
 	
-	# Each sample is normalized
-	assert(all(abs(np.sum(X, axis=1) - 1) <= 1e-10))
+	## Each sample is normalized
+	#assert(all(abs(np.sum(X, axis=1) - 1) <= 1e-10))
 	
-	## Normalize gene-wise
-	#from scipy import stats
-	#X = stats.zscore(X, axis=0)
-	#assert(all(abs(np.sum(X, axis=0) - 0) <= 1e-10))
+	# Normalize gene-wise
+	from scipy import stats
+	X = stats.zscore(X, axis=0)
+	assert(all(abs(np.sum(X, axis=0) - 0) <= 1e-10))
 	
 	y = np.argmax(P, axis=1)
 	
@@ -151,20 +165,55 @@ def plot_expression_heatmaps(M) :
 		p = p[i]
 		
 		plt.figure(figsize=(8, 5), dpi=200)
-		# Green to red: RdYlGn_r  /  White to red: Reds
-		plt.imshow(x.T, cmap=plt.cm.Reds, aspect='auto')
 		
-		plt.xticks(range(sum(y == n)), [])
+		# Green to red: RdYlGn_r  /  White to red: Reds
+		param = { 'cmap' : plt.cm.RdYlGn_r, 'aspect' : 'auto', 'vmin' : -1, 'vmax' : +1 }
+		   
+		im = plt.imshow(x.T, **param)
+		
+		plt.xticks([], [])
+		#def p2label(p0) : return "{}%".format(int(round(p0 * 100)))
+		#xticks = range(sum(y == n))
+		#xtickl = [p2label(p[0])] + ([''] * (len(xticks)-2)) + [p2label(p[-1])]
+		#plt.xticks(xticks, xtickl, size=6)
 		plt.xlabel('{} samples classified as "{}"'.format(sum(y == n), c))
 		
 		plt.yticks(range(len(pam50)), pam50, size=5)
 		
 		plt.tight_layout()
 		
+		main_ax = plt.gca()
+		
+		# Mean
+		
+		# https://matplotlib.org/users/tight_layout_guide.html
+		from mpl_toolkits.axes_grid1 import make_axes_locatable
+		div = make_axes_locatable(plt.gca())
+		
+		ax = div.new_horizontal(size="5%", pad="1%")
+		main_ax.get_figure().add_axes(ax)
+		
+		im = plt.imshow(np.mean(x, axis=0, keepdims=True).T, **param)
+		plt.xticks([], [])
+		plt.yticks([], [])
+		plt.xlabel("Mean")
+		
+		# Colorbar
+		
+		# https://matplotlib.org/users/tight_layout_guide.html
+		cax = div.new_horizontal(size="1%", pad="3%")
+		main_ax.get_figure().add_axes(cax)
+		cb = plt.colorbar(im, cax=cax, ticks=[-1, 0, 1])
+		#
+		cb.set_clim(-1, 1)
+		cax.set_yticklabels(["-1", "0", "1"], va='center', size=7)
+		cax.yaxis.set_ticks_position('left')
+		cax.tick_params(axis='both', which='both', length=0)		
+		
+		# Save figure to disk
+		
 		plt.savefig(OFILE['expression-heatmap'].format(pam50=c, ext="pdf"))
 		plt.close()
-	
-	exit()
 	
 	#for (c, g) in M.items() :
 		#plt.imshow(X.loc[, g])
@@ -336,6 +385,7 @@ def train(X, Y) :
 	from sklearn.model_selection import train_test_split
 	
 	from keras.regularizers import l2 as L2
+	from keras.regularizers import l1 as L1
 	import keras.optimizers
 	
 	# https://stackoverflow.com/questions/39547279/loading-weights-in-th-format-when-keras-is-set-to-tf-format
@@ -346,9 +396,10 @@ def train(X, Y) :
 	
 	model = Sequential([
 		BatchNormalization(input_shape=X.shape[1:]),
-		Dense(8*num_classes, kernel_regularizer=L2(1e-2)),
+		Dense(8*num_classes, kernel_regularizer=L1(1e-3)),
+		Dropout(0.5),
 		Activation('softplus'),
-		Dense(4*num_classes, kernel_regularizer=L2(1e-1)),
+		Dense(4*num_classes, kernel_regularizer=L1(1e-2)),
 		Activation('softplus'),
 		Dense(num_classes),
 		Activation('softmax')
@@ -370,7 +421,7 @@ def train(X, Y) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
 		model.fit(X[I_train], Y[I_train], epochs=100, validation_split=0.1)
-		
+	
 	# Package for export
 	M = {
 		'X' : X,
@@ -407,12 +458,9 @@ def get_training_data() :
 	else :
 		# The gene subset is "all genes"
 		genes = sorted(A.index)
-		
-	# Normalize sample-wise (after feature selection)
-	for c in A.columns : A[c] /= A[c].sum()
 	
-	# Drop missing/invalid data
-	A = A.dropna()
+	# Normalize sample-wise (after feature selection)
+	A = normalize(A)
 	
 	# Index the expression table by aliquot_barcode
 	A = A.transpose()
