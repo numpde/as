@@ -42,7 +42,7 @@ from scipy.stats     import gaussian_kde
 ## ==================== INPUT :
 
 IFILE = {
-	'BC data'  : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
+	'BC data'  : "OUTPUT/0_prepare/UV/bcxx.pkl",
 	'GO=>CI'   : "OUTPUT/0_go2ci/UV/go2ci.pkl",
 }
 
@@ -126,42 +126,40 @@ def CI(X, feature_axis) :
 #[ BC DATA ]#
 
 # Load the BC data
-BC_data = pickle.load(open(IFILE['BC data'], 'rb'))
+BCXX = pickle.load(open(IFILE['BC data'], 'rb'))
 
 # Expression matrix
-BC_X = BC_data['X']
+BC_X = BCXX['X']
 
-# Rearrange data axes
+# Data layout: genes x samples
 (axis_gene, axis_smpl) = (0, 1)
-BC_X = np.moveaxis(BC_X, BC_data['axis_gene'], axis_gene)
 
-# Number of samples / genes in the expression matrix
-(n_samples, n_genes) = (BC_X.shape[axis_smpl], BC_X.shape[axis_gene])
+## Number of samples / genes in the expression matrix
+#(n_samples, n_genes) = (BC_X.shape[axis_smpl], BC_X.shape[axis_gene])
 
-# ENSG IDs
-BC_E = BC_data['gene_id']
-assert(len(BC_E) == BC_X.shape[axis_gene]), "Inconsistent gene info"
+# HGNC Symbols in the table
+BC_H = list(BC_X.index)
 
-# E2I : BC ENSG --> Gene indices in BC data
-E2I = dict(zip(BC_E, range(len(BC_E))))
+# H2I : HGNC Symbol --> Gene indices in BC data
+H2I = dict(zip(BC_X.index, range(len(BC_X.index))))
 
 # Clusters/groups
 G2S = { 
 	g : tuple(s for (s, h) in SH)
-	for (g, SH) in BC_data['B2SH'].items() 
+	for (g, SH) in BCXX['B2SH'].items() 
 }
-S = sorted(G2S.values())
+S = list(G2S.values())
 
 #[ GO DATA ]#
 
 # Clustering indices data bundle
 CI_data = pickle.load(open(IFILE['GO=>CI'], 'rb'))
 
-# GO2E : GO ID --> Clustering index
+# GO2CI : GO ID --> Clustering index
 GO2CI = CI_data['GO2CI']
 
-# GO2E : GO ID --> [ENSG IDs]
-GO2E = CI_data['GO2E']
+# GO2H : GO ID --> [HGNC Symbols in the table]
+GO2H = CI_data['GO2H']
 
 # GO2T : GO ID --> GO category name
 GO2T = CI_data['GO2T']
@@ -175,28 +173,28 @@ GO2WQ = CI_data['GO2WQ']
 #[ Remove repeated GO categories ]#
 
 H2GO = defaultdict(set)
-for (go, E) in GO2E.items() : H2GO[hash('+'.join(sorted(E)))].add(go)
+for (go, H) in GO2H.items() : H2GO[hash('+'.join(sorted(H)))].add(go)
 H2GO = dict(H2GO)
 #
 # Check for no hash collisions
-assert(all((1 == len(set('+'.join(sorted(GO2E[go])) for go in GO))) for GO in H2GO.values()))
+assert(all((1 == len(set('+'.join(sorted(GO2H[go])) for go in GO))) for GO in H2GO.values()))
 #
 # Non-redundant GO categories and their aliases
 GO2A = { min(GO) : sorted(GO) for GO in H2GO.values() }
 #
-#print("{} of {} GO categories are non-redundant".format(len(GO2A), len(GO2E)))
+#print("{} of {} GO categories are non-redundant".format(len(GO2A), len(GO2H)))
 assert(10000 <= len(GO2A) <= 30000), "Unexpected number of GO terms"
 #
 del H2GO
 
 if ("TEST" in sys.argv) : 
 	PARAM['M'] = 2
-	GO2A = dict(list(GO2A.items())[0:1000])
+	GO2A = dict(list(GO2A.items())[0:200])
 
 def restrict(GO2X, GO) :
 	return { go : x for (go, x) in GO2X.items() if (go in GO) }
 
-GO2E  = restrict(GO2E, GO2A.keys())
+GO2H  = restrict(GO2H, GO2A.keys())
 GO2CI = restrict(GO2CI, GO2A.keys())
 GO2WQ = restrict(GO2WQ, GO2A.keys())
 
@@ -205,12 +203,12 @@ GO2WQ = restrict(GO2WQ, GO2A.keys())
 
 # Exclude genes w/o GO category
 if PARAM['GO union only'] :
-	E = set(chain.from_iterable(GO2E.values()))
-	BC_X = np.take(BC_X, [n for (n, e) in enumerate(BC_E) if e in E] , axis=axis_gene)
-	print("Keeping {}/{} genes".format(len(E), len(BC_E)))
+	H = set(chain.from_iterable(GO2H.values()))
+	BC_X = np.take(BC_X.as_matrix(), [n for (n, h) in enumerate(BC_H) if h in H] , axis=axis_gene)
+	print("Keeping {}/{} genes".format(len(H), len(BC_H)))
 	# Those are invalidated:
-	del E2I
-	del BC_E
+	del H2I
+	del BC_H
 
 Z = stats.mstats.zscore(BC_X, axis=axis_smpl).tolist()
 assert(axis_gene == 0) # tolist() above assumes this
@@ -233,9 +231,9 @@ def COMPUTE() :
 	# Main computation loop
 	NC = list(chain.from_iterable(
 		Parallel(n_jobs=PARAM['#proc'])(
-			delayed(job)(len(E), M)
-			for (_, E) in Progress()(GO2E.items())
-			if len(E)
+			delayed(job)(len(H), M)
+			for (_, H) in Progress()(GO2H.items())
+			if len(H)
 		)
 	))
 	
@@ -277,15 +275,15 @@ def LIST() :
 		
 		QK = []
 		
-		for (go, E) in Progress()(GO2E.items()) :
-			if not (K/w <= len(E) < K*w) : continue
+		for (go, H) in Progress()(GO2H.items()) :
+			if not (K/w <= len(H) < K*w) : continue
 			if not GO2CI.get(go, None) : continue
 		
 			ci = GO2CI[go]
 			
 			q = np.mean([(c < ci) for c in C])
 			
-			QK.append( (go, len(E), K, GO2T[go], GO2WQ[go], q, len(C)) )
+			QK.append( (go, len(H), K, GO2T[go], GO2WQ[go], q, len(C)) )
 		
 		Q[K] = sorted(QK, key=(lambda x : x[5]))
 	
@@ -330,7 +328,7 @@ def PLOT() :
 	# where n is the subset size and c is the clustering index
 	
 	# Make a similar list for the GO categories
-	NC_GO = [(len(E), GO2CI[go]) for (go, E) in GO2E.items() if (len(E) and (go in GO2CI))]
+	NC_GO = [(len(E), GO2CI[go]) for (go, E) in GO2H.items() if (len(E) and (go in GO2CI))]
 	
 	# Collect all those lists with a tag
 	#    'r' = random subset
@@ -350,9 +348,13 @@ def PLOT() :
 		L = { tag : [] for tag in T2L.keys() }
 		
 		for (NC, tag) in NC_ALL :
+			
+			nc = [(n, c) for (n, c) in NC if (K/w <= n < K*w)]
+			
+			if not nc : continue
+			
 			# Filter subsets by size
-			(N, C) = zip(*[(n, c) for (n, c) in NC if (K/w <= n < K*w)])
-			if not C : continue
+			(N, C) = zip(*nc)
 			
 			f = gaussian_kde(C)
 			
@@ -389,14 +391,16 @@ def PLOT() :
 		plt.ylim([0, ylim])
 		
 		plt.legend(
-			[ H[tag][0] for tag in ['r', 'm', 'g', '-'] ],
-			[ L[tag][0] for tag in ['r', 'm', 'g', '-'] ],
+			[ H[tag][0] for tag in ['r', 'm', 'g', '-'] if (tag in H) ],
+			[ L[tag][0] for tag in ['r', 'm', 'g', '-'] if (tag in L) ],
 			#loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
 			loc = 'upper left'
 		)
 		
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative frequency")
+		
+		plt.tight_layout()
 		
 		plt.savefig(OFILE['plot'].format(pivot=K))
 

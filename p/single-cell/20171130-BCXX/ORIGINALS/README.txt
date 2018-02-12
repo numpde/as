@@ -72,7 +72,7 @@ are from KL (2017-12-05).
 
 Downloaded (2017-12-18)
 
-	go/go-summary.csv
+	go-0/go-summary.csv
 
 from 
 
@@ -88,10 +88,19 @@ using the list of GO IDs from the results of **0_e2go.py**.
 
 The file
 
-	go/UV/go.obo
+	go-0/UV/go.obo
 
 was downloaded on 2017-12-25 from
 
 	http://geneontology.org/page/download-ontology#go.obo_and_go.owl
 	http://purl.obolibrary.org/obo/go.obo
+
+
+Files in
+
+	go-1
+
+are from
+
+	https://github.com/numpde/as/tree/d66a7b6b39e6d690031ed8d83ac32421e9ff4335/p/single-cell/20180118-GO
 

@@ -1,5 +1,5 @@
 
-# RA, 2018-01-04
+# RA, 2018-02-12
 
 ## ================== IMPORTS :
 
@@ -9,6 +9,7 @@ import math
 import os.path
 import inspect
 import sys
+import pandas as pd
 
 from collections import defaultdict
 from scipy import stats
@@ -21,13 +22,11 @@ from progressbar import ProgressBar as Progress
 
 IFILE = {
 	# Extract the list of relevant genes from here
-	'BC data' : "OUTPUT/0_select/UV/GSE75688_GEO_processed_Breast_Cancer_raw_TPM_matrix.txt-selected.pkl",
+	'BC data' : "OUTPUT/0_prepare/UV/bcxx.pkl",
 	
 	# 
-	'GO=>ENSG' : "OUTPUT/0_e2go/go2e.txt",
-	
-	#
-	'GO=>Info' : "OUTPUT/0_go-graph/UV/go-graph.pkl",
+	'GO=>Symb' : "ORIGINALS/go-1/go2symb.txt",
+	'GO=>Info' : "ORIGINALS/go-1/go2name.txt",
 }
 
 # Check existence of input files
@@ -47,16 +46,16 @@ for f in OFILE.values() :
 
 ## =================== PARAMS :
 
-PARAM = {
-	# Number of parallel computing processes
-	'#proc' : min(12, math.ceil(cpu_count() / 1.5)),
-	
-	# Window width for the windowed quantiles
-	'window width' : 2,
-}
-
 # Test mode
 TESTMODE = ("TEST" in sys.argv)
+
+PARAM = {
+	# Number of parallel computing processes
+	'#proc' : TESTMODE or min(12, math.ceil(cpu_count() / 1.5)),
+	
+	# Category size window width for the windowed quantiles
+	'window width' : 2,
+}
 
 ## ====================== AUX :
 
@@ -79,13 +78,25 @@ def silhouette(D, S) :
 	return s
 
 # Compute a distance matrix as (1 - cos(angle))
-def cos_dist(X, axis) :
+def cos_dist(X) :
 	# Covariance & norm products
-	C = np.tensordot(X, X, axes=([axis], [axis]))
+	C = np.tensordot(X, X, axes=([1], [1]))
 	V = np.sqrt(np.outer(np.diag(C), np.diag(C)))
 	V[V == 0] = 1
 	D = 1 - (C / V)
 	return D
+
+# Clustering index
+def CI(X, feature_axis) :
+
+	def dist(X) : return cos_dist(np.moveaxis(X, feature_axis, 1))
+	#def dist(X) : return euc_dist(np.moveaxis(X, feature_axis, 1))
+
+	return np.mean([
+		np.sign(x) 
+		for x in chain.from_iterable(silhouette(dist(X), S).values())
+	])
+
 
 ## ===================== WORK :
 
@@ -94,92 +105,74 @@ def cos_dist(X, axis) :
 #[ LOAD BC DATASET ]#
 
 # Load the BC data
-BC_data = pickle.load(open(IFILE['BC data'], 'rb'))
+BCXX = pickle.load(open(IFILE['BC data'], 'rb'))
 
 # Expression matrix
-X = BC_data['X']
+X = BCXX['X']
 
-# Labels for axis/dimension of BC data
-(axis_smpl, axis_gene) = (BC_data['axis_smpl'], BC_data['axis_gene'])
-	
-# Number of samples / genes in the expression matrix
-(n_samples, n_genes) = (X.shape[axis_smpl], X.shape[axis_gene])
+# Data layout: genes x samples
+(axis_gene, axis_smpl) = (0, 1)
 
-# ENSG IDs
-BC_E = BC_data['gene_id']
-assert(len(BC_E) == X.shape[axis_gene]), "Inconsistent gene info"
+# Drop unexpressed genes
+X = X[ X.sum(axis=axis_smpl) != 0 ]
 
-## E2X : BC ENSG --> BC X data
-#E2X = dict(zip(BC_E, np.moveaxis(X, axis_gene, 0)))
-
-# E2I : BC ENSG --> Gene indices in BC data
-E2I = dict(zip(BC_E, range(len(BC_E))))
+# H2I : HGNC Symbol --> Gene indices in BC data
+H2I = dict(zip(X.index, range(len(X.index))))
 
 # Clusters/groups
 G2S = { 
 	g : tuple(s for (s, h) in SH)
-	for (g, SH) in BC_data['B2SH'].items() 
+	for (g, SH) in BCXX['B2SH'].items() 
 }
 S = list(G2S.values())
 
 #[ LOAD GO TERMS & ANNOTATION ]#
 
-# GO2E : GO ID --> [ENSG IDs]
-GO2E = {
-	go_E[0] : set(go_E[1:])
-	for go_E in [
-		L.rstrip().split('\t') 
-		for L in open(IFILE['GO=>ENSG'], 'r')
-	]
+# GO2H : GO ID --> [Gene HGNC symbols]
+GO2H = {
+	r[0] : r[1].split('|')
+	for r in pd.read_csv(IFILE['GO=>Symb'], sep='\t', index_col=0).itertuples()
 }
+# Filter out those symbols that not in the expression table
+GO2H = { go : [h for h in H if (h in H2I)] for (go, H) in GO2H.items()}
 
 # GO2T : GO ID --> GO category name
 GO2T = {
-	go : data['name']
-	for (go, data) in pickle.load(open(IFILE['GO=>Info'], 'rb')).nodes(data=True)
+	r[0] : r[1]
+	for r in pd.read_csv(IFILE['GO=>Info'], sep='\t', index_col=0).itertuples()
 }
 
-# All GO terms
-GO = list(GO2T.keys())
 
-if TESTMODE : GO = GO[0:100]
+# All GO terms
+GO = sorted(GO2T.keys())
+
+if TESTMODE : GO = sorted(np.random.permutation(GO)[0:100])
 
 
 #[ GO TERMS vs BC DATASET ]#
 
-for go in GO2T.keys() :
-	if (go not in GO2E) :
-		#print("NOTE: {} has no gene list".format(go))
-		GO2E[go] = set()
+#for go in GO2T.keys() :
+	#if (go not in GO2H) :
+		##print("NOTE: {} has no gene list".format(go))
+		#GO2H[go] = set()
 
 # GO2I : GO ID --> Gene indices in BC data
 GO2I = {
-	go : np.asarray([E2I[e] for e in E])
-	for (go, E) in GO2E.items()
+	go : np.asarray([H2I[h] for h in H])
+	for (go, H) in GO2H.items()
 }
 
 
 #[ PREPARE DATA ]#
 
-Z = np.moveaxis(stats.mstats.zscore(X, axis=axis_smpl), axis_gene, 0)
-del X
-
-assert(Z.shape[0] == n_genes)
-assert(Z.shape[1] == n_samples)
-
+Z = np.moveaxis(stats.mstats.zscore(X.as_matrix(), axis=axis_smpl), axis_gene, 0)
 
 #[ COMPUTE THE CLUSTERING INDEX FOR EACH GO TERM ]#
 
 def goci_from_go(go) :
-	if (len(GO2I[go]) == 0) : return (go, None)
-
-	return (
-		go, 
-		np.mean([
-			np.sign(x) 
-			for x in chain.from_iterable(silhouette(cos_dist(Z[GO2I[go], :], 0), S).values())
-		])
-	)
+	if (0 == len(GO2I.get(go, []))) : return (go, None)
+	
+	return ( go, CI(Z[GO2I[go], :], 0) )
 
 print("Computing clustering indices")
 
@@ -192,22 +185,22 @@ GO2CI = dict(
 
 # N2CI : size of GO term --> [clustering indices]
 N2CI = defaultdict(list)
-for (go, E) in GO2E.items() : 
-	if (go in GO2CI) and len(E) :
-		N2CI[len(E)].append(GO2CI[go])
+for (go, I) in GO2I.items() : 
+	if (go in GO2CI) and len(I) :
+		N2CI[len(I)].append(GO2CI[go])
 
 
 #[ COMPUTE THE WINDOWED QUANTILES FOR EACH GO TERM ]#
 
 def gowq_from_go(go) :
-	E = GO2E[go]
+	I = GO2I.get(go, [])
 	
-	if (len(E) == 0) : return (go, None)
+	if (len(I) == 0) : return (go, None)
 
 	w = math.sqrt(PARAM['window width'])
 
 	p = stats.percentileofscore(
-		[ci for (n, CI) in N2CI.items() for ci in CI if (len(E)/w <= n <= len(E)*w)],
+		[ci for (n, CI) in N2CI.items() for ci in CI if (len(I)/w <= n <= len(I)*w)],
 		GO2CI[go]
 	)
 	
@@ -229,7 +222,7 @@ GO2WQ = dict(
 
 pickle.dump(
 	{ 
-		'GO2E'   : GO2E,
+		'GO2H'   : GO2H,
 		'GO2T'   : GO2T,
 		'GO2CI'  : GO2CI,
 		'N2CI'   : N2CI,
