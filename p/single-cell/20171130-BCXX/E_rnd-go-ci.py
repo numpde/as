@@ -66,9 +66,11 @@ for f in OFILE.values() :
 
 ## ==================== PARAM :
 
+TESTMODE = ("TEST" in sys.argv)
+
 PARAM = {
 	# Number of parallel computing processes
-	'#proc' : min(12, math.ceil(cpu_count() / 1.2)),
+	'#proc' : TESTMODE or min(12, math.ceil(cpu_count() / 1.2)),
 	
 	# Number of random subsets per GO category
 	'M' : 10,
@@ -187,7 +189,7 @@ assert(10000 <= len(GO2A) <= 30000), "Unexpected number of GO terms"
 #
 del H2GO
 
-if ("TEST" in sys.argv) : 
+if TESTMODE : 
 	PARAM['M'] = 2
 	GO2A = dict(list(GO2A.items())[0:200])
 
@@ -204,20 +206,16 @@ GO2WQ = restrict(GO2WQ, GO2A.keys())
 # Exclude genes w/o GO category
 if PARAM['GO union only'] :
 	H = set(chain.from_iterable(GO2H.values()))
-	BC_X = np.take(BC_X.as_matrix(), [n for (n, h) in enumerate(BC_H) if h in H] , axis=axis_gene)
+	BC_X = np.take(BC_X, [n for (n, h) in enumerate(BC_H) if h in H], axis=axis_gene)
 	print("Keeping {}/{} genes".format(len(H), len(BC_H)))
 	# Those are invalidated:
 	del H2I
 	del BC_H
 
-Z = stats.mstats.zscore(BC_X, axis=axis_smpl).tolist()
-assert(axis_gene == 0) # tolist() above assumes this
+Z = stats.mstats.zscore(BC_X.as_matrix(), axis=axis_smpl)
+assert(axis_gene == 0) # For slicing the Z matrix
 
-def job(N, M) :
-	return [
-		(N, CI(np.vstack(random.sample(Z, N)), axis_gene))
-		for _ in range(M)
-	]
+def job(I) : return ( len(I), CI(Z[I, :], axis_gene) )
 
 def COMPUTE() :
 	
@@ -228,14 +226,22 @@ def COMPUTE() :
 	print("Results will be written to:")
 	print(OFILE['runs'].format(ver=ver))
 	
-	# Main computation loop
-	NC = list(chain.from_iterable(
+	print("Preparing random subsets")
+	II = list(
+		random.sample(range(len(Z)), len(H))
+		for (_, H) in Progress()(GO2H.items())
+		for _ in range(M)
+		if len(H)
+	)
+	
+	# Main computation loops
+	print("Computing clustering indices")
+	NC = list(
 		Parallel(n_jobs=PARAM['#proc'])(
-			delayed(job)(len(H), M)
-			for (_, H) in Progress()(GO2H.items())
-			if len(H)
+			delayed(job)(I)
+			for I in Progress()(II)
 		)
-	))
+	)
 	
 	# Save the results
 	pickle.dump(
