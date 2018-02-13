@@ -104,13 +104,10 @@ def bcxx_groups(P) :
 def normalize(A) :
 	
 	# Normalize columns-wise
-	for c in A.columns : A[c] /= sum(A[c])
-	
-	# Drop missing/invalid data
-	A = A.dropna()
+	for c in A.columns : A[c] /= (sum(A[c]) or 1)
 	
 	# Log-transform
-	A = np.log(1 + A)
+	A = np.log(1 + 10 * A)
 	
 	return A
 

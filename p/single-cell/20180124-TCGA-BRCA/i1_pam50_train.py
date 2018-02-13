@@ -37,6 +37,10 @@ IFILE = {
 	
 	# TCGA PAM50 classification
 	'TCGA-PAM50' : "OUTPUT/e_prepared/UV/tcga.pkl",
+	
+	# 
+	'GO=>Symb' : "ORIGINALS/GO/UV/go2symb.txt",
+	'GO=>Info' : "ORIGINALS/GO/UV/go2name.txt",
 }
 
 
@@ -51,7 +55,7 @@ OFILE = {
 	
 	'model-plot' : "OUTPUT/i1_pam50/model.{ext}",
 	
-	'expression-heatmap' : "OUTPUT/i1_pam50/expression-heatmap/{pam50}.{ext}",
+	'expression-heatmap' : "OUTPUT/i1_pam50/expression-heatmap/{subtype}.{ext}",
 }
 
 # Create output directories
@@ -75,13 +79,58 @@ PARAM = {
 	
 	# Source: https://www.biostars.org/p/77590/
 	# Replaced ORC6L by ORC6 (http://www.genecards.org/cgi-bin/carddisp.pl?gene=ORC6)
+	# May be modified below
 	'PAM50-genes' : ("ACTR3B ANLN BAG1 BCL2 BIRC5 BLVRA CCNB1 CCNE1 CDC20 CDC6 CDH3 CENPF CEP55 CXXC5 EGFR ERBB2 ESR1 EXO1 FGFR4 FOXA1 FOXC1 GPR160 GRB7 KIF2C KRT14 KRT17 KRT5 MAPT MDM2 MELK MIA MKI67 MLPH MMP11 MYBL2 MYC NAT1 NDC80 NUF2 ORC6 PGR PHGDH PTTG1 RRM2 SFRP1 SLC39A6 TMEM45B TYMS UBE2C UBE2T").split(),
+	
+	# Whether or not ...
+	'METABRIC-remove' : True,
+	# ... remove those genes
+	'METABRIC-missing' : { "BAG1", "GPR160", "MIA", "TMEM45B" },
 	
 	'PAM50-types' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
 	
 	## Extension for plots
 	#'ext' : { 'pdf', 'png' },
 }
+
+#GENES = PARAM['PAM50-genes']
+
+#GENES = "GO:0003823" # antigen binding
+#GENES = "GO:0045087" # innate immune response
+#GENES = "GO:0005245" # voltage-gated calcium channel activity
+#GENES = "GO:0006811" # ion transport
+
+#GENES = "GO:0072659" # protein localization to plasma membrane
+#GENES = "GO:0007399" # nervous system development
+#GENES = "GO:0006268" # DNA unwinding involved in DNA replication
+#GENES = "GO:0043524" # negative regulation of neuron apoptotic process
+#GENES = "GO:0007173" # epidermal growth factor receptor signaling pathway
+#GENES = "GO:0007601" # visual perception
+#GENES = "GO:0030512" # negative regulation of transforming growth factor beta receptor signaling pathway
+#GENES = "GO:0003951" # NAD+ kinase activity
+
+#GENES = "GO:0019900" # kinase binding
+#GENES = "GO:0038128" # ERBB2 signaling pathway
+#GENES = "GO:0007568" # aging
+#GENES = "GO:0042493" # response to drug
+#GENES = "GO:0030331" # estrogen receptor binding
+#GENES = "GO:0006605" # protein targeting
+#GENES = "GO:0043154" # negative regulation of cysteine-type endopeptidase activity involved in apoptotic process
+#GENES = "GO:2001237" # negative regulation of extrinsic apoptotic signaling pathway
+#GENES = "GO:0051973" # positive regulation of telomerase activity
+#GENES = "GO:0007160" # cell-matrix adhesion
+#GENES = "GO:0032993" # protein-DNA complex
+#GENES = "GO:0021549" # cerebellum development
+#GENES = "GO:1900740" # positive regulation of protein insertion into mitochondrial membrane involved in apoptotic signaling pathway
+#GENES = "GO:0019888" # protein phosphatase regulator activity
+#GENES = "GO:1900034" # regulation of cellular response to heat
+#GENES = "GO:0006913" # nucleocytoplasmic transport
+#GENES = "GO:0001046" # core promoter sequence-specific DNA binding
+#GENES = "GO:0006368" # transcription elongation from RNA polymerase II promoter
+#GENES = "GO:0010595" # positive regulation of endothelial cell migration
+#GENES = "GO:0008137" # NADH dehydrogenase (ubiquinone) activity
+
+GENES = None # all genes
 
 
 ## ====================== AUX :
@@ -94,6 +143,28 @@ def is_unique(S) : return (S.unique().size == S.size)
 
 
 ## ====================== (!) :
+
+
+if (type(GENES) is str) and GENES.startswith("GO:") :
+	
+	# GO2H : GO ID --> [Gene HGNC symbols]
+	GO2H = {
+		r[0] : r[1].split('|')
+		for r in pd.read_csv(IFILE['GO=>Symb'], sep='\t', index_col=0).itertuples()
+	}
+
+	# GO2T : GO ID --> GO category name
+	GO2T = {
+		r[0] : r[1]
+		for r in pd.read_csv(IFILE['GO=>Info'], sep='\t', index_col=0).itertuples()
+	}
+	
+	GENES = GO2H[GENES]
+	
+else :
+	if GENES and PARAM['METABRIC-remove'] : 
+		GENES = sorted(set(GENES) - PARAM['METABRIC-missing'])
+
 
 # Read the PAM50 classification of TCGA samples
 def get_tcga_pam50_labels() :
@@ -119,13 +190,10 @@ def get_tcga_pam50_labels() :
 def normalize(A) :
 	
 	# Normalize columns-wise
-	for c in A.columns : A[c] /= sum(A[c])
-	
-	# Drop missing/invalid data
-	A = A.dropna()
+	for c in A.columns : A[c] /= (sum(A[c]) or 1)
 	
 	# Log-transform
-	A = np.log(1 + A)
+	A = np.log(1 + 10 * A)
 	
 	return A
 
@@ -142,8 +210,6 @@ def plot_model(M) :
 def plot_expression_heatmaps(M) :
 	
 	(X, Y, L, P, I) = (M['X'], M['Y'], M['L'], M['P'], M['I'])
-	
-	pam50 = PARAM['PAM50-genes']
 	
 	## Each sample is normalized
 	#assert(all(abs(np.sum(X, axis=1) - 1) <= 1e-10))
@@ -178,7 +244,7 @@ def plot_expression_heatmaps(M) :
 		#plt.xticks(xticks, xtickl, size=6)
 		plt.xlabel('{} samples classified as "{}"'.format(sum(y == n), c))
 		
-		plt.yticks(range(len(pam50)), pam50, size=5)
+		plt.yticks(range(len(GENES)), GENES, size=5)
 		
 		plt.tight_layout()
 		
@@ -212,7 +278,7 @@ def plot_expression_heatmaps(M) :
 		
 		# Save figure to disk
 		
-		plt.savefig(OFILE['expression-heatmap'].format(pam50=c, ext="pdf"))
+		plt.savefig(OFILE['expression-heatmap'].format(subtype=c, ext="pdf"))
 		plt.close()
 	
 	#for (c, g) in M.items() :
@@ -394,12 +460,16 @@ def train(X, Y) :
 	# Number of classes
 	num_classes = Y.shape[1]
 	
+	## 
+	#num_features = X.shape[1]
+	
 	model = Sequential([
 		BatchNormalization(input_shape=X.shape[1:]),
-		Dense(8*num_classes, kernel_regularizer=L1(1e-3)),
 		Dropout(0.5),
+		Dense(8*num_classes),
+		Dropout(0.9),
 		Activation('softplus'),
-		Dense(4*num_classes, kernel_regularizer=L1(1e-2)),
+		Dense(4*num_classes),
 		Activation('softplus'),
 		Dense(num_classes),
 		Activation('softmax')
@@ -417,7 +487,7 @@ def train(X, Y) :
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 	
 	# Training outer loop
-	for _ in range(10) :
+	for _ in range(100) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
 		model.fit(X[I_train], Y[I_train], epochs=100, validation_split=0.1)
@@ -444,20 +514,20 @@ def get_training_data() :
 	A = pickle.load(open(IFILE['TCGA'], 'rb'))['X']
 	
 	# Gene set of interest (set to None for all genes)
-	genes = None or PARAM['PAM50-genes']
+	genes = None or GENES
 	
 	# Has a gene subset been specified?
 	if genes :
 		# Keep only those genes in the expression table
-		assert(set(genes) <= set(A.index))
-		A = A.loc[ genes, : ]
+		#assert(set(genes) <= set(A.index))
+		A = A[ A.index.isin(genes) ]
 		
 		# Requested genes not found in the expression table
 		gnitt = (set(genes) - set(A.index))
 		if gnitt : print("Genes not in the table:", sorted(gnitt))
-	else :
-		# The gene subset is "all genes"
-		genes = sorted(A.index)
+	
+	# The gene subset is "all remaining genes"
+	genes = sorted(A.index)
 	
 	# Normalize sample-wise (after feature selection)
 	A = normalize(A)
