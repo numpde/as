@@ -103,9 +103,9 @@ def silhouette(D, S) :
 	return s
 
 # Compute a distance matrix as (1 - cos(angle))
-def cos_dist(X) :
+def cos_dist(X, feature_axis) :
 	# Covariance & norm products
-	C = np.tensordot(X, X, axes=([1], [1]))
+	C = np.tensordot(X, X, axes=([feature_axis], [feature_axis]))
 	V = np.sqrt(np.outer(np.diag(C), np.diag(C)))
 	V[V == 0] = 1
 	D = 1 - (C / V)
@@ -114,7 +114,7 @@ def cos_dist(X) :
 # Clustering index
 def CI(X, feature_axis) :
 
-	def dist(X) : return cos_dist(np.moveaxis(X, feature_axis, 1))
+	def dist(X) : return cos_dist(X, feature_axis)
 	#def dist(X) : return euc_dist(np.moveaxis(X, feature_axis, 1))
 
 	return np.mean([
@@ -135,6 +135,10 @@ BC_X = BCXX['X']
 
 # Data layout: genes x samples
 (axis_gene, axis_smpl) = (0, 1)
+
+# Drop unexpressed genes
+# Note: don't save any info based on numerical gene index
+BC_X = BC_X[ BC_X.sum(axis=axis_smpl) != 0 ]
 
 ## Number of samples / genes in the expression matrix
 #(n_samples, n_genes) = (BC_X.shape[axis_smpl], BC_X.shape[axis_gene])
@@ -212,10 +216,18 @@ if PARAM['GO union only'] :
 	del H2I
 	del BC_H
 
+# There are no NaN's
+assert(not BC_X.isnull().values.any())
+
 Z = stats.mstats.zscore(BC_X.as_matrix(), axis=axis_smpl)
+Z[ ~np.isfinite(Z) ] = 0
+
 assert(axis_gene == 0) # For slicing the Z matrix
 
-def job(I) : return ( len(I), CI(Z[I, :], axis_gene) )
+def job(I) : 
+	ci = CI(Z[I, :], axis_gene)
+	assert(np.isfinite(ci))
+	return ( len(I), ci )
 
 def COMPUTE() :
 	
@@ -227,14 +239,17 @@ def COMPUTE() :
 	print(OFILE['runs'].format(ver=ver))
 	
 	print("Preparing random subsets")
+	# Pool of valid gene indices
+	I = np.flatnonzero(np.all(np.isfinite(Z), axis=axis_smpl)).tolist()
+	# Collect random subset indices
 	II = list(
-		random.sample(range(len(Z)), len(H))
+		sorted(random.sample(I, len(H)))
 		for (_, H) in Progress()(GO2H.items())
 		for _ in range(M)
 		if len(H)
 	)
 	
-	# Main computation loops
+	# Main computation loop
 	print("Computing clustering indices")
 	NC = list(
 		Parallel(n_jobs=PARAM['#proc'])(
@@ -254,6 +269,9 @@ def COMPUTE() :
 
 def LIST() :
 	
+	GO_union_only = PARAM['GO union only']
+	ngenes = "{}k".format(int(round(BC_X.shape[axis_gene] / 1e3)))
+	
 	# Load the clustering indices of random subsets
 	RUNS = [
 		pickle.load(open(f, 'rb'))
@@ -269,17 +287,21 @@ def LIST() :
 	NC = list(chain.from_iterable(
 		run['NC']
 		for run in RUNS
-		if (run['PARAM']['GO union only'] == PARAM['GO union only'])
+		if (run['PARAM']['GO union only'] == GO_union_only)
 	))
 	
-	Q = dict()
+	# Random subset quantile, size pivot
+	def key52(x) : return (x[5], x[2])
+	
+	# Size pivot, random subset quantile
+	def key25(x) : return (x[2], x[5])
+	
+	Q = []
 	for K in [2**k for k in range(0, 13)] :
 		print("Pivot:", K)
 		
 		w = math.sqrt(2)
 		C = [c for (n, c) in NC if (K/w <= n < K*w)]
-		
-		QK = []
 		
 		for (go, H) in Progress()(GO2H.items()) :
 			if not (K/w <= len(H) < K*w) : continue
@@ -289,17 +311,14 @@ def LIST() :
 			
 			q = np.mean([(c < ci) for c in C])
 			
-			QK.append( (go, len(H), K, GO2T[go], GO2WQ[go], q, len(C)) )
-		
-		Q[K] = sorted(QK, key=(lambda x : x[5]))
+			Q.append( (go, len(H), K, GO2T[go], GO2WQ[go], q, len(C)) )
 	
-	filename = OFILE['list'].format(pivot="all", union=PARAM['GO union only'])
+	filename = OFILE['list'].format(pivot="all", union=GO_union_only)
 	
 	with open(filename, 'w') as f :
-		print("GO term", "GO size", "Size pivot", "GO name", "CI quantile (GO)", "CI quantile (random)", "Number of random subsets", sep='\t', file=f)
-		for (K, QK) in sorted(Q.items()) :
-			for q in QK : 
-				print(*q, sep='\t', file=f)
+		print("GO term", "GO size", "Size pivot", "GO name", "CI quantile (GO)", "CI quantile ({} random)".format(ngenes), "Number of random subsets", sep='\t', file=f)
+		for q in sorted(Q, key=key52) :
+			print(*q, sep='\t', file=f)
 
 
 ## ============ PLOTTING WORK :
@@ -355,7 +374,7 @@ def PLOT() :
 		
 		for (NC, tag) in NC_ALL :
 			
-			nc = [(n, c) for (n, c) in NC if (K/w <= n < K*w)]
+			nc = [(n, c) for (n, c) in NC if (K/w <= n < K*w) and np.isfinite(c)]
 			
 			if not nc : continue
 			
@@ -397,8 +416,8 @@ def PLOT() :
 		plt.ylim([0, ylim])
 		
 		plt.legend(
-			[ H[tag][0] for tag in ['r', 'm', 'g', '-'] if (tag in H) ],
-			[ L[tag][0] for tag in ['r', 'm', 'g', '-'] if (tag in L) ],
+			[ H[tag][0] for tag in ['r', 'm', 'g', '-'] if H[tag] ],
+			[ L[tag][0] for tag in ['r', 'm', 'g', '-'] if L[tag] ],
 			#loc = ('upper left' if (np.median(C) >= 0) else 'upper right'),
 			loc = 'upper left'
 		)
@@ -406,7 +425,7 @@ def PLOT() :
 		plt.xlabel("Clustering index")
 		plt.ylabel("Relative frequency")
 		
-		plt.tight_layout()
+		#plt.tight_layout()
 		
 		plt.savefig(OFILE['plot'].format(pivot=K))
 
