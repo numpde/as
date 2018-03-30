@@ -1,6 +1,10 @@
 
 # RA, 2018-02-12
 
+# Run as
+#	python3 0_go2ci.py
+
+
 ## ================== IMPORTS :
 
 import numpy as np
@@ -114,6 +118,7 @@ X = BCXX['X']
 (axis_gene, axis_smpl) = (0, 1)
 
 # Drop unexpressed genes
+# Note: don't save any info based on numerical gene index
 X = X[ X.sum(axis=axis_smpl) != 0 ]
 
 # H2I : HGNC Symbol --> Gene indices in BC data

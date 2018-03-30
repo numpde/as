@@ -14,7 +14,9 @@ default:
 
 i:
 	p="$$(pwd)/../img/"; cd $(IMG_PATH) && cp --parents \
+		e*/*/*.pdf \
 		i1*/*.pdf \
+		i1*/*/*.pdf \
 		i2*/*/*.pdf \
 		i2*/*/*/*.pdf \
 		$$p;

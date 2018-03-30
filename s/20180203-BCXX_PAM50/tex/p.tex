@@ -247,7 +247,7 @@
 	\begin{center}
 		%\small
 		%
-		PAM50 classification of the GSE75688 BC dataset
+		PAM50 classification of the single cell BC dataset (GSE75688)
 		%
 		\\[1\baselineskip]
 		\small
@@ -269,6 +269,22 @@
 		Feb 6, 2018
 		\\ {\ }
 	}
+\end{frame}
+
+% PAM50 origins:
+% https://www.nature.com/articles/35021093
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2667820/
+% https://www.ncbi.nlm.nih.gov/pmc/articles/PMC124443/
+
+
+\begin{frame}[t]{TCGA PAM50 classification}{}
+	\begin{center}
+		\includegraphics<01>[width=0.8\textwidth]{e_prepared/tcga-pam50-overview/ER-status}
+		\includegraphics<02>[width=0.8\textwidth]{e_prepared/tcga-pam50-overview/HER2-status-(FISH)}
+		\includegraphics<03>[width=0.8\textwidth]{e_prepared/tcga-pam50-overview/HER2-status-(IHC)}
+		\includegraphics<04>[width=0.8\textwidth]{e_prepared/tcga-pam50-overview/PR-status}
+		\includegraphics<05>[width=0.8\textwidth]{e_prepared/tcga-pam50-overview/TN}
+	\end{center}
 \end{frame}
 
 
@@ -296,23 +312,81 @@ m = Sequential([
 m.compile('adam', 'categorical_crossentropy')
 m.fit(X, Y, epochs=5000)
 \end{lstlisting}
+
+\scriptsize{\ }
+
+For training and prediction: 
+normalize each 50-gene sample.
+
 \end{minipage}
+%
+%
 \begin{minipage}{0.29\textwidth}
 \includegraphics[width=0.99\textwidth]{i1_pam50/model}
 \end{minipage}
+
 \end{frame}
 
 
 \begin{frame}[t]{TCGA-trained PAM50 classifier}{}
 	\begin{center}
-		\includegraphics<01>[width=0.99\textwidth]{i1_pam50/tsne_train}
-		\includegraphics<02>[width=0.99\textwidth]{i1_pam50/tsne_valid}
+		\includegraphics<01>[width=0.9\textwidth]{i1_pam50/tsne_train}
+		\includegraphics<02>[width=0.9\textwidth]{i1_pam50/tsne_valid}
 		\includegraphics<03>[width=0.99\textwidth]{i1_pam50/conf_class_pnorm}
 	\end{center}
+	
+	\Bottom{
+		{\only<1>{%
+			Unsupervised t-SNE embedding for the training set.
+		}}%
+		{\only<2>{%
+			Unsupervised t-SNE embedding for the test set.
+		}}%
+		{\only<3>{%
+			Confusion matrices for the training set and the test set.
+		}}%
+	}
+\end{frame}
+
+
+\begin{frame}[t]{TCGA-trained PAM50 classifier}{}
+	\begin{center}
+		\includegraphics<01>[width=0.9\textwidth]{i1_pam50/expression-heatmap/Normal}
+		\includegraphics<02>[width=0.9\textwidth]{i1_pam50/expression-heatmap/LumA}
+		\includegraphics<03>[width=0.9\textwidth]{i1_pam50/expression-heatmap/LumB}
+		\includegraphics<04>[width=0.9\textwidth]{i1_pam50/expression-heatmap/Her2}
+		\includegraphics<05>[width=0.9\textwidth]{i1_pam50/expression-heatmap/Basal}
+	\end{center}
+	
+	\Bottom{
+% 		Gene expression heatmaps.
+		Normalization sample-wise, then global z-score gene-wise.
+	}
 \end{frame}
 
 %%%
 
+\begin{frame}[t]{Application of the classifier to BCXX}{}
+	\footnotesize
+	From 
+	``Nanogrid single-nucleus RNA sequencing reveals phenotypic diversity in breast cancer'', 
+	Nature Comm, 2017:
+	% https://www.nature.com/articles/s41467-017-00244-w
+	\begin{quote}
+		We also applied the PAM50 gene signature to \textbf{classify single cells}
+		into the five major clinical breast cancer expression subtypes 
+		(normal-like, luminal A, luminal B, human epidermal growth factor receptor 2 (Her2) or basal-like). 
+% 		The relative frequency shifted slightly in each group, however, it was not significant by concordance test (p value >0.4). 
+		[..]
+		These data showed that most of the single cells and nuclei were classified as Her2 positive, 
+		consistent with the report that SK-BR-3 is a Her2-positive cell line by immunohistochemistry. 
+		However, we also found that a subset of the single cells were classified as 
+		luminal B (10.7, 23.6\%), basal-like (1.8, 5.9\%), normal-like (0.4, 1.4\%), or luminal A (2.4, 3.3\%) 
+% 		in both the nuclei and cells (frequency concordance P > 0.4), 
+		[..]
+		suggesting that the population of cells represented a composite mixture of molecular subtypes.
+	\end{quote}
+\end{frame}
 
 \begin{frame}[t]{Application of the classifier to BCXX}{}
 	\begin{center}
@@ -365,6 +439,88 @@ m.fit(X, Y, epochs=5000)
 	\end{center}
 \end{frame}
 
+%%%
+
+
+\begin{frame}[t]{Application of the classifier to BCXX}{Artificially assembled tumors}
+	{\only<1>{%
+		Assemble an artificial ``tumor'':
+		\begin{itemize}
+		\item
+			choose a subtype \[ \text{T $=$ Normal, LumA, LumB, Her2, Basal;} \]
+		\item
+			collect BCXX cells classified as T with confidence $\leq c_0$;
+		\item
+			keep only the top 20 cells;
+		\item
+			bulk expression $:=$ $\sum_{\text{20 cells}}$ [single cell expression $\times$ spike-in].
+		\end{itemize}
+		
+		{\ }
+		
+		Is this ``tumor'' still classified as T?
+	}}%
+	{\only<2->{%
+		\begin{center}
+			\includegraphics<2>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=5}
+			\includegraphics<3>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=4}
+			\includegraphics<4>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=3}
+			\includegraphics<5>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=2}
+			\includegraphics<6>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=1}
+			\includegraphics<7>[width=0.8\textwidth]{i2_pam50_bcxx/pred_sc2bulk/img/conf-win=0}
+		\end{center}
+		
+		{\only<5->{%
+			A collection of 20 weakly-LumB cells is frequently classified as LumB.
+		}}%
+	}}%
+\end{frame}
+
+%%%
+
+
+\begin{frame}[t]{PAM50 LumB subtype: bulk vs sc}{}
+	Is LumB 
+	\begin{itemize}
+	\item<1->
+		a ``legitimate'' subtype detectable from (the mRNA of) a single cell? 
+		
+		Then:
+		
+		\begin{itemize}
+		\item
+			False-(+)
+			for
+			bulk measurement of mixture of other subtypes:
+			
+			\begin{table}[]
+			\centering
+			\begin{tabular}{c|cc|c|c}
+				& cell 1 & cell 2 & bulk & LumB \\ \hline
+			gene X & 1     & 0     & 1    & 1    \\
+			gene Y & 0     & 1     & 1    & 1   
+			\end{tabular}
+			\end{table}
+		\item
+			Need sc-seq to avoid false-(+).
+		\end{itemize}
+		
+	\item<2->
+		a ``bogus'' subtype that arises only as a mixture of other subtypes? 
+		
+		Then:
+		
+		\begin{itemize}
+		\item
+			A single cell is not predictive of LumB subtype.
+		\item
+			LumB may be more effectively treated as multiple cancers.
+		\item
+			Need sc-seq to establish the composition of the tumor.
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
