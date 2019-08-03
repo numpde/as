@@ -1,0 +1,7 @@
+Predicted  Normal  LumA  LumB  Her2  Basal
+Reference                                 
+Normal          6     1     0     0      2
+LumA            0    58     7     5      2
+LumB            0     9    26     2      0
+Her2            0     0     9     9      0
+Basal           0     0     0     1     24

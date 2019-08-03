@@ -50,6 +50,8 @@ num_biomart_max_retry = 5
 
 TESTMODE = ("TEST" in sys.argv)
 
+if TESTMODE:
+	num_biomart_ids_per_query = 1
 
 ## ===================== WORK :
 
@@ -71,7 +73,7 @@ def biomart_this(dataset, attributes, E, retry=0) :
 	
 	except Exception as e :
 		
-		print("Error on try {}: {}".format(retry, e))
+		# print("Error on try {}: {}".format(retry, e))
 		
 		if (retry >= num_biomart_max_retry) : raise e
 		
@@ -101,7 +103,6 @@ def download(E, attributes) :
 
 	if TESTMODE : 
 		E = E[0:5]
-		num_biomart_ids_per_query = 1
 
 	print("Downloading info for {} ENSGs...".format(len(E)))
 

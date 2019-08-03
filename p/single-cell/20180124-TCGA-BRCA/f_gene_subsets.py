@@ -11,6 +11,7 @@ import os
 import pickle
 import inspect
 import pandas as pd
+from progressbar import ProgressBar as Progress
 
 ## ==================== INPUT :
 
@@ -66,7 +67,7 @@ PARAM = {
 		# From B_go_by_wq, gene numbers are approximate
 		"GO:0005132", # type I interferon receptor binding (6)
 		#"GO:0015874", # norepinephrine transport (3)
-		"GO:0005333", # norepinephrine transmembrane transporter activity (3)
+		# "GO:0005333", # norepinephrine transmembrane transporter activity (3)
 		"GO:0008188", # neuropeptide receptor activity (12)
 		"GO:0004956", # prostaglandin D receptor activity (2)
 		"GO:0014050", # negative regulation of glutamate secretion (5)
@@ -146,6 +147,10 @@ def hallmarks() :
 
 def gocategories() :
 	GO = pd.read_table(IFILE['go->symb'], index_col=0).join(pd.read_table(IFILE['go->name'], index_col=0), how='outer')
+
+	for go in PARAM['GO']:
+		if go not in GO.index:
+			print("{} unknown".format(go))
 	
 	S = [
 		geneset(go, GO['GO name'][go], GO['Primary symbol'][go].split('|'))

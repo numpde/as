@@ -306,8 +306,12 @@ def plot_pam50_overview(M) :
 			continue
 	
 	for (n, c) in enumerate(C) :
-		plt.figure(figsize=(4, 3), dpi=100)
-		
+		# plt.figure()
+
+		fig: plt.Figure
+		ax: plt.Axes
+		(fig, ax) = plt.subplots(figsize=(4, 3), dpi=100)
+
 		p = 'PAM50'
 		m = M[[p, c]].dropna()
 		S = pd.DataFrame(0, index=M[p].cat.categories, columns=M[c].cat.categories)
@@ -315,41 +319,53 @@ def plot_pam50_overview(M) :
 		
 		def norm(s) : return s / (sum(s) or 1)
 		
-		im = plt.imshow(S.apply(norm, axis=0), cmap=plt.cm.Blues, aspect='auto', vmin=0, vmax=1)
-		ax = plt.gca()
+		im = ax.imshow(S.apply(norm, axis=0), cmap=plt.cm.Blues, aspect='auto', vmin=0, vmax=1)
 		
 		for (x, j) in enumerate(S.columns) :
 			for (y, i) in enumerate(S.index) :
-				plt.text(x, y, S.loc[i, j], va='center', ha='center')
+				ax.text(x, y, S.loc[i, j], va='center', ha='center')
 
 		ax.tick_params(axis='both', which='both', length=0)
 
-		plt.xticks(range(len(S.columns)), short(S.columns))
-		plt.xlabel(c)
-		plt.yticks(range(len(S.index)), S.index)
-		plt.ylabel("Classified (in TCGA) as...")
+		(xlim, ylim) = (ax.get_xlim(), ax.get_ylim())
+
+		ax.set_xticks(range(0, len(S.columns)))
+		ax.set_xticklabels(short(S.columns))
+
+		ax.set_yticks(range(0, len(S.index)))
+		ax.set_yticklabels(S.index)
+
+		ax.set_xlabel(c)
+		ax.set_ylabel("Classified (in TCGA) as...")
+
+		ax.set_xlim(xlim)
+		ax.set_ylim(ylim)
 	
-		plt.tight_layout()
-		
-		(y0, y1) = (ax.get_position().y0, ax.get_position().y1)
+		fig.tight_layout()
 		
 		# Colorbar
-		
+
 		# https://stackoverflow.com/questions/13784201/matplotlib-2-subplots-1-colorbar
-		cax = plt.gcf().add_axes([0.98, y0, 0.01, y1-y0])
-		plt.gcf().subplots_adjust(right=0.9)
-		cb = plt.colorbar(im, cax=cax, ticks=[0, 0.5, 1])
+		(y0, y1) = (ax.get_position().y0, ax.get_position().y1)
+		cax = fig.add_axes([0.98, y0, 0.01, y1-y0])
+		fig.subplots_adjust(right=0.9)
+		cb = fig.colorbar(im, cax=cax, ticks=[0, 0.5, 1], )
 		cax.tick_params(labelsize=5) 
-		#
-		cb.set_clim(0, 1)
+		im.set_clim(0, 1)
+		cb.set_ticks([0, 0.5, 1])
 		cax.set_yticklabels(["0%", "proportion", "100%"], va='center', rotation=90)
 		cax.yaxis.set_ticks_position('left')
 		cax.tick_params(axis='both', which='both', length=0)
 		
 		# Save to disk
-		
-		plt.savefig(OFILE['pam50-overview'].format(status=(c.replace(" ", "-")), ext="pdf"))
-		plt.close()
+
+		for ext in ["png", "pdf"]:
+			fig.savefig(
+				OFILE['pam50-overview'].format(status=(c.replace(" ", "-")), ext=ext),
+				bbox_inches='tight', pad_inches=0,
+				dpi=300
+			)
+		plt.close(fig)
 
 
 def OVERVIEW() :

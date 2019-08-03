@@ -20,12 +20,15 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from keras.utils import to_categorical
+import tensorflow as tf
+# import tensorflow.keras as keras
+
+from tensorflow.keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix
 
-from keras import backend as keras_backend
+# from keras import backend as keras_backend
 
-from utils import make_keras_picklable
+# from utils import make_keras_picklable
 
 
 ## ==================== INPUT :
@@ -82,9 +85,9 @@ PARAM = {
 	# May be modified below
 	'PAM50-genes' : ("ACTR3B ANLN BAG1 BCL2 BIRC5 BLVRA CCNB1 CCNE1 CDC20 CDC6 CDH3 CENPF CEP55 CXXC5 EGFR ERBB2 ESR1 EXO1 FGFR4 FOXA1 FOXC1 GPR160 GRB7 KIF2C KRT14 KRT17 KRT5 MAPT MDM2 MELK MIA MKI67 MLPH MMP11 MYBL2 MYC NAT1 NDC80 NUF2 ORC6 PGR PHGDH PTTG1 RRM2 SFRP1 SLC39A6 TMEM45B TYMS UBE2C UBE2T").split(),
 	
-	# Whether or not ...
+	# Whether or not to remove ...
 	'METABRIC-remove' : True,
-	# ... remove those genes
+	# ... those genes
 	'METABRIC-missing' : { "BAG1", "GPR160", "MIA", "TMEM45B" },
 	
 	'PAM50-types' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
@@ -93,7 +96,7 @@ PARAM = {
 	#'ext' : { 'pdf', 'png' },
 }
 
-#GENES = PARAM['PAM50-genes']
+GENES = PARAM['PAM50-genes']
 
 #GENES = "GO:0003823" # antigen binding
 #GENES = "GO:0045087" # innate immune response
@@ -130,16 +133,13 @@ PARAM = {
 #GENES = "GO:0010595" # positive regulation of endothelial cell migration
 #GENES = "GO:0008137" # NADH dehydrogenase (ubiquinone) activity
 
-GENES = None # all genes
+# GENES = None # all genes
 
 
 ## ====================== AUX :
 
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
-
-# Check if pandas series has unique items
-def is_unique(S) : return (S.unique().size == S.size)
 
 
 ## ====================== (!) :
@@ -172,9 +172,9 @@ def get_tcga_pam50_labels() :
 	# PAM50
 	P = pickle.load(open(IFILE['TCGA-PAM50'], 'rb'))['subtype']
 	# Identify record by aliquot barcode
-	assert(is_unique(P['aliquot_barcode']))
+	assert(P['aliquot_barcode'].is_unique)
 	# Some patients have multiple aliquots though
-	assert(not is_unique(P['patient_barcode']))
+	assert(not P['patient_barcode'].is_unique)
 	# Use the aliquot barcode as index
 	P = P.set_index('aliquot_barcode')
 	# Select only the PAM50 class column
@@ -187,6 +187,7 @@ def get_tcga_pam50_labels() :
 	return P
 
 
+# Normalization for cross-dataset comparison
 def normalize(A) :
 	
 	# Normalize columns-wise
@@ -202,7 +203,7 @@ def normalize(A) :
 
 # Visualize the keras neural network model
 def plot_model(M) :
-	from keras.utils.vis_utils import plot_model
+	from tensorflow.keras.utils.vis_utils import plot_model
 	plot_model(M['m'], to_file=OFILE['model-plot'].format(ext="pdf"), show_shapes=True, show_layer_names=False)
 
 
@@ -233,7 +234,7 @@ def plot_expression_heatmaps(M) :
 		plt.figure(figsize=(8, 5), dpi=200)
 		
 		# Green to red: RdYlGn_r  /  White to red: Reds
-		param = { 'cmap' : plt.cm.RdYlGn_r, 'aspect' : 'auto', 'vmin' : -1, 'vmax' : +1 }
+		param = { 'cmap' : plt.cm.get_cmap('RdYlGn_r'), 'aspect' : 'auto', 'vmin' : -1, 'vmax' : +1 }
 		   
 		im = plt.imshow(x.T, **param)
 		
@@ -441,21 +442,20 @@ def PLOT() :
 #    Y = "sample x class" binary matrix
 def train(X, Y) :
 	
-	from keras.models import Sequential
-	from keras.layers import Dense, Dropout, Activation, BatchNormalization
-	from keras.engine.topology import Input
-	from keras        import regularizers
+	from tensorflow.keras.models import Sequential
+	from tensorflow.keras.layers import Dense, Dropout, Activation, BatchNormalization
+	from tensorflow.keras        import regularizers
 	
-	from keras.callbacks import LambdaCallback
+	from tensorflow.keras.callbacks import LambdaCallback
 	
 	from sklearn.model_selection import train_test_split
 	
-	from keras.regularizers import l2 as L2
-	from keras.regularizers import l1 as L1
-	import keras.optimizers
+	from tensorflow.keras.regularizers import l2 as L2
+	from tensorflow.keras.regularizers import l1 as L1
+	import tensorflow.keras.optimizers
 	
 	# https://stackoverflow.com/questions/39547279/loading-weights-in-th-format-when-keras-is-set-to-tf-format
-	keras_backend.set_image_data_format('channels_first')
+	tf.keras.backend.set_image_data_format('channels_first')
 	
 	# Number of classes
 	num_classes = Y.shape[1]
@@ -465,9 +465,9 @@ def train(X, Y) :
 	
 	model = Sequential([
 		BatchNormalization(input_shape=X.shape[1:]),
-		Dropout(0.5),
+		Dropout(rate=0.5),
 		Dense(8*num_classes),
-		Dropout(0.9),
+		Dropout(rate=0.1),
 		Activation('softplus'),
 		Dense(4*num_classes),
 		Activation('softplus'),
@@ -487,7 +487,7 @@ def train(X, Y) :
 	model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 	
 	# Training outer loop
-	for _ in range(100) :
+	for _ in range(2) :
 		# Use a separate small validation split for online inspection
 		# Due to the outer loop, this is not a true training/validation split
 		model.fit(X[I_train], Y[I_train], epochs=100, validation_split=0.1)
@@ -575,4 +575,4 @@ if (__name__ == "__main__") :
 	if ("PLOT"  in sys.argv) : PLOT()
 	
 	# https://github.com/tensorflow/tensorflow/issues/3388#issuecomment-271107725
-	keras_backend.clear_session()
+	# keras_backend.clear_session()

@@ -8,6 +8,23 @@ were downloaded from
 	https://tcga-data.nci.nih.gov/docs/publications/brca_2012/
 
 
+The meta files
+
+	gdc_manifest.2019-07-31.txt
+	files.2019-08-01.json
+
+were downloaded from
+
+	https://portal.gdc.cancer.gov/repository?facetTab=files&filters={"op":"and","content":[{"op":"in","content":{"field":"cases.project.project_id","value":["TCGA-BRCA"]}},{"op":"in","content":{"field":"files.access","value":["open"]}},{"op":"in","content":{"field":"files.data_category","value":["Clinical","Transcriptome Profiling"]}}]}
+
+Data selection is as follows
+
+	Project Id IS TCGA-BRCA
+	AND
+	Access IS open
+	AND
+	Data Category IN ( Clinical, Transcriptome Profiling )
+
 
 The meta files 
 
@@ -25,6 +42,8 @@ Data selection is as follows
 	Access IS open
 	AND
 	Data Category IN ( Biospecimen, Clinical, Copy Number Variation, Transcriptome Profiling )
+
+	[2019-08-01: This is probably an incorrect list of categories specified]
 
 
 Data files can be downloaded with

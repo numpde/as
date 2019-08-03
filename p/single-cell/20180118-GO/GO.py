@@ -119,7 +119,7 @@ def read_goa(filename) :
 	# http://www.geneontology.org/page/go-annotation-file-format-20
 	columns = ['DB', 'ID', 'Symbol', 'Q', 'GO', 'DB Ref', 'Evidence', 'With/From', 'Aspect', 'Name', 'Synonyms', 'Type', 'Taxon', 'Date', 'Assigned by', 'Extension', 'Gene product ID']
 	data = read_table(filename, index_col=False, comment='!', sep='\t', header=None, nrows=None, names=columns)
-	
+
 	# Check that each ID has at exactly one (primary) symbol
 	# (but some symbols have multiple IDs)
 	g = nx.Graph()
@@ -129,8 +129,8 @@ def read_goa(filename) :
 	
 	# Obtain the symbol synonyms (excluding itself)
 	SYN = [
-		(s, set(syn.split('|')) - set(s))
-		for (s, syn) in zip(data['Symbol'], data['Synonyms'])
+		(sym, set(str(syn).split('|')) - set(sym))
+		for (sym, syn) in zip(data['Symbol'], data['Synonyms'])
 	]
 	
 	# Check that each symbol has a unique list of synonyms

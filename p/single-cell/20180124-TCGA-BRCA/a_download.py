@@ -14,10 +14,11 @@ import json
 import hashlib
 import urllib.request
 
+from progressbar import ProgressBar as Progress
+
 from pandas import read_table as pandas_read
 from time import sleep
 from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
 
 from shutil import copyfile
 from glob import glob
@@ -29,8 +30,8 @@ from collections import defaultdict
 
 IFILE = {
 	# Before download
-	'manifest'   : "ORIGINALS/TCGA-BRCA-01/gdc_manifest.2018-01-24T03_39_35.725692.txt",
-	'files-json' : "ORIGINALS/TCGA-BRCA-01/files.2018-01-24T04_54_05.741627.json",
+	'manifest'   : "ORIGINALS/TCGA-BRCA-01/gdc_manifest.2019-07-31.txt",
+	'files-json' : "ORIGINALS/TCGA-BRCA-01/files.2019-08-01.json",
 }
 
 
@@ -124,11 +125,12 @@ def DOWNLOAD() :
 def SORTCASE() :
 	
 	L = json.load(open(IFILE['files-json']))
-	assert(all((len(rec['cases']) == 1) for rec in L))
+	# assert(all((len(rec['cases']) == 1) for rec in L))
 	
 	C = defaultdict(list)
 	for rec in L :
-		C[rec['cases'][0]['case_id']].append( rec['file_name'] )
+		for case in rec['cases']:
+			C[case['case_id']].append( rec['file_name'] )
 	C = dict(C)
 	
 	# Test

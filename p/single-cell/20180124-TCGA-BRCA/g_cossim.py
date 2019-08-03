@@ -74,15 +74,19 @@ def zscore(S) : return (S - S.mean()) / S.std()
 # Cosine similarity between two pandas dataframes (column-wise)
 # https://en.wikipedia.org/wiki/Cosine_similarity
 def cosine_similarity(A, B) :
-	
-	# Drop zero columns
-	A = A.loc[ :, (A != 0).any(axis=0) ]
-	B = B.loc[ :, (B != 0).any(axis=0) ]
+
+	# Nonzero columns
+	jA = (A != 0).any(axis=0)
+	jB = (B != 0).any(axis=0)
+
+	# Keep only nonzero columns
+	A = A.loc[ :, jA ]
+	B = B.loc[ :, jB ]
 	
 	# Convert to numpy arrays
-	a = A.astype(float).as_matrix()
-	b = B.astype(float).as_matrix()
-	
+	a = A.astype(float).values
+	b = B.astype(float).values
+
 	# All-x-all dot products
 	d = np.matmul(a.T, b)
 	
@@ -111,29 +115,45 @@ def compute(genes, meta) :
 	# TCGA data
 	TCGA_DATA = pickle.load(open(IFILE['TCGA'], 'rb'))
 
+	BCXX: pd.DataFrame
+	TCGA: pd.DataFrame
+
 	BCXX = BCXX_DATA['X']
 	TCGA = TCGA_DATA['X']
-	
+
 	# Restrict to those genes
 	if genes :
-		TCGA = TCGA.ix[genes]
-		BCXX = BCXX.ix[genes]
-	
+		BCXX = BCXX.loc[genes & set(BCXX.index), :]
+		TCGA = TCGA.loc[genes & set(TCGA.index), :]
+
 	if PARAM['zscore'] :
-		TCGA = TCGA.apply(zscore, axis=1)
 		BCXX = BCXX.apply(zscore, axis=1)
-	
-	TCGA = TCGA.dropna()
+		TCGA = TCGA.apply(zscore, axis=1)
+
 	BCXX = BCXX.dropna()
-	
+	TCGA = TCGA.dropna()
+
+	assert(not BCXX.empty)
+	assert(not TCGA.empty)
+
 	# Keep only the genes that are in both tables
 	# Note: the tables are indexed by the gene symbol
 	(TCGA, BCXX) = TCGA.align(BCXX, join='inner', axis=0)
-	
+
+	# TCGA has size (gene subset) x (TCGA bulk sample)
+	# BCXX has size (gene subset) x (BCXX single cell sample)
+	# print(TCGA.shape, BCXX.shape)
+
+	# TCGA and BCXX may have all-zero columns on this subset of genes;
+	# The following similarity matrix will only contain
+	# the nonzero columns of TCGA (as rows) and
+	# the nonzero columns of BCXX (as columns);
+	# Record the original columns as 'I0' and 'J0'
+
 	# Similarity matrix for (TCGA bulk sample) x (BCXX single cell sample)
 	M = cosine_similarity(TCGA, BCXX)
-	
-	return { 'M' : M, 'meta' : meta }
+
+	return { 'M' : M, 'meta' : meta, 'I0': TCGA.columns, 'J0': BCXX.columns }
 
 
 def COMPUTE() :

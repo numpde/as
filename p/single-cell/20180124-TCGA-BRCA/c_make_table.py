@@ -86,6 +86,7 @@ def files_by_patient() :
 		
 			assert(type(L) == list)
 			assert(len(L) == 1)
+
 			return L[0]
 		
 		# Files
@@ -95,7 +96,7 @@ def files_by_patient() :
 		F['FPKM-UQ']      = glob(p + "*FPKM-UQ.txt*")
 		F['htseq.counts'] = glob(p + "*htseq.counts*")
 		
-		F['clinical']     = onlyone(glob(p + "*clinical*"))
+		F['clinical']     = onlyone(glob(p + "*clinical*.xml"))
 		F['biospecimen']  = onlyone(glob(p + "*biospecimen*"))
 		
 		if not F['clinical'] : 
@@ -175,6 +176,10 @@ def get_transcriptome_file_info() :
 def XX_by_patient() :
 	
 	FI = get_transcriptome_file_info()
+
+	#
+	assert(FI['file_name'].is_unique)
+	FI = FI.set_index('file_name')
 	
 	P2FF = files_by_patient()
 	
@@ -193,13 +198,19 @@ def XX_by_patient() :
 		#print("Path:", os.path.dirname(F['clinical']))
 		
 		for (n, filename) in enumerate(F['FPKM']) :
+
+			i = os.path.basename(filename)
+
+			if i not in FI.index:
+				print("(!) File {i} not in FI".format(i=i))
+				continue
 			
 			# Constency of patient UUID info coming from the directory tree and the 'filemeta' list
-			patient_uuid = FI.loc[ FI['file_name'] == os.path.basename(filename), 'patient_uuid' ].item()
+			patient_uuid = FI.loc[ i, 'patient_uuid' ]
 			assert(p == patient_uuid), "Patient ID mismatch"
 			
 			# Aliquot ID of this file (file of different data kinds that belong together share this ID)
-			aliquot_barcode = FI.loc[ FI['file_name'] == os.path.basename(filename), 'aliquot_barcode' ].item()
+			aliquot_barcode = FI.loc[ i, 'aliquot_barcode' ]
 			
 			P2XX[p].append(
 				pd.read_table(

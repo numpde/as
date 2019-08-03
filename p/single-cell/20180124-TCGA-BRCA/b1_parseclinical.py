@@ -143,7 +143,7 @@ def CLINICAL() :
 		assert(not c), "Record has to be either a 'patient' or a 'follow-up'"
 	
 	for (k, data) in DATA.items() :
-		DATA[k] = pd.DataFrame().join(data, how='outer')
+		DATA[k] = pd.DataFrame().join(data, how='outer', sort=True)
 	
 	
 	print("Saving...")

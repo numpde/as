@@ -19,6 +19,8 @@ from multiprocessing import cpu_count
 from joblib import Parallel, delayed
 from progressbar import ProgressBar as Progress
 
+from pandas.core.base import DataError
+
 
 ## ==================== INPUT :
 
@@ -83,64 +85,93 @@ def classify(M) :
 	# These are the PAM50 subtypes
 	PAM50 = PARAM['PAM50']
 	# Assume uniqueness of 'aliquot_barcode's for unambiguous classification
-	assert(is_unique(C['aliquot_barcode']))
+	assert(C['aliquot_barcode'].is_unique)
 	# Expect all the PAM50 subtypes to be represented
 	assert(set(PAM50) == set(C['PAM50']))
+
+	# Index by aliquot_barcode
+	C = C.set_index('aliquot_barcode')
 	
 	# Keep only the TCGA samples that have been PAM50-classified
-	M = M.loc[ M.index.isin(C['aliquot_barcode']), : ]
+	M = M.loc[ M.index.isin(C.index), : ]
 	# Each sample is now classified
-	assert(set(C['aliquot_barcode']) >= set(M.index))
-	
+	assert(set(C.index) >= set(M.index))
+
 	# Group into a (TCGA PAM50 type) x (BCXX tumor) matrix
 	def group(M) :
 		
 		# Omit records with missing data
 		N = M.dropna().astype(float)
-		
+
 		# Group by PAM50 type
 		N = N.groupby(
 			# Aliquot barcode to PAM50 type
-			lambda a : C[ C['aliquot_barcode'] == a ]['PAM50'].item(),
+			lambda a : C.loc[a, 'PAM50'],
 			axis=0
 		).mean()
-		
+
 		# Group by BCXX tumors
 		N = N.groupby(
 			# Sample "BCXX[LN][_Re]_YY" to cluster "BCXX"
 			lambda c : c[:-3],
 			axis=1
 		).mean()
-		
+
 		# Use the order of the PAM50 list
 		N = N.reindex(pd.Categorical(N.index, categories=PAM50)).sort_index()
 		
 		return N
-	
+
 	# Group into a (TCGA PAM50 type) x (BCXX tumor) matrix
 	N = group(M)
 
 	return N
 
+
 # Plot a (TCGA type) x (BCXX tumor) matrix
-def plot(N) :
-	
+def plot(N):
+
 	N = N.drop(index='Normal')
-	
+
 	# Normalize column-wise
 	for c in N.columns : N[c] /= N[c].sum()
-	
+
 	## Normalize row-wise
 	#for i in N.index : N.ix[i] /= N.ix[i].sum()
-	
-	plt.clf()
-	plt.imshow(N.as_matrix(), aspect='auto', cmap=plt.cm.Blues)
-	plt.xticks(range(len(N.columns)), list(N.columns), rotation=60)
-	plt.yticks(range(len(N.index)), list(N.index))
-	plt.tick_params(axis='x', which='major', labelsize=6)
-	plt.tick_params(axis='y', which='major', labelsize=8)
-	plt.colorbar()
-	plt.ylabel("Normed cos-sim to...")
+
+	fig: plt.Figure
+	ax: plt.Axes
+	(fig, ax) = plt.subplots()
+
+	im = ax.imshow(N.values, aspect='auto', cmap=plt.cm.Blues)
+	(xlim, ylim) = (ax.get_xlim(), ax.get_ylim())
+
+	ax.set_xticks(list(range(len(N.columns))))
+	ax.set_xticklabels(N.columns, rotation=60)
+	ax.set_yticks(list(range(len(N.index))))
+	ax.set_yticklabels(N.index)
+	ax.tick_params(axis='x', which='major', labelsize=6)
+	ax.tick_params(axis='y', which='major', labelsize=8)
+	ax.set_ylabel("Normed cos-sim to...")
+
+	ax.set_xlim(xlim)
+	ax.set_ylim(ylim)
+
+	fig.tight_layout()
+
+	# https://stackoverflow.com/questions/13784201/matplotlib-2-subplots-1-colorbar
+	(y0, y1) = (ax.get_position().y0, ax.get_position().y1)
+	cax = fig.add_axes([0.98, y0, 0.01, y1 - y0])
+	fig.subplots_adjust(right=0.9)
+	cb = fig.colorbar(im, cax=cax, ticks=[0, 0.5, 1], )
+	cax.tick_params(labelsize=5)
+	im.set_clim(0, 1)
+	cb.set_ticks([0, 0.5, 1])
+	cax.set_yticklabels(["0%", "proportion", "100%"], va='center', rotation=90)
+	cax.yaxis.set_ticks_position('left')
+	cax.tick_params(axis='both', which='both', length=0)
+
+	return (fig, ax)
 
 
 def COMPUTE() :
@@ -149,14 +180,17 @@ def COMPUTE() :
 	
 	for cossim in Progress()(all_cossim) :
 		setid = cossim['meta']['id']
-		#print("Gene set:", setid)
-	
-		N = classify(cossim['M'])
-		
-		plot(N)
-		plt.title(cossim['meta']['info'], fontsize=6)
-		plt.savefig(OFILE['classified'].format(geneset=nicer(setid)))
-	
+
+		try:
+			N = classify(cossim['M'])
+		except:
+			print("Failed on gene set:", setid)
+		else:
+			(fig, ax) = plot(N)
+			title = "{name} ({len} genes)".format(name=cossim['meta']['info'], len=len(cossim['meta']['set']))
+			ax.set_title(title, fontsize=6)
+			fig.savefig(OFILE['classified'].format(geneset=nicer(setid)))
+			plt.close(fig)
 
 ## ==================== ENTRY :
 
