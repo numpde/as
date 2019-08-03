@@ -9,6 +9,8 @@ import pickle
 import datetime
 import inspect
 
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
@@ -74,89 +76,94 @@ def plot_fancy(Y: pd.DataFrame):
 	# Insert spacing between them
 	spacing = 2
 	R = list(chain(*zip([spacing] * len(R), R)))[1:]
-	# Add space for the subtypes labels and the colorbar
-	R = [sum(R) * 0.03] + [spacing] + R + [sum(R) * 0.03, sum(R) * 0.01, spacing]
+	# Add space for the subtypes labels (and the colorbar)
+	# R = [sum(R) * 0.03] + [spacing] + R + [sum(R) * 0.03, sum(R) * 0.01, spacing] # with colorbar
+	R = [sum(R) * 0.03] + [spacing] + R + [spacing, sum(R) * 0.01, spacing]
 	R = np.cumsum(R)
 	R = R / max(R)
 
-	fig = plt.figure(figsize=(10, 2), dpi=300, frameon=False)
+	with plt.style.context("dark_background"):
+		fig = plt.figure(figsize=(10, 2), dpi=300, frameon=False, facecolor=(0, 0, 0, 1))
 
-	# Vertical orientation
-	origin = ["upper", "lower"][1]
+		# Vertical orientation
+		origin = ["upper", "lower"][1]
 
-	# Ploting axes for the groups
-	AX = [
-		fig.add_axes([a, 0, b - a, 1])
-		for (a, b, _) in zip(R[1::2], R[2::2], tumors)
-		# The third component is to have the correct number of axes
-	]
-
-	# Group-wise sample classification
-
-	def to_rgba(Y: pd.DataFrame):
-		C = [
-			list(map((lambda a: [*colors[pam], a]), Y[pam].values))
-			for pam in Y.columns
+		# Ploting axes for the groups
+		AX = [
+			fig.add_axes([a, 0, b - a, 1], frame_on=False)
+			for (a, b, _) in zip(R[1::2], R[2::2], tumors)
+			# The third component is to have the correct number of axes
 		]
-		return np.asarray(C)
 
-	for (t, ax, Y) in zip(tumors, AX, TY):
+		# Group-wise sample classification
 
-		im = ax.imshow(
-			to_rgba(Y),
-			aspect='auto', origin=origin,
-			cmap=plt.cm.get_cmap('Blues'),
-			vmin=0, vmax=1
-		)
+		def to_rgba(Y: pd.DataFrame):
+			C = [
+				list(map((lambda a: [*colors[pam], a]), Y[pam].values))
+				for pam in Y.columns
+			]
+			return np.asarray(C)
 
-		ax.set_xticks([])
-		ax.set_yticks([])
+		for (t, ax, Y) in zip(tumors, AX, TY):
 
-		# Group label
-		ax.text(
-			0.95, 0.99, t,
-			size=6,
-			transform=ax.transAxes, rotation=90,
-			ha='right', va='top',
-			color="red"
-		)
+			im = ax.imshow(
+				to_rgba(Y),
+				aspect='auto', origin=origin,
+				cmap=plt.cm.get_cmap('Blues'),
+				vmin=0, vmax=1
+			)
 
-	# Colorbar
+			ax.set_xticks([])
+			ax.set_yticks([])
 
-	cax = fig.add_axes([R[-3], 0.05, R[-2] - R[-3], 0.9])
-	cb = plt.colorbar(im, cax=cax, ticks=[0, 0.5, 1])
-	#
-	im.set_clim(0, 1)
-	cax.set_yticklabels(["0%", "confidence", "100%"], va='center', rotation=90, size=5)
-	cax.yaxis.set_ticks_position('left')
-	cax.tick_params(axis='both', which='both', length=0)
+			# Group label
+			ax.text(
+				0.95, 0.99, t,
+				size=6,
+				transform=ax.transAxes, rotation=90,
+				ha='right', va='top',
+				color="red"
+			)
 
-	# Class labels
+		# # Colorbar
+		#
+		# cax = fig.add_axes([R[-3], 0.05, R[-2] - R[-3], 0.9], frame_on=False)
+		# cb = plt.colorbar(im, cax=cax, ticks=[0, 0.5, 1])
+		# #
+		# im.set_clim(0, 1)
+		# cax.set_yticklabels(["0%", "confidence", "100%"], va='center', rotation=90, size=5)
+		# cax.yaxis.set_ticks_position('left')
+		# cax.tick_params(axis='both', which='both', length=0)
 
-	ax = fig.add_axes([0, 0, R[0], 1])
-	ax.axis('off')
-	#
-	L = list(classes)
-	if (origin == "upper"): L = list(reversed(L))
-	#
-	for (y, t) in zip(np.linspace(0, 1, 1 + 2 * len(L))[1::2], L):
-		ax.text(
-			0.5, y, t,
-			size=8,
-			transform=ax.transAxes, rotation=90,
-			ha='center', va='center',
-			color='black',
-		)
+		# Class labels
 
-	for ext in ['png', 'pdf']:
-		fig.savefig(
-			commons.makedirs(PARAM['full_classified'].format(ext=ext)),
-			transparent=False,
-			bbox_inches='tight', pad_inches=0,
-			dpi=300
-		)
+		ax = fig.add_axes([0, 0, R[0], 1])
+		ax.axis('off')
+		#
+		L = list(classes)
+		if (origin == "upper"): L = list(reversed(L))
+		#
+		for (y, t) in zip(np.linspace(0, 1, 1 + 2 * len(L))[1::2], L):
+			ax.text(
+				0.5, y, t,
+				size=8,
+				transform=ax.transAxes, rotation=90,
+				ha='center', va='center',
+				# color='black',
+			)
 
-	plt.close(fig)
+		for ext in ['png', 'pdf']:
+			fig.savefig(
+				commons.makedirs(PARAM['full_classified'].format(ext=ext)),
+				transparent=True,
+				facecolor=(0, 0, 0, 1),
+				frameon=True,
+				edgecolor=None,
+				bbox_inches='tight', pad_inches=0.1,
+				dpi=300
+			)
+
+		plt.close(fig)
 
 
 def plot_hist(y: pd.Series):
