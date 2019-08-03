@@ -91,17 +91,21 @@ def plot_fancy(Y: pd.DataFrame):
 	R = R / max(R)
 
 	with plt.style.context("dark_background"):
-		fig = plt.figure(figsize=(10, 2), dpi=300, frameon=False, facecolor=(0, 0, 0, 1))
+		fig = plt.figure(figsize=(10, 2))
 
 		# Vertical orientation
 		origin = ["upper", "lower"][1]
 
 		# Ploting axes for the groups
 		AX = [
-			fig.add_axes([a, 0, b - a, 1], frame_on=False)
+			fig.add_axes([a, 0, b - a, 1], alpha=1)
 			for (a, b, _) in zip(R[1::2], R[2::2], tumors)
 			# The third component is to have the correct number of axes
 		]
+
+		# Axes frame edge color
+		for ax in AX:
+			plt.setp(ax.spines.values(), color='black')
 
 		# Group-wise sample classification
 
@@ -126,11 +130,11 @@ def plot_fancy(Y: pd.DataFrame):
 
 			# Group label
 			ax.text(
-				0.95, 0.99, t,
+				0.95, 0.05, t,
 				size=6,
 				transform=ax.transAxes, rotation=90,
-				ha='right', va='top',
-				color="red"
+				ha='right', va='bottom',
+				color="white"
 			)
 
 		# # Colorbar
@@ -157,16 +161,16 @@ def plot_fancy(Y: pd.DataFrame):
 				size=8,
 				transform=ax.transAxes, rotation=90,
 				ha='center', va='center',
-				# color='black',
 			)
+
+		# Save figure
 
 		for ext in ['png', 'pdf']:
 			fig.savefig(
 				commons.makedirs(PARAM['full_classified'].format(ext=ext)),
-				transparent=True,
-				facecolor=(0, 0, 0, 1),
-				frameon=True,
-				edgecolor=None,
+				transparent=False,
+				facecolor=(0.1, 0.1, 0.1, 1),
+				# frameon=True,
 				bbox_inches='tight', pad_inches=0.1,
 				dpi=300
 			)
