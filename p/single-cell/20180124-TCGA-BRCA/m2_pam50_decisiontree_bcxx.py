@@ -148,12 +148,13 @@ def plot_fancy(Y: pd.DataFrame):
 			color='black',
 		)
 
-	fig.savefig(
-		commons.makedirs(PARAM['full_classified'].format(ext='png')),
-		transparent=False,
-		bbox_inches='tight', pad_inches=0,
-		dpi=300
-	)
+	for ext in ['png', 'pdf']:
+		fig.savefig(
+			commons.makedirs(PARAM['full_classified'].format(ext=ext)),
+			transparent=False,
+			bbox_inches='tight', pad_inches=0,
+			dpi=300
+		)
 
 	plt.close(fig)
 
