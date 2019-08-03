@@ -19,3 +19,8 @@ __pycache__
 
 .DS_*
 
+venv/
+.idea/
+
+.~*
+
