@@ -40,6 +40,9 @@ PARAM = {
 	# Plot markers
 	'PAM50-markers': ['o', '^', 'v', '*', 's'],
 
+	# Normalize the fancy plot to "max = 1"
+	'normalize-y': True,
+
 	# BCXX PAM50-classified histogram
 	'classified': "OUTPUT/m2_pam50_decisiontree_bcxx/hist_{kind}.{ext}",
 	'full_classified': "OUTPUT/m2_pam50_decisiontree_bcxx/full_hist.{ext}",
@@ -63,6 +66,11 @@ def plot_fancy(Y: pd.DataFrame):
 	def class_confidence(p):
 		n = np.argmax(p.values)
 		return (n, -p[n])
+
+	# Normalize the whole matrix
+	if PARAM['normalize-y']:
+		commons.logger.info("Max Y: {}".format(max(Y.values.flatten())))
+		Y /= max(Y.values.flatten())
 
 	# Split Y by tumor
 	TY = [Y[Y.index.map(parent) == t] for t in tumors]
