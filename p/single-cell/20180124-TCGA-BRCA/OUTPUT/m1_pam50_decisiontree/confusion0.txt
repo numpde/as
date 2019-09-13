@@ -1,7 +1,7 @@
 Predicted  Normal  LumA  LumB  Her2  Basal
 Reference                                 
 Normal         20     0     0     0      0
-LumA            0   150     7     0      1
-LumB            0     1    87     0      0
+LumA            0   157     1     0      0
+LumB            0     0    88     0      0
 Her2            0     0     0    39      0
 Basal           0     0     1     0     69
