@@ -105,7 +105,7 @@ def plot_fancy(Y: pd.DataFrame):
 
 		# Axes frame edge color
 		for ax in AX:
-			plt.setp(ax.spines.values(), color='black')
+			plt.setp(ax.spines.values(), color='C6')
 
 		# Group-wise sample classification
 
@@ -208,10 +208,17 @@ def plot_hist(y: pd.Series):
 			bottom += h[pam]
 
 		if (kind == 'abs'):
+			# zorder doesn't seem to help here
 			ax.grid(axis='y', zorder=-10)
 
 		ax.tick_params(axis='x', which='both', labelsize='small', length=0, rotation=45)
 
+		if (kind == 'rel'):
+			ax.tick_params(labelleft=False)
+			# ax.set_yticklabels(ax.get_yticklabels())
+
+
+		# Legend in inverse order
 		ax.legend(*map(reversed, ax.get_legend_handles_labels()), loc='upper right')
 
 		fig.savefig(
@@ -223,8 +230,6 @@ def plot_hist(y: pd.Series):
 		plt.close(fig)
 
 
-
-
 def classify_and_plot():
 	# Expression table (HGNC Symbol x Sample ID)
 	# Transpose to a table (Sample ID x HGNC Symbol)
@@ -233,20 +238,19 @@ def classify_and_plot():
 	X: pd.DataFrame
 	X = commons.zscore(pickle.load(open(PARAM['BCXX'], 'rb'))['X'].T, axis=1)[PARAM['PAM50']]
 
-	# # Check: each row sums to zero
-	# assert(all((abs(row.sum()) < 1e-10) for (i, row) in X.iterrows()))
-
 	# Classifier
 	model: RandomForestClassifier
 	model = pickle.load(open(PARAM['model'], 'rb'))['model']
 
+	# Check that the data layout is compatible with the classifier
+	assert(all(list(X.columns.values == pickle.load(open(PARAM['model'], 'rb'))['features'])))
+
 	# Prediction confidence table (Sample) x (Label)
 	Y = pd.DataFrame(data=model.predict_proba(X), index=X.index, columns=model.classes_)
+	plot_fancy(Y)
 
 	# Predicted label for each sample in X
 	y = pd.Series(model.predict(X), index=X.index)
-
-	plot_fancy(Y)
 	plot_hist(y)
 
 

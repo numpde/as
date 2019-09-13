@@ -1,10 +1,10 @@
 
 # RA, 2018-01-28
 
-# Run as
-#    python3 g*.py
 
 ## ================== IMPORTS :
+
+from helpers import commons
 
 import os
 import sys
@@ -15,9 +15,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from multiprocessing import cpu_count
 from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
+
 
 
 ## ==================== INPUT :
@@ -37,9 +36,6 @@ OFILE = {
 	'cossim' : "OUTPUT/g_cossim/UV/TCGA-v-BCXX.pkl",
 }
 
-# Create output directories
-for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
-
 
 ## ==================== PARAM :
 
@@ -47,26 +43,19 @@ TESTMODE = ("TEST" in sys.argv)
 
 PARAM = {
 	# Number of parallel computing processes
-	'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.5)),
+	'#proc' :  int(TESTMODE) or commons.cpu_frac(0.7),
 	
-	# Record just in case
+	# Record whether in testmode, just in case
 	'testmode' : TESTMODE,
 	
 	# Do gene-wise zscore transform?
-	'zscore' : False,
+	'zscore-genewise' : False,
 }
 
 
 ## ====================== AUX :
 
-# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
-THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
-
-# Check if pandas series has unique items
-def is_unique(S) : return (S.unique().size == S.size)
-
-# zscore transform of a pandas series
-def zscore(S) : return (S - S.mean()) / S.std()
+pass
 
 
 ## ====================== (!) :
@@ -126,9 +115,9 @@ def compute(genes, meta) :
 		BCXX = BCXX.loc[genes & set(BCXX.index), :]
 		TCGA = TCGA.loc[genes & set(TCGA.index), :]
 
-	if PARAM['zscore'] :
-		BCXX = BCXX.apply(zscore, axis=1)
-		TCGA = TCGA.apply(zscore, axis=1)
+	if PARAM['zscore-genewise'] :
+		BCXX = commons.zscore(BCXX, axis=1)
+		TCGA = commons.zscore(TCGA, axis=1)
 
 	BCXX = BCXX.dropna()
 	TCGA = TCGA.dropna()
@@ -163,16 +152,18 @@ def COMPUTE() :
 
 	cossim_by_geneset = Parallel(n_jobs=PARAM['#proc'])(
 		delayed(compute)(geneset['set'], geneset)
-		for geneset in Progress()(gene_subsets)
+		for geneset in commons.Progress()(gene_subsets)
 	)
-	
+
 	pickle.dump(
 		{
 			'cossim' : cossim_by_geneset,
-			'script' : THIS,
+
 			'param'  : PARAM,
+			'script': commons.this_module_body(),
+			'timestamp': commons.utcnow(),
 		},
-		open(OFILE['cossim'], 'wb')
+		open(commons.makedirs(OFILE['cossim']), 'wb')
 	)
 
 

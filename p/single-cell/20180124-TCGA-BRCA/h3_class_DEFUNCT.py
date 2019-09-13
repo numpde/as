@@ -1,8 +1,9 @@
 
 # RA, 2018-01-30
 
-# Run as
-#    python3 h3*.py
+# Combines g, h1 and h2 ?
+# Outdated compared to those.
+
 
 ## ================== IMPORTS :
 
@@ -99,9 +100,6 @@ PARAM = {
 # https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
 THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
 
-# Check if pandas series has unique items
-def is_unique(S) : return (S.unique().size == S.size)
-
 # zscore transform of a pandas series
 def zscore(S) : return (S - np.mean(S)) / np.std(S)
 
@@ -139,14 +137,14 @@ def compile_class_table() :
 	# Clinical
 	C = pickle.load(open(IFILE['clinical'], 'rb'))['patient_barcode']
 	# Identify record by patient barcode
-	assert(is_unique(C.columns)) 
+	assert(C.columns.is_unique)
 	
 	# PAM50
 	P = pickle.load(open(IFILE['PAM50'], 'rb'))['subtype']
 	# Identify record by aliquot barcode
-	assert(is_unique(P['aliquot_barcode']))
+	assert(P['aliquot_barcode'].is_unique)
 	# Some patients have multiple aliquots though
-	assert(not is_unique(P['patient_barcode']))
+	assert(not P['patient_barcode'].is_unique)
 	# Use the aliquot barcode as index
 	P = P.set_index('aliquot_barcode')
 	
@@ -196,8 +194,8 @@ def cosine_similarity(A, B) :
 	B = B.loc[ :, (B != 0).any(axis=0) ]
 	
 	# Convert to numpy arrays
-	a = A.astype(float).as_matrix()
-	b = B.astype(float).as_matrix()
+	a = A.astype(float).values
+	b = B.astype(float).values
 	
 	# All-x-all dot products
 	d = np.matmul(a.T, b)
@@ -225,8 +223,8 @@ def compute_similarity(A, B, genes=None) :
 	
 	# Restrict to those genes
 	if genes :
-		A = A.ix[genes]
-		B = B.ix[genes]
+		A = A.loc[genes]
+		B = B.loc[genes]
 	
 	# Apply columns-wise normalization
 	if PARAM['normcol'] :
@@ -326,7 +324,7 @@ def plot(N, m) :
 	for c in N.columns : N[c] = softmax(N[c], amp=3)
 	
 	## Normalize row-wise
-	#for i in N.index : N.ix[i] /= N.ix[i].sum()
+	#for i in N.index : N.loc[i] /= N.loc[i].sum()
 	
 	plt.clf()
 	im = plt.imshow(N.as_matrix(), aspect='auto', cmap=plt.cm.Blues, vmin=0, vmax=1)

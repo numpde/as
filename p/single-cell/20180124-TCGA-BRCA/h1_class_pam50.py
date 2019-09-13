@@ -1,10 +1,10 @@
 
 # RA, 2018-01-28
 
-# Run as
-#    python3 h1*.py
 
 ## ================== IMPORTS :
+
+from helpers import commons
 
 import os
 import sys
@@ -14,12 +14,6 @@ import inspect
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
-from multiprocessing import cpu_count
-from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
-
-from pandas.core.base import DataError
 
 
 ## ==================== INPUT :
@@ -35,11 +29,8 @@ IFILE = {
 ## =================== OUTPUT :
 
 OFILE = {
-	'classified' : "OUTPUT/h1_class/TCGA-BCXX/PAM50/{geneset}.pdf",
+	'classified' : "OUTPUT/h1_class/TCGA-BCXX/PAM50/{geneset}.{ext}",
 }
-
-# Create output directories
-for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 
 
 ## ==================== PARAM :
@@ -47,21 +38,12 @@ for f in OFILE.values() : os.makedirs(os.path.dirname(f), exist_ok=True)
 TESTMODE = ("TEST" in sys.argv)
 
 PARAM = {
-	# Number of parallel computing processes
-	'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.2)),
-	
-	# PAM50 order
+	# PAM50 label order
 	'PAM50' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
 }
 
 
 ## ====================== AUX :
-
-# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
-THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
-
-# Check if pandas series has unique items
-def is_unique(S) : return (S.unique().size == S.size)
 
 # Change GO:000 to GO-000 in filenames
 def nicer(filename) : return filename.replace("GO:", "GO-")
@@ -71,7 +53,7 @@ def nicer(filename) : return filename.replace("GO:", "GO-")
 pass
 
 
-## ===================== WORK :
+## =================== WORKER :
 
 # Compute the similarity grouping by class
 def classify(M) :
@@ -174,26 +156,37 @@ def plot(N):
 	return (fig, ax)
 
 
-def COMPUTE() :
+## =================== MASTER :
+
+def main() :
 	
 	all_cossim = pickle.load(open(IFILE['cossim'], 'rb'))['cossim']
 	
-	for cossim in Progress()(all_cossim) :
+	for cossim in commons.Progress()(all_cossim) :
 		setid = cossim['meta']['id']
 
 		try:
 			N = classify(cossim['M'])
 		except:
-			print("Failed on gene set:", setid)
-		else:
-			(fig, ax) = plot(N)
-			title = "{name} ({len} genes)".format(name=cossim['meta']['info'], len=len(cossim['meta']['set']))
-			ax.set_title(title, fontsize=6)
-			fig.savefig(OFILE['classified'].format(geneset=nicer(setid)))
-			plt.close(fig)
+			commons.logger.warning("Failed on gene set: {}".format(setid))
+			continue
+
+		(fig, ax) = plot(N)
+		title = "{name} ({len} genes)".format(name=cossim['meta']['info'], len=len(cossim['meta']['set']))
+		ax.set_title(title, fontsize=6)
+
+		for ext in ['png', 'pdf']:
+			fig.savefig(
+				commons.makedirs(OFILE['classified'].format(geneset=nicer(setid), ext=ext)),
+				bbox_inches='tight', pad_inches=0,
+				dpi=180
+			)
+
+		plt.close(fig)
+
 
 ## ==================== ENTRY :
 
 if (__name__ == "__main__") :
-	COMPUTE()
+	main()
 

@@ -113,23 +113,52 @@ def get_X() :
 	ENSG = ENSG.rename(columns={ 'ensembl_gene_id' : 'ENSG', 'hgnc_symbol' : 'symbol' })
 	# Select only those columns
 	ENSG = ENSG[['ENSG', 'symbol']]
-	# Omit rows with missing data
-	ENSG = ENSG.dropna(axis=0, how='any')
+	# Omit ENSG's without a known gene symbol
+	ENSG = ENSG.dropna()
 	
 	# Read TCGA table
+	X: pd.DataFrame
 	X = pickle.load(logged_open(IFILE['TCGA'], 'rb'))['X']
-	
-	# Omit version number from the ENSG IDs
+
+	# Drop the version number from the ENSG IDs
+	# Do not reindex by ENSG, as other datasets may not have it
 	X['ENSG'] = [e[0:15] for e in X['ENSG']]
-	
+
+	# ENSG ID's are unique; gene symbols may not be
+	assert(X['ENSG'].is_unique)
+	assert(ENSG['ENSG'].index.is_unique)
+
 	# Append the Symbol column, dropping rows where unknown
-	# Then "ENSG" is the index column
-	X = X.merge(ENSG, left_index=True, right_index=True, how='inner')
-	
+	X = X.merge(ENSG, on='ENSG', how='inner')
+
+	# At this point, Symbols may repeat, viz (2019-08-03):
+	# 	for (symbol, group) in X.groupby('symbol'):
+	# 		if (len(group) > 1):
+	# 			print(symbol, ":", list(group['ENSG']))
+	# yields
+	# 	DUXAP8 : ['ENSG00000206195', 'ENSG00000271672']
+	# 	GOLGA8M : ['ENSG00000188626', 'ENSG00000261480']
+	# 	ITFG2-AS1 : ['ENSG00000256150', 'ENSG00000258325']
+	# 	LINC01238 : ['ENSG00000237940', 'ENSG00000261186']
+	# 	LINC01505 : ['ENSG00000234229', 'ENSG00000234323']
+	# 	PINX1 : ['ENSG00000254093', 'ENSG00000258724']
+	# 	POLR2J4 : ['ENSG00000214783', 'ENSG00000272655']
+	# 	PRAMEF7 : ['ENSG00000204510', 'ENSG00000279195']
+	# 	RMRP : ['ENSG00000269900', 'ENSG00000277027']
+	# 	RN7SKP260 : ['ENSG00000252716', 'ENSG00000281402']
+	# 	RNU6-771P : ['ENSG00000202250', 'ENSG00000207511']
+	# 	SCARNA4 : ['ENSG00000280466', 'ENSG00000281394']
+	# 	SNORA16A : ['ENSG00000274582', 'ENSG00000280498']
+	# 	SNORA17B : ['ENSG00000276161', 'ENSG00000280496']
+	# 	SNORA50A : ['ENSG00000206952', 'ENSG00000281910']
+	# 	SNORD38B : ['ENSG00000207421', 'ENSG00000281859']
+	# 	SNORD3D : ['ENSG00000277947', 'ENSG00000281000']
+
 	# Index by Symbol, summing over subgroups
-	# The ENSG index column is dropped
+	# The ENSG ID column is dropped as a nuisance column:
+	# https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html
 	X = X.groupby('symbol').sum()
-	
+
 	return X
 
 

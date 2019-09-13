@@ -1,10 +1,10 @@
 
 # RA, 2018-01-28
 
-# Run as
-#    python3 h2*.py
 
 ## ================== IMPORTS :
+
+from helpers import commons
 
 import os
 import sys
@@ -14,10 +14,6 @@ import inspect
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
-from multiprocessing import cpu_count
-from joblib import Parallel, delayed
-from progressbar import ProgressBar as Progress
 
 
 ## ==================== INPUT :
@@ -32,7 +28,7 @@ IFILE = {
 ## =================== OUTPUT :
 
 OFILE = {
-	'classified' : "OUTPUT/h2_class/TCGA-BCXX/{method}/{geneset}.pdf",
+	'classified' : "OUTPUT/h2_class/TCGA-BCXX/{method}/{geneset}.{ext}",
 }
 
 
@@ -41,10 +37,7 @@ OFILE = {
 TESTMODE = ("TEST" in sys.argv)
 
 PARAM = {
-	# Number of parallel computing processes
-	'#proc' :  int(TESTMODE) or min(12, math.ceil(cpu_count() / 1.2)),
-	
-	# Classification methods
+	# Clinical classification methods
 	'Classification' : {
 		'ER status' : {
 			'key' : 'er_status_by_ihc',
@@ -65,12 +58,6 @@ PARAM = {
 
 
 ## ====================== AUX :
-
-# https://stackoverflow.com/questions/34491808/how-to-get-the-current-scripts-code-in-python
-THIS = inspect.getsource(inspect.getmodule(inspect.currentframe()))
-
-# Check if pandas series has unique items
-def is_unique(S) : return (S.unique().size == S.size)
 
 # Change GO:000 to GO-000 in filenames
 def nicer(filename) : return filename.replace("GO:", "GO-")
@@ -204,7 +191,7 @@ def COMPUTE() :
 	
 	all_cossim = pickle.load(open(IFILE['cossim'], 'rb'))['cossim']
 	
-	for cossim in Progress()(all_cossim) :
+	for cossim in commons.Progress()(all_cossim) :
 		for method in PARAM['Classification'].keys() :
 			meta = cossim['meta']
 			setid = meta['id']
@@ -215,24 +202,24 @@ def COMPUTE() :
 			try:
 				N = classify(cossim['M'], method)
 			except:
-				print("Failed on gene set:", setid)
-			else:
-			
-				(fig, ax) = plot(N)
+				commons.logger.warning("Failed on gene set:", setid)
 
-				title = "{name} ({len} genes)".format(name=meta['info'], len=len(meta['set']))
-				ax.set_title(title, fontsize=6)
+			(fig, ax) = plot(N)
 
-				ax.set_ylabel(method + " normed cos-sim to...")
+			title = "{name} ({len} genes)".format(name=meta['info'], len=len(meta['set']))
+			ax.set_title(title, fontsize=6)
 
-				# Filename for figure
-				f = OFILE['classified'].format(method=method, geneset=nicer(setid))
-				# Create output directories
-				os.makedirs(os.path.dirname(f), exist_ok=True)
-				# Save figure
-				plt.savefig(f)
-				plt.close(fig)
-				
+			ax.set_ylabel(method + " normed cos-sim to...")
+
+			for ext in ['png', 'pdf']:
+				fig.savefig(
+					commons.makedirs(OFILE['classified'].format(method=method, geneset=nicer(setid), ext=ext)),
+					bbox_inches='tight', pad_inches=0,
+					dpi=180
+				)
+
+			plt.close(fig)
+
 
 ## ==================== ENTRY :
 

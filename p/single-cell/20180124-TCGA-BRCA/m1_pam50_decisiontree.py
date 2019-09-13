@@ -93,7 +93,10 @@ def main():
 	pickle.dump(
 		{
 			'model': model,
+			'features': X.columns,
 			'data': {'X': X, 'C': C},
+
+			'PARAM': PARAM,
 			'script': commons.this_module_body(),
 			'timestamp': datetime.datetime.utcnow(),
 		},

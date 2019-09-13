@@ -5,6 +5,12 @@
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+import datetime as dt
+utcnow = dt.datetime.utcnow
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
 import pandas as pd
 
 # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html
@@ -15,8 +21,8 @@ def zscore(X: pd.DataFrame, axis: int) -> pd.DataFrame:
 	return X.apply((lambda s: (s - s.mean()) / (s.std() or 1)), axis=axis)
 
 
-def normalize(X: pd.DataFrame, axis: int) -> pd.DataFrame:
-	return X.apply((lambda s: s / (s.sum() or 1)), axis=axis)
+def norm1(X: pd.DataFrame, axis: int) -> pd.DataFrame:
+	return X.apply((lambda s: s / (s.abs().sum() or 1)), axis=axis)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -77,7 +83,7 @@ PARAM_LOGGER_OFILE = os.path.join(os.path.dirname(__file__), "logs/UV/{id}.log")
 import progressbar
 progressbar.streams.wrap_stderr()
 
-from progressbar import progressbar
+from progressbar import ProgressBar as Progress
 
 def initialize_logger() :
 	import logging.config
