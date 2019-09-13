@@ -1,13 +1,14 @@
 
 # RA, 2019-08-02
 
+# Apply the mock PAM50 classifier to the single-cell BCXX dataset
+
+
 from helpers import commons
 
 import pandas as pd
 import numpy as np
 import pickle
-import datetime
-import inspect
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -17,12 +18,10 @@ import matplotlib.colors as mcolors
 from itertools import chain
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn import metrics
 
 
 PARAM = {
-	#
+	# Preprocessed BCXX gene expression dataset (GSE75688)
 	'BCXX': "OUTPUT/e_prepared/UV/bcxx.pkl",
 
 	# Load the regression model
@@ -43,8 +42,9 @@ PARAM = {
 	# Normalize the fancy plot to "max = 1"
 	'normalize-y': True,
 
-	# BCXX PAM50-classified histogram
+	# Barplot tumor-wise as predicted by classifier
 	'classified': "OUTPUT/m2_pam50_decisiontree_bcxx/hist_{kind}.{ext}",
+	# Confidences for each cell / each class
 	'full_classified': "OUTPUT/m2_pam50_decisiontree_bcxx/full_hist.{ext}",
 }
 

@@ -1,13 +1,14 @@
 
 # RA, 2019-08-02
 
+# Retrain the mock PAM50 classifier on the TCGA-BRCA dataset
+
+
 from helpers import commons
 
 import pandas as pd
 import pickle
 import datetime
-import inspect
-import matplotlib.pyplot as plt
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -15,6 +16,7 @@ from sklearn import metrics
 
 
 PARAM = {
+	# Preprocessed TCGA-BRCA dataset with PAM50 labels
 	'TCGA': "OUTPUT/e_prepared/UV/tcga.pkl",
 
 	# https://www.biostars.org/p/77590/
