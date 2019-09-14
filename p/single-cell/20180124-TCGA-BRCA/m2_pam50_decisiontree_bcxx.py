@@ -249,9 +249,5 @@ def classify_and_plot():
 	plot_hist(y)
 
 
-def main():
-	classify_and_plot()
-
-
 if (__name__ == "__main__"):
-	main()
+	classify_and_plot()
