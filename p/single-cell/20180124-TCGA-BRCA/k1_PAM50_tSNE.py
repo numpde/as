@@ -5,30 +5,27 @@ from helpers import commons
 
 import matplotlib.pyplot as plt
 import pandas as pd
-import pickle
+import json, pickle
+
 from sklearn.manifold import TSNE
-from itertools import groupby
+
 
 PARAM = {
+	# Input: Preprocessed TCGA-BRCA dataset with PAM50 labels
 	'TCGA': "OUTPUT/e_prepared/UV/tcga.pkl",
 
-	# https://www.biostars.org/p/77590/
-	# Changed ORC6L to ORC6 (https://en.wikipedia.org/wiki/ORC6, 2019-08-02)
-	'PAM50': list((
-		"ACTR3B, ANLN, BAG1, BCL2, BIRC5, BLVRA, CCNB1, CCNE1, CDC20, CDC6, CDH3, CENPF, CEP55, CXXC5, EGFR, ERBB2, ESR1, EXO1, FGFR4, FOXA1, FOXC1, GPR160, GRB7, KIF2C, KRT14, KRT17, KRT5, MAPT, MDM2, MELK, MIA, MKI67, MLPH, MMP11, MYBL2, MYC, NAT1, NDC80, NUF2, ORC6, PGR, PHGDH, PTTG1, RRM2, SFRP1, SLC39A6, TMEM45B, TYMS, UBE2C, UBE2T"
-	).replace(' ', '').split(',')),
+	# List of PAM50 genes
+	'PAM50': json.load(open("ORIGINALS/GeneSets/pam50/pam50.json", 'r'))['data'],
 
-	# PAM50 labels order
+	# PAM50 labels order and plot markers
 	'PAM50-labels' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
-
-	# Plot markers
 	'PAM50-markers': ['o', '^', 'v', '*', 's'],
 
-	# tSNE plot save-to path
-	'fig': "OUTPUT/k1_PAM50_tSNE/tsne{:0>2d}.{ext}",
-
-	# Number of tSNE repeats
+	# Number of tSNE random repeats
 	'tSNE-repeats': 6,
+
+	# Output: tSNE plot save-to path
+	'fig': "OUTPUT/k1_PAM50_tSNE/tsne{:0>2d}.{ext}",
 }
 
 
