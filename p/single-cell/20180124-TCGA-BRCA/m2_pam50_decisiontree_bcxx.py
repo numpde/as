@@ -8,7 +8,7 @@ from helpers import commons
 
 import pandas as pd
 import numpy as np
-import pickle
+import json, pickle
 
 import matplotlib as mpl
 mpl.use('Agg')
@@ -21,30 +21,25 @@ from sklearn.ensemble import RandomForestClassifier
 
 
 PARAM = {
-	# Preprocessed BCXX gene expression dataset (GSE75688)
+	# Input: Preprocessed BCXX gene expression dataset (GSE75688)
 	'BCXX': "OUTPUT/e_prepared/UV/bcxx.pkl",
 
-	# Load the regression model
+	# Input: Regression model
 	'model': "OUTPUT/m1_pam50_decisiontree/rf_model.dat",
 
-	# https://www.biostars.org/p/77590/
-	# Changed ORC6L to ORC6 (https://en.wikipedia.org/wiki/ORC6, 2019-08-02)
-	'PAM50': list((
-		"ACTR3B, ANLN, BAG1, BCL2, BIRC5, BLVRA, CCNB1, CCNE1, CDC20, CDC6, CDH3, CENPF, CEP55, CXXC5, EGFR, ERBB2, ESR1, EXO1, FGFR4, FOXA1, FOXC1, GPR160, GRB7, KIF2C, KRT14, KRT17, KRT5, MAPT, MDM2, MELK, MIA, MKI67, MLPH, MMP11, MYBL2, MYC, NAT1, NDC80, NUF2, ORC6, PGR, PHGDH, PTTG1, RRM2, SFRP1, SLC39A6, TMEM45B, TYMS, UBE2C, UBE2T"
-	).replace(' ', '').split(',')),
+	# List of PAM50 genes
+	'PAM50': json.load(open("ORIGINALS/GeneSets/pam50/pam50.json", 'r'))['data'],
 
-	# PAM50 labels order
+	# PAM50 labels order and plot markers
 	'PAM50-labels' : ["Normal", "LumA", "LumB", "Her2", "Basal"],
-
-	# Plot markers
 	'PAM50-markers': ['o', '^', 'v', '*', 's'],
 
 	# Normalize the fancy plot to "max = 1"
 	'normalize-y': True,
 
-	# Barplot tumor-wise as predicted by classifier
-	'classified': "OUTPUT/m2_pam50_decisiontree_bcxx/hist_{kind}.{ext}",
-	# Confidences for each cell / each class
+	# Output: Barplot tumor-wise as predicted by classifier
+	'pred_classified': "OUTPUT/m2_pam50_decisiontree_bcxx/hist_{kind}.{ext}",
+	# Output: Confidences for each cell / each class
 	'full_classified': "OUTPUT/m2_pam50_decisiontree_bcxx/full_hist.{ext}",
 }
 
@@ -67,7 +62,7 @@ def plot_fancy(Y: pd.DataFrame):
 		n = np.argmax(p.values)
 		return (n, -p[n])
 
-	# Normalize the whole matrix
+	# Max-normalize the whole matrix
 	if PARAM['normalize-y']:
 		commons.logger.info("Max Y: {}".format(max(Y.values.flatten())))
 		Y /= max(Y.values.flatten())
@@ -222,7 +217,7 @@ def plot_hist(y: pd.Series):
 		ax.legend(*map(reversed, ax.get_legend_handles_labels()), loc='upper right')
 
 		fig.savefig(
-			commons.makedirs(PARAM['classified'].format(kind=kind, ext='png')),
+			commons.makedirs(PARAM['pred_classified'].format(kind=kind, ext='png')),
 			bbox_inches='tight', pad_inches=0,
 			dpi=300
 		)
@@ -243,7 +238,7 @@ def classify_and_plot():
 	model = pickle.load(open(PARAM['model'], 'rb'))['model']
 
 	# Check that the data layout is compatible with the classifier
-	assert(all(list(X.columns.values == pickle.load(open(PARAM['model'], 'rb'))['features'])))
+	assert(all(list(X.columns == pickle.load(open(PARAM['model'], 'rb'))['features'])))
 
 	# Prediction confidence table (Sample) x (Label)
 	Y = pd.DataFrame(data=model.predict_proba(X), index=X.index, columns=model.classes_)
