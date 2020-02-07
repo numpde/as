@@ -9,9 +9,9 @@ The file is expected to be in the format:
 	6 7 8
 	...
 
-there number **i** in the **j**-th row of the file indicates a nonzero of the matrix at **(i, j)**.
+where number **i** in the **j**-th row of the file indicates a nonzero of the matrix at **(i, j)**.
 
-It outputs a single number, namely the rank.
+It outputs a single integer, namely the rank.
 
 Compile with 
 
